@@ -1,0 +1,55 @@
+
+% 2025 Simple·System
+
+% ./Section/线性空间/线性映射/复合
+
+\Convention{sec}{
+    \serial{•}设 $S\in\mathcal{L}\braI{V\and W}$ .
+}
+
+\par 接下来我们将证明, 线性映射的复合也是线性映射, 并且其具有许多良好的代数性质, 这为我们后续对线性变换多项式的研究设下基础.
+
+\Theorem{复合线性映射}{
+    $S\circ T\in\mathcal{L}\braI{U\and W}$ .
+}
+\Proof{证明}{
+    \begin{align*}
+        \Forall{\bm u_{1}\and\bm u_{2}}{U}
+        \braI{S\circ T}\braI{\bm u_{1}+\bm u_{2}}&=S\braI{T\bm u_{1}+T\bm u_{2}}\\[-2mm]
+        &=S\braI{T\bm u_{1}}+S\braI{T\bm u_{2}}\\[-2mm]
+        &=\braI{S\circ T}\bm u_{1}+\braI{S\circ T}\bm u_{2}\ ,\\[-16mm]
+    \end{align*}
+    \begin{align*}
+        \ForallII{\bm u}{U}{\lambda}{\bfF}
+        \braI{S\circ T}\braI{\lambda\bm u}=S\braI{\lambda T\bm u}=\lambda S\braI{T\bm u}=\lambda\braI{S\circ T}\bm u\ .\ProofEndF
+    \end{align*}
+}
+
+\Corollary{线性映射复合的性质}{
+    \serial{1.}复合幺元: $T\circ\bm I_{U}=\bm I_{V}\circ T=T$ .
+    \serial{2.}复合结合律: 设 $U_{0}\and U_{1}\and U_{2}\and U_{3}$ 是线性空间, 则
+    \begin{align*}
+        \braI{T_{3}\circ T_{2}}\circ T_{1}=T_{3}\circ\braI{T_{2}\circ T_{1}}
+    \end{align*}
+    对一切 $T_{1}\in\mathcal{L}\braI{U_{0}\and U_{1}}$ , $T_{2}\in\mathcal{L}\braI{U_{1}\and U_{2}}$ 和 $T_{3}\in\mathcal{L}\braI{U_{2}\and U_{3}}$ 成立.
+    \serial{3.}左分配律:
+    \begin{align*}
+        S\circ\braI{T_{1}+T_{2}}=S\circ T_{1}+S\circ T_{2}
+    \end{align*}
+    对一切 $T_{1}\and T_{2}\in\mathcal{L}\braI{U\and V}$ 成立.
+    \serial{4.}右分配律:
+    \begin{align*}
+        \braI{S_{1}+S_{2}}\circ T=S_{1}\circ T+S_{2}\circ T
+    \end{align*}
+    对一切 $S_{1}\and S_{2}\in\mathcal{L}\braI{V\and W}$ 成立.
+}
+
+\newpage
+
+%\par 注意到上述性质与乘法大致相近, 因此我们一般省略线性映射之间的运算符 $\circ$ . 但需要注意的是, 只有在一些特定的情境下, 线性映射复合才满足交换律.
+
+%\Convention{cpt}{
+    %\serial{•} 对任意线性空间 $U\and V\and W$ 和任意线性映射 $S:V\to W\and T:U\to V$ : 令 $ST$ 表示复合映射 $S\circ T$ .
+%}
+
+\newpage

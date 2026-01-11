@@ -1,0 +1,45 @@
+
+% 2025 Simple·System
+
+% ./Section/线性空间/子空间/商空间
+
+\Definition{商空间}{
+    子空间 $U$ 的\newconcept{商空间}定义为
+    \begin{align*}
+        \sfrac{V}{U}:=\braIII{\bm v+U\ |\ \bm v\in V}\ ,
+    \end{align*}
+    其中 $\bm v+U:=\braIII{\bm u+\bm v\ |\ \bm u\in U}$ 是向量 $\bm v$ 关于子空间 $U$ 的\newconcept{陪集}.
+}
+
+\vspace{-4pt}
+
+\Theorem{商空间引理}{
+    设 $\bm v_{1}\and\bm v_{2}\in V$ , 下列各命题等价:
+    \serial{1.}$\bm v_{1}-\bm v_{2}\in U$ .
+    \serial{2.}$\bm v_{1}+U=\bm v_{2}+U$ .
+    \serial{3.}$\braI{\bm v_{1}+U}\cap\braI{\bm v_{2}+U}\ne\emptyset$ .
+}
+\Proof{证明}{
+    \par 先证 $\Longrightarrow_{1}$ . 设存在 $\bm u_{1}\and\bm u_{2}\in U$ 使得 $\bm u_{1}+\bm v_{1}=\bm u_{2}+\bm v_{2}$ , 则 $\bm v_{1}-\bm v_{2}=\bm u_{2}-\bm u_{1}\in U$ .
+    \par 再证 $\Longrightarrow_{2}$ . 对任意 $\bm w\in\bm v_{1}+U$ , 存在 $\bm u\in U$ 使得 $\bm w=\bm v_{1}+\bm u$ , 于是
+    \begin{align*}
+        \bm w-\bm v_{2}=\bm u+\bm v_{1}-\bm v_{2}\in U\implies\bm w\in\bm v_{2}+U\ ,
+    \end{align*}
+    从而 $\bm v_{1}+U\subseteq\bm v_{2}+U$ , 同理可证 $\bm v_{1}+U\supseteq\bm v_{2}+U$ , 于是 $\bm v_{1}+U=\bm v_{2}+U$\ .
+}
+
+\par 容易发现商空间 $\sfrac{V}{U}$ 依然是线性空间, 从而我们可以将 $\bm v+U$ 视作 $\bm v$ 在商空间 $\sfrac{V}{U}$ 中的化身, 此时所有与 $\bm v$ 相差一个 $U$ 中元素的向量都被视为与 $\bm v$ 相同, 这使我们得以暂时忽略子整个空间 $U$ 的存在.
+
+\Theorem{商空间是线性空间}{
+    $\braI{\sfrac{V}{U}\and\bfF\and+_{/U}\and\cdot_{/U}}$ 是线性空间, 其中\newconcept{陪集加法}和\newconcept{陪集数乘}定义为
+    \begin{align*}
+        \Forall{\bm v_{1}\and\bm v_{2}}{V}
+        \braI{\bm v_{1}+U}+_{/U}\braI{\bm v_{2}+U}:=\braI{\bm v_{1}+\bm v_{2}}+U\ ,\\[-16mm]
+    \end{align*}
+    \begin{align*}
+        \ForallII{\lambda}{\bfF}{\bm v}{V}
+        \lambda\cdot_{/U}\braI{\bm v+U}:=\lambda\bm v+U\ .
+    \end{align*}
+}
+
+\newpage

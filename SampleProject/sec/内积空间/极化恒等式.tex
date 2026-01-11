@@ -1,0 +1,54 @@
+
+% 2025 Simple·System
+
+% ./Section/内积空间/极化恒等式
+
+\par 作为一种证明内积相关结论的重要技巧, 极化恒等式允许我们用 $\braV{\bm v\and\bm v}$ 和 $\braV{T\bm v\and\bm v}$ 的形式来表示一般形式的内积 $\braV{\bm v_{1}\and\bm v_{2}}$ 和 $\braV{T\bm v_{1}\and\bm v_{2}}$ .
+
+\Theorem{范数极化恒等式（Euclid空间）}{
+    设 $V$ 是Euclid空间, 则
+    \begin{align*}
+        \Forall{\bm v_{1}\and\bm v_{2}}{V}
+        \braV{\bm v_{1}\and\bm v_{2}}=\frac{\norm{\bm v_{1}+\bm v_{2}}^{2}-\norm{\bm v_{1}-\bm v_{2}}^{2}}{4}\ .
+    \end{align*}
+}
+\Proof{证明}{
+    \par 由\link{内积空间}{余弦定理}有
+    \begin{align*}
+        \frac{\norm{\bm v_{1}+\bm v_{2}}^{2}-\norm{\bm v_{1}-\bm v_{2}}^{2}}{4}=\frac{2\Re\braV{\bm v_{1}\and\bm v_{2}}-2\Re\braV{\bm v_{1}\and-\bm v_{2}}}{4}=\Re\braV{\bm v_{1}\and\bm v_{2}}\ .\ProofEndF
+    \end{align*}
+}
+
+\Theorem{范数极化恒等式（酉空间）}{
+    设 $V$ 是酉空间, 则
+    \begin{align*}
+        \Forall{\bm v_{1}\and\bm v_{2}}{V}
+        \braV{\bm v_{1}\and\bm v_{2}}=\frac{\norm{\bm v_{1}+\bm v_{2}}^{2}-\norm{\bm v_{1}-\bm v_{2}}^{2}}{4}+\frac{\norm{\bm v_{1}+\rmi\bm v_{2}}^{2}-\norm{\bm v_{1}-\rmi\bm v_{2}}^{2}}{4}\rmi\ .
+    \end{align*}
+}
+\Proof{证明}{
+    \par 由\link{内积空间}{余弦定理}进一步有
+    \begin{align*}
+        \frac{\norm{\bm v_{1}+\rmi\bm v_{2}}^{2}-\norm{\bm v_{1}-\rmi\bm v_{2}}^{2}}{4}=\frac{2\Re\braV{\bm v_{1}\and\rmi\bm v_{2}}-2\Re\braV{\bm v_{1}\and-\rmi\bm v_{2}}}{4}=\Im\braV{\bm v_{1}\and\bm v_{2}}\ .\ProofEndF
+    \end{align*}
+}
+
+\Theorem{算子极化恒等式（酉空间）}{
+    设 $V$ 是酉空间, 则
+    \begin{align*}
+        \Forall{\bm v_{1}\and\bm v_{2}}{V}
+        \braV{T\bm v_{1}\and\bm v_{2}}=\frac{\braV{T\bm v'_{1}\and\bm v'_{1}}-\braV{T\bm v'_{2}\and\bm v'_{2}}}{4}+\frac{\braV{T\bm v'_{3}\and\bm v'_{3}}-\braV{T\bm v'_{4}\and\bm v'_{4}}}{4}\rmi\ ,
+    \end{align*}
+    其中 $\braI{\bm v'_{1}\and\bm v'_{2}\and\bm v'_{3}\and\bm v'_{4}}=\braI{\bm v_{1}+\bm v_{2}\and\bm v_{1}-\bm v_{2}\and\bm v_{1}+\rmi\bm v_{2}\and\bm v_{1}-\rmi\bm v_{2}}$ .
+}
+\Proof{证明}{
+    \par 利用内积的可加性展开右式, 容易验证
+    \begin{align*}
+        \frac{\braV{T\bm v'_{1}\and\bm v'_{1}}-\braV{T\bm v'_{2}\and\bm v'_{2}}}{4}=\frac{\braV{T\bm v_{1}\and\bm v_{2}}+\braV{T\bm v_{2}\and\bm v_{1}}}{2}\ ,\\[-14mm]
+    \end{align*}
+    \begin{align*}
+        \frac{\braV{T\bm v'_{3}\and\bm v'_{3}}-\braV{T\bm v'_{4}\and\bm v'_{4}}}{4}\rmi=\frac{\braV{T\bm v_{1}\and\bm v_{2}}-\braV{T\bm v_{2}\and\bm v_{1}}}{2}\ .\ProofEndF
+    \end{align*}
+}
+
+\newpage

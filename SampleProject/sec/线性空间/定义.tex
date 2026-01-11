@@ -1,0 +1,98 @@
+
+% 2025 Simple·System
+
+% ./Section/线性空间/定义
+
+\Definition{线性空间}{
+    设 $\braI{\bfF\and+_{F}\and\times_{F}}$ 是一个域, $V$ 是一个集合, 则 $\braI{V\and\braI{\bfF\and+_{F}\and\times_{F}}\and+\and\cdot}$ 是域 $\bfF$ 上的\newconcept{线性空间}, 当且仅当其\newconcept{加法} $+:V\times V\to V$ 和\newconcept{数乘} $\cdot:\bfF\times V\to V$ 满足如下性质:
+    \serial{1.}加法右幺元: 存在加法右幺元 $\bm 0\in V$ 使得 $\bm v+\bm 0=\bm v$ 对一切 $\bm v\in V$ 成立.
+    \serial{2.}数乘单位: 存在乘法左幺元 $1\in\bfF$ 使得 $1\cdot\bm v=\bm v$ 对一切 $\bm v\in V$ 成立.
+    \serial{3.}加法右逆元: 对任意 $\bm v\in V$ 都存在加法右逆元 $-\bm v\in V$ 使得 $\bm v+\braI{-\bm v}=\bm 0$ , 其中 $\bm 0$ 是 $V$ 的加法右幺元.
+    \serial{4.}加法结合律: $\braI{\bm u+\bm v}+\bm w=\bm u+\braI{\bm v+\bm w}$ 对一切 $\bm u\and\bm v\and\bm w\in V$ 成立.
+    \serial{5.}数乘结合律: $\braI{a\times_{F}b}\cdot\bm v=a\cdot\braI{b\cdot\bm v}$ 对一切 $a\and b\in\bfF$ 和 $\bm v\in V$ 成立.
+    \serial{6.}左分配律: $a\cdot\braI{\bm u+\bm v}=a\cdot\bm u+a\cdot\bm v$ 对一切 $a\in\bfF$ 和 $\bm u\and\bm v\in V$ 成立.
+    \serial{7.}右分配律: $\braI{a+_{F}b}\cdot\bm v=a\cdot\bm v+b\cdot\bm v$ 对一切 $a\and b\in\bfF$ 和 $\bm v\in V$ 成立.
+}
+
+\par 我们一般直接用集合的符号来表示其所对应的线性空间, 并且可以省略数乘运算符 $\cdot$ .
+
+\par 线性空间中的元素称为\newconcept{向量}并用粗体字母表示, 其所在域 $\bfF$ 中的元素为\newconcept{标量}. 由 $V$ 中向量组成的集合和族分别简称为 $V$ 中的\newconcept{向量集}和\newconcept{向量组}.
+
+\par $\bfF$ 取 $\bfR$ 和 $\bfC$ 时的线性空间分别称为\newconcept{实线性空间}和\newconcept{复线性空间}. 称某个线性空间\newconcept{非零}, 当且仅当其真包含加法幺元 $\bm 0$ .
+
+\Structure{域诱导线性空间}{
+    设 $\braI{\bfF\and+\and\cdot}$ 是一个域, 则
+    \serial{1.} 对任意正整数 $n$ , $\braI{\bfF^{n}\and\braI{\bfF\and+\and\cdot}\and+\and\cdot}$ 是线性空间;
+    \serial{2.} $\braI{\bfF^{\infty}\and\braI{\bfF\and+\and\cdot}\and+\and\cdot}$ 是线性空间.
+}
+
+\vspace{-4pt}
+
+\Theorem{加法左幺元&加法左逆元}(加法左幺元\&加法左逆元){
+    设 $\bm 0$ 是线性空间 $V$ 的加法右幺元, 则
+    \serial{1.} $\bm 0+\bm v=\bm v$ 对一切 $\bm v\in V$ 成立;
+    \serial{2.} $\braI{-\bm v}+\bm v=\bm 0$ 对一切 $\bm v\in V$ 成立, 其中 $-\bm v$ 表示 $\bm v$ 的加法右逆元.
+}
+\Proof{证明}{
+    \par 对任意 $\bm v\in V$ 我们有
+    \begin{align*}
+        \bm0+\braI{-\braI{-\bm v}\!}=\braI{\bm v+\braI{-\bm v}\!}+\braI{-\braI{-\bm v}\!}=\bm v+\braI{\!\braI{-\bm v}+\braI{-\braI{-\bm v}\!}\!}=\bm v+\bm0=\bm v\ ,
+    \end{align*}
+    于是
+    \begin{align*}
+        \bm0+\bm v=\bm0+\braI{\bm0+\braI{-\braI{-\bm v}\!}\!}=\braI{\bm0+\bm0}+\braI{-\braI{-\bm v}\!}=\bm0+\braI{-\braI{-\bm v}\!}=\bm v\ ,\\[-16mm]
+    \end{align*}
+    \begin{align*}
+        -\bm v+\bm v=-\bm v+\braI{\bm0+\braI{-\braI{-\bm v}\!}\!}=\braI{-\bm v+\bm0}+\braI{-\braI{-\bm v}\!}=-\bm v+\braI{-\braI{-\bm v}\!}=\bm0\ ,
+    \end{align*}
+    从而 $\bm0+\bm v=\bm v$ 和 $\braI{-\bm v}+\bm v=\bm0$ 对一切 $\bm v\in V$ 成立.\ProofEndT
+}
+
+\par 根据上述结论, 我们可以统称加法右幺元和加法右逆元为\newconcept{加法幺元}, 事实上, 加法幺元对于任何线性空间而言都具有唯一性.
+
+\Theorem{加法幺元的唯一性}{
+    任何线性空间都有唯一的加法幺元.
+}
+\Proof{证明}{
+    \par 假设 $\bm 0_{1}$ 和 $\bm 0_{2}$ 都是线性空间 $V$ 的加法幺元, 则
+    \begin{align*}
+        \bm 0_{1}=\bm 0_{1}+\bm 0_{2}=\bm 0_{2}+\bm 0_{1}=\bm 0_{2}\ .\ProofEndF
+    \end{align*}
+}
+
+\Theorem{加法逆元的唯一性}{
+    向量 $\bm v$ 有唯一的加法逆元 $-\bm v$ .
+}
+\Proof{证明}{
+    \par 假设对任意 $\bm v\in V$ , $-\bm v_{1}$ 和 $-\bm v_{2}$ 都是 $\bm v$ 的加法逆元, 则
+    \begin{align*}
+        -\bm v_{1}=-\bm v_{1}+\bm 0=-\bm v_{1}+\braI{\bm v_{1}+\braI{-\bm v_{2}}\!}=\braI{-\bm v_{1}+\bm v_{1}}+\braI{-\bm v_{2}}=\bm 0+\braI{-\bm v_{2}}=-\bm v_{2}\ .\ProofEndF
+    \end{align*}
+}
+
+\Corollary{加法逆元的对合律}{
+    $\bm v=-\braI{-\bm v}$ 对一切 $\bm v\in V$ 成立.
+}
+
+\vspace{-4pt}
+
+\Definition{向量减法}{
+    设 $\bm v_{1}\and\bm v_{2}\in V$ , 我们定义 $\bm v_{1}-\bm v_{2}:=\bm v_{1}+\braI{-\bm v_{2}}$ .
+}
+
+\vspace{-4pt}
+
+\Corollary{向量减法的性质}{
+    \serial{1.}左分配律: $a\cdot\braI{\bm u-\bm v}=a\cdot\bm u-a\cdot\bm v$ 对一切 $a\in\bfF$ 和 $\bm u\and\bm v\in V$ 成立.
+    \serial{2.}右分配律: $\braI{a-_{F}b}\cdot\bm v=a\cdot\bm v-b\cdot\bm v$ 对一切 $a\and b\in\bfF$ 和 $\bm v\in V$ 成立.
+}
+
+\vspace{-4pt}
+
+\Convention{cpt}{
+    \serial{•}设 $\braI{\bfF\and+\and\cdot}$ 是域, 令 $0\and 1\and-1$ 分别表示其加法幺元, 乘法幺元和乘法幺元的加法逆元.
+    \serial{•}设 $\braI{U\and\bfF\and+\and\cdot}\and\braI{V\and\bfF\and+\and\cdot}\and\braI{W\and\bfF\and+\and\cdot}$ 是域 $\bfF$ 上线性空间.
+    \serial{•}不产生歧义时, 令 $\bm 0$ 表示任何线性空间的加法幺元.
+}
+
+\newpage

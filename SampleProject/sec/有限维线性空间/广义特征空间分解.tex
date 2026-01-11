@@ -1,0 +1,44 @@
+
+% 2025 Simple·System
+
+% ./Section/有限维线性空间/广义特征空间分解
+
+%\Convention{sec}{
+    %\serial{•}设 $T\in\mathcal{L}\braI{V}$ .
+    %\serial{•}令 $\bm O$ 和 $\bm I$ 分别表示 $\bfF$ 上的零矩阵和 $V$ 上的恒等变换 $\bm v\mapsto\bm v$ .
+    %\serial{•}对任意 $T$ 的特征值 $\lambda$ : 令 $\nu\braI{\lambda}$ 表示其指数, 即其作为最小多项式的根的重数.
+%}
+
+%\vspace{-4pt}
+
+\Theorem{广义特征空间分解}{
+    若 $T$ 的特征多项式分裂, 则
+    \begin{align*}
+        V=\bigoplus_{k=1}^{n}E_{T}^{*}\braI{\lambda_{k}}\ ,
+    \end{align*}
+    其中 $\lambda_{1}\and\cdots\and\lambda_{n}$ 是 $T$ 的全部互异特征值, 各 $E_{T}^{*}\braI{\lambda_{k}}$ 是 $T$ 下的不变子空间.
+}
+\Proof{证明\method{强归纳法}}{
+    \par 我们已经证明了\link{线性空间}[线性变换]{广义特征空间的不变性}(全体广义特征空间有直和), 下面我们将证明其等于 $V$ , 也即证明存在 $V$ 的一组由广义特征向量构成的基. 注意这必将对应 $T$ 的全部互异特征值, 否则全体广义特征空间的和将成为 $V$ 的一个维数大于 $\dim V$ 的子空间.
+    \par 当 $\dim V=1$ 时, 此时 $V=E_{T}\braI{\lambda_{1}}$ , 显然待证结论成立.
+    \par 假设 $\dim V<m$ 时待证结论成立. 考虑 $\dim V=m$ 时的情形, 设 $\lambda_{1}$ 我们有
+    \begin{align*}
+        V=\ker\braI{T-\lambda\bm I}^{m}\oplus\im\braI{T-\lambda\bm I}^{m}\ ,
+    \end{align*}
+    注意这两者\link{}{}(都是不变子空间), 我们为其选取各选取基 $B_{\ker}=(\bm v_{k})_{k=1}^{p}$ 和 $B_{\im}=(\bm v_{k})_{k=p+1}^{q}$ , 记 $\bm A$ 和 $\bm B$ 分别为线性变换 $T\restrict{\ker(T-\lambda\bm I)^{m}}$ 和 $T\restrict{\im(T-\lambda\bm I)^{m}}$ 在 $B_{\ker}$ 和 $B_{\im}$ 下的矩阵, 则 $T$ 在基 $B_{V}=\braI{\bm v_{1}\and\cdots\and\bm v_{p}\and\bm v_{p+1}\and\cdots\and\bm v_{q}}$ 下的矩阵为
+    \begin{align*}
+        \bm T=\braII{\begin{array}{cc}
+            \bm A&\bm O\\[-1mm]
+            \bm O&\bm B
+        \end{array}}\ ,
+    \end{align*}
+    这就表明 $T\restrict{\im(T-\lambda\bm I)^{m}}$ 的特征多项式整除 $T$ 的特征多项式, 从而任何 $T\restrict{\im(T-\lambda\bm I)^{m}}$ 的特征值都是 $T$ 的特征值, 进一步地任何 $T\restrict{\im(T-\lambda\bm I)^{m}}$ 的广义特征向量都是 $T$ 的广义特征向量.
+    \par 现在我们对线性变换 $T\restrict{\im(T-\lambda\bm I)^{m}}$ 应用归纳假设, 可以得到 $\im\braI{T-\lambda\bm I}^{m}$ 的一组由 $T\restrict{\im(T-\lambda\bm I)^{m}}$ 的广义特征向量构成的基 $B'_{\im}=\braI{\bm v'_{p+1}\and\cdots\and\bm v'_{q}}$ , 此时
+    \begin{align*}
+        B'_{V}=\braI{\bm v_{1}\and\cdots\and\bm v_{p}\and\bm v'_{p+1}\and\cdots\and\bm v'_{q}}
+    \end{align*}
+    就是我们所需要的基, 从而待证结论对一切正整数 $\dim V$ 成立.
+    \par 最后, 显然各 $E_{T}^{*}\braI{\lambda_{k}}$ 是 $T$ 下的不变子空间, 这就完成了证明.\ProofEndT
+}
+
+\newpage

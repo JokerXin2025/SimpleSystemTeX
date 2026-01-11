@@ -1,0 +1,33 @@
+
+% 2025 Simple·System
+
+% ./Section/赋范空间/定义
+
+\Definition{赋范空间}{
+    设 $\braI{V\and\bfF\and+\and\cdot}$ 是一个线性空间, 则 $\braI{\!\braI{V\and\bfF\and+\and\cdot}\and\norm{\cdot}}$ 是\newconcept{赋范空间}, 当且仅当其\newconcept{范数} $\norm{\cdot}:V\to\bfR$ 满足如下性质:
+    \serial{1.}定性: $$\Forall{\bm v}{V}\norm{\bm v}=0\implies\bm v=\bm 0\ ;$$
+    \serial{2.}线性: $$\ForallII{\bm v}{V}{\lambda}{\bfF}\norm{\lambda\bm v}=\braIV{\lambda}\norm{\bm v}\ ;$$
+    \serial{3.}三角不等式: $$\Forall{\bm u\and\bm v}{V}\norm{\bm u+\bm v}\leqslant\norm{\bm u}+\norm{\bm v}\ .$$
+}
+
+\par 从\link{赋范空间}{赋范空间}的定义中还可以得到如下信息:
+
+\Corollary{范数的基本性质}{
+    \serial{1.}正性: $$\Forall{\bm v}{V}\norm{\bm v}\geqslant 0\ .$$
+    \serial{2.}反向三角不等式: $$\Forall{\bm u\and\bm v}{V}\braIV{\norm{\bm u}-\norm{\bm v}}\leqslant\norm{\bm u+\bm v}\ .$$
+    \serial{3.}广义三角不等式: $$\Forall{(\bm v_{k})_{k=1}^{n}}{V^{n}}\norm{\sum_{k=1}^{n}\bm v_{k}}\leqslant\sum_{k=1}^{n}\norm{\bm v_{k}}\ .$$
+}
+
+\par 一般地, 我们把赋范空间中的线性映射称为\newconcept{线性算子}.
+
+\Structure{赋范空间诱导度量空间}{
+    若 $\braI{V\and\norm{\cdot}}$ 是赋范空间, 则 $\braI{V\and d_{\norm{\cdot}}}$ 是度量空间, 其中 $d_{\norm{\cdot}}$ 定义为 $$d_{\norm{\cdot}}:V^{2}\to\bfR\ ,\ \braI{\bm x\and\bm y}\mapsto\norm{\bm x-\bm y}\ .$$
+}
+
+\vspace{-4pt}
+
+\Structure{赋范空间诱导拓扑空间}{
+    若 $\braI{V\and\norm{\cdot}}$ 是赋范空间, 则 $\braI{V\and\tau_{\norm{\cdot}}}$ 是拓扑空间, 其中 $\tau_{\norm{\cdot}}$ 定义为度量 $d_{\norm{\cdot}}$ 诱导的拓扑.
+}
+
+\newpage

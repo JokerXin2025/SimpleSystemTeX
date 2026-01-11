@@ -1,0 +1,104 @@
+
+% 2025 Simple·System
+
+% ./Section/域/矩阵/积
+
+\Convention{sec}{
+    \serial{•}设 $m\and n\and l$ 是正整数.
+    %\serial{•}对任意正整数 $m\and n$ : 令 $\bm O_{m\times n}$ 和 $\bm I_{n}$ 分别表示 $m\times n$ 型零矩阵和 $n$ 阶单位阵.
+}
+
+\vspace{-4pt}
+
+\Definition{矩阵乘法}{
+    设 $\bm A$ 是 $m\times l$ 型矩阵, $\bm B$ 是 $l\times n$ 型矩阵, 我们定义 $\bm A\bm B$ 为 $m\times n$ 型矩阵
+    \begin{align*}
+        \bm A\bm B\ :\ \braI{i\and j}\mapsto\sum_{k=1}^{l}\bm A\braI{i\and k}\bm B\braI{k\and j}\ ,
+    \end{align*}
+    即
+    \begin{small}\begin{align*}
+        \matrix{ccc}{
+            A_{1,1} \* \cdots \* A_{1,l} \\[-1mm]
+            \vdots \* \ddots \* \vdots \\[-1mm]
+            A_{m,1} \* \cdots \* A_{m,l}
+        }\matrix{ccc}{
+            B_{1,1} \* \cdots \* B_{1,n} \\[-1mm]
+            \vdots \* \ddots \* \vdots \\[-1mm]
+            B_{l,1} \* \cdots \* B_{l,n}
+        }:=\matrix{ccc}{
+            \sum_{k=1}^{l}A_{1,k}B_{k,1} \* \cdots \* \sum_{k=1}^{l}A_{1,k}B_{k,n} \\[-1mm]
+            \vdots \* \ddots \* \vdots \\[-1mm]
+            \sum_{k=1}^{l}A_{m,k}B_{k,1} \* \cdots \* \sum_{k=1}^{l}A_{m,k}B_{k,n}
+        }\ .\\[-15mm]
+    \end{align*}\end{small}
+}
+
+\vspace{15pt}
+
+\par 上述采用的\link{域}[矩阵]{矩阵乘法}(矩阵乘法的定义)即{\it 矩阵乘法的元素观点}, 我们也可以将矩阵乘法考虑为\link{线性空间}[线性映射]{线性映射}对向量的作用, 这就导出了下面所示的两种观点. %另外, 我们将在\link{线性空间}{矩阵与线性映射的等效性}中揭示矩阵乘法的定义由来.
+
+\Corollary{矩阵乘法的列观点}{
+    设 $\bm A$ 是 $m\times l$ 型矩阵, $\bm B$ 是 $l\times n$ 型矩阵, 则对任意正整数 $j\leqslant n$ 有
+    \begin{align*}
+        \braI{\bm A\bm B}_{:j}=\sum_{k=1}^{l}B_{k,j}\bm A_{:k}\ .
+    \end{align*}
+}
+
+\vspace{-4pt}
+
+\Corollary{矩阵乘法的行观点}{
+    设 $\bm A$ 是 $m\times l$ 型矩阵, $\bm B$ 是 $l\times n$ 型矩阵, 则对任意正整数 $i\leqslant m$ 有
+    \begin{align*}
+        \braI{\bm A\bm B}_{i:}=\sum_{k=1}^{l}A_{i,k}\bm B_{k:}\ .
+    \end{align*}
+}
+
+\vspace{-4pt}
+
+\Corollary{矩阵乘法运算律}{
+    设 $\bm A$ 是 $m\times n$ 型矩阵, $\bm B$ 是 $n\times l$ 型矩阵, $\bm C$ 是 $l\times p$ 型矩阵, 则对于矩阵乘法有如下性质成立:
+    \serial{1.}幺元: $\bm I_{m}\bm A=\bm A\bm I_{n}=\bm A$ .
+    \serial{2.}零元: $\bm O_{l\times m}\bm A=\bm O_{l\times n}$ , $\bm A\bm O_{n\times p}=\bm O_{m\times p}$ .
+    \serial{3.}结合律: $\braI{\bm A\bm B}\bm C=\bm A\braI{\bm B\bm C}$ .
+    \serial{4.}左分配律: $\bm A\braI{\bm B+\bm C}=\bm A\bm B+\bm A\bm C$ .
+    \serial{5.}右分配律: $\braI{\bm A+\bm B}\bm C=\bm A\bm C+\bm B\bm C$ .
+    \serial{6.}数乘结合律: $\lambda\braI{\bm A\bm B}=\braI{\lambda\bm A}\bm B=\bm A\braI{\lambda\bm B}$ .
+}
+
+\par 需要注意, 矩阵乘法的幺元和零元都不是唯一的. 另外, 乘法交换律一般不成立.
+
+\par 对于方阵, 我们可以利用矩阵乘法进一步定义方阵的幂.
+
+\Definition{矩阵幂}{
+    设 $n\in\bfN$ 并且 $\bm A$ 是 $m$ 阶方阵, 我们定义 $\bm A^{n}$ 为 $m$ 阶方阵
+    \begin{align*}
+        \bm A^{n}:=\underbrace{\bm A\cdots\bm A}_{n\text{个}\bm A}\ .
+    \end{align*}
+    另外, 我们定义 $\bm A^{0}$ 为 $m$ 阶单位阵.
+}
+
+\vspace{-4pt}
+
+\Corollary{矩阵幂的性质}{
+    设 $\bm A$ 是方阵, 则对于矩阵幂有如下性质成立:
+    \serial{1.}$\bm A^{m}\bm A^{n}=\bm A^{m+n}$ .
+    \serial{2.}$\braI{\bm A^{m}}^{n}=\bm A^{mn}$ .
+}
+
+\vspace{-4pt}
+
+\Theorem{矩阵积的转置}{
+    设 $\bm A$ 是 $m\times l$ 型矩阵, $\bm B$ 是 $l\times n$ 型矩阵, 则 $\braI{\bm A\bm B}^{\rmT}=\bm B^{\rmT}\bm A^{\rmT}$ .
+}
+\Proof{证明}{
+    \par 注意 $\braI{\bm A\bm B}^{\rmT}=\bm B^{\rmT}\bm A^{\rmT}$ 均为 $n\times m$ 型矩阵, 对任意正整数 $i\leqslant n$ 和 $j\leqslant m$ 有
+    \begin{align*}
+        \braI{\bm A\bm B}^{\rmT}\braI{i\and j}=\braI{\bm A\bm B}\braI{j\and i}=\sum_{k=1}^{l}\bm A\braI{j\and k}\bm B\braI{k\and i}\ ,\\[-14mm]
+    \end{align*}
+    \begin{align*}
+        \braI{\bm B^{\rmT}\bm A^{\rmT}}\braI{i\and j}=\sum_{k=1}^{l}\bm B^{\rmT}\braI{i\and k}\bm A^{\rmT}\braI{k\and j}=\sum_{k=1}^{l}\bm B\braI{k\and i}\bm A\braI{j\and k}\ ,
+    \end{align*}
+    这就证明了 $\braI{\bm A\bm B}^{\rmT}=\bm B^{\rmT}\bm A^{\rmT}$ .\ProofEndT
+}
+
+\newpage

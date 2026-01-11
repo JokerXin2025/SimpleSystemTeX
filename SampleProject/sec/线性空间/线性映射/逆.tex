@@ -1,0 +1,52 @@
+
+% 2025 Simple·System
+
+% ./Section/线性空间/线性映射/逆
+
+\Definition{逆映射}{
+    称 $S\in\mathcal{L}\braI{V\and U}$ 是 $T$ 的\newconcept{逆}并记作 $T^{-1}$ 当且仅当 $ST=\bm I$ 且 $TS=\bm I$ .
+}
+
+\vspace{-4pt}
+
+\Theorem{逆映射的唯一性}{
+    任何线性映射至多有一个逆映射.
+}
+\Proof{证明}{
+    \par 假设 $S_{1}\and S_{2}\in\mathcal{L}\braI{V\and U}$ 都是 $T$ 的逆映射, 则
+    \begin{align*}
+        S_{1}=S_{1}\bm I=S_{1}\braI{TS_{2}}=\braI{S_{1}T}S_{2}=\bm IS_{2}=S_{2}\ .\ProofEndF
+    \end{align*}
+}
+
+%\par 若 $T^{-1}$ 存在, 则称 $T$ \newconcept{可逆}. 事实上对于线性映射而言, 可逆映射与双射无异.
+
+\Theorem{T可逆当且仅当T是双射}($T$可逆\nogap $\iff$\nogap $T$是双射){
+    $T$ 可逆当且仅当 $T$ 是双射.
+}
+\Proof{$\implies$证明}{
+    \par 假设有 $\bm u_{1}\and\bm u_{2}\in U$ 满足 $T\bm u_{1}=T\bm u_{2}$ , 则 $\bm u_{1}=T^{-1}T\bm u_{1}=T^{-1}T\bm u_{2}=\bm u_{2}$ , 于是 $T$ 是单射; 另一方面, 对任何 $\bm v\in V$ 有 $\bm v=TT^{-1}\bm v$ , 这表明 $T$ 是满射. 从而 $T$ 是双射.\ProofEndT
+}
+\Proof{$\impliedby$证明}{
+    \par 由 $T$ 是双射知存在 $T^{-1}\in U^{V}$ 使得 $T^{-1}T=\bm I$ 且 $TT^{-1}=\bm I$ . 现在我们证明 $T^{-1}$ 是线性映射, 对任意 $\bm v_{1}\and\bm v_{2}\in V$ , 我们有
+    \begin{align*}
+        T^{-1}\braI{\bm v_{1}+\bm v_{2}}&=T^{-1}\braI{TT^{-1}\bm v_{1}+TT^{-1}\bm v_{2}}\\[-2mm]
+        &=T^{-1}T\braI{T^{-1}\bm v_{1}+T^{-1}\bm v_{2}}\\[-2mm]
+        &=T^{-1}\bm v_{1}+T^{-1}\bm v_{2}\ ,
+    \end{align*}
+    对任意 $\lambda\in\bfF$ 和 $\bm v\in V$ , 我们有
+    \begin{align*}
+        T^{-1}\braI{\lambda\bm v}=T^{-1}\braI{\lambda\cdot TT^{-1}\bm v}=T^{-1}T\braI{\lambda\cdot T^{-1}\bm v}=\lambda\cdot T^{-1}\bm v\ ,
+    \end{align*}
+    这就证明了 $T$ 可逆.\ProofEndT
+}
+
+\Corollary{逆映射的性质}{
+    设 $a\in\bfF$ 并且 $S\in\mathcal{L}\braI{V\and W}$ 和 $T\in\mathcal{L}\braI{U\and V}$ 可逆, 则下列各性质成立:
+    \serial{•}恒等逆: $\bm I^{-1}=\bm I$ .
+    \serial{•}对合律: $\braI{T^{-1}}^{-1}=T$ .
+    \serial{•}数乘分配律: $\braI{aT}^{-1}=a^{-1}T^{-1}$ .
+    \serial{•}反序分配律: $\braI{ST}^{-1}=T^{-1}S^{-1}$ .
+}
+
+\newpage

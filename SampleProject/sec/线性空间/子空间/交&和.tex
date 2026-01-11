@@ -1,0 +1,75 @@
+
+% 2025 Simple·System
+
+% ./Section/线性空间/子空间/交&和
+
+\Theorem{子空间的交的最大性}{
+    $V_{1}\cap V_{2}$ 是包含于 $V_{1}$ 和 $V_{2}$ 的子空间, 并且任何包含于 $V_{1}$ 和 $V_{2}$ 的子空间必定包含 $V_{1}\cap V_{2}$ .
+}
+\Proof{证明}{
+    \par 我们只需证明 $V_{1}\cap V_{2}$ 是 $V$ 的子空间即可, 定理的其余部分是显然的.
+    \par 显然 $\bm 0\in V_{1}\cap V_{2}$ . 对任意 $\bm v_{1}\and\bm v_{2}\in V_{1}\cap V_{2}$ , 分别在线性空间 $V_{1}$ 和 $V_{2}$ 中应用加法封闭性即有 $\bm v_{1}+\bm v_{2}\in V_{1}\cap V_{2}$ , 同理可知对任意 $\bm v\in V_{1}\cap V_{2}$ 和 $a\in\bfF$ 有 $a\bm v\in V_{1}\cap V_{2}$ .
+    \par 由\link{线性空间}[子空间]{子空间的判定准则}即可完成验证.\ProofEndT
+}
+
+\par 与交集不同的是, 很多情况下子空间的并不再是线性空间.
+
+\Theorem{无限域线性空间并的不完全性}{
+    设 $\bfF$ 是无限域, 且 $V_{1}\and\cdots\and V_{n}$ 是 $V$ 的真子空间, 则
+    \begin{align*}
+        V\ne\bigcup_{k=1}^{n}V_{k}\ .
+    \end{align*}
+}
+\Proof{证明\method{数学归纳法}}{
+    \par 当 $n=1$ 时, 上述命题显然成立.
+    \par 假设上述命题对于正整数 $n$ 成立, 现在考虑 $n+1$ 时的情形. 由归纳假设知存在 $\bm v\in V$ 使得 $\bm v\notin V_{1}\cup\cdots\cup V_{n}$ , 若又有 $\bm v\not\in V_{n+1}$ , 则我们就找到了
+    \begin{align*}
+        \bm v\notin\bigcup_{k=1}^{n+1}V_{k}\ ,
+    \end{align*}
+    因此可令 $\bm v\in V_{n+1}$ , 又由 $V_{n+1}$ 是 $V$ 的真子空间可知存在 $\bm u\in V\setminus V_{n+1}$ . 现在考虑 $V$ 中的向量集
+    \begin{align*}
+        \bm L=\braIII{\bm u+a\bm v\ |\ a\in\bfF}\ .
+    \end{align*}
+    \par 首先, $\bm L$ 与 $V_{n+1}$ 不相交, 因为若存在 $a_{0}\in\bfF$ 使得 $\bm u+a_{0}\bm v\in V_{n+1}$ , 则
+    \begin{align*}
+        \bm u=\braI{\bm u+a_{0}\bm v}-a_{0}\bm v\in V_{n+1}\ ,
+    \end{align*}
+    这与 $\bm u\notin V_{n+1}$ 矛盾.
+
+\newpage
+
+    \par 其次, $\bm L$ 与其它每个 $V_{k}$ 最多只有 $1$ 个交点, 因为若存在不同的 $a_{1}\and a_{2}\in\bfF$ 使得 $\bm u+a_{1}\bm v\and\bm u+a_{2}\bm v\in V_{k}$ , 则
+    \begin{align*}
+        \bm v=\frac{\braI{\bm u+a_{1}\bm v}-\braI{\bm u+a_{2}\bm v}}{a_{1}-a_{2}}\in V_{k}\ ,
+    \end{align*}
+    这与 $\bm v\notin V_{k}$ 矛盾.
+    \par 由于 $\bfF$ 是无限域, 所以至少存在某个 $\bm w\in\bm L$ 使得
+    \begin{align*}
+        \bm w\in V\setminus\bigcup_{k=1}^{n+1}V_{k}\ ,
+    \end{align*}
+    这就完成了证明.\ProofEndT
+}
+
+\par 现在我们定义一种子空间的全新运算, 它在许多性质上与子空间的交形成对偶.
+
+\Definition{子空间的和}{
+    子空间 $V_{1}$ 和 $V_{2}$ 的\newconcept{和}定义为
+    \begin{align*}
+        V_{1}+V_{2}:=\braIII{\,\bm u_{1}+\bm u_{2}\ |\,\braI{\bm u_{1}\and\bm u_{2}}\in V_{1}\times V_{2}\,}\ .
+    \end{align*}
+}
+
+\vspace{-4pt}
+
+\Theorem{子空间的和的最小性}{
+    $V_{1}+V_{2}$ 是包含 $V_{1}$ 和 $V_{2}$ 的子空间, 并且任何包含 $V_{1}$ 和 $V_{2}$ 的子空间必定包含 $V_{1}+V_{2}$ .
+}
+\Proof{证明}{
+    \par 首先, 显然 $V_{1}+V_{2}$ 包含 $U$ . 其次, 设 $U$ 是 $V$ 的子空间并且 $U$ 包含 $V_{1}$ 和 $V_{2}$ , 则对任意的有序对 $\braI{\bm u_{1}\and\bm u_{2}}\in V_{1}\times V_{2}$ , 必然有 $\bm u_{1}\and\bm u_{2}\in U$ , 又因为 $U$ 是线性空间, 所以又有 $\bm u_{1}+\bm u_{2}\in U$ , 从而 $V_{1}+V_{2}\subseteq U$ .\ProofEndT
+}
+
+\Convention{cpt}{
+    \serial{•}对任意线性空间 $V$ 的任意子空间 $V_{1}\and V_{2}$ : 令 $V_{1}+V_{2}$ 表示 $V_{1}$ 与 $V_{2}$ 的和, 并且允许对多个子空间以左结合的形式使用该记号.
+}
+
+\newpage

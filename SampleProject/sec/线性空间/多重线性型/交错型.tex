@@ -1,0 +1,77 @@
+
+% 2025 Simple·System
+
+% ./Section/线性空间/多重线性型/交错型
+
+% 任取$(\bm v_{k})_{k=1}^{m}\in V^{m}$
+% V是n维线性空间
+
+\Definition{交错多重线性型}{
+    \,$m$ 重线性型 $\alpha$ 是\newconcept{交错型}, 当且仅当其满足:
+    \serial{•}交错性:
+    \begin{align*}
+        \alpha\braI{\cdots\and\underset{\text{第$p$个}}{\bm v}\and\cdots\and\underset{\text{第$q$个}}{\bm v}\and\cdots}=0
+    \end{align*}
+    对一切 $\bm v\in V$ 和正整数 $p\leqslant q\leqslant m$ 成立.
+    \par\noindent 全体 $V$ 上的交错 $m$ 重线性型构成的集合记为 $\mathcal{L}_{\mathrm{alt}}^{m}\braI{V\by\bfF}$ .
+}
+
+\vspace{-4pt}
+
+\Corollary{交错多重线性型的剪切不变性}{
+    设 $\alpha$ 是交错 $m$ 重线性型, 则
+    \begin{align*}
+        \alpha\braI{\cdots\and\underset{\text{第$p$个}}{\bm u}\and\cdots\and\underset{\text{第$q$个}}{\bm v}\and\cdots}=\alpha\braI{\cdots\and\underset{\text{第$p$个}}{\bm u}\and\cdots\and\underset{\text{第$q$个}}{\bm v+a\bm u}\and\cdots}
+    \end{align*}
+    对一切 $\bm u\and\bm v\in V$ , $a\in\bfF$ 和正整数 $p\leqslant q\leqslant m$ 成立.
+}
+
+\vspace{-4pt}
+
+\Theorem{交错多重线性型的反对称性}{
+    设 $\alpha$ 是交错 $m$ 重线性型, 则
+    \begin{align*}
+        \alpha\braI{\cdots\and\underset{\text{第$p$个}}{\bm u}\and\cdots\and\underset{\text{第$q$个}}{\bm v}\and\cdots}=-\alpha\braI{\cdots\and\underset{\text{第$p$个}}{\bm v}\and\cdots\and\underset{\text{第$q$个}}{\bm u}\and\cdots}
+    \end{align*}
+    对一切 $\bm u\and\bm v\in V$ 和正整数 $p\leqslant q\leqslant m$ 成立.
+}
+\Proof{证明}{
+    \begin{align*}
+        &\quad\ \alpha\braI{\cdots\and\underset{\text{第$p$个}}{\bm u}\and\cdots\and\underset{\text{第$q$个}}{\bm v}\and\cdots}+\alpha\braI{\cdots\and\underset{\text{第$p$个}}{\bm v}\and\cdots\and\underset{\text{第$q$个}}{\bm u}\and\cdots}\\[1mm]
+        &=\alpha\braI{\cdots\and\underset{\text{第$p$个}}{\bm u+\bm v}\and\cdots\and\underset{\text{第$q$个}}{\bm u+\bm v}\and\cdots}\\[-1mm]
+        &=0\ .\ProofEndF
+    \end{align*}
+}
+
+\Corollary{交错多重线性型的重排列}{
+    设 $\alpha$ 是交错多重线性型, $\sigma$ 是 $\braIII{1\and\cdots\and m}$ 上的置换, 则
+    \begin{align*}
+        \alpha\braI{\bm v_{\sigma(1)}\and\cdots\and\bm v_{\sigma(m)}}=\sgn\sigma\cdot\alpha\braI{\bm v_{1}\and\cdots\and\bm v_{m}}\ .
+    \end{align*}
+}
+
+\vspace{-4pt}
+
+\Theorem{交错多重线性型下的线性相关组}{
+    设 $\alpha$ 是交错多重线性型, 若 $(\bm v_{k})_{k=1}^{m}$ 线性相关, 则
+    \begin{align*}
+        \alpha\braI{\bm v_{1}\and\cdots\and\bm v_{m}}=0\ .
+    \end{align*}
+}
+\Proof{证明}{
+    \par 由\link{线性空间}[向量组]{线性相关性引理}知存在 $\bm v_{p}$ 和 $\braI{a_{1}\and\cdots\and a_{p-1}\and a_{p+1}\and\cdots\and a_{m}}\in\bfF^{m-1}$ 使得
+    \begin{align*}
+        \bm v_{p}=\sum_{\substack{1\leqslant k\leqslant m\\k\ne p}}a_{k}\bm v_{k}\ ,
+    \end{align*}
+    则
+    \begin{align*}
+        \alpha\braI{\bm v_{1}\and\cdots\and\bm v_{m}}=\alpha\braI{\cdots\and\underset{\text{第$p$个}}{\sum_{\substack{1\leqslant k\leqslant m\\k\ne p}}a_{k}\bm v_{k}}\and\cdots}=\sum_{\substack{1\leqslant k\leqslant m\\k\ne p}}a_{k}\alpha\braI{\cdots\and\underset{\text{第$p$个}}{\bm v_{k}}\and\cdots}=0\ .\ProofEndF
+    \end{align*}
+}
+
+\Theorem{交错多重线性型构成线性空间}{
+    \serial{1.}$m>n$ 时: $\mathcal{L}_{\mathrm{alt}}^{m}\braI{V\by\bfF}=\braIII{\bm 0}$ .
+    \serial{2.}$m\leqslant n$ 时: $\braI{\mathcal{L}_{\mathrm{alt}}^{m}\braI{V\by\bfF}\and\bfF\and+\and\cdot}$ 是 $\mathcal{L}^{m}\braI{V\by\bfF}$ 的 $\rmC_{n}^{m}$ 维子空间.
+}
+
+\newpage

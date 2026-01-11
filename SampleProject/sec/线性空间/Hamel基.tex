@@ -1,0 +1,64 @@
+
+% 2025 Simple·System
+
+% ./Section/线性空间/Hamel基
+
+\Convention{sec}{
+    \serial{•}对任意集族 $\mathcal{A}$ , 记 $$\bigcup\mathcal{A}=\bigcup_{A\in\mathcal{A}}A\ .$$
+}
+
+\Definition{Hamel基}{
+    $V$ 中的向量组 $(\bm v_{k})_{k\in I}$ 是 $V$ 的\gap\newconcept{Hamel基}, 当且仅当如下性质成立:
+    \serial{1.}张成性: $V=\spn\,(\bm v_{k})_{k\in I}$ .
+    \serial{2.}无关性: $(\bm v_{k})_{k\in I}$ 线性无关.
+}
+
+\vspace{-4pt}
+
+\Theorem{[AC]Hamel基的存在性}(\axiombasis{AC}Hamel基的存在性){
+    任何线性空间都有Hamel基.
+}
+\Proof{证明\method{Zorn\nogap 引理}}{
+    \par 考虑由 $V$ 中全体使得 $(\bm v)_{\bm v\in S}$ 线性无关的向量集 $S$ 构成的集合 $\mathcal{S}$ , 显然 $\emptyset\in\mathcal{S}$ , 为了对其使用Zorn引理, 我们需要验证对偏序集 $\braI{\mathcal{S}\and\subseteq}$ 的任意全序子集 $\mathcal{S}'$ 都有 $\bigcup\mathcal{S}'\in\mathcal{S}$ , 从而 $\mathcal{S}'$ 在 $\mathcal{S}$ 中有上界.
+    \par 给定任意的有限集 $I\subseteq\bigcup\mathcal{S}'$ , 对任意 $\bm v\in I$ , 令 $S_{\bm v}$ 表示 $\mathcal{S}'$ 中某个含有 $\bm v$ 的向量集, 结合 $\mathcal{S}'$ 的全序性和归纳法可知存在某个 $S_{\bm v_{0}}$ 包含一切 $S_{\bm v}$ , 从而 $I\subseteq S_{\bm v_{0}}$ , 又因为 $(\bm v)_{\bm v\in S_{\bm v_{0}}}$ 线性无关, 于是 $(\bm v)_{\bm v\in I}$ 也线性无关.
+    \par 由Zorn引理可知存在极大元 $H\in\mathcal{S}$ 使得 $H\not\subset S$ 对一切 $S\in\mathcal{S}$ 成立. 由 $\mathcal{S}$ 的定义知 $(\bm v)_{\bm v\in H}$ 线性无关, 假设存在某个向量 $\bm v'\in V\setminus\spn\,(\bm v)_{\bm v\in H}$ , 则令 $H'=H\cup\braIII{\bm v'}$ , 我们有 $H\subset H'$ , 并且由 $\bm v'\notin\spn\,(\bm v)_{\bm v\in H}$ 和 $(\bm v)_{\bm v\in H}$ 线性无关知 $(\bm v)_{\bm v\in H'}$ 线性无关, 这与 $H$ 的极大性矛盾, 因此必有 $V=\spn\,(\bm v)_{\bm v\in H}$ . 这就得到了 $V$ 的Hamel基 $(\bm v)_{\bm v\in H}$ .\ProofEndT
+}
+
+\Theorem{Hamel坐标}{
+    $V$ 中的向量组 $(\bm v_{k})_{k\in I}$ 是 $V$ 的Hamel基, 当且仅当对任意 $\bm v\in V$ , 存在唯一仅有限个非零的 $(a_{k})_{k\in I}\in\bfF^{I}$ 使得
+    \begin{align*}
+        \bm v=\sum_{k\in J}a_{k}\bm v_{k}\ ,
+    \end{align*}
+    其中 $J=\braIII{k\in I\ |\ a_{k}\ne 0}$ , 我们称 $(a_{k})_{k\in I}$ 为 $\bm v$ 在Hamel基 $(\bm v_{k})_{k\in I}$ 下的\newconcept{坐标}.
+}
+
+\newpage
+
+\Proof{\limplyr 证明}{
+    \par 显然 $V=\spn(\bm v_{k})_{k\in I}$ 蕴涵了 $(a_{k})_{k\in I}$ 的存在性. 假设同时存在 $(a_{k}^{(1)})_{k\in I}$ 和 $(a_{k}^{(2)})_{k\in I}$ 使得
+    \begin{align*}
+        \bm v=\sum_{k\in I}a_{k}^{(1)}\bm v_{k}=\sum_{k\in I}a_{k}^{(2)}\bm v_{k}\ ,
+    \end{align*}
+    设 $(a_{k}^{(1)})_{k\in I}$ 和 $(a_{k}^{(2)})_{k\in I}$ 分别仅在 $I$ 的有限子集 $J_{1}$ 和 $J_{2}$ 上非零, 并且令 $J=J_{1}\cup J_{2}$ , 则
+    \begin{align*}
+        \sum_{k\in J}\braI{a_{k}^{(1)}-a_{k}^{(2)}}\bm v_{k}=\bm0\ ,
+    \end{align*}
+    由 $(\bm v_{k})_{k\in I}$ 线性无关知 $a_{k}^{(1)}=a_{k}^{(2)}$ 对一切 $k\in J$ 成立, 从而 $(a_{k})_{k\in J}$ 的唯一性得证.\ProofEndT
+}
+\Proof{\rimplyl 证明}{
+    \par 假设 $(\bm v_{k})_{k\in I}$ 不线性无关, 则存在有限子集 $J\subseteq I$ 和不全为零的 $(a_{k})_{k\in J}$ 使得
+    \begin{align*}
+        \sum_{k\in J}a_{k}\bm v_{k}=\bm0\ .
+    \end{align*}
+    取某个 $k_{0}\in J$ 使得 $a_{k_{0}}\ne 0$ , 则对任意 $\bm v\in V$ , 若存在 $(b_{k})_{k\in I}$ 使得
+    \begin{align*}
+        \bm v=\sum_{k\in I}b_{k}\bm v_{k}\ ,
+    \end{align*}
+    则同时有
+    \begin{align*}
+        \bm v=\sum_{\substack{k\in I\\k\ne k_{0}}}b_{k}\bm v_{k}+\braI{b_{k_{0}}+t a_{k_{0}}}\bm v_{k_{0}}\ ,
+    \end{align*}
+    对任意 $t\in\bfF$ , 这与 $(\bm v_{k})_{k\in I}$ 的坐标唯一性矛盾, 因此 $(\bm v_{k})_{k\in I}$ 线性无关得证.\ProofEndT
+}
+
+\newpage

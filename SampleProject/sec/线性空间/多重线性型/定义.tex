@@ -1,0 +1,39 @@
+
+% 2025 Simple·System
+
+% ./Section/线性空间/多重线性型/定义
+
+\Definition{多重线性型}{
+    映射 $f:V^{m}\to\bfF$ 是线性空间 $V$ 上的 \newconcept{$m$ 重线性型}, 当且仅当其满足:
+    \serial{•}多重可加性:
+    \begin{align*}
+        f\braI{\cdots\and\underset{\text{第$p$个}}{\bm u+\bm v}\and\cdots}=f\braI{\cdots\and\underset{\text{第$p$个}}{\bm u}\and\cdots}+f\braI{\cdots\and\underset{\text{第$p$个}}{\bm v}\and\cdots}
+    \end{align*}
+    对一切 $\bm u\and\bm v\in V$ 和正整数 $p\leqslant m$ 成立.
+    \serial{•}多重齐次性:
+    \begin{align*}
+        f\braI{\cdots\and\underset{\text{第$p$个}}{\lambda\bm v}\and\cdots}=\lambda f\braI{\cdots\and\underset{\text{第$p$个}}{\bm v}\and\cdots}
+    \end{align*}
+    对一切 $\lambda\in\bfF$ , $\bm v\in V$ 和正整数 $p\leqslant m$ 成立.
+    \par\noindent 全体 $V$ 上的 $m$ 重线性型构成的集合记为 $\mathcal{L}^{m}\braI{V\by\bfF}$ .
+}
+
+\vspace{-4pt}
+
+\Theorem{多重线性型构成线性空间}($\mathcal{L}^{m}\braI{V\by\bfF}$是线性空间){
+    $\braI{\mathcal{L}^{m}\braI{V\by\bfF}\and\bfF\and+\and\cdot}$ 是 $n^{m}$ 维线性空间, 其中加法和数乘定义为
+    \begin{align*}
+        \Forall{f\and g}{\mathcal{L}^{m}\braI{V\by\bfF}}
+        f+g:\braI{\bm v_{1}\and\cdots\and\bm v_{m}}\mapsto f\braI{\bm v_{1}\and\cdots\and\bm v_{m}}+g\braI{\bm v_{1}\and\cdots\and\bm v_{m}}\ ,\\[-16mm]
+    \end{align*}
+    \begin{align*}
+        \ForallII{\lambda}{\bfF}{f}{\mathcal{L}^{m}\braI{V\by\bfF}}
+        \lambda\cdot f:\braI{\bm v_{1}\and\cdots\and\bm v_{m}}\mapsto\lambda f\braI{\bm v_{1}\and\cdots\and\bm v_{m}}\ .
+    \end{align*}
+}
+\Proof{证明}{
+    \par 显然零映射 $\bm 0:\braI{\bm v_{1}\and\cdots\and\bm v_{m}}\mapsto 0$ 作为加法右幺元. $1$ 作为乘法单位. 另外, 对于任意 $f\in\mathcal{L}^{m}\braI{V\by\bfF}$ , 其加法右逆元定义为 $-f:\braI{\bm v_{1}\and\cdots\and\bm v_{m}}\mapsto-f\braI{\bm v_{1}\and\cdots\and\bm v_{m}}$ . 域 $\bfF$ 的结合律和分配律保证了 $\mathcal{L}^{m}\braI{V\by\bfF}$ 作为线性空间的两则结合律和分配律成立.
+    \par 
+}
+
+\newpage

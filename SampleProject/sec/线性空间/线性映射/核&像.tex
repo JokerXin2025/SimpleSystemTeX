@@ -1,0 +1,69 @@
+
+% 2025 Simple·System
+
+% ./Section/线性空间/线性映射/核&像
+
+\Definition{核}{
+    我们定义线性映射 $T$ 的\newconcept{核}为
+    \begin{align*}
+        \ker T:=\braIII{\bm u\in U\ |\ T\bm u=\bm u}\ ,
+    \end{align*}
+    其中 $\bm u$ 是 $V$ 的加法幺元.
+}
+
+\vspace{-4pt}
+
+\Theorem{核是线性空间}{
+    $\ker T$ 是 $U$ 的子空间.
+}
+\Proof{证明}{
+    \par 首先, 由 $T\bm 0=\bm 0$ 可知 $\bm 0\in\ker T$ .
+    \par 其次, 对任意 $\lambda\and\mu\in\bfF$ 和 $\bm u\and\bm v\in\ker T$ , 我们有
+    \begin{align*}
+        T\braI{\lambda\bm u+\mu\bm v}=T\braI{\lambda\bm u}+T\braI{\mu\bm v}=\lambda T\bm u+\mu T\bm v=\lambda\bm 0+\mu\bm 0=\bm 0\ ,
+    \end{align*}
+    于是 $\lambda\bm u+\mu\bm v\in\ker T$ . 从而完成了证明.\ProofEndT
+}
+
+\par 对于 $T\in\mathcal{L}\braI{U\and V}$ , 一般我们将 $U$ 在 $T$ 下的像 $T\braI{U}$ 称为 $T$ 的\newconcept{像}并记为 $\im T$ , 这是为了与\link{线性空间}[线性映射]{核}的概念形成对偶.
+
+\Theorem{像是线性空间}{
+    $\im T$ 是 $V$ 的子空间.
+}
+\Proof{证明}{
+    \par 首先, 由 $T\bm 0=\bm 0$ 可知 $\bm 0\in\im T$ .
+    \par 其次, 假设 $\bm v_{1}\and\bm v_{2}\in\im T$ , 则存在 $\bm u_{1}\and\bm u_{2}\in U$ 使得 $T\bm u_{1}=\bm v_{1}$ , $T\bm u_{2}=\bm v_{2}$ , 我们有 $\bm u_{1}+\bm u_{2}\in U$ 并且
+    \begin{align*}
+        T\braI{\bm u_{1}+\bm u_{2}}=T\bm u_{1}+T\bm u_{2}=\bm v_{1}+\bm v_{2}\ ,
+    \end{align*}
+    假设 $\lambda\in\bfF$ , $\bm v\in\im T$ , 则存在 $\bm u\in U$ 使得 $T\bm u=\bm v$ , 我们有 $\lambda\bm u\in U$ 并且
+    \begin{align*}
+        T\braI{\lambda\bm u}=\lambda\cdot T\bm u=\lambda\bm v\ ,
+    \end{align*}
+    于是 $T$ 对加法和数乘运算封闭.\ProofEndT
+}
+
+\par 类似地, 我们可以得到如下结论.
+
+\Corollary{子空间的像&逆像是线性空间}(子空间的像\&逆像是线性空间){
+    \serial{1.}设 $U'$ 是 $U$ 的子空间, 则 $T\braI{U'}$ 是 $V$ 的子空间;
+    \serial{2.}设 $V'$ 是 $V$ 的子空间, 则 $T^{-1}\braI{V'}$ 是 $U$ 的子空间.
+}
+
+\par 线性空间当且仅当线性映射 $T$ 的像最大, 即当 $\im T=V$ 时 , $T$ 是满射. 类似地, 当且仅当 $T$ 的核最小时 $T$ 是单射.
+
+\Theorem{单射的等价条件}{
+    $T$ 是单射当且仅当 $\ker T=\braIII{\bm 0}$ .
+}
+\Proof{$\implies$证明}{
+    \par 我们知道 $T\bm 0=\bm 0$ , 因此由 $T$ 是单射知 $\ker T=\braIII{\bm 0}$ .\ProofEndT
+}
+\Proof{$\impliedby$证明}{
+    \par 假设存在 $\bm u_{1}\and\bm u_{2}\in U$ 使得 $T\bm u_{1}=T\bm u_{2}$ , 则
+    \begin{align*}
+        T\braI{\bm u_{1}-\bm u_{2}}=T\bm u_{1}-T\bm u_{2}=0\ ,
+    \end{align*}
+    另一方面, 我们有 $\ker T=\braIII{0}$ , 于是 $\bm u_{1}-\bm u_{2}=\bm 0$ , 从而 $\bm u_{1}=\bm u_{2}$ , 即 $T$ 是单射.\ProofEndT
+}
+
+\newpage

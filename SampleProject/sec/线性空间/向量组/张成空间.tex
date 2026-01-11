@@ -1,0 +1,50 @@
+
+% 2025 Simple·System
+
+% ./Section/线性空间/向量组/张成空间
+
+\Convention{subcpt}{
+    \serial{•}设 $I$ 是集合, $S=(\bm v_{k})_{k\in I}$ 是 $V$ 中的向量组.
+}
+
+\Definition{张成空间}{
+    $S$ 的\newconcept{张成空间}定义为
+    \begin{align*}
+        \spn S:=\braIII{\bm 0}\cup\braIII{\sum_{k\in J}a_{k}\bm v_{k}\ \bigg|\ (a_{k})_{k\in J}\in\bfF^{J}\and J\ \text{是}\ I\ \text{的有限子集}}\ .
+    \end{align*}
+    如果 $V=\spn S$ , 则称 $S$ \newconcept{张成} $V$ .
+}
+
+\par 我们把 $\spn S$ 中的元素称为 $S$ 的\newconcept{线性组合}. 注意, 在上面的定义中额外并入 $\braIII{\bm 0}$ 是为了保证 $\spn\braI{}=\braIII{\bm 0}$ , 由此有下面的结论成立.
+
+\Theorem{张成空间是线性空间}{
+    $\spn S$ 是 $V$ 的子空间.
+}
+\Proof{证明}{
+    \par $\spn S$ 的定义确保了 $\bm 0\in\spn S$ , 对任意 $a\and b\in\bfF$ 和 $\bm u\and\bm v\in\spn S$ , 不妨记
+    \begin{align*}
+        \bm u=\sum_{k\in J_{1}}a_{k}\bm v_{k}\AND\bm v=\sum_{k\in J_{2}}b_{k}\bm v_{k}\ ,
+    \end{align*}
+    其中 $J_{1}\and J_{2}$ 是 $I$ 的有限子集, 则有
+    \begin{align*}
+        a\bm u+b\bm v=\sum_{k\in J_{1}}\braI{aa_{k}}\bm v_{k}+\sum_{k\in J_{2}}\braI{bb_{k}}\bm v_{k}\ ,
+    \end{align*}
+    其中各 $aa_{k}\and bb_{k}\in\bfF$ , 于是由\link{线性空间}[子空间]{子空间的判定准则}可知 $\spn S$ 是 $V$ 的子空间.\ProofEndT
+}
+
+\par 下面的事实给出了判断两个向量组的张成空间是否相等的简便方法.
+
+\Definition{等价向量组}{
+    设 $S_{1}=(\bm v_{k}^{(1)})_{k\in I_{1}}$ 和 $S_{2}=(\bm v_{k}^{(2)})_{k\in I_{2}}$ 是 $V$ 中的向量组, $S_{1}$ 与 $S_{2}$ \newconcept{等价}当且仅当任何 $\bm v_{k}^{(1)}$ 都属于 $\spn S_{2}$ 且任何 $\bm v_{k}^{(2)}$ 都属于 $\spn S_{1}$ .
+}
+
+\vspace{-4pt}
+
+\Corollary{等价向量组的张成空间}{
+    设 $S_{1}\and S_{2}$ 是 $V$ 中的向量组, 则 $S_{1}$ 与 $S_{2}$ 等价当且仅当
+    \begin{align*}
+        \spn S_{1}=\spn S_{2}\ .
+    \end{align*}
+}
+
+\newpage

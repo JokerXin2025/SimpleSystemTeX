@@ -1,0 +1,95 @@
+
+% 2025 Simple·System
+
+% ./Section/有限维线性空间/矩阵表示/Jordan标准型
+
+% 设定：T的最小多项式在F中分裂
+
+\Definition{Jordan块}{
+    设 $\bm J$ 是 $\bfF$ 上的 $n$ 阶方阵, $\bm J$ 是对应于 $\lambda\in R$ 的\gap\newconcept{Jordan块}当且仅当
+    \begin{align*}
+        \bm J:\braI{i\and j}\mapsto\casesIII{\lambda}{i=j}{-2}{1}{i+1=j}{-2}{0}{\text{$i+1<j$ 或 $i>j$}}\ ,
+    \end{align*}
+    即
+    \begin{align*}
+        \bm J=\matrix{cccccc}{
+            \lambda \* 1 \* \* \cdots \* \* 0 \\[-2.5mm]
+            0 \* \lambda \* 1 \* \* \* \\[-2.5mm]
+            \* \* \ddots \* \ddots \* \* \vdots \\[-2.5mm]
+            \vdots \* \* \* \ddots \* 1 \* \\[-2.5mm]
+            \* \* \* \* \lambda \* 1 \\[-2.5mm]
+            0 \* \* \cdots \* \* 0 \* \lambda
+        }\ .
+    \end{align*}
+}
+
+\vspace{15pt}
+
+\vspace{-4pt}
+
+\Theorem{Jordan标准型}{
+    存在 $V$ 的某个基使得 $T$ 在该基下的矩阵为 $T$ 的\gap\newconcept{Jordan标准型}
+    \begin{align*}
+        \bm J_{T}=\sqmatrix{ccccccc}{
+            \bm J_{1} \* \bm O \* \* \cdots \* \* \bm O \\[-1.5mm]
+            \bm O \* \bm J_{2} \* \* \* \* \\[-1.5mm]
+            \* \* \ddots \* \* \* \vdots \\[-1.5mm]
+            \vdots \* \* \* \ddots \* \* \\[-1.5mm]
+            \* \* \* \* \bm J_{n-1} \* \bm O \\[-1.5mm]
+            \bm O \* \* \cdots \* \* \bm O \* \bm J_{n}
+        }\ ,
+    \end{align*}
+    其中 $\bm J_{1}\and\cdots\and\bm J_{n}$ 是Jordan块.
+}
+\Proof{证明I}{
+    \par 对 $V$ 作\link{有限维线性空间}{广义特征空间分解}和\link{有限维线性空间}{幂零循环空间分解}, 记 $T_{m}=\braI{T-\lambda_{m}\bm I}\restrict{E_{T}^{*}\braI{\lambda_{m}}}$ , 则
+    \begin{align*}
+        V=\bigoplus_{m=1}^{M}E_{T}^{*}\braI{\lambda_{m}}=\bigoplus_{m=1}^{M}\bigoplus_{k=1}^{K_{m}}C_{T_{m}}\braI{\bm v_{k}^{(m)}}\ ,
+    \end{align*}
+    其中 $\lambda_{1}\and\cdots\and\lambda_{M}$ 是 $T$ 的全部互异特征值, $K_{m}=\dim\ker T_{m}$ , 注意各 $E_{T}^{*}\braI{\lambda_{m}}$ 在 $T$ 下的不变性保证了该直和分解的有效性.
+    \par 记 $N_{m,k}=\dim C_{T_{m}}\braI{\bm v_{k}^{(m)}}$ , 我们知道
+    \begin{align*}
+        \braI{\bm v_{k}^{(m)}\and T_{m}\bm v_{k}^{(m)}\and\cdots\and T_{m}^{N_{m,k}-1}\bm v_{k}^{(m)}}
+    \end{align*}
+    即为\link{线性空间}[线性变换]{有限维循环空间的基}(幂零循环空间$C_{T_{m}}\braI{\bm v_{k}^{(m)}}$的基), 下面我们证明
+    \begin{align*}
+        \left(\;\!T_{1}^{N_{1,1}-1}\bm v_{1}^{(1)}\and\cdots\and T_{1}\bm v_{1}^{(1)}\and\bm v_{1}^{(1)}\and\cdots\cdots\and T_{1}^{N_{1,K_{1}}-1}\bm v_{K_{1}}^{(1)}\and\cdots\and T_{1}\bm v_{K_{1}}^{(1)}\and\bm v_{K_{1}}^{(1)}\and\right.\\[-15mm]
+    \end{align*}
+    \begin{align*}
+        T_{2}^{N_{2,1}-1}\bm v_{1}^{(2)}\and\cdots\and T_{2}\bm v_{1}^{(2)}\and\bm v_{1}^{(2)}\and\cdots\cdots\and T_{2}^{N_{2,K_{2}}-1}\bm v_{K_{2}}^{(2)}\and\cdots\and T_{2}\bm v_{K_{2}}^{(2)}\and\bm v_{K_{2}}^{(2)}\and\\[-15mm]
+    \end{align*}
+    \begin{align*}
+        \cdots\cdots\quad\cdots\cdots\and\\[-15mm]
+    \end{align*}
+    \begin{align*}
+        \left.T_{M}^{N_{M,1}-1}\bm v_{1}^{(M)}\and\cdots\and T_{M}\bm v_{1}^{(M)}\and\bm v_{1}^{(M)}\and\cdots\cdots\and T_{M}^{N_{\!M,K_{\!M}}-1}\bm v_{K_{\!M}}^{(M)}\and\cdots\and T_{M}\bm v_{K_{\!M}}^{(M)}\and\bm v_{K_{\!M}}^{(M)}\;\!\right)
+    \end{align*}
+    就是使得 $T$ 的矩阵表示为\link{有限维线性空间}[线性变换]{Jordan标准型}的基.
+    \par 令 $n=K_{1}+\cdots+K_{\!M}$ , 对任意正整数 $m\leqslant M$ , $k\leqslant K_{m}$ 和 $j<N_{m,k}$ :
+    \par 1. 当 $j=N_{m,k}-1$ 时, 我们知道 $T_{m}\braI{T_{m}^{j}\bm v_{k}^{(m)}}=T_{m}^{N_{m,k}}\bm v_{k}^{(m)}=\bm 0$ , 因此有
+    \begin{align*}
+        T\braI{T_{m}^{j}\bm v_{k}^{(m)}}=\braI{T-\lambda_{m}\bm I}\braI{T_{m}^{j}\bm v_{k}^{(m)}}+\braI{\lambda_{m}\bm I}\braI{T_{m}^{j}\bm v_{k}^{(m)}}=\lambda_{m}T_{m}^{j}\bm v_{k}^{(m)}\ .
+    \end{align*}
+    \par 2. 当 $j<N_{m,k}-1$ 时, 我们有
+    \begin{align*}
+        T\braI{T_{m}^{j}\bm v_{k}^{(m)}}&=\braI{T-\lambda_{m}\bm I}\braI{T_{m}^{j}\bm v_{k}^{(m)}}+\braI{\lambda_{m}\bm I}\braI{T_{m}^{j}\bm v_{k}^{(m)}}=T_{m}^{j+1}\bm v_{k}^{(m)}+\lambda_{m}T_{m}^{j}\bm v_{k}^{(m)}\ .
+    \end{align*}
+    这就完成了证明.\ProofEndT
+}
+%\Proof{证明II}{
+    %\par 证明.
+%}
+%\Proof{证明III\method{数学归纳法}}{
+    %\par 证明.
+%}
+
+\par 从证明I中容易得出如下关于\link{有限维线性空间}[线性变换]{Jordan标准型}的结论.
+
+\Corollary{Jordan标准型的性质}{
+    设 $\bm J_{T}$ 是 $T$ 的Jordan标准型, 则
+    \serial{1.}$\bm J_{T}$ 中对应于 $\lambda$ 的最大Jordan块阶数等于 $\lambda$ 的指数.
+    \serial{2.}$\bm J_{T}$ 中对应于 $\lambda$ 的各Jordan块阶数之和等于 $\lambda$ 的代数重数.
+    \serial{3.}$\bm J_{T}$ 中对应于 $\lambda$ 的Jordan块数量等于 $\lambda$ 的几何重数.
+}
+
+\newpage

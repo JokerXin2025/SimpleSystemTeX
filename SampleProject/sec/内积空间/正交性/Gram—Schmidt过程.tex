@@ -1,0 +1,47 @@
+
+% 2025 Simple·System
+
+% ./Section/内积空间/正交性/Gram—Schmidt过程
+
+\Theorem{Gram—Schmidt过程}(Gram\—Schmidt过程){
+    设 $\braI{\bm v_{1}\and\cdots\and\bm v_{n}}$ 是内积空间 $V$ 的基, 定义
+    \begin{align*}
+        \Forall{m}{\braIII{1\and\cdots\and n}}
+        \bm e_{m}:=\frac{\displaystyle\bm v_{m}-\sum_{k=1}^{m-1}\braV{\bm v_{m}\and\bm e_{k}}\bm e_{k}}{\displaystyle\norm{\bm v_{m}-\sum_{k=1}^{m-1}\braV{\bm v_{m}\and\bm e_{k}}\bm e_{k}}}\ ,
+    \end{align*}
+    是有意义的, 并且 $\braI{\bm e_{1}\and\cdots\and\bm e_{n}}$ 是 $V$ 的规范正交基.
+}
+\Proof{证明\method{数学归纳法}}{
+    \par 当 $n=1$ 时. 由 $\braI{\bm v_{1}}$ 线性无关知 $\bm v_{1}\ne\bm u$ , 于是 $\norm{\bm v_{1}}\ne0$ , 因此定义 $\bm e_{1}:=\sfrac{\bm v_{1}}{\norm{\bm v_{1}}}$ 是有意义的. 又有 $\braV{\bm e_{1}\and\bm e_{1}}=\norm{\bm e_{1}}^{2}=1$ , 由\link{维数}{基的维数准则}知 $\braI{\bm e_{1}}$ 是 $V$ 的规范正交基.
+    \par 假设 $n=m$ 时上述命题成立. 由 $\braI{\bm v_{1}\and\cdots\and\bm v_{n}}$ 线性无关知
+    \begin{align*}
+        \bm v_{m}-\sum_{k=1}^{m-1}\braV{\bm v_{m}\and\bm e_{k}}\bm e_{k}\ne\bm u\ ,
+    \end{align*}
+    于是
+    \begin{align*}
+        \norm{\bm v_{m}-\sum_{k=1}^{m-1}\braV{\bm v_{m}\and\bm e_{k}}\bm e_{k}}\ne0\ ,
+    \end{align*}
+    因此上述递归定义始终是有意义的.
+    \par 现在证明向量组 $\braI{\bm e_{1}\and\cdots\and\bm e_{m+1}}$ 规范正交, 任意给定正整数 $p\and q\leqslant m+1$ :
+    \par 1. 当 $p\and q\leqslant m$ 时, 规范正交性由归纳假设保证;
+    \par 2. 当 $p=q=m+1$ 时, 显然有 $\braV{\bm e_{m+1}\and\bm e_{m+1}}=\norm{\bm e_{m+1}}^{2}=1$ ;
+    \par 3. 当 $p\leqslant m$ 且 $q=m+1$ 时, 由归纳假设知 $\braV{\bm e_{p}\and\bm e_{k}}=\delta_{p,k}$ 对一切正整数 $k\leqslant m$ 成立, 我们有
+    \begin{align*}
+        \braV{\bm e_{p}\and\bm e_{q}}&=\norm{\bm v_{m+1}-\sum_{k=1}^{m}\braV{\bm v_{m+1}\and\bm e_{k}}\bm e_{k}}^{-1}\braV{\bm e_{p}\and\bm v_{m+1}-\sum_{k=1}^{m}\braV{\bm v_{m+1}\and\bm e_{k}}\bm e_{k}}\\[1mm]
+        &=\norm{\bm v_{m+1}-\sum_{k=1}^{m}\braV{\bm v_{m+1}\and\bm e_{k}}\bm e_{k}}^{-1}\braI{\!\braV{\bm e_{p}\and\bm v_{m+1}}-\overline{\braV{\bm v_{m+1}\and\bm e_{p}}}\!}\\[-1mm]
+        &=0\ ,
+    \end{align*}
+    \par 4. 当 $p=m+1$ 且 $q\leqslant m$ 时, 我们有
+    \begin{align*}
+        \braV{\bm e_{p}\and\bm e_{q}}=\overline{\braV{\bm e_{q}\and\bm e_{p}}}=0\ .
+    \end{align*}
+    \par 综上所述, $\braV{\bm e_{p}\and\bm e_{q}}=\delta_{p,q}$ , 从而 $n=m+1$ 时上述命题成立. 这就完成了证明.\ProofEndT
+}
+
+\par 由上面的证明可知: 对任意的正整数 $m\leqslant n$ , $(\bm e_{k})_{k=1}^{m}$ 都是 $\spn\,(\bm v_{k})_{k=1}^{m}$ 的规范正交基, 这说明如果 $(\bm v_{k})_{k=1}^{m}$ 在线性变换 $T$ 下不变, 那么 $(\bm e_{k})_{k=1}^{m}$ 也在 $T$ 下不变, 因此我们可以将任何上三角矩阵规范正交化.
+
+\Corollary{上三角矩阵的规范正交化}{
+    设 $T\in\mathcal{L}\braI{V}$ 在 $V$ 的某个基下有上三角矩阵, 那么 $T$ 在 $V$ 的某个规范正交基下有上三角矩阵.
+}
+
+\newpage

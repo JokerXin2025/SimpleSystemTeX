@@ -1,0 +1,42 @@
+
+% 2025 Simple·System
+
+% ./Section/内积空间/正交补/投影定理
+
+\Convention{sec}{
+    \serial{•}设 $U$ 是 $V$ 的子空间, 并且 $U$ 是完备集.
+}
+
+\vspace{-4pt}
+
+\Theorem{投影定理}{
+    $V=U\oplus U^{\perp}$ .
+}
+\Proof{证明}{
+    \par 对任意 $\bm v\in V$ , 存在\link{内积空间}{正交极小化向量} $\bm u\in U$ 和 $\bm u^{\perp}\in U^{\perp}$ 使得 $\bm v=\bm u+\bm u^{\perp}$ , 于是就有 $V=U+U^{\perp}$ . 另一方面, 显然有 $U\cap U^{\perp}=\braIII{\bm 0}$ , 因为只有 $\bm 0$ 与自身正交.\ProofEndT
+}
+
+\Corollary{正交补的维数}{
+    设 $W$ 是 $V$ 的子空间,
+    \serial{1.}若 $V$ 是有限维空间, 则 $\dim W^{\perp}=\dim V-\dim W$ .
+    \serial{2.}若 $V$ 是无限维空间, $W$ 是有限维空间, 则 $W^{\perp}$ 是无限维空间.
+}
+
+\vspace{-4pt}
+
+\Theorem{正交补的对合律}{
+    $U=\braI{U^{\perp}}^{\perp}$ .
+}
+\Proof{证明}{
+    \par $U\subseteq\braI{U^{\perp}}^{\perp}$ 是显然的, 因此我们只需证明对任意 $\bm w\in\braI{U^{\perp}}^{\perp}$ 都有 $\bm w\in U$ 成立即可. 在 $\braI{U^{\perp}}^{\perp}$ 中对完备子空间 $U$ 应用\link{内积空间}[正交补]{投影定理}可得 $\bm u\in U$ 和 $\bm v\in U^{\perp}$ 使得 $\bm w=\bm u+\bm v$ , 由 $\bm u\in U\subseteq\braI{U^{\perp}}^{\perp}$ 知 $\bm v=\bm w-\bm u\in\braI{U^{\perp}}^{\perp}$ , 于是
+    \begin{align*}
+        \bm v\in U^{\perp}\cap\braI{U^{\perp}}^{\perp}\implies\bm v=\bm 0\ ,
+    \end{align*}
+    这就证明了 $\bm w=\bm u$ , 即 $\bm w\in U$ .\ProofEndT
+}
+
+\Corollary{V的正交补判定准则}($V$的正交补判定准则){
+    $U^{\perp}=\braIII{\bm 0}\implies U=V$ .
+}
+
+\newpage

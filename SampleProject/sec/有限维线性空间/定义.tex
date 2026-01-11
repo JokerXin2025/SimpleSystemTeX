@@ -1,0 +1,57 @@
+
+% 2025 Simple·System
+
+% ./Section/有限维线性空间/定义
+
+\Definition{有限维线性空间}{
+    线性空间 $V$ \newconcept{有限维}, 当且仅当 $V$ 有有限的Hamel基. 否则 $V$ \newconcept{无限维}.
+}
+
+\vspace{-4pt}
+
+\Theorem{有限维线性空间的子空间}{
+    设 $V$ 是有限维空间, $U$ 是 $V$ 的子空间, 则 $U$ 是有限维空间.
+}
+\Proof{证明\method{流程}}{
+    \par 若 $U=\braIII{\bm 0}$ , 则有 $\spn\braI{}=U$ , 于是 $U$ 为有限维空间.
+    \par 若 $U\ne\braIII{\bm 0}$ , 则从 $p=1$ 开始依次考虑每个正整数 $p$ . 由 $\spn\,(\bm u_{k})_{k=1}^{p-1}\ne U$ 我们可以找到一个 $U$ 中的向量 $\bm u_{p}\notin\spn\,(\bm u_{k})_{k=1}^{p-1}$ , \link{线性空间}[向量组]{线性相关性引理}确保了向量组 $(\bm u_{k})_{k=1}^{p}$ 始终线性无关, 若 $\spn\,(\bm u_{k})_{k=1}^{p}=U$ 则此流程终止.
+    \par 设向量组 $S=(\bm v_{k})_{k=1}^{n}$ 张成 $V$ , 则必始终有 $p\leqslant n$ , 这表明上述的流程一定会在某个 $p=m$ 后终止, 这就构造出了张成 $U$ 的向量组 $(\bm u_{k})_{k=1}^{m}$ .\ProofEndT
+}
+
+\par 具体考察 $p=m$ 时的情形, 假设此步骤后依然有 $\spn\,(\bm u_{k})_{k=1}^{p}\ne U$ , 则此流程会在 $p=m+1$ 时产生长度超过 $S$ 且线性无关的向量组, 而这是不可能的.
+
+\par 下面给出无限维空间的判定准则, 注意任何有限维空间中的无关组都是有限的.
+
+\Theorem{无限维线性空间的判定准则}{
+    若存在某个向量序列 $(\bm v_{n})_{n=1}^{\infty}\in V^{\infty}$ 使得对一切正整数 $n$ 都有向量组 $S_{n}=(\bm v_{k})_{k=1}^{n}$ 线性无关, 则 $V$ 是无限维空间.
+}
+\Proof{证明\method{反证法}}{
+    \par 假设 $V$ 是\link{线性空间}[有限维空间]{有限维线性空间}(有限维空间), 则存在张成 $V$ 的向量组 $S_{n}$ , 但我们有向量组 $S_{n+1}$ 线性无关, 这与\link{线性空间}[向量组]{替换定理}矛盾, 从而 $V$ 必定是无限维空间.\ProofEndT
+}
+
+\Theorem{F上的序列构成无限维线性空间}($\bfF$上的序列构成无限维线性空间){
+    $\bfF^{\infty}$ 是无限维空间.
+}
+\Proof{证明}{
+    \par 构造无限序列序列 $(\bm e_{n})_{n=1}^{\infty}$ 为 $\bm e_{n}:=(\bm e_{m}^{(n)})_{m=1}^{\infty}$ , 其中对每个正整数 $n$ 有
+    \begin{align*}
+        \bm e_{m}^{(n)}:=\casesII{1}{m=n}{-2}{0}{m\ne n}\ .
+    \end{align*}
+
+\newpage
+
+    \noindent 对任意正整数 $n$ , 设存在 $(a_{k})_{k=1}^{n}\in\bfF^{n}$ 使得
+    \begin{align*}
+        \sum_{k=1}^{n}a_{k}\bm e_{k}=\bm u\ ,\\[-15mm]
+    \end{align*}
+    \begin{align*}
+        \braI{a_{1}\and\cdots\and a_{n}\and0\and\cdots}=\braI{0\and0\and\cdots}\ ,
+    \end{align*}
+    于是 $a_{1}=\cdots=a_{n}=0$ , 故 $\bfF^{\infty}$ 是无限维空间.\ProofEndT
+}
+
+\Convention{cpt}{
+    \serial{•}设 $U\and V\and W$ 是有限维空间.
+}
+
+\newpage

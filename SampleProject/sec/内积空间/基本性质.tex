@@ -1,0 +1,115 @@
+
+% 2025 Simple·System
+
+% ./Section/内积空间/基本性质
+
+\Theorem{内积的连续性}{
+    设 $V$ 是内积空间, 并且 $(\bm u_{k})_{k=1}^{\infty}\and(\bm v_{k})_{k=1}^{\infty}$ 是 $V$ 中的序列, 若 $\lim_{n\to\infty}x_{n}=x$ 且 $\lim_{n\to\infty}y_{n}=y$ , 则 $$\lim_{n\to\infty}\braV{x_{n}\and y_{n}}=\braV{x\and y}\ .$$
+}
+\Proof{证明}{
+    \begin{align*}
+        \braIV{\!\braV{x_{n}\and y_{n}}-\braV{x\and y}\!}&=\braIV{\!\braV{x_{n}\and y_{n}}-\braV{x_{n}\and y}+\braV{x_{n}\and y}-\braV{x\and y}\!}\\[-2mm]
+        &\leqslant\braIV{\!\braV{x_{n}\and\braI{y_{n}-y}\!}\!}+\braIV{\!\braV{\!\braI{x_{n}-x}\and y}\!}\\[-2mm]
+        &\leqslant\norm{x_{n}}\norm{y_{n}-y}+\norm{x_{n}-x}\norm{y}\ ,
+    \end{align*}
+    于是由 $\lim_{n\to\infty}x_{n}=x$ 和 $\lim_{n\to\infty}y_{n}=y$ 可得结论成立.\ProofEndT
+}
+
+\par 事实上, \link{内积空间}{内积空间诱导第一可数空间}(内积空间诱导第一可数空间), 因此上述定理\link{}{连续映射的序列刻画（第一可数）}(刻画了内积作为连续映射的特性).
+
+\Corollary{内积作为连续映射}{
+    设 $V$ 是内积空间, 则
+    \serial{1.}对任意 $\bm u\in V$ , $\braV{\cdot\and\bm u}:V\to\bfF\ ,\ \bm v\mapsto\braV{\bm v\and\bm u}$ 是连续映射.
+    \serial{2.}对任意 $\bm u\in V$ , $\braV{\bm u\and\cdot}:V\to\bfF\ ,\ \bm v\mapsto\braV{\bm u\and\bm v}$ 是连续映射.
+    \serial{3.}$\braV{\cdot\and\cdot}:V^{2}\to\bfF\ ,\ \braI{\bm u\and\bm v}\mapsto\braV{\bm u\and\bm v}$ 是连续映射.
+}
+
+\vspace{-4pt}
+
+\Theorem{Cauchy—Schwarz不等式}(Cauchy\—Schwarz不等式){
+    设 $V$ 是一个内积空间, 则
+    \begin{align*}
+        \Forall{\bm v_{1}\and\bm v_{2}}{V}
+        \norm{\bm v_{1}}\norm{\bm v_{2}}\geqslant\braIV{\!\braV{\bm v_{1}\and\bm v_{2}}\!}\ ,
+    \end{align*}
+    其中等号当且仅当 $\braI{\bm v_{1}\and\bm v_{2}}$ 线性相关时取得.
+}
+\Proof{证明I}{
+    \par 当 $\bm v_{2}=\bm u$ 时, 该不等式成立并且等式成立;
+    \par 当 $\bm v_{2}\ne\bm u$ 时, 我们可以对 $\bm v_{1}$ 进行正交分解 
+    \begin{align*}
+        \bm v_{1}=\frac{\braV{\bm v_{1}\and\bm v_{2}}}{\norm{\bm v_{2}}^{2}}\bm v_{2}+\braI{\bm v_{1}-\frac{\braV{\bm v_{1}\and\bm v_{2}}}{\norm{\bm v_{2}}^{2}}\bm v_{2}}\ ,
+    \end{align*}
+    于是由\link{内积空间}[正交性]{勾股定理}(勾股定理)有
+    \begin{align*}
+        \norm{\bm v_{2}}^{2}\norm{\bm v_{1}}^{2}&=\norm{\bm v_{2}}^{2}\braI{\norm{\frac{\braV{\bm v_{1}\and\bm v_{2}}}{\norm{\bm v_{2}}^{2}}\bm v_{2}}^{2}+\norm{\bm v_{1}-\frac{\braV{\bm v_{1}\and\bm v_{2}}}{\norm{\bm v_{2}}^{2}}\bm v_{2}}^{2}}\\[1mm]
+        &=\braIV{\!\braV{\bm v_{1}\and\bm v_{2}}\!}^{2}+\norm{\bm v_{2}}^{2}\norm{\bm v_{1}-\frac{\braV{\bm v_{1}\and\bm v_{2}}}{\norm{\bm v_{2}}^{2}}\bm v_{2}}^{2}\\[-1mm]
+        &\geqslant\braIV{\!\braV{\bm v_{1}\and\bm v_{2}}\!}^{2}\ ,
+    \end{align*}
+    不等式两侧同时取根号即可, 其中等式当且仅当存在 $a\in\bfF$ 使得 $\bm v_{1}=a\bm v_{2}$ 时成立, 因为只要 $\bm v_{1}=a\bm v_{2}$ 即有
+    \begin{align*}
+        \braV{\bm v_{1}\and\bm v_{2}}=\braV{a\bm v_{2}\and\bm v_{2}}=a\norm{\bm v_{2}}^{2}\ ,
+    \end{align*}
+    于是 $a=\bigsfrac{\braV{\bm v_{1}\and\bm v_{2}}}{\norm{\bm v_{2}}^{2}}$ .
+    \par 综上所述, 该不等式成立且等号当且仅当 $\braI{\bm v_{1}\and\bm v_{2}}$ 线性相关时取得.\ProofEndT
+}
+
+\Theorem{三角不等式}{
+    设 $V$ 是一个内积空间, 则
+    \begin{align*}
+        \Forall{\bm v_{1}\and\bm v_{2}}{V}
+        \braIV{\norm{\bm v_{1}}-\norm{\bm v_{2}}}\leqslant\norm{\bm v_{1}+\bm v_{2}}\leqslant\norm{\bm v_{1}}+\norm{\bm v_{2}}\ ,
+    \end{align*}
+    其中第一个等号当且仅当 $\braI{\bm v_{1}\and\bm v_{2}}$ 线性相关且 $\braV{\bm v_{1}\and\bm v_{2}}<0$ 时取得, 第二个等号当且仅当 $\braI{\bm v_{1}\and\bm v_{2}}$ 线性相关且 $\braV{\bm v_{1}\and\bm v_{2}}>0$ 时取得.
+}
+\Proof{证明}{
+    \begin{align*}
+        \braIV{\norm{\bm v_{1}}-\norm{\bm v_{2}}}^{2}&=\norm{\bm v_{1}}^{2}+\norm{\bm v_{2}}^{2}-2\norm{\bm v_{1}}\norm{\bm v_{2}}\\[-2mm]
+        &\leqslant\norm{\bm v_{1}}^{2}+\norm{\bm v_{2}}^{2}-2\braIV{\!\braV{\bm v_{1}\and\bm v_{2}}\!}\\[-2mm]
+        &=\norm{\bm v_{1}}^{2}+\norm{\bm v_{2}}^{2}-2\braIV{\!\braV{\bm v_{1}\and-\bm v_{2}}\!}\\[-2mm]
+        &\leqslant\norm{\bm v_{1}}^{2}+\norm{\bm v_{2}}^{2}-2\Re\braV{\bm v_{1}\and-\bm v_{2}}\\[-2mm]
+        &=\norm{\bm v_{1}}^{2}+\norm{\bm v_{2}}^{2}+2\Re\braV{\bm v_{1}\and\bm v_{2}}\\[-2mm]
+        &=\norm{\bm v_{1}+\bm v_{2}}^{2}\ ,\\[-16mm]
+    \end{align*}
+    \begin{align*}
+        \norm{\bm v_{1}+\bm v_{2}}^{2}&=\norm{\bm v_{1}}^{2}+\norm{\bm v_{2}}^{2}+2\Re\braV{\bm v_{1}\and\bm v_{2}}\\[-2mm]
+        &\leqslant\norm{\bm v_{1}}^{2}+\norm{\bm v_{2}}^{2}+2\braIV{\!\braV{\bm v_{1}\and\bm v_{2}}\!}\\[-2mm]
+        &\leqslant\norm{\bm v_{1}}^{2}+\norm{\bm v_{2}}^{2}+2\norm{\bm v_{1}}\norm{\bm v_{2}}\\[-2mm]
+        &=\braI{\norm{\bm v_{1}}+\norm{\bm v_{2}}}^{2}\ ,
+    \end{align*}
+    其中第一个等号当且仅当
+    \begin{align*}
+        \norm{\bm v_{1}}\norm{\bm v_{2}}=\braIV{\!\braV{\bm v_{1}\and\bm v_{2}}\!}=\Re\braV{\bm v_{1}\and-\bm v_{2}}
+    \end{align*}
+    时, 也即 $\braI{\bm v_{1}\and\bm v_{2}}$ 线性相关且 $\braV{\bm v_{1}\and\bm v_{2}}<0$ 时取得, 第二个等号当且仅当
+    \begin{align*}
+        \norm{\bm v_{1}}\norm{\bm v_{2}}=\braIV{\!\braV{\bm v_{1}\and\bm v_{2}}\!}=\Re\braV{\bm v_{1}\and\bm v_{2}}
+    \end{align*}
+    时, 也即 $\braI{\bm v_{1}\and\bm v_{2}}$ 线性相关且 $\braV{\bm v_{1}\and\bm v_{2}}>0$ 时取得.\ProofEndT
+}
+
+\par 至此, 结合\link{内积空间}{范数的基本性质}和\link{内积空间}{三角不等式}, 我们证明了
+
+\Structure{内积空间诱导赋范空间}{
+    若 $\braI{V\and\braV{\cdot\and\cdot}\!}$ 是内积空间, 则 $\braI{V\and\norm{\cdot}}$ 是赋范空间.
+}
+
+\vspace{-4pt}
+
+\Structure{内积空间诱导度量空间}{
+    若 $\braI{V\and\braV{\cdot\and\cdot}\!}$ 是内积空间, 则 $\braI{V\and d_{\braV{\cdot,\cdot}}}$ 是度量空间, 其中 $d_{\braV{\cdot,\cdot}}$ 定义为内积 $\braV{\cdot\and\cdot}$ 诱导的度量.
+}
+
+\vspace{-4pt}
+
+\Structure{内积空间诱导拓扑空间}{
+    若 $\braI{V\and\braV{\cdot\and\cdot}\!}$ 是内积空间, 则 $\braI{V\and\tau_{\braV{\cdot,\cdot}}}$ 是拓扑空间, 其中 $\tau_{\braV{\cdot,\cdot}}$ 定义为度量 $d_{\braV{\cdot,\cdot}}$ 诱导的拓扑.
+}
+
+\vspace{-4pt}
+
+\Corollary{内积空间诱导第一可数空间}{
+    $\braI{V\and\tau_{\braV{\cdot,\cdot}}}$ 是第一可数空间.
+}
+
+\newpage

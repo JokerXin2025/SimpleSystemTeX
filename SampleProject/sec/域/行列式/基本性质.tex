@@ -1,0 +1,327 @@
+
+% 2025 Simple·System
+
+% ./Section/域/行列式/基本性质
+
+% 设AB为同阶方阵
+% 设B是V的基，M(v)表示v在B下的矩阵表示
+
+\Corollary{行列式的规范性}{
+    $\det\bm I=1$ .
+}
+
+\vspace{-4pt}
+
+\Theorem{行列式的交错多重线性}{
+    \serial{1.}多重可加性:
+    \begin{align*}
+        \determinant{ccc}{
+            \* \vdots \* \\[-1mm]
+            a_{1}+b_{1} \* \cdots \* a_{n}+b_{n} \\[-1mm]
+            \* \vdots \*
+        }=\determinant{ccc}{
+            \* \vdots \* \\[-1mm]
+            a_{1} \* \cdots \* a_{n} \\[-1mm]
+            \* \vdots \*
+        }+\determinant{ccc}{
+            \* \vdots \* \\[-1mm]
+            b_{1} \* \cdots \* b_{n} \\[-1mm]
+            \* \vdots \*
+        }\ ,\\[-14mm]
+    \end{align*}
+    \begin{align*}
+        \determinant{ccc}{
+            \* a_{1}+b_{1} \* \\[-1mm]
+            \cdots \* \vdots \* \cdots \\[-1mm]
+            \* a_{n}+b_{n} \*
+        }=\determinant{ccc}{
+            \* a_{1} \* \\[-1mm]
+            \cdots \* \vdots \* \cdots \\[-1mm]
+            \* a_{n} \*
+        }+\determinant{ccc}{
+            \* b_{1} \* \\[-1mm]
+            \cdots \* \vdots \* \cdots \\[-1mm]
+            \* b_{n} \*
+        }\ .
+    \end{align*}
+    \serial{2.}多重齐次性:
+    \begin{align*}
+        \determinant{ccc}{
+            \* \vdots \* \\[-1mm]
+            ka_{1} \* \cdots \* ka_{n} \\[-1mm]
+            \* \vdots \*
+        }=k\determinant{ccc}{
+            \* \vdots \*\\[-1mm]
+            a_{1} \* \cdots \* a_{n} \\[-1mm]
+            \* \vdots \*
+        }\ ,\\[-14mm]
+    \end{align*}
+    \begin{align*}
+        \determinant{ccccc}{
+            \* ka_{1} \* \\[-1mm]
+            \cdots \* \vdots \* \cdots \\[-1mm]
+            \* ka_{n} \*
+        }=k\determinant{ccccc}{
+            \* a_{1} \* \\[-1mm]
+            \cdots \* \vdots \* \cdots \\[-1mm]
+            \* a_{n} \*
+        }\ .
+    \end{align*}
+    \serial{3.}交错性:
+    \begin{align*}
+        \determinant{ccc}{
+            \* \vdots \* \\[-1mm]
+            a_{1} \* \cdots \* a_{n} \\[-1mm]
+            \* \vdots \* \\[-1mm]
+            a_{1} \* \cdots \* a_{n} \\[-1mm]
+            \* \vdots \*
+        }=0\ ,\\[-14mm]
+    \end{align*}
+    \begin{align*}
+        \determinant{ccccc}{
+            \* a_{1} \* \* a_{1} \* \\[-1mm]
+            \cdots \* \vdots \* \cdots \* \vdots \* \cdots \\[-1mm]
+            \* a_{n} \* \* a_{n} \*
+        }=0\ .
+    \end{align*}
+}
+\Proof{\sentence{1}证明}{
+    \[\resizebox{\textwidth}{!}{$
+        \begin{aligned}
+            \determinant{ccc}{
+                a_{1,1} \* \cdots \* a_{1,n} \\[-1mm]
+                \* \vdots \* \\[-1mm]
+                a_{m-1,1} \* \cdots \* a_{m-1,n} \\[-1mm]
+                a_{1}+b_{1} \* \cdots \* a_{n}+b_{n} \\[-1mm]
+                a_{m+1,1} \* \cdots \* a_{m+1,n} \\[-1mm]
+                \* \vdots \* \\[-1mm]
+                a_{n,1} \* \cdots \* a_{n,n}
+            }&=\sum_{\sigma\in S_{n}}\braI{\sgn\sigma\braI{a_{\sigma(m)}+b_{\sigma(m)}}\prod_{\substack{1\leqslant k\leqslant n\\k\ne m}}a_{k,\sigma\braI{k}\!}}\\[1mm]
+            &=\sum_{\sigma\in S_{n}}\braI{\sgn\sigma\,a_{\sigma(m)}\prod_{\substack{1\leqslant k\leqslant n\\k\ne m}}a_{k,\sigma\braI{k}\!}}+\sum_{\sigma\in S_{n}}\braI{\sgn\sigma\,b_{\sigma(m)}\prod_{\substack{1\leqslant k\leqslant n\\k\ne m}}a_{k,\sigma\braI{k}\!}}\\[1mm]
+            &=\determinant{ccc}{
+                a_{1,1} \* \cdots \* a_{1,n} \\[-1mm]
+                \* \vdots \* \\[-1mm]
+                a_{m-1,1} \* \cdots \* a_{m-1,n} \\[-1mm]
+                a_{1} \* \cdots \* a_{n} \\[-1mm]
+                a_{m+1,1} \* \cdots \* a_{m+1,n} \\[-1mm]
+                \* \vdots \* \\[-1mm]
+                a_{n,1} \* \cdots \* a_{n,n}
+            }+\determinant{ccc}{
+                a_{1,1} \* \cdots \* a_{1,n} \\[-1mm]
+                \* \vdots \* \\[-1mm]
+                a_{m-1,1} \* \cdots \* a_{m-1,n} \\[-1mm]
+                b_{1} \* \cdots \* b_{n} \\[-1mm]
+                a_{m+1,1} \* \cdots \* a_{m+1,n} \\[-1mm]
+                \* \vdots \* \\[-1mm]
+                a_{n,1} \* \cdots \* a_{n,n}
+            }\ ,
+        \end{aligned}
+    $}\]
+    另一个等式可由完全相似的方式证出.\ProofEndT
+}
+\Proof{\sentence{2}证明}{
+    \[\resizebox{\textwidth}{!}{$
+        \begin{aligned}
+        \determinant{ccccccc}{
+            a_{1,1} \* \* a_{1,m-1} \* ka_{1} \* a_{1,m+1} \* \* a_{1,n} \\[-1mm]
+            \vdots \* \cdots \* \vdots \* \vdots \* \vdots \* \cdots \* \vdots \\[-1mm]
+            a_{n,1} \* \* a_{n,m-1} \* ka_{n} \* a_{n,m+1} \* \* a_{n,n}
+        }&=\sum_{\sigma\in S_{n}}\braI{\sgn\sigma\,ka_{\sigma(m)}\prod_{\substack{1\leqslant k\leqslant n\\k\ne m}}a_{k,\sigma\braI{k}\!}}\\[1mm]
+        &=k\sum_{\sigma\in S_{n}}\braI{\sgn\sigma\,a_{\sigma(m)}\prod_{\substack{1\leqslant k\leqslant n\\k\ne m}}a_{k,\sigma\braI{k}\!}}\\[1mm]
+        &=k\determinant{ccccccc}{
+            a_{1,1} \* \* a_{1,m-1} \* a_{1} \* a_{1,m+1} \* \* a_{1,n} \\[-1mm]
+            \vdots \* \cdots \* \vdots \* \vdots \* \vdots \* \cdots \* \vdots \\[-1mm]
+            a_{n,1} \* \* a_{n,m-1} \* a_{n} \* a_{n,m+1} \* \* a_{n,n}
+        }\ ,
+        \end{aligned}
+    $}\]
+    另一个等式可由完全相似的方式证出.\ProofEndT
+}
+
+\newpage
+
+\Proof{\sentence{3}证明}{
+    \par 对于任意给定的正整数 $p\leqslant q\leqslant n$ , 我们定义关于 $p$ 和 $q$ 的对换映射 $\mathcal{A}:S_{n}\to S_{n}$ 为
+    \begin{align*}
+        \braI{\mathcal{A}\sigma}\braI{k}:=\casesIII{\sigma\braI{q}}{k=p}{-2}{\sigma\braI{p}}{k=q}{-2}{\sigma\braI{k}}{k\ne p\Text{且}k\ne q}\ ,
+    \end{align*}
+    显然 $\mathcal{A}$ 是双射. 若 $\bm A\braI{p\and k}=\bm A\braI{q\and k}$ 对一切正整数 $k\leqslant n$ 成立, 则
+    \begin{align*}
+        \prod_{k=1}^{n}\bm A\braI{k\and\braI{\mathcal{A}\sigma}\braI{k}\!}&=\bm A\braI{p\and\braI{\mathcal{A}\sigma}\braI{p}\!}\bm A\braI{q\and\braI{\mathcal{A}\sigma}\braI{q}\!}\prod_{\substack{1\leqslant k\leqslant n\\k\ne p\text{且}k\ne q}}\bm A\braI{k\and\braI{\mathcal{A}\sigma}\braI{k}\!}\\[1mm]
+        &=\bm A\braI{p\and\sigma\braI{q}\!}\bm A\braI{q\and\sigma\braI{p}\!}\prod_{\substack{1\leqslant k\leqslant n\\k\ne p\text{且}k\ne q}}\bm A\braI{k\and\sigma\braI{k}\!}\\[1mm]
+        &=\bm A\braI{q\and\sigma\braI{q}\!}\bm A\braI{p\and\sigma\braI{p}\!}\prod_{\substack{1\leqslant k\leqslant n\\k\ne p\text{且}k\ne q}}\bm A\braI{k\and\sigma\braI{k}\!}\\[1mm]
+        &=\prod_{k=1}^{n}\bm A\braI{k\and\sigma\braI{k}\!}\ ,
+    \end{align*}
+    于是
+    \begin{align*}
+        \det\bm A&=\frac{1}{2}\braI{\sum_{\sigma\in S_{n}}\sgn\sigma\prod_{k=1}^{n}\bm A\braI{k\and\sigma\braI{k}\!}+\sum_{\sigma\in S_{n}}\sgn\braI{\mathcal{A}\sigma}\prod_{k=1}^{n}\bm A\braI{k\and\braI{\mathcal{A}\sigma}\braI{k}\!}}\\[1mm]
+        &=\frac{1}{2}\braI{\sum_{\sigma\in S_{n}}\sgn\sigma\prod_{k=1}^{n}\bm A\braI{k\and\sigma\braI{k}\!}+\sum_{\sigma\in S_{n}}\sgn\braI{\mathcal{A}\sigma}\prod_{k=1}^{n}\bm A\braI{k\and\sigma\braI{k}\!}}\\[1mm]
+        &=\frac{1}{2}\sum_{\sigma\in S_{n}}\braI{\sgn\sigma+\sgn\braI{\mathcal{A}\sigma}\!}\prod_{k=1}^{n}\bm A\braI{k\and\sigma\braI{k}\!}\\[-1mm]
+        &=0\ ,
+    \end{align*}
+    另一个等式可由完全相似的方式证出.\ProofEndT
+}
+
+\par 上述性质表明行列式作为映射
+\begin{align*}
+    \det_{\mathrm{column}}:\braI{\bfF^{n}}^{n}\to\bfF\ ,\ \braI{(a_{k}^{(1)})_{k=1}^{n}\and\cdots\and(a_{k}^{(n)})_{k=1}^{n}}\mapsto\determinant{ccc}{
+        a_{1}^{(1)} \* \cdots \* a_{n}^{(1)} \\[-1mm]
+        \vdots \* \ddots \* \vdots \\[-1mm]
+        a_{1}^{(n)} \* \cdots \* a_{n}^{(n)}
+    }
+\end{align*}
+和
+\begin{align*}
+    \det_{\mathrm{row}}:\braI{\bfF^{n}}^{n}\to\bfF\ ,\ \braI{(a_{1}^{(k)})_{k=1}^{n}\and\cdots\and(a_{n}^{(k)})_{k=1}^{n}}\mapsto\determinant{ccccc}{
+        a_{1}^{(1)} \* \cdots \* a_{n}^{(1)} \\[-1mm]
+        \vdots \* \ddots \* \vdots \\[-1mm]
+        a_{1}^{(n)} \* \cdots \* a_{n}^{(n)}
+    }
+\end{align*}
+是\link{线性空间}[多重线性型]{交错多重线性型}(交错$n$重线性型), 由此可以得到下面的诸多结论.
+
+\Corollary{行列式的剪切不变性}{
+    \begin{align*}
+        \determinant{ccc}{
+            \* \vdots \* \\[-1mm]
+            a_{1} \* \cdots \* a_{n} \\[-1mm]
+            \* \vdots \* \\[-1mm]
+            b_{1} \* \cdots \* b_{n} \\[-1mm]
+            \* \vdots \*
+        }=\determinant{ccc}{
+            \* \vdots \* \\[-1mm]
+            a_{1} \* \cdots \* a_{n} \\[-1mm]
+            \* \vdots \* \\[-1mm]
+            b_{1}+ca_{1} \* \cdots \* b_{n}+ca_{n} \\[-1mm]
+            \* \vdots \*
+        }\ ,\\[-14mm]
+    \end{align*}
+    \begin{align*}
+        \determinant{ccccc}{
+            \* a_{1} \* \* b_{1} \* \\[-1mm]
+            \cdots \* \vdots \* \cdots \* \vdots \* \cdots \\[-1mm]
+            \* a_{n} \* \* b_{n} \*
+        }=\determinant{ccccccc}{
+            \* a_{1} \* \* b_{1}+ca_{1} \* \\[-1mm]
+            \cdots \* \vdots \* \cdots \* \vdots \* \cdots \\[-1mm]
+            \* a_{n} \* \* b_{n}+ca_{n} \*
+        }\ .
+    \end{align*}
+}
+
+\vspace{15pt}
+
+\vspace{-4pt}
+
+\Corollary{行列式的反对称性}{
+    \begin{align*}
+        \determinant{ccc}{
+            \* \vdots \* \\[-1mm]
+            a_{1} \* \cdots \* a_{n} \\[-1mm]
+            \* \vdots \* \\[-1mm]
+            b_{1} \* \cdots \* b_{n} \\[-1mm]
+            \* \vdots \*
+        }=-\determinant{ccc}{
+            \* \vdots \* \\[-1mm]
+            b_{1} \* \cdots \* b_{n} \\[-1mm]
+            \* \vdots \* \\[-1mm]
+            a_{1} \* \cdots \* a_{n} \\[-1mm]
+            \* \vdots \*
+        }\ ,\\[-14mm]
+    \end{align*}
+    \begin{align*}
+        \determinant{ccccc}{
+            \* a_{1} \* \* b_{1} \* \\[-1mm]
+            \cdots \* \vdots \* \cdots \* \vdots \* \cdots \\[-1mm]
+            \* a_{n} \* \* b_{n} \*
+        }=-\determinant{ccccc}{
+            \* b_{1} \* \* a_{1} \* \\[-1mm]
+            \cdots \* \vdots \* \cdots \* \vdots \* \cdots \\[-1mm]
+            \* b_{n} \* \* a_{n} \*
+        }\ .
+    \end{align*}
+}
+
+\vspace{15pt}
+
+\vspace{-4pt}
+
+\Corollary{奇异矩阵的行列式}{
+    $\bm A$ 是奇异矩阵当且仅当 $\det\bm A=0$ .
+}
+
+\par 从 $\bm I_{n}$ 的最后一行出发, 依次向上逐行应用行列式的\link{域}[行列式]{行列式的交错多重线性}(多重齐次性)和\link{域}[行列式]{行列式的剪切不变性}(剪切不变性)即可得任意上三角矩阵的行列式.
+
+\newpage
+
+\Corollary{上三角矩阵的行列式}{
+    \begin{align*}
+        \determinant{cccccc}{
+            \lambda_{1} \* * \* \* \cdots \* \* * \\[-1mm]
+            0 \* \lambda_{2} \* \\[-1mm]
+            \* \* \ddots \* \* \* \vdots \\[-1mm]
+            \vdots \* \* \* \ddots \* \* \\[-1mm]
+            \* \* \* \* \lambda_{n-1} \* * \\[-1mm]
+            0 \* \* \cdots \* \* 0 \* \lambda_{n}
+        }=\prod_{k=1}^{n}\lambda_{k}\ .
+    \end{align*}
+}
+
+\vspace{-4pt}
+
+\Theorem{转置矩阵的行列式}{
+    $\det\bm A^{\rmT}=\det\bm A$ .
+}
+\Proof{证明}{
+    \begin{align*}
+        \det\bm A^{\rmT}&=\sum_{\sigma\in S_{n}}\sgn\sigma\prod_{k=1}^{n}\bm A^{\rmT}\braI{k\and\sigma\braI{k}\!}\\[1mm]
+        &=\sum_{\sigma\in S_{n}}\sgn\sigma\prod_{k=1}^{n}\bm A\braI{\sigma\braI{k}\and k}\\[1mm]
+        &=\sum_{\sigma\in S_{n}}\sgn\sigma\prod_{k=1}^{n}\bm A\braI{k\and\sigma^{-1}\braI{k}\!}\\[1mm]
+        &=\sum_{\sigma\in S_{n}}\sgn\sigma\prod_{k=1}^{n}\bm A\braI{k\and\sigma\braI{k}\!}\\[1mm]
+        &=\det\bm A\ .\ProofEndF
+    \end{align*}
+}
+
+\Theorem{行列式的可乘性}{
+    $\det\braI{\bm A\bm B}=\det\bm A\,\det\bm B$ .
+}
+\Proof{证明}{
+    \begin{align*}
+        \det\braI{\bm A\bm B}&=\sum_{\sigma\in S_{n}}\sgn\sigma\prod_{k=1}^{n}\bm A\bm B\braI{k\and\sigma\braI{k}\!}\\[1mm]
+        &=\sum_{\sigma\in S_{n}}\sgn\sigma\prod_{k=1}^{n}\sum_{l=1}^{n}\bm A\braI{k\and l}\bm B\braI{l\and\sigma\braI{k}\!}\\[1mm]
+        &=\sum_{\sigma\in S_{n}}\sgn\sigma\sum_{1\leqslant l_{1},...,l_{n}\leqslant n}\prod_{k=1}^{n}\bm A\braI{k\and l_{k}}\bm B\braI{l_{k}\and\sigma\braI{k}\!}\\[1mm]
+        &=\sum_{1\leqslant l_{1},...,l_{n}\leqslant n}\prod_{k=1}^{n}\bm A\braI{k\and l_{k}}\sum_{\sigma\in S_{n}}\sgn\sigma\prod_{k=1}^{n}\bm B\braI{l_{k}\and\sigma\braI{k}\!}\ ,
+    \end{align*}
+
+\newpage
+
+    \noindent 考虑矩阵
+    \begin{align*}
+        \bm B'=\matrix{ccc}{
+            \bm B\braI{l_{1}\and 1} \* \cdots \* \bm B\braI{l_{1}\and n} \\[-1mm]
+            \vdots \* \ddots \* \vdots \\[-1mm]
+            \bm B\braI{l_{n}\and 1} \* \cdots \* \bm B\braI{l_{n}\and n}
+        }\ ,
+    \end{align*}
+    则上面的结果可写作
+    \begin{align*}
+        \det\braI{\bm A\bm B}=\sum_{1\leqslant l_{1},...,l_{n}\leqslant n}\det\bm B'\prod_{k=1}^{n}\bm A\braI{k\and l_{k}}\ ,
+    \end{align*}
+    我们可以要求上述 $l_{k}$ 各不相同, 否则就有 $\det\bm B'=0$ , 因此我们可以进一步将 $l_{1}\and\cdots\and l_{n}$ 视作 $\braIII{1\and\cdots\and n}$ 上的某个置换 $\tau$ , 此时又有 $\det\bm B'=\sgn\tau\det\bm B$ , 于是
+    \begin{align*}
+        \det\braI{\bm A\bm B}&=\sum_{\tau\in S_{n}}\det\bm B'\prod_{k=1}^{n}\bm A\braI{k\and\tau\braI{k}\!}\\[1mm]
+        &=\det\bm B\sum_{\tau\in S_{n}}\sgn\tau\prod_{k=1}^{n}\bm A\braI{k\and\tau\braI{k}\!}\\[1mm]
+        &=\det\bm A\,\det\bm B\ .\ProofEndF
+    \end{align*}
+}
+
+\Theorem{逆矩阵的行列式}{
+    若 $\bm A$ 可逆, 则 $\det\braI{\bm A^{-1}}=\braI{\det\bm A}^{-1}$ .
+}
+\Proof{证明}{
+    \begin{align*}
+        \det\braI{\bm A^{-1}}=\frac{\det\braI{\bm A\bm A^{-1}}}{\det\bm A}=\frac{\det\bm I}{\det\bm A}=\frac{1}{\det\bm A}\ .\ProofEndF
+    \end{align*}
+}
+
+\newpage

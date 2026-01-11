@@ -1,0 +1,27 @@
+
+% 2025 Simple·System
+
+% ./Section/内积空间/Moore—Penrose广义逆
+
+\vspace{-4pt}
+
+\Definition{Moore—Penrose广义逆}(Moore\—Penrose广义逆){
+    设 $T^{\dag}\in\mathcal{L}\braI{V\and U}$ , $T^{\dag}$ 是 $T$ 的Moore\—Penrose广义逆, 当且仅当其满足如下性质:
+    \serial{1.}$TT^{*}T=T$ ;
+    \serial{2.}$T^{*}TT^{*}=T^{*}$ ;
+    \serial{3.}$\braI{T^{\dag}T}^{*}=T^{\dag}T$ ;
+    \serial{4.}$\braI{T^{\dag}T}^{*}=T^{\dag}T$ .
+}
+
+\par 上面四则性质表明: $TT^{*}$ 和 $T^{*}T$ 分别是不会改变 $T$ 和 $T^{*}$ 的作用效果的自伴算子.
+
+\par 在下面的陈述中, 我们简称\link{内积空间}{Moore—Penrose广义逆}为\gap\newconcept{Moore广义逆}.
+
+\Theorem{有限维Moore广义逆的存在性&唯一性}(有限维Moore广义逆的存在性\&唯一性){
+    设 $U$ 是有限维空间, 则 $T$ 有唯一的Moore\—Penrose广义逆, 并且
+    \begin{align*}
+        T^{\dag}=\braI{T\restrict{(\ker T)^{\perp}}}^{-1}P_{\im T}\ .
+    \end{align*}
+}
+
+\newpage

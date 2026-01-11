@@ -1,0 +1,116 @@
+
+% 2025 Simple·System
+
+% ./Section/线性空间/子空间/直和
+
+\par 作为一类特殊的和, 直和意味着其中的每一个向量都能唯一地被表示为各个子空间中向量的线性组合.
+
+\Definition{直和}{
+    当且仅当映射
+    \begin{align*}
+        T:\prod_{k=1}^{n}V_{k}\to\sum_{k=1}^{n}V_{k}\ ,\ (\bm v_{k})_{k=1}^{n}\mapsto\sum_{k=1}^{n}\bm v_{k}
+    \end{align*}
+    是单射时, 定义 $V_{1}\and V_{2}\and\cdots\and V_{n}$ 的\newconcept{直和}为
+    \begin{align*}
+        V_{1}\oplus V_{2}\oplus\cdots\oplus V_{n}:=\sum_{k=1}^{n}V_{k}\ .
+    \end{align*}
+}
+
+\par 当我们写下 $V_{1}\oplus V_{2}$ 这个表达式, 或是说 $V_{1}+V_{2}$ 是直和时, 就意味着子空间 $V_{1}$ 和 $V_{2}$ 需要满足一些理想的性质.
+
+\Theorem{直和的等价条件}{
+    下面的各命题等价:
+    \serial{1.}$V_{1}+V_{2}+\cdots+V_{n}$ 是直和.
+    \serial{2.}不存在不全为 $\bm 0$ 的 $(\bm v_{k})_{k=1}^{n}\in\braI{V_{1}\times V_{2}\times\cdots\times V_{n}}$ 使得 $\bm v_{1}+\bm v_{2}+\cdots+\bm v_{n}=\bm 0$ 成立.
+    \serial{3.}对一切正整数 $i\leqslant n$ 都有
+    \begin{align*}
+        V_{i}\cap\sum_{j\ne i}V_{j}=\braIII{\bm 0}\ .
+    \end{align*}
+    \serial{4.}任何向量组
+    \begin{align*}
+        S\in\prod_{k=1}^{m}\braI{V'_{k}\setminus\braIII{\bm 0}\!}
+    \end{align*}
+    都线性无关, 其中 $V_{1}'\and\cdots\and V_{m}'$ 是 $V_{1}\and V_{2}\and\cdots\and V_{n}$ 中所有非零子空间.
+}
+\Proof{\imply{1}{2}证明\method{逆否命题}}{
+    \par 假设存在不全为 $\bm 0$ 的 $(\bm v_{k})_{k=1}^{n}$ 使得 $\bm v_{1}+\bm v_{2}+\cdots+\bm v_{n}=\bm 0$ 成立, 我们有
+    \begin{align*}
+        \sum_{k=1}^{n}\bm v_{k}=\sum_{k=1}^{n}\bm 0=\bm 0\ ,
+    \end{align*}
+    并且 $(\bm v_{k})_{k=1}^{n}\ne(\bm 0)_{k=1}^{n}$ , 这表明 $V_{1}+V_{2}+\cdots+V_{n}$ 不是直和.\ProofEndT
+}
+\Proof{\imply{2}{1}证明\method{逆否命题}}{
+    \par 假设存在不同的 $(\bm u_{k})_{k=1}^{n}\and(\bm v_{k})_{k=1}^{n}\in\braI{V_{1}\times V_{2}\times\cdots\times V_{n}}$ 使得
+    \begin{align*}
+        \sum_{k=1}^{n}\bm u_{k}=\sum_{k=1}^{n}\bm v_{k}\ ,
+    \end{align*}
+    那么
+    \begin{align*}
+        \sum_{k=1}^{n}\braI{\bm u_{k}-\bm v_{k}}=\sum_{k=1}^{n}\bm u_{k}-\sum_{k=1}^{n}\bm v_{k}=\bm 0\ ,
+    \end{align*}
+    其中 $\bm u_{k}-\bm v_{k}$ 不全为 $\bm 0$ .\ProofEndT
+}
+\Proof{\imply{1}{3}证明}{
+    \par 给定任意的 $i$ , 对任意
+    \begin{align*}
+        \bm v_{i}\in V_{i}\cap\sum_{j\ne i}V_{j}
+    \end{align*}
+    总有 $\braI{\bm v_{i}\and-\bm v_{i}}\in V_{1}\times V_{2}$ 使得 $\bm v_{i}+\braI{-\bm v_{i}}=\bm 0$ 成立, 根据直和的定义可知必有 $\bm v_{i}=\bm 0$ .\ProofEndT
+}
+\Proof{\imply{3}{1}证明}{
+    \par 对任意的 $(\bm v_{k})_{k=1}^{n}\in\braI{V_{1}\times V_{2}\times\cdots\times V_{n}}$ , 若 $\bm v_{1}+\bm v_{2}+\cdots+\bm v_{n}=\bm 0$ , 则对每个 $i$ 有
+    \begin{align*}
+        \bm v_{i}=-\sum_{j\ne i}\bm v_{j}=\sum_{j\ne i}-\bm v_{j}\in\sum_{j\ne i}V_{j}\ ,
+    \end{align*}
+    于是
+    \begin{align*}
+        \bm v_{i}\in V_{i}\cap\sum_{j\ne i}V_{j}\ ,
+    \end{align*}
+    这表明 $\bm v_{i}=\bm 0$ .\ProofEndT
+}
+
+\Theorem{直和的基}{
+    若 $V_{1}+V_{2}+\cdots+V_{n}$ 是直和并且对每个正整数 $m\leqslant n$ 都有 $(\bm v_{k}^{(m)})_{k\in I_{m}}$ 是 $V_{m}$ 的Hamel基, 则 $$(\bm v_{k}^{(m)})_{(k,m)\in I_{1}\sqcup\cdots\sqcup I_{n}}$$ 是 $V_{1}+V_{2}+\cdots+V_{n}$ 的Hamel基.
+}
+\Proof{证明}{
+    \par 对任意 $\bm v\in V_{1}+\cdots+V_{n}$ , 不妨记 $\bm v=\bm v_{1}+\cdots+\bm v_{n}$ , 其中各 $\bm v_{k}\in V_{k}$ , 对每个正整数 $m\leqslant n$ , 由 $\spn\,(\bm v_{k}^{(m)})_{k\in I_{m}}=V_{m}$ 可知存在有限集 $J_{m}\subseteq I_{m}$ 和 $(a_{k}^{(m)})_{k\in J_{m}}$ 使得
+    \begin{align*}
+        \bm v_{m}=\sum_{k\in J_{m}}a_{k}^{(m)}\bm v_{k}^{(m)}\ ,
+    \end{align*}
+    于是就得到了有限集 $J_{1}\sqcup\cdots\sqcup J_{n}\subseteq I_{1}\sqcup\cdots\sqcup I_{n}$ 和 $(a_{k}^{(m_{k})})_{k\in J_{1}\sqcup\cdots\sqcup J_{n}}$ 使得
+    \begin{align*}
+        \bm v=\sum_{m=1}^{n}\bm v_{m}=\sum_{m=1}^{n}\sum_{k\in J_{m}}a_{k}^{(m)}\bm v_{k}^{(m)}=\sum_{k\in J_{1}\sqcup\cdots\sqcup J_{n}}a_{k}^{(m_{k})}\bm v_{k}^{(m_{k})}\ ,
+    \end{align*}
+    这就证明了
+    \begin{align*}
+        \spn\,(\bm v_{k}^{(m_{k})})_{k\in I_{1}\sqcup\cdots\sqcup I_{n}}=\sum_{k=1}^{n}V_{k}\ .
+    \end{align*}
+    \par 对 $(\bm v_{k}^{(m_{k})})_{k\in I_{1}\sqcup\cdots\sqcup I_{n}}$ 的任意有限子组 $S$ , 不妨记
+    \begin{align*}
+        S=(\bm v_{k}^{(m_{k})})_{k\in I'_{1}\sqcup\cdots\sqcup I'_{n}}\ ,
+    \end{align*}
+    其中各 $I'_{k}\subseteq I_{k}$ 均为有限集, 若存在不全为 $0$ 的 $(a_{k})_{k\in I'_{1}\sqcup\cdots\sqcup I'_{n}}$ 使得
+    \begin{align*}
+        \sum_{k\in I'_{1}\sqcup\cdots\sqcup I'_{n}}a_{k}\bm v_{k}=\bm 0\ ,
+    \end{align*}
+    则必定存在不全为 $0$ 的 $(a_{k})_{k\in I'_{m}}$ 使得
+    \begin{align*}
+        \sum_{k\in I'_{m}}a_{k}\bm v_{k}^{(m)}=\bm 0\ ,
+    \end{align*}
+    这与 $(\bm v_{k}^{(m)})_{k\in I_{m}}$ 线性无关矛盾.\ProofEndT
+}
+
+\par 特别地, 若各 $V_{k}$ 的Hamel基均为有限集, 则我们可以将 $V_{1}+V_{2}+\cdots+V_{n}$ 的Hamel基表示为
+\begin{align*}
+    \braI{\bm v_{1}^{(1)}\and\cdots\and\bm v_{N_{1}}^{(1)}\and\bm v_{1}^{(2)}\and\cdots\and\bm v_{N_{2}}^{(2)}\and\cdots\cdots\and\bm v_{1}^{(n)}\and\cdots\and\bm v_{N_{n}}^{(n)}}\ .
+\end{align*}
+
+\Convention{cpt}{
+    \serial{•}对线性空间 $V$ 的任意子空间 $V_{1}\and V_{2}\and\cdots\and V_{n}$ : 令 $V_{1}\oplus V_{2}\oplus\cdots\oplus V_{n}$ 或
+    \begin{align*}
+        \bigoplus_{k=1}^{n}V_{k}
+    \end{align*}
+    表示 $V_{1}\and V_{2}\and\cdots\and V_{n}$ 的直和, 其中 $\boxed{k}$ 是任意形式记号.
+}
+
+\newpage

@@ -1,0 +1,64 @@
+
+% 2025 Simple·System
+
+% ./Section/域/行列式/定义
+
+\Convention{sec}{
+    \serial{•}令 $S_{n}$ 表示 $\braIII{1\and\cdots\and n}$ 上全体置换构成的集合.
+    \serial{•}设 $n$ 是正整数, $\bm A$ 是 $n$ 阶方阵.
+}
+
+\vspace{-4pt}
+
+\Definition{行列式}{
+    $\bm A$ 的\newconcept{行列式}定义为
+    \begin{align*}
+        \det\bm A:=\sum_{\sigma\in S_{n}}\sgn\sigma\prod_{k=1}^{n}\bm A\braI{k\and\sigma\braI{k}\!}\ ,
+    \end{align*}
+    或者记作
+    \begin{align*}
+        \determinant{ccc}{
+            a_{1,1} \* \cdots \* a_{1,n} \\[-2mm]
+            \vdots \* \ddots \* \vdots \\[-2mm]
+            a_{n,1} \* \cdots \* a_{n,n}
+        }=\sum_{\sigma\in S_{n}}\sgn\sigma\prod_{k=1}^{n}a_{k,\sigma\braI{k}\!}\ .
+    \end{align*}
+}
+
+\vspace{15pt}
+
+\par 对于交错型, 我们知道\link{线性空间}[多重线性型]{交错多重线性型构成线性空间}($\dim\mathcal{L}_{\mathrm{alt}}^{\dim\!V}\braI{V\by\bfF}=1$), 下面的定理进一步刻画了 $V$ 上的任何交错 $\dim V$ 重线性型, 注意等式右侧与各 $\bm v_{k}$ 相关的部分只有行列式, 这表明任何 $\alpha$ 都可以通过行列式乘相应的系数得到.
+
+\Theorem{交错dimV重线性型的刻画}(交错$\dim V$重线性型的刻画){
+    设 $V$ 是以 $(\bm e_{k})_{k=1}^{n}$ 为基的线性空间, 则
+    \begin{align*}
+        \Forall{(\bm v_{k})_{k=1}^{n}}{V^{n}}
+        \alpha\braI{\bm v_{1}\and\cdots\and\bm v_{n}}=\determinant{ccc}{
+            a_{1}^{(1)} \* \cdots \* a_{n}^{(1)} \\[-1mm]
+            \vdots \* \ddots \* \vdots \\[-1mm]
+            a_{1}^{(n)} \* \cdots \* a_{n}^{(n)}
+        }\cdot\alpha\braI{\bm e_{1}\and\cdots\and\bm e_{n}}\ .
+    \end{align*}
+    其中 $(a_{k}^{(m)})_{k=1}^{n}$ 表示 $\bm v_{m}$ 在 $(\bm e_{k})_{k=1}^{n}$ 下的坐标.
+}
+\Proof{证明}{
+    \begin{align*}
+        \alpha\braI{\bm v_{1}\and\cdots\and\bm v_{n}}&=\alpha\braI{\sum_{k_{1}=1}^{n}a_{k_{1}}^{(1)}\bm e_{k_{1}}\and\cdots\and\sum_{k_{n}=1}^{n}a_{k_{n}}^{(n)}\bm e_{k_{n}}}\\[1mm]
+        &=\sum_{k_{1}=1}^{n}\cdots\sum_{k_{n}=1}^{n}\braI{\prod_{m=1}^{n}a_{k_{m}}^{(m)}}\alpha\braI{\bm e_{k_{1}}\and\cdots\and\bm e_{k_{n}}}\ ,
+    \end{align*}
+
+\newpage
+
+    \noindent 我们可以要求上述 $k_{m}$ 各不相同, 否则就有 $\alpha\braI{\bm e_{k_{1}}\and\cdots\and\bm e_{k_{n}}}=0$ , 因此我们可以进一步将 $k_{1}\and\cdots\and k_{n}$ 视作 $\braIII{1\and\cdots\and n}$ 上的某个置换 $\sigma$ , 于是
+    \begin{align*}
+        \alpha\braI{\bm v_{1}\and\cdots\and\bm v_{n}}&=\sum_{\sigma\in S_{n}}\braI{\prod_{m=1}^{n}a_{\sigma(m)}^{(m)}}\alpha\braI{\bm e_{\sigma(1)}\and\cdots\and\bm e_{\sigma(n)}}\\[1mm]
+        &=\alpha\braI{\bm e_{1}\and\cdots\and\bm e_{n}}\sum_{\sigma\in S_{n}}\sgn\sigma\braI{\prod_{m=1}^{n}a_{\sigma(m)}^{(m)}}\\[1mm]
+        &=\determinant{ccc}{
+            a_{1}^{(1)} \* \cdots \* a_{n}^{(1)} \\[-1mm]
+            \vdots \* \ddots \* \vdots \\[-1mm]
+            a_{1}^{(n)} \* \cdots \* a_{n}^{(n)}
+        }\cdot\alpha\braI{\bm e_{1}\and\cdots\and\bm e_{n}}\ .\ProofEndF
+    \end{align*}
+}
+
+\newpage

@@ -1,0 +1,67 @@
+
+% 2025 Simple·System
+
+% ./Section/内积空间/极小化向量
+
+\par 下面的定理给出了唯一确定非空完备凸集中与外部某向量距离极小的向量的方法. 虽然其表述不涉及内积, 但是其证明过程\link{赋范空间}{Jordan—von Neumann定理}(只对可内积化的赋范空间空间成立).
+
+\Theorem{极小化向量}{
+    设 $V$ 的非空子集 $M$ 是完备凸集, 则对任意 $\bm v\in V$ 存在唯一的 $\bm v_{0}\in M$ 使得 $$\norm{\bm v-\bm v_{0}}=\inf\braIII{\norm{\bm v-\bm m}:\bm m\in M}\ .$$
+}
+\Proof{\existence 证明}{
+    \par 令 $\delta$ 表示 $\braIII{\norm{\bm v-\bm m}:\bm m\in M}$ 的下确界, 在该集合中\link{}{}(可以构造收敛于 $\delta$ 的序列), 即存在 $(\bm m_{n})_{n=1}^{\infty}\in M^{\infty}$ 使得
+    \begin{align*}
+        \lim_{n\to\infty}\norm{\bm v-\bm m_{n}}=\delta\ .
+    \end{align*}
+    \par 现在我们来证明 $(\bm m_{n})_{n=1}^{\infty}$ 是Cauchy序列. 给定任意 $\epsilon>0$ , 由 $\lim_{n\to\infty}\norm{\bm v-\bm m_{n}}^{2}=\delta^{2}$ 知对 $\sfrac{\epsilon}{2}$ 存在自然数 $N$ 使得对一切 $n>N$ 有 $\delta^{2}\leqslant\norm{\bm m_{n}-\bm v}^{2}<\delta^{2}+\sfrac{\epsilon}{2}$ , 于是对任意正整数 $p\and q>N$ , 依\link{内积空间}{平行四边形恒等式}有
+    \begin{align*}
+        \norm{\bm m_{p}-\bm m_{q}}^{2}&=\norm{\braI{\bm m_{p}-\bm v}-\braI{\bm m_{q}-\bm v}}^{2}\\[-2mm]
+        &=2\norm{\bm m_{p}-\bm v}^{2}+2\norm{\bm m_{q}-\bm v}^{2}-\norm{\bm m_{p}+\bm m_{q}-2\bm v}^{2}\\[-1mm]
+        &<4\delta^{2}+\epsilon-4\norm{\frac{\bm m_{p}+\bm m_{q}}{2}-\bm v}^{2}\\[-1mm]
+        &<\epsilon\ ,
+    \end{align*}
+    其中 $\sfrac{\braI{\bm m_{p}+\bm m_{q}}}{2}\in M$ .
+    \par 由于 $M$ 是完备集, 所以存在 $\bm v_{0}\in M$ 使得 $\lim_{n\to\infty}\bm m_{n}=\bm v_{0}$ , 依\link{赋范空间}{范数的连续性}即有
+    \begin{align*}
+        \norm{\bm v-\bm v_{0}}=\norm{\bm v-\lim_{n\to\infty}\bm m_{n}}=\lim_{n\to\infty}\norm{\bm v-\bm m_{n}}=\delta\ .\ProofEndF
+    \end{align*}
+}
+\Proof{\uniqueness 证明}{
+    \par 令 $\delta=\inf\braIII{\norm{\bm v-\bm m}:\bm m\in M}$ . 假设存在 $\bm v_{1}\and\bm v_{2}\in M$ 使得
+    \begin{align*}
+        \norm{\bm v-\bm v_{1}}=\norm{\bm v-\bm v_{2}}=\delta\ ,
+    \end{align*}
+
+\newpage
+
+    \noindent 则由\link{内积空间}{平行四边形恒等式}知
+    \begin{align*}
+        \norm{\bm v_{1}-\bm v_{2}}^{2}&=\norm{\braI{\bm v_{1}-\bm v}-\braI{\bm v_{2}-\bm v}}^{2}\\[-2mm]
+        &=2\norm{\bm v_{1}-\bm v}^{2}+2\norm{\bm v_{2}-\bm v}^{2}-\norm{\bm v_{1}+\bm v_{2}-2\bm v}^{2}\\[-1mm]
+        &=4\delta^{2}-4\norm{\frac{\bm v_{1}+\bm v_{2}}{2}-\bm v}^{2}\\[-1mm]
+        &\leqslant 0\ ,
+    \end{align*}
+    其中 $\sfrac{\braI{\bm v_{1}+\bm v_{2}}}{2}\in M$ , 于是显然有 $\bm v_{1}=\bm v_{2}$ .\ProofEndT
+}
+
+\Theorem{正交极小化向量}{
+    设 $U$ 是 $V$ 的完备子空间, 则对任意 $\bm v\in V$ 存在唯一的 $\bm v_{0}\in U$ 使得 $$\norm{\bm v-\bm v_{0}}=\inf\braIII{\norm{\bm v-\bm u}:\bm u\in U}\ ,$$ 并且 $\bm u\perp\bm v-\bm v_{0}$ 对一切 $\bm u\in U$ 成立.
+}
+\Proof{证明\method{反证法}}{
+    \par 我们已经在\link{内积空间}{极小化向量}(上一个定理)中证明了满足第一个条件的 $\bm v_{0}$ 的存在性和唯一性, 现在我们只需确认其满足正交性的条件即可, 为此我们可以考虑在与 $\bm u_{0}$ 正交的方向上对 $\bm v'$ 正交分解.
+    \par 记 $\bm v'=\bm v-\bm v_{0}$ . 假设存在 $\bm u_{0}\in U$ 使得 $\bm u_{0}\perp\bm v'$ 不成立, 则显然 $\bm u_{0}\ne\bm 0$ , 并且
+    \begin{align*}
+        &\quad\,\norm{\bm v'-\frac{\braV{\bm v'\and\bm u_{0}}}{\norm{\bm u_{0}}^{2}}\bm u_{0}}^{2}\\[1mm]
+        &=\braV{\bm v'-\frac{\braV{\bm v'\and\bm u_{0}}}{\norm{\bm u_{0}}^{2}}\bm u_{0}\and\bm v'-\frac{\braV{\bm v'\and\bm u_{0}}}{\norm{\bm u_{0}}^{2}}\bm u_{0}}\\[1mm]
+        &=\norm{\bm v'}^{2}-\frac{\braV{\bm u_{0}\and\bm v'}}{\norm{\bm u_{0}}^{2}}\braV{\bm v'\and\bm u_{0}}-\frac{\braV{\bm v'\and\bm u_{0}}}{\norm{\bm u_{0}}^{2}}\braI{\braV{\bm u_{0}\and\bm v'}-\frac{\braV{\bm u_{0}\and\bm v'}}{\norm{\bm u_{0}}^{2}}\norm{\bm u_{0}}^{2}}\\[1mm]
+        &=\norm{\bm v'}^{2}-\frac{\braIV{\!\braV{\bm u_{0}\and\bm v'}\!}^{2}}{\norm{\bm u_{0}}^{2}}\\[-1mm]
+        &<\norm{\bm v'}^{2}\ ,
+    \end{align*}
+    从而产生了另一个使得 $\norm{\bm v-\bm u}$ 取得最小值的 $\bm u$ , 即
+    \begin{align*}
+        \bm v_{0}+\frac{\braV{\bm v'\and\bm u_{0}}}{\norm{\bm u_{0}}^{2}}\bm u_{0}\in U\ ,
+    \end{align*}
+    这就导出了矛盾.\ProofEndT
+}
+
+\newpage

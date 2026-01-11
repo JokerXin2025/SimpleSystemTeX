@@ -1,0 +1,62 @@
+
+% 2025 Simple·System
+
+% ./Section/内积空间/伴随映射/定义
+
+\Definition{伴随映射}{
+    若存在 $S\in\mathcal{L}\braI{V\and U}$ 使得对任意 $\bm u\in U$ 和 $\bm v\in V$ 有
+    \begin{align*}
+        \braV{T\bm u\and\bm v}=\braV{\bm u\and S\bm v}\ ,
+    \end{align*}
+    则称 $S$ 是 $T$ 的伴随映射, 记作 $T^{*}$ .
+}
+
+\par 对于伴随映射, 容易验证有如下性质成立:
+
+\Corollary{伴随映射的性质}{
+    设 $a\in\bfR$ 并且 $S\and T\in\mathcal{L}\braI{U\and V}$ 都有伴随映射, 则有如下性质成立:
+    \serial{•}零伴随: $\bm 0^{*}=\bm 0$ .
+    \serial{•}恒等伴随: $\bm I_{V}^{*}=\bm I_{V}$ .
+    \serial{•}可加性: $\braI{S+T}^{*}=S^{*}+T^{*}$ .
+    \serial{•}共轭齐次性: $\braI{aT}^{*}=\overline{a}T^{*}$ .
+    \serial{•}反序分配律: $\braI{ST}^{*}=T^{*}S^{*}$ .
+    \serial{•}对合律: $\braI{T^{*}}^{*}=T$ .
+    \serial{•}逆: 若 $T$ 可逆, 则 $T^{*}$ 可逆, 并且 $\braI{T^{*}}^{-1}=\braI{T^{-1}}^{*}$ .
+    \serial{•}映射类型: $T$ 是单射当且仅当 $T^{*}$ 是满射, $T$ 是满射当且仅当 $T^{*}$ 是单射.
+}
+
+\vspace{-4pt}
+
+\Theorem{伴随映射的核}{
+    若 $T$ 有伴随映射, 则 $\ker T^{*}=\braI{\im T}^{\perp}$ .
+}
+\Proof{证明}{
+    \begin{align*}
+        \bm v\in\ker T^{*}&\iff T^{*}\bm v=\bm 0\\[-2mm]
+        &\iff\braV{\bm u\and T^{*}\bm v}=0\Text{对一切}\bm u\in U\Text{成立}\\[-2mm]
+        &\iff\braV{T\bm u\and\bm v}=0\Text{对一切}\bm u\in U\Text{成立}\\[-2mm]
+        &\iff\bm v\in\braI{\im T}^{\perp}\ ,
+    \end{align*}
+    由此可得 $\ker T^{*}=\braI{\im T}^{\perp}$ .
+}
+
+\Theorem{伴随映射的范数}{
+    若 $T$ 有伴随映射, 则 $\norm{T^{*}}=\norm{T}$ .
+}
+%\Proof{证明}{
+    %\par 由伴随映射的定义可知, 对任意非零向量 $\bm u\in U$ 和 $\bm v\in V$ , 有
+    %\begin{align*}
+        %\braIV{\braV{T\bm u\and\bm v}}=\braIV{\braV{\bm u\and T^{*}\bm v}}\leqslant\norm{\bm u}\norm{T^{*}\bm v}\leqslant\norm{\bm u}\norm{T^{*}}\norm{\bm v}\ .
+    %\end{align*}
+    %因此
+    %\begin{align*}
+        %\frac{\braIV{\braV{T\bm u\and\bm v}}}{\norm{\bm u}\norm{\bm v}}\leqslant\norm{T^{*}}\ ,
+    %\end{align*}
+    %进而
+    %\begin{align*}
+        %\norm{T}=\sup_{\bm u\in U\setminus\braIII{\bm 0}}\sup_{\bm v\in V\setminus\braIII{\bm 0}}\frac{\braIV{\braV{T\bm u\and\bm v}}}{\norm{\bm u}\norm{\bm v}}\leqslant\norm{T^{*}}\ .
+    %\end{align*}
+    %同理可得 $\norm{T^{*}}\leqslant\norm{T}$ , 由此可得 $\norm{T^{*}}=\norm{T}$ .
+%}
+
+\newpage

@@ -1,0 +1,116 @@
+
+% 2025 Simple·System
+
+% ./Section/内积空间/Riesz表示定理
+
+\Convention{sec}{
+    \serial{•}不产生歧义时, 令 $\bm 0$ 同时表示 $V$ 的加法幺元和 $V$ 上的零泛函 $\bm v\mapsto 0$ .
+}
+
+\par 下面的定理使我们可以把任何有界的线性泛函 $f$ 简单地等效为与某个向量 $\bm v_{f}$ 的内积运算, 并且 $\bm v_{f}$ 与 $f$ 有相同的范数.
+
+\Theorem{Riesz表示定理（线性泛函）}{
+    设 $f\in\mathcal{L}\braI{V\and\bfF}$ 是有界线性泛函, 则其有唯一的\gap\newconcept{Riesz表示} $\bm v_{f}\in V$ 使得
+    \begin{align*}
+        \Forall{\bm v}{V}
+        f\braI{\bm v}=\braV{\bm v\and\bm v_{f}}\ .
+    \end{align*}
+}
+\Proof{\uniqueness 证明}{
+    \par 假设 $\bm v_{1}\and\bm v_{2}\in V$ 都是使得 $f\braI{\bm v}=\braV{\bm v\and\bm v_{f}}$ 对一切 $\bm v\in V$ 成立的 $\bm v_{f}$ , 那么
+    \begin{align*}
+        \norm{\bm v_{1}-\bm v_{2}}=\braV{\bm v_{1}-\bm v_{2}\and\bm v_{1}}-\braV{\bm v_{1}-\bm v_{2}\and\bm v_{2}}=f\braI{\bm v_{1}-\bm v_{2}}-f\braI{\bm v_{1}-\bm v_{2}}=0\ ,
+    \end{align*}
+    于是 $\bm v_{1}=\bm v_{2}$ .\ProofEndT
+}
+\par 注意到 $f\braI{\bm v}=\braV{\bm v\and\bm v_{f}}$ 的必要条件是 $\bm v_{f}\in\braI{\ker f}^{\perp}$ , 而我们知道除非 $f$ 是零映射, 否则始终有 $\dim\braI{\ker f}^{\perp}=1$ , 这就意味着我们可以随意选取某个 $\braI{\ker f}^{\perp}$ 的非零向量, 然后使之与某个适当的标量相乘从而得到 $\bm v_{f}$ , 这样的想法就导出了下面的证明.
+\Proof{\existence 证明}{
+    \par 当 $f=\bm 0$ 时, 取 $\bm v_{f}=\bm 0$ 即可.
+    \par 当 $f\ne\bm 0$ 时, 我们有 $\ker f\ne V$ , 于是由\link{内积空间}[正交补]{V的正交补判定准则}可知 $\braI{\ker f}^{\perp}\ne\braIII{\bm 0}$ , 随意选取某个非零向量 $\bm v_{0}\in\braI{\ker f}^{\perp}$ , 令
+    \begin{align*}
+        \bm v_{f}=\frac{\overline{f\braI{\bm v_{0}}}}{\norm{\bm v_{0}}^{2}}\bm v_{0}\ ,
+    \end{align*}
+    显然 $\bm v_{f}$ 也是 $\braI{\ker f}^{\perp}$ 中的非零向量, 并且注意到
+    \begin{align*}
+        f\braI{\bm v_{f}}=\frac{\braIV{f\braI{\bm v_{0}}}^{2}}{\norm{\bm v_{0}}^{2}}=\norm{\bm v_{f}}^{2}\ ,
+    \end{align*}
+    于是
+    \begin{align*}
+        \braV{\bm v\and\bm v_{f}}&=\braV{\!\braI{\bm v-\frac{f\braI{\bm v}}{f\braI{\bm v_{f}}}\bm v_{f}}+\frac{f\braI{\bm v}}{\norm{\bm v_{f}}^{2}}\bm v_{f}\and\bm v_{f}}\\[1mm]
+        &=\braV{\bm v-\frac{f\braI{\bm v}}{f\braI{\bm v_{f}}}\bm v_{f}\and\bm v_{f}}+\braV{\frac{f\braI{\bm v}}{\norm{\bm v_{f}}^{2}}\bm v_{f}\and\bm v_{f}}\\[1mm]
+        &=\frac{f\braI{\bm v}}{\norm{\bm v_{f}}^{2}}\braV{\bm v_{f}\and\bm v_{f}}\\[-1mm]
+        &=f\braI{\bm v}\ ,
+    \end{align*}
+    其中
+    \begin{align*}
+        \bm v-\frac{f\braI{\bm v}}{f\braI{\bm v_{f}}}\bm v_{f}\in\ker f\implies\braV{\bm v-\frac{f\braI{\bm v}}{f\braI{\bm v_{f}}}\bm v_{f}\and\bm v_{f}}=0\ .\ProofEndF
+    \end{align*}
+}
+
+\Theorem{Riesz表示的范数}{
+    设 $\bm v_{f}\in V$ 是 $f$ 的Riesz表示, 则 $\norm{f}=\norm{\bm v_{f}}$ .
+}
+\Proof{证明}{
+    \par 当 $f=\bm 0$ 时, $\bm v_{f}=\bm 0$ , 显然 $\norm{f}=\norm{\bm v_{f}}=0$ . 下面我们考虑 $f\ne\bm 0$ 时的情形, 此时必然有 $\bm v_{f}\ne\bm 0$ 成立.
+    \par 一方面, 对于任意满足 $\norm{\bm v}=1$ 的 $\bm v\in V$ , 由\link{内积空间}{Cauchy—Schwarz不等式}有
+    \begin{align*}
+        f\braI{\bm v}=\braV{\bm v\and\bm v_{f}}\leqslant\norm{\bm v}\norm{\bm v_{f}}=\norm{\bm v_{f}}\ ,
+    \end{align*}
+    于是 $\norm{f}\leqslant\norm{\bm v_{f}}$ .
+    \par 另一方面, 令 $\bm v=\norm{\bm v_{f}}^{-1}\bm v_{f}$ , 则 $\norm{\bm v}=1$ , 并且有
+    \begin{align*}
+        f\braI{\bm v}=\braV{\frac{\bm v_{f}}{\norm{\bm v_{f}}}\and\bm v_{f}}=\norm{\bm v_{f}}\ ,
+    \end{align*}
+    于是 $\norm{f}\geqslant\norm{\bm v_{f}}$ .
+    \par 综上所述, 我们有 $\norm{f}=\norm{\bm v_{f}}$ .\ProofEndT
+}
+
+\Theorem{有限维Riesz表示}{
+    设 $V$ 是有限维空间, $\bm v_{f}$ 是 $f$ 的Riesz表示, 则 $$\bm v_{f}=\sum_{k=1}^{n}\overline{f\braI{\bm e_{k}}}\bm e_{k}\ .$$
+}
+\Proof{证明}{
+    \begin{align*}
+        f\braI{\bm v}&=f\braI{\sum_{k=1}^{n}\braV{\bm v\and\bm e_{k}}\bm e_{k}}\\[1mm]
+        &=\sum_{k=1}^{n}\braV{\bm v\and\bm e_{k}}f\braI{\bm e_{k}}\\[1mm]
+        &=\sum_{k=1}^{n}\braV{\bm v\and\overline{f\braI{\bm e_{k}}}\bm e_{k}}\\[1mm]
+        &=\braV{\bm v\and\sum_{k=1}^{n}\overline{f\braI{\bm e_{k}}}\bm e_{k}}\ .\ProofEndF
+    \end{align*}
+}
+
+\par 除了线性性质, 我们也可以利用\link{内积空间}{第二元共轭线性}(内积的共轭线性)来表示一些具有相同特征的有界泛函. 若同时利用这两则性质, 则可以得到更加广泛的结论
+
+\Corollary{Riesz表示定理（共轭线性泛函）}{
+    设 $f:V\to\bfF$ 是\newconcept{有界共轭线性泛函}, 即有如下性质成立, 则存在唯一的 $\bm v_{f}\in V$ 使得
+    \begin{align*}
+        f:\bm v\mapsto\braV{\bm v_{f}\and\bm v}\ .
+    \end{align*}
+    \serial{1.}可加性: $$\Forall{\bm v_{1}\and\bm v_{2}}{V}f\braI{\bm v_{1}+\bm v_{2}}=f\braI{\bm v_{1}}+f\braI{\bm v_{2}}\ .$$
+    \serial{2.}共轭齐次性: $$\ForallII{\lambda}{\bfF}{\bm v}{V}f\braI{\lambda\bm v}=\overline{\lambda}f\braI{\bm v}\ .$$
+    \serial{3.}有界性: 存在 $C\in\bfR$ 使得 $$\Forall{\bm v}{V}\norm{f\bm v}\leqslant C\norm{\bm v}\ .$$
+}
+
+\vspace{-4pt}
+
+%\Theorem{Lax—Milgram定理}(Lax\—Milgram定理){
+    %设 $f:U\times V\to\bfF$ 是\newconcept{有界共轭双线性泛函}, 即有如下性质成立, 则存在唯一的 $A\in\mathcal{L}\braI{V\and U}$ 使得
+    %\begin{align*}
+        %f:\braI{\bm u\and\bm v}\mapsto\braV{\bm u\and A\bm v}\ .
+    %\end{align*}
+    %\serial{1.}可加性:
+    %\begin{align*}
+        %\ForallII{\bm u_{1}\and\bm u_{2}}{U}{\bm v}{V}f\braI{\bm u_{1}+\bm u_{2}\and\bm v}=f\braI{\bm u_{1}\and\bm v}+f\braI{\bm u_{2}\and\bm v}\ ,\\[-16mm]
+    %\end{align*}
+    %\begin{align*}
+        %\ForallII{\bm u}{U}{\bm v_{1}\and\bm v_{2}}{V}f\braI{\bm u\and\bm v_{1}+\bm v_{2}}=f\braI{\bm u\and\bm v_{1}}+f\braI{\bm u\and\bm v_{2}}\ .
+    %\end{align*}
+    %\serial{2.}齐次性\&共轭齐次性:
+    %\begin{align*}
+        %\ForallII{\lambda}{\bfF}{\braI{\bm u\and\bm v}}{U\times V}f\braI{\lambda\bm u\and\bm v}=\lambda f\braI{\bm u\and\bm v}\ ,\\[-16mm]
+    %\end{align*}
+    %\begin{align*}
+        %\ForallII{\lambda}{\bfF}{\braI{\bm u\and\bm v}}{U\times V}f\braI{\bm u\and\lambda\bm v}=\overline{\lambda}f\braI{\bm u\and\bm v}\ .
+    %\end{align*}
+    %\serial{3.}有界性: 存在 $C\in\bfR$ 使得 $$\Forall{\braI{\bm u\and\bm v}}{U\times V}\norm{f\braI{\bm u\and\bm v}}\leqslant C\norm{\bm u}\norm{\bm v}\ .$$
+%}
+
+\newpage

@@ -1,0 +1,61 @@
+
+% 2025 Simple·System
+
+% ./Section/内积空间/正交补/定义
+
+\Convention{subcpt}{
+    \serial{•}令 $\bm 0$ 表示 $V$ 的加法幺元.
+    \serial{•}设 $M\subseteq V$ .
+}
+
+\vspace{-4pt}
+
+\Definition{正交补}{
+    $M$ 的正交补定义为
+    \begin{align*}
+        M^{\perp}:=\braIII{\bm v\ |\ \bm v\in V\and\bm m\perp\bm v\Text{对一切}\bm m\in M\Text{成立}}\ .
+    \end{align*}
+}
+
+\vspace{-4pt}
+
+\Corollary{braIII0的正交补}($\braIII{\bm 0}$的正交补){
+    $M=\braIII{\bm 0}\iff M^{\perp}=V$ .
+}
+
+\vspace{-4pt}
+
+\Corollary{V的正交补}($V$的正交补){
+    $V^{\perp}=\braIII{\bm 0}$ .
+}
+
+\par 对于无限维线性空间, 一般我们无法从 $M^{\perp}=\braIII{\bm 0}$ 推出 $M=V$ .
+
+\Theorem{正交补是闭子空间}{
+    \serial{1.}$M^{\perp}$ 是 $V$ 的子空间.
+    \serial{2.}$M^{\perp}$ 是闭集.
+}
+\Proof{\sentence{1}证明}{
+    \par 我们知道 $\bm m\perp\bm 0$ 对一切 $\bm m\in M$ 成立, 所以 $\bm 0\in M^{\perp}$ .
+    \par 对任意 $\lambda\and\mu\in\bfF$ 和 $\bm u\and\bm v\in M^{\perp}$ , 我们有
+    \begin{align*}
+        \Forall{\bm m}{M}
+        \braV{\lambda\bm u+\mu\bm v\and\bm m}=\lambda\braV{\bm u\and\bm m}+\mu\braV{\bm v\and\bm m}=\lambda\cdot 0+\mu\cdot 0=0\ ,
+    \end{align*}
+    于是 $\lambda\bm u+\mu\bm v\in M^{\perp}$ , 从而完成了证明.\ProofEndT
+}
+\Proof{\sentence{2}证明I}{
+    \par 对于任意给定的 $\bm m\in M$ , 令 $f_{\bm m}\braI{\bm v}=\braV{\bm v\and\bm m}$ , 我们知道\link{内积空间}{内积作为连续映射}($f_{\bm m}$是连续映射), 因此有 $f_{\bm m}^{-1}\braI{\!\braIII{0}\!}$ 是闭集, 进而
+    \begin{align*}
+        M^{\perp}=\bigcap_{\bm m\in M}f_{\bm m}^{-1}\braI{\!\braIII{0}\!}
+    \end{align*}
+    是闭集.\ProofEndT
+}
+\Proof{\sentence{2}证明II}{
+    \par 因为拓扑空间 $V$ 是第一可数空间, 只需证明对任意 $\bm v\in V$ 和收敛于 $\bm v$ 的序列 $(\bm v_{n})_{n=1}^{\infty}\in\braI{M^{\perp}}^{\infty}$ 有 $\bm v\in M^{\perp}$ 即可.
+    \par 对于任意给定的 $\bm m\in M$ 有 $\braV{\bm v_{n}\and\bm m}=0$ 成立, 故由\link{内积空间}{内积的连续性}知 $\braV{\bm v\and\bm m}=0$ , 也即 $\bm v\in M^{\perp}$ , 这就完成了证明.\ProofEndT
+}
+
+\par 显然我们总有 $M\subseteq\braI{M^{\perp}}^{\perp}$ 成立, 但其中等号的取得\link{内积空间}[正交补]{正交补的对合律}(需要$M$满足一些其它的性质).
+
+\newpage

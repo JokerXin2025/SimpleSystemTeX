@@ -1,0 +1,387 @@
+
+% 2025 Simple·System
+
+% < Simple 线性代数 >
+
+% --------------------------------------------------
+% | 导言区 | Preamble (XeLaTeX) |
+% --------------------------------------------------
+
+% 宏包 | Packages
+
+\documentclass[10pt]{article}
+\usepackage{simplesystem,datetime2,geometry,ctex,amssymb,bm,ulem}
+
+% 编译时间 | Compile Time
+
+\DTMsetstyle{iso}
+\special{
+    pdf: encrypt
+    ownerpw (\DTMtoday)
+    length (128)
+    perm (0)
+}
+
+% 页面规格 | Page Layout
+
+\renewcommand \baselinestretch {1.75}
+\newcommand \gap {\hspace{0.15em}}
+\xeCJKsetup {
+    CJKecglue = \gap
+}
+\geometry {
+    b5paper,
+    left=18.75mm,
+    right=18.75mm,
+    top=20mm,
+    bottom=25mm
+}
+
+% 字体 | Fonts
+
+\newCJKfontfamily\HeavyFontC{方正春晚龙行体 简 Heavy}
+\newCJKfontfamily\BoldFontC{方正春晚龙行体 简 Bold}
+\newCJKfontfamily\ThinFontC{方正春晚龙行体 简 Thin}
+\newfontfamily\HeavyFontE{FZChunWanLXTS Heavy}
+
+% 杂项 | Miscellaneous
+
+\everymath{\displaystyle}
+\setlength{\ULdepth}{0.75ex}
+\newcommand \— {\,—\,}
+\renewcommand \* {\;\!\!\!&\;\!\!\!}
+\newcommand \nogap {\,\!}
+\newcommand \Text [1] {\:\text{#1}\:}
+\newcommand \serial [1] {\par\noindent{\bf #1}\ }
+\newcommand \newconcept [1] {{\color{purple}\kaishu\underline{#1}}}
+\newcommand \axiombasis [1] {$_{\bf\scriptscriptstyle #1}$}
+\newcommand \sentence [1] {{\bf #1}}
+\newcommand \existence {{\scriptsize 存在性}\,}
+\newcommand \uniqueness {{\scriptsize 唯一性}\,}
+\newcommand \limplyr {$\implies$\nogap}
+\newcommand \rimplyl {$\impliedby$\nogap}
+\newcommand \imply [2] {{\bf #1}\!$\implies$\!{\bf #2}}
+\newcommand \biimply [2] {{\bf #1}\!$\iff$\!{\bf #2}}
+\newcommand \method [1] {{\scriptsize（#1）}}
+
+% 样式设置 | Format Settings
+
+\ExplSyntaxOn
+\FormatSetting {CatalogTitle} {
+    \Large\HeavyFontC
+    \begin{center}目录\quad\textbf{Content}\end{center}\bigskip
+}
+\FormatSetting {CatalogSection} {
+    \BoldFontC
+    \ifempty\subchaptername {
+        \,{\scriptsize\chaptername}\ |\ \sectionname
+    } {
+        \,{\scriptsize\chaptername}\ \subchaptername\ |\ \sectionname
+    }
+    \vspace{-7.5pt}
+}
+\FormatSetting {CatalogIndex} {
+    \BoldFontC{\Large\chaptername}\ \parameterA
+    \vspace{-7.5pt}
+}
+\FormatSetting {IndexTitle} {
+    \noindent
+    \HeavyFontC{\huge\chaptername}\ \textbf{\Large\parameterA}
+    \par
+}
+\FormatSetting {IndexSubchapter} {
+    \BoldFontC
+    \ifempty\subchaptername{
+        {\Large\chaptername}
+    } {
+        {\normalsize\chaptername}\ {\Large\subchaptername}
+    }
+    \vspace{-5pt}
+}
+\FormatSetting {IndexSection} {
+    \BoldFontC
+    \ifempty\subchaptername {
+        \,{\scriptsize\chaptername}\ |\ \sectionname
+    } {
+        \,{\scriptsize\chaptername}\ \subchaptername\ |\ \sectionname
+    }
+}
+\FormatSetting {SectionHeading} {
+    \noindent
+    \bfseries\HeavyFontC
+    \ifempty\subchaptername {
+        {\Large\chaptername}{\huge\;|\;\sectionname}
+    } {
+        {\Large\chaptername}\ {\huge\subchaptername\;|\;\sectionname}
+    }
+    \par\bigskip
+}
+\FormatSetting {DefinitionName} {
+    \vspace{4pt}\noindent
+    \color{purple}\bfseries\ThinFontC\blockname
+    \quad
+}
+\FormatSetting {DefinitionContent} {
+    \color{purple}\kaishu\blockcontent
+}
+\FormatSetting {TheoremName} {
+    \vspace{4pt}\noindent
+    \color{teal}\bfseries\ThinFontC\blockname
+    \quad
+}
+\FormatSetting {TheoremContent} {
+    \color{teal}\kaishu\blockcontent
+}
+\FormatSetting {CorollaryName} {
+    \vspace{4pt}\noindent
+    \color{brown}\bfseries\ThinFontC\blockname
+    \quad
+}
+\FormatSetting {CorollaryContent} {
+    \color{brown}\kaishu\blockcontent
+}
+\FormatSetting {ProofName} {
+    \par\noindent
+    \kaishu\blockname
+}
+\FormatSetting {ProofContent} {
+    \kaishu\blockcontent
+    \par\smallskip
+}
+\FormatSetting {ConventionName} {
+    \vspace{4pt}\noindent
+    \color{darkgray}\bfseries\ThinFontC
+    \ifequal\parameterB {sec} {
+        \ifempty\subchaptername {
+            \seclink{\chaptername}{\sectionlabel}
+        } {
+            \seclink{\chaptername}[\subchaptername]{\sectionlabel}
+        }
+    } {
+        \ifequal\parameterB {cpt} {
+            \cptlink{\chaptername}
+        } {
+            \ifequal\parameterB {subcpt} {
+                \cptlink{\chaptername}[\subchaptername]
+            } {
+                \parameterB
+            }
+        }
+    }
+    中的设定
+    \quad
+}
+\FormatSetting {ConventionContent} {
+    \color{darkgray}\kaishu\blockcontent
+}
+\FormatSetting {StructureName} {
+    \vspace{4pt}\noindent
+    \color{violet}\bfseries\ThinFontC\blockname
+    \quad
+}
+\FormatSetting {StructureContent} {
+    \color{violet}\kaishu\blockcontent
+}
+\FormatSetting {ExampleName} {
+    \vspace{4pt}\noindent
+    \color{gray}\bfseries\ThinFontC\blockname
+    \quad
+}
+\FormatSetting {ExampleContent} {
+    \color{gray}\kaishu\blockcontent
+}
+\FormatSetting {BlockLink} {
+    \bfseries\ThinFontC
+    \ifempty\linktext {
+        \,\blockname\,
+    } {
+        \,\linktext\,
+    }
+}
+\FormatSetting {SectionLink} {
+    \bfseries\BoldFontC
+    \ifempty\linktext {
+        \ifempty\subchaptername {
+            \,{\footnotesize\chaptername}\,|\,\sectionname\,
+        } {
+            \,{\footnotesize\chaptername}\;\subchaptername\,|\,\sectionname\,
+        }
+    } {
+        \,\linktext\,
+    }
+}
+\FormatSetting {ChapterLink} {
+    \bfseries\BoldFontC
+    \ifempty\linktext {
+        \ifempty\subchaptername {
+            \,\chaptername\,
+        } {
+            \,{\footnotesize\chaptername}\;\subchaptername\,
+        }
+    } {
+        \,\linktext\,
+    }
+}
+\ExplSyntaxOff
+
+% --------------------------------------------------
+% | 正文区 | Body |
+% --------------------------------------------------
+
+\begin{document}
+
+    % 封面 | Cover
+
+    \pagestyle{empty}
+    \begin{center}
+	    \vspace*{\fill}
+	    \SimpleSystem
+	    \HeavyFontC\HeavyFontE\par\Huge Simple 线性代数
+        $_{\!\scriptscriptstyle\mathbf{O}}$
+	    \par\large Preview 20
+	    \vspace*{\fill}
+    \end{center}
+    \newpage
+    \pagestyle{plain}
+
+    % 目录 | Catalog
+
+    \MakeSimpleCatalog
+    \TextCommand{\newpage}
+
+    % 线性空间
+    \CatalogPart{$\bm{\alpha_{1}}$}
+    \ImportSection{线性空间}{定义}
+    \ImportSection{线性空间}{基本性质}
+    \ImportSection{线性空间}[子空间]{定义}
+    \ImportSection{线性空间}[向量组]{张成空间}
+    \ImportSection{线性空间}[向量组]{线性相关性}
+    \ImportSection{线性空间}[向量组]{替换定理}
+    \ImportSection{线性空间}{Hamel基}
+    \ImportSection{线性空间}[子空间]{交&和}(交\&和)
+    \ImportSection{线性空间}[子空间]{直和}
+    %\ImportSection{线性空间}[子空间]{积空间}
+    \ImportSection{线性空间}[子空间]{商空间}
+    %\ImportSection{实线性空间}[复化]{定义}
+    \ImportSection{有限维线性空间}{定义}
+    \ImportSection{有限维线性空间}{基&维数}(基\&维数)
+    \ImportSection{有限维线性空间}{维数公式}
+    \CatalogCommand{\bigskip}
+
+    % 线性映射
+    \CatalogPart{$\bm{\alpha_{2}}$}
+    \ImportSection{线性空间}[线性映射]{定义}
+    \ImportSection{线性空间}[线性映射]{线性映射空间}
+    \ImportSection{线性空间}[线性映射]{核&像}(核\&像)
+    \ImportSection{线性空间}[线性映射]{复合}
+    \ImportSection{线性空间}[线性映射]{逆}
+    \ImportSection{有限维线性空间}{秩—零化度定理}(秩\—零化度定理)
+    \CatalogCommand{\newpage}
+    %\ImportSection{线性空间}[线性变换]{幂}
+    %\ImportSection{线性空间}[线性变换]{多项式}
+    %\ImportSection{线性空间}[线性泛函]{对偶空间}
+
+    % 多重线性代数
+    \CatalogPart{$\bm{\alpha_{3}}$}
+    \ImportSection{线性空间}[多重线性型]{定义}
+    \ImportSection{线性空间}[多重线性型]{对称型}
+    \ImportSection{线性空间}[多重线性型]{交错型}
+    \ImportSection{线性空间}[双线性型]{对称交错分解}
+    %\ImportSection{实线性空间}[二次型]{定义}
+    %\ImportSection{实线性空间}[二次型]{正定&负定}(正定\&负定)
+    %\ImportSection{实线性空间}[二次型]{Sylvester惯性定理}
+    \CatalogCommand{\bigskip}
+
+    % 矩阵&行列式
+    \CatalogPart{$\bm{\beta}$}
+    \ImportSection{域}[矩阵]{定义}
+    \ImportSection{域}[矩阵]{积}
+    \ImportSection{域}[行列式]{定义}
+    \ImportSection{域}[行列式]{基本性质}
+    %\ImportSection{域}[矩阵]{逆}
+    %\ImportSection{复数系}[矩阵]{复共轭}
+    %\ImportSection{有限维线性空间}[矩阵表示]{向量&线性映射}(向量\&线性映射)
+    %\ImportSection{有限维线性空间}[矩阵表示]{双线性型}
+    %\ImportSection{有限维线性空间}[矩阵表示]{基变换}
+    \CatalogCommand{\bigskip}
+
+    % 特征值理论
+    %\CatalogPart{$\bm{\gamma_{1}}$}
+    %\ImportSection{线性空间}[线性变换]{特征值}
+    %\ImportSection{线性空间}[线性变换]{广义特征空间}
+    %\ImportSection{有限线性空间}[特征多项式]{定义}
+    %\ImportSection{有限维线性空间}[特征多项式]{基本性质}
+    %\ImportSection{有限维线性空间}[特征多项式]{代数重数}
+    %\ImportSection{线性空间}[最小多项式]{定义}
+    %\ImportSection{线性空间}[最小多项式]{基本性质}
+    %\ImportSection{有限维线性空间}[矩阵表示]{对角化}
+    %\CatalogCommand{\newpage}
+
+    % 相似标准型
+    \CatalogPart{$\bm{\gamma_{2}}$}
+    \ImportSection{有限维线性空间}{广义特征空间分解}
+    %\ImportSection{线性空间}[线性变换]{循环空间}
+    \ImportSection{有限维线性空间}{幂零循环空间分解}
+    \ImportSection{有限维线性空间}[矩阵表示]{Jordan标准型}
+    %\ImportSection{有限维线性空间}[矩阵表示]{Frobenius标准型}
+    \CatalogCommand{\bigskip}
+
+    % 奇异值理论
+    %\CatalogPart{$\bm{\gamma_{3}}$}
+    %\ImportSection{有限维线性空间}[奇异值]{定义}
+    %\ImportSection{有限维线性空间}[奇异值]{基本性质}
+    %\ImportSection{有限维线性空间}[矩阵表示]{奇异值分解}
+
+    % 度量结构
+    \CatalogPart{$\bm{\delta}$}
+    \ImportSection{赋范空间}{定义}
+    %\ImportSection{赋范空间}[线性算子]{范数}
+    %\ImportSection{赋范空间}[线性算子]{有界算子}
+    \ImportSection{内积空间}{定义}
+    \ImportSection{内积空间}{范数}
+    \ImportSection{内积空间}{基本性质}
+    \ImportSection{内积空间}{极化恒等式}
+    \ImportSection{内积空间}[正交性]{定义}
+    \ImportSection{内积空间}[正交性]{规范正交组}
+    \ImportSection{内积空间}[正交性]{Gram—Schmidt过程}(Gram\—Schmidt过程)
+    \ImportSection{内积空间}{极小化向量}
+    \ImportSection{内积空间}[正交补]{定义}
+    \ImportSection{内积空间}[正交补]{投影定理}
+    %\ImportSection{内积空间}[正交补]{正交投影}
+    \ImportSection{内积空间}{Riesz表示定理}
+    \CatalogCommand{\bigskip}
+
+    % 算子理论
+    \CatalogPart{$\bm{\epsilon}$}
+    \ImportSection{内积空间}[伴随映射]{定义}
+    \ImportSection{内积空间}[伴随映射]{有限维性质}
+    %\ImportSection{内积空间}{自伴算子}
+    %\ImportSection{内积空间}{数值域}
+    %\ImportSection{内积空间}{正规算子}
+    %\ImportSection{内积空间}{等距映射}
+    %\ImportSection{内积空间}{幺正算子}
+    %\ImportSection{内积空间}{QR分解&Cholesky分解}(QR分解\&\gap Cholesky分解)
+    \ImportSection{内积空间}{Moore—Penrose广义逆}(Moore\—Penrose广义逆)
+    \CatalogCommand{\bigskip}
+
+    % 索引 | Index
+
+    \CatalogCommand{\bigskip}
+    %\TextCommand{\newpage}
+    %\MakeSimpleIndex{环}<Ring>
+    \TextCommand{\newpage}
+    \MakeSimpleIndex{域}<Field>
+    \TextCommand{\newpage}
+    \MakeSimpleIndex{线性空间}<Linear Space>
+    \TextCommand{\newpage}
+    \MakeSimpleIndex{有限维线性空间}<Finite Dimensional Linear Space>
+    \TextCommand{\newpage}
+    \MakeSimpleIndex{赋范空间}<Normed Space>
+    \TextCommand{\newpage}
+    \MakeSimpleIndex{内积空间}<Inner Product Space>
+    %\TextCommand{\newpage}
+    %\MakeSimpleIndex{复数系}<Complex Number System>
+    %\TextCommand{\newpage}
+    %\MakeSimpleIndex{实线性空间}<Real Linear Space>
+
+\end{document}

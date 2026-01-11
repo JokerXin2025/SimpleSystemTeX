@@ -1,0 +1,41 @@
+
+% 2025 Simple·System
+
+% ./Section/线性空间/向量组/替换定理
+
+\Theorem{替换定理}{
+    设 $S_{1}=(\bm u_{k})_{k=1}^{m}$ 和 $S_{2}=(\bm v_{k})_{k=1}^{n}$ 是 $V$ 中的向量组, 其中 $S_{1}$ 线性无关且 $S_{2}$ 张成 $V$ , 则 $m\leqslant n$ 并且存在 $S_{2}$ 的子组 $S_{2}'=(\bm v_{k}')_{k=1}^{n-m}$ 使得
+    \begin{align*}
+        \spn\braI{\bm u_{1}\and\cdots\and\bm u_{m}\and\bm v_{1}'\and\cdots\and\bm v_{n-m}'}=V\ .
+    \end{align*}
+}
+\Proof{证明\method{流程}}{
+    \par 对每个 $k\leqslant n$ , 设 $\bm r_{k}^{(0)}=\bm v_{k}$ , 现在从 $p=1$ 开始依次考虑每个正整数 $p\leqslant m$ . 记
+    \begin{align*}
+        \bm w_{k}^{(p)}=\casesII{\bm u_{k}}{k\leqslant p}{-2}{\bm r_{k-p}^{(p-1)}}{p+1\leqslant k\leqslant n+1}\ ,
+    \end{align*}
+    其中
+    \begin{align*}
+        \bm w_{p}^{(p)}\in V=\spn\braI{\bm w_{1}^{(p)}\and\cdots\and\bm w_{p-1}^{(p)}\and\bm w_{p+1}^{(p)}\and\cdots\and\bm w_{n+1}^{(p)}}\ ,
+    \end{align*}
+    故 $(\bm w_{k}^{(p)})_{k=1}^{n+1}$ 线性相关, 由\link{线性空间}[向量组]{线性相关性引理}可以找到某个 $\bm w_{k}^{(p)}$ 使得
+    \begin{align*}
+        \bm w_{k}^{(p)}\in\spn\braI{\bm w_{1}^{(p)}\and\cdots\and\bm w_{k-1}^{(p)}}\ ,
+    \end{align*}
+    并且 $\bm w_{k}^{(p)}$ 不可能为 $S_{1}$ 中的向量, 因为由 $S_{1}$ 线性无关, 从而 $k>p$ , 我们记
+    \begin{align*}
+        \braI{\bm w_{p+1}^{(p)}\and\cdots\and\bm w_{k-1}^{(p)}\and\bm w_{k+1}^{(p)}\and\cdots\and\bm w_{n+1}^{(p)}}
+    \end{align*}
+    为 $\braI{\bm r_{1}^{(p)}\and\cdots\and\bm r_{n-p}^{(p)}}$ , 注意到 $\braI{\bm u_{1}\and\cdots\and\bm u_{p}\and\bm r_{1}^{(p)}\and\cdots\and\bm r_{n-p}^{(p)}}$ 依然张成 $V$ .
+    \par 当考虑完所有的正整数 $p$ 后, 我们令 $S_{2}'=\braI{\bm r_{1}^{(m)}\and\cdots\and\bm r_{n-m}^{(m)}}$ , 此时即有
+    \begin{align*}
+        \spn\braI{\bm u_{1}\and\cdots\and\bm u_{m}\and\bm r_{1}^{(m)}\and\cdots\and\bm r_{n-m}^{(m)}}=V
+    \end{align*}
+    成立, 并且此时有 $m\leqslant n$ .\ProofEndT
+}
+
+\par 在上述流程中的最后一步, 我们通过\link{线性空间}[向量组]{线性相关性引理}证明了 $\bm w_{k}^{(m)}$ 的存在性, 又通过 $S_{1}$ 线性无关证明了 $k>m$ , 此即保证了大于 $m$ 但不大于 $n+1$ 的正整数 $k$ 的存在性, 也即证明了 $m\leqslant n$ .
+
+\par 替换定理的重要性在于, 其表明线性空间的无关组的长度必定不大于张成组的长度, 这为建立有限维线性空间的判定准则及其维数研究提供了基础.
+
+\newpage

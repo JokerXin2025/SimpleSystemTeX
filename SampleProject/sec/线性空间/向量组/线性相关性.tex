@@ -1,0 +1,56 @@
+
+% 2025 Simple·System
+
+% ./Section/线性空间/向量组/线性相关性
+
+\Definition{线性相关性}{
+    向量组 $S$ \newconcept{线性相关}当且仅当存在有限集 $J\subseteq I$ 和不全为 $0$ 的 $(a_{k})_{k\in J}\in\bfF^{J}$ 使得
+    \begin{align*}
+        \sum_{k\in J}a_{k}\bm v_{k}=\bm 0\ ,
+    \end{align*}
+    否则 $S$ \newconcept{线性无关}. 另外, 我们规定空组 $\braI{}$ 线性无关.
+}
+
+\par 从\link{线性空间}[向量组]{线性相关性}的定义中可得知如下事实:
+
+\Corollary{线性相关性的遗传性}{
+    \serial{1.}线性无关组的任何子组都线性无关.
+    \serial{2.}任何以线性相关组为子组的向量组都线性相关.
+}
+
+\par 若 $S$ 线性相关, 则表明 $S$ 中的某个向量可以被写作其它向量的线性组合, 从而在某种意义上是多余的. 例如, 考虑向量组 $S=\braI{\bm 0\and\bm v}$ , 其中 $\bm v$ 是非零向量, 那么就会出现 $a\bm 0+0\bm v=\bm u$ , 这里 $a$ 可以取任何 $\bfF$ 中的非零元素, 所以我们可以缩减向量组为 $S'=\braI{\bm v}$ , 并且 $\spn S'=\spn S$ . 但这里我们不能将 $\bm v$ 删去, 因为我们不可能写出类似 $a\bm 0+b\bm v=\bm 0$ 这样的等式, 其中 $b$ 为 $\bfF$ 中的非零元素, 这也表明 $\bm v$ 在 $S$ 中是不可替代的.
+
+\par 将上面的想法严格化, 就得到了如下表述, 这也是线性相关性概念产生的意义:
+
+\Theorem{线性相关性引理}{
+    \serial{1.}若 $S$ 线性相关, 则存在 $\bm v_{m}$ 使得 $\bm v_{m}\in\spn\braI{\cdots\and\bm v_{m-1}}$ .
+    \serial{2.}若存在 $\bm v_{m}$ 使得 $\bm v_{m}\in\spn\braI{\cdots\and\bm v_{m-1}\and\bm v_{m+1}\and\cdots\and\bm v_{n}}$ , 则 $S$ 线性相关.
+}
+\Proof{\sentence{1}证明}{
+    \par 由 $S$ 线性相关可知存在不全为 $0$ 的 $(a_{k})_{k=1}^{n}\in\bfF^{n}$ 使得
+    \begin{align*}
+        \sum_{k=1}^{n}a_{k}\bm v_{k}=\bm 0\ ,
+    \end{align*}
+    现在设 $m$ 是使得 $a_{k}\ne0$ 成立的最大的正整数 $k$ . 若 $m=1$ , 我们必定有 $\bm v_{m}=\bm 0$ , 故显然有该命题成立; 若 $m>1$ , 则有
+    \begin{align*}
+        \bm v_{m}=-\sum_{k=1}^{m-1}\frac{a_{k}}{a_{m}}\bm v_{k}\ .\ProofEndF
+    \end{align*}
+}
+\Proof{\sentence{2}证明}{
+    \par 设存在 $\braI{\cdots\and a_{m-1}\and a_{m+1}\and\cdots\and a_{n}}\in\bfF^{n-1}$ 使得
+    \begin{align*}
+        \bm v_{m}=\sum_{k=1}^{m-1}a_{k}\bm v_{k}+\sum_{k=m+1}^{n}a_{k}\bm v_{k}\ ,
+    \end{align*}
+    令 $a_{m}=-1$ , 从而存在不全为 $0$ 的 $(a_{k})_{k=1}^{n}\in\bfF^{n}$ 使得
+    \begin{align*}
+        \sum_{k=1}^{n}a_{k}\bm v_{k}=\bm 0\ ,
+    \end{align*}
+    即 $S$ 线性相关.\ProofEndT
+}
+
+\par 该定理表明 $S$ 线性相关等价于存在 $\bm v_{m}\in S$ 使得向量组 $\braI{\cdots\and\bm v_{m-1}\and\bm v_{m+1}\and\cdots\and\bm v_{n}}$ 与 $S$ 等价, 又因为\link{线性空间}[向量组]{等价向量组的张成空间}(等价向量组张成相同的空间)相同, 这可以进一步等价于
+\begin{align*}
+    \spn\braI{\cdots\and\bm v_{m-1}\and\bm v_{m+1}\and\cdots\and\bm v_{n}}=\spn S\ .
+\end{align*}
+
+\newpage

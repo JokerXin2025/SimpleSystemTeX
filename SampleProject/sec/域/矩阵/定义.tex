@@ -1,0 +1,200 @@
+
+% 2025 Simple·System
+
+% ./Section/域/矩阵/定义
+
+\Convention{subcpt}{
+    \serial{•}设 $m\and n$ 是正整数, $\lambda\and\mu\in R$ .
+}
+
+\vspace{-4pt}
+
+\Definition{矩阵}{
+    我们称映射 $\bm A:\braIII{1\and\cdots\and m}\times\braIII{1\and\cdots\and n}\to R$ 为 $R$ 上的 \newconcept{$m\times n$ 型矩阵}, 并记作
+    \begin{align*}
+        \bm A=\matrix{ccc}{
+            \bm A\braI{1\and 1} \* \cdots \* \bm A\braI{1\and n} \\[-1mm]
+            \vdots \* \ddots \* \vdots \\[-1mm]
+            \bm A\braI{m\and 1} \* \cdots \* \bm A\braI{m\and n}
+        }\ .
+    \end{align*}
+}
+
+\vspace{15pt}
+
+\par 上述每个 $A_{i,j}$ 为矩阵 $\bm A$ 第 $i$ 行第 $j$ 列的\newconcept{元素}. $m$ 和 $n$ 分别称为 $\bm A$ 的\newconcept{行数}和\newconcept{列数}. 当 $\bm A$ 的行数和列数均为 $n$ 时, 我们称 $\bm A$ 为 $n$ 阶\newconcept{方阵}. 另外, 我们称矩阵 $\bm A$ 与矩阵 $\bm B$ \newconcept{同型}, 当且仅当其均为 $m\times n$ 型矩阵.
+
+\par 一般地, 所有元素均为 $0$ 的矩阵称为\newconcept{零矩阵}并记作 $\bm O$ , 对角上的元素均为 $1$ 而其余元素均为 $0$ 的矩阵称为\newconcept{单位阵}, 例如
+\begin{align*}
+    \bm I_{1}:=\matrix{c}{
+        1
+    }\quad,\quad\bm I_{2}:=\matrix{cc}{
+        1 \* 0 \\[-2mm]
+        0 \* 1
+    }\quad,\quad\cdots\quad,\quad\bm I_{n}:=\underbrace{\matrix{ccccc}{
+        1 \* \cdots \* 0 \* \cdots \* 0 \\[-2mm]
+        \vdots \* 1 \* \* \* \vdots \\[-2mm]
+        0 \* \* \ddots \* \* 0 \\[-2mm]
+        \vdots \* \* \* 1 \* \vdots \\[-2mm]
+        0 \* \cdots \* 0 \* \cdots \* 1
+    }}_{n\times n}\ .
+\end{align*}
+
+\Definition{矩阵的行与列}{
+    矩阵 $\bm A$ 的第 $i$ 行 $\bm A_{i:}$ 和第 $j$ 列 $\bm A_{:j}$ 定义为 $1\times n$ 型矩阵和 $m\times 1$ 型矩阵
+    \begin{align*}
+        \bm A_{i:}\ :\ \braI{1\and j}\mapsto \bm A\braI{i\and j}\AND\bm A_{:j}\ :\ \braI{i\and1}\mapsto \bm A\braI{i\and j}\ ,
+    \end{align*}
+    即
+    \begin{small}\begin{align*}
+        \matrix{ccc}{
+            A_{1,1} \* \cdots \* A_{1,n} \\[-1mm]
+            \vdots \* \ddots \* \vdots \\[-1mm]
+            A_{m,1} \* \cdots \* A_{m,n}
+        }_{i:}:=\matrix{ccc}{
+            A_{i,1} \* \cdots \* A_{i,n}
+        }\ \ \text{和}\ \ \matrix{ccc}{
+            A_{1,1} \* \cdots \* A_{1,n} \\[-1mm]
+            \vdots \* \ddots \* \vdots \\[-1mm]
+            A_{m,1} \* \cdots \* A_{m,n}
+        }_{:j}:=\matrix{c}{
+            A_{1,j}\\[-1mm]
+            \vdots\\[-1mm]
+            A_{m,j}
+        }\ .
+    \end{align*}\end{small}
+}
+
+\vspace{15pt}
+
+\newpage
+
+\vspace{-4pt}
+
+\Definition{矩阵加法}{
+    设 $\bm A\and\bm B$ 是 $m\times n$ 型矩阵, 我们定义 $\bm A+\bm B$ 为 $m\times n$ 型矩阵
+    \begin{align*}
+        \bm A+\bm B\ :\ \braI{i\and j}\mapsto\bm A\braI{i\and j}+B\braI{i\and j}\ ,
+    \end{align*}
+    即
+    \begin{small}\begin{align*}
+        \matrix{ccc}{
+            A_{1,1} \* \cdots \* A_{1,n} \\[-1mm]
+            \vdots \* \ddots \* \vdots \\[-1mm]
+            A_{m,1} \* \cdots \* A_{m,n}
+        }+\matrix{ccc}{
+            B_{1,1} \* \cdots \* B_{1,n} \\[-1mm]
+            \vdots \* \ddots \* \vdots \\[-1mm]
+            B_{m,1} \* \cdots \* B_{m,n}
+        }:=\matrix{ccc}{
+            A_{1,1}+B_{1,1} \* \cdots \* A_{1,n}+B_{1,n} \\[-1mm]
+            \vdots \* \ddots \* \vdots \\[-1mm]
+            A_{m,1}+B_{m,1} \* \cdots \* A_{m,n}+B_{m,n}
+        }\ .\\[-15mm]
+    \end{align*}\end{small}
+}
+
+\vspace{15pt}
+
+\vspace{-4pt}
+
+\Definition{矩阵数乘}{
+    设 $\bm A$ 是 $m\times n$ 型矩阵, 我们定义 $\lambda\bm A$ 为 $m\times n$ 型矩阵
+    \begin{align*}
+        \lambda\bm A\ :\ \braI{i\and j}\mapsto\lambda\bm A\braI{i\and j}\ ,
+    \end{align*}
+    即
+    \begin{align*}
+        \lambda\matrix{ccc}{
+            A_{1,1} \* \cdots \* A_{1,n} \\[-1mm]
+            \vdots \* \ddots \* \vdots \\[-1mm]
+            A_{m,1} \* \cdots \* A_{m,n}
+        }:=\matrix{ccc}{
+            \lambda A_{1,1} \* \cdots \* \lambda A_{1,n} \\[-1mm]
+            \vdots \* \ddots \* \vdots \\[-1mm]
+            \lambda A_{m,1} \* \cdots \* \lambda A_{m,n}
+        }\ .
+    \end{align*}
+}
+
+\vspace{15pt}
+
+\par 我们定义 $-\bm A:=\braI{-1}\bm A$ , 并且可由此定义\newconcept{矩阵减法}为 $\bm A-\bm B:=\bm A+\braI{-\bm B}$ , 即
+\begin{small}\begin{align*}
+    \matrix{ccc}{
+        A_{1,1} \* \cdots \* A_{1,n} \\[-1mm]
+        \vdots \* \ddots \* \vdots \\[-1mm]
+        A_{m,1} \* \cdots \* A_{m,n}
+    }-\matrix{ccc}{
+        B_{1,1} \* \cdots \* B_{1,n} \\[-1mm]
+        \vdots \* \ddots \* \vdots \\[-1mm]
+        B_{m,1} \* \cdots \* B_{m,n}
+    }:=\matrix{ccc}{
+        A_{1,1}-B_{1,1} \* \cdots \* A_{1,n}-B_{1,n} \\[-1mm]
+        \vdots \* \ddots \* \vdots \\[-1mm]
+        A_{m,1}-B_{m,1}  \* \cdots \* A_{m,n}-B_{m,n}
+    }\ .
+\end{align*}\end{small}
+
+\par 注意只有同型矩阵才可进行加法/减法和数乘运算, 因为不同型矩阵的定义域不同.
+
+\Corollary{矩阵加法&数乘运算律}(矩阵加法\&数乘运算律){
+    设 $\bm A\and\bm B\and\bm C$ 是 $R$ 上的 $m\times n$ 型矩阵, 令 $\bm O$ 表示零矩阵, 则对于矩阵加法\&数乘有如下性质成立:
+    \serial{1.}加法幺元: $\bm O+\bm A=\bm A+\bm O=\bm A$ .
+    \serial{2.}数乘幺元: $1\bm A=\bm A$ .
+    \serial{3.}数乘零元: $0\bm A=\bm O$ .
+    \serial{4.}加法逆元: $\bm A+\braI{-\bm B}=\bm A-\bm B$ .
+    \serial{5.}加法交换律: $\bm A+\bm B=\bm B+\bm A$ .
+    \serial{6.}加法结合律: $\braI{\bm A+\bm B}+\bm C=\bm A+\braI{\bm B+\bm C}$ .
+    \serial{7.}左分配律: $\lambda\braI{\bm A+\bm B}=\lambda\bm A+\lambda\bm B$ .
+    \serial{8.}右分配律: $\braI{\lambda+\mu}\bm A=\lambda\bm A+\mu\bm A$ .
+    \serial{9.}数乘结合律: $\lambda\braI{\mu\bm A}=\braI{\lambda\mu}\bm A$ .
+}
+
+\vspace{-4pt}
+
+\Definition{转置矩阵}{
+    设 $\bm A$ 是 $m\times n$ 型矩阵, $\bm A$ 的\newconcept{转置}定义为 $n\times m$ 型矩阵
+    \begin{align*}
+        \bm A^{\rmT}\ :\ \braI{i\and j}\mapsto\bm A\braI{j\and i}\ ,
+    \end{align*}
+    即
+    \begin{align*}
+        \matrix{ccc}{
+            A_{1,1} \* \cdots \* A_{1,n} \\[-1mm]
+            \vdots \* \ddots \* \vdots \\[-1mm]
+            A_{m,1} \* \cdots \* A_{m,n}
+        }^{\rmT}:=\matrix{ccc}{
+            A_{1,1} \* \cdots \* A_{1,m} \\[-1mm]
+            \vdots \* \ddots \* \vdots \\[-1mm]
+            A_{n,1} \* \cdots \* A_{n,m}
+        }\ .
+    \end{align*}
+}
+
+\vspace{15pt}
+
+\vspace{-4pt}
+
+\Corollary{转置矩阵的性质}{
+    设 $\bm A\and\bm B$ 是 $R$ 上的 $m\times n$ 型矩阵, 则对于转置矩阵有如下性质成立:
+    \serial{1.}对合性: $\braI{\bm A^{\rmT}}^{\rmT}=\bm A$ .
+    \serial{2.}可加性: $\braI{\bm A+\bm B}^{\rmT}=\bm A^{\rmT}+\bm B^{\rmT}$ .
+    \serial{3.}齐次性: $\braI{\lambda\bm A}^{\rmT}=\lambda\bm A^{\rmT}$ .
+}
+
+\vspace{-4pt}
+
+\Definition{对称&反对称矩阵}(对称\&反对称矩阵){
+    设 $\bm A$ 是 $n$ 阶方阵, $\bm A$ 是
+    \serial{•}对称矩阵, 当且仅当 $\bm A=\bm A^{\rmT}$ .
+    \serial{•}反对称矩阵, 当且仅当 $\bm A=-\bm A^{\rmT}$ .
+}
+
+\vspace{-4pt}
+
+\Corollary{反对称矩阵的主对角线}{
+    反对称矩阵的主对角线元素均为 $0$ .
+}
+
+\newpage

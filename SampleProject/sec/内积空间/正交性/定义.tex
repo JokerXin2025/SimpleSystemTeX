@@ -1,0 +1,28 @@
+
+% 2025 Simple·System
+
+% ./Section/内积空间/正交性/定义
+
+\Definition{正交性}{
+    设 $V$ 是一个内积空间, 则两个向量 $\bm v_{1}\and\bm v_{2}\in V$ 正交并记作 $\bm v_{1}\perp\bm v_{2}$ , 当且仅当 $\braV{\bm v_{1}\and\bm v_{2}}=0$ .
+}
+
+\par 注意定义中 $\bm v_{1}$ 和 $\bm v_{2}$ 的顺序是不必要的, 这由内积的共轭对称性所保证.
+
+\par 下面的定理是\link{内积空间}{余弦定理}的一个直接推论.
+
+\Corollary{勾股定理}{
+    设 $V$ 是一个内积空间, 则
+    \begin{align*}
+        \Forall{\bm v_{1}\and\bm v_{2}}{V}
+        \bm v_{1}\perp\bm v_{2}\implies\norm{\bm v_{1}+\bm v_{2}}^{2}=\norm{\bm v_{1}}^{2}+\norm{\bm v_{2}}^{2}\ .
+    \end{align*}
+}
+
+\par 勾股定理表明: 当两个向量正交时, 其范数具有平方可加性. 这启发我们对任何 $\bm v\in V$ 进行分解, 从而得到两个正交的部分. 考虑 $\bm v\and\bm v_{0}\in V$ , 我们希望找到某个 $a\in\bfF$ 使得 $a\bm v_{0}\perp\braI{\bm v-a\bm v_{0}}$ , 根据内积的第一元线性与第二元共轭线性, 我们可以解得
+\begin{align*}
+    \braV{a\bm v_{0}\and\bm v-a\bm v_{0}}=0\implies a=\frac{\braV{\bm v\and\bm v_{0}}}{\norm{\bm v_{0}}^{2}}\ ,
+\end{align*}
+此即 $\bm v$ 关于 $\bm v_{0}$ 的\newconcept{正交分解}.
+
+\newpage

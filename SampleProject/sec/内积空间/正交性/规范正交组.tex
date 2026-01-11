@@ -1,0 +1,114 @@
+
+% 2025 Simple·System
+
+% ./Section/内积空间/正交性/规范正交组
+
+\Definition{Kronecker记号}{
+    \begin{align*}
+        \delta_{a,b}:=\casesII{1}{a=b}{-2}{0}{a\ne b}\ .
+    \end{align*}
+}
+
+\vspace{-4pt}
+
+\Definition{规范正交组}{
+    设 $S=(\bm e_{k})_{k\in I}$ 是内积空间 $V$ 中的一个向量组, $S$ 规范正交当且仅当对所有 $p\and q\in I$ 均有 $\braV{\bm e_{p}\and\bm e_{q}}=\delta_{p,q}$ .
+}
+
+\par 若有限维空间 $V$ 的某个基 $B$ 规范正交, 则我们称 $B$ 为 $V$ 的\newconcept{规范正交基}.
+
+\Theorem{规范正交性引理}{
+    设 $(\bm e_{k})_{k=1}^{n}$ 是一个规范正交向量组, 则
+    \begin{align*}
+        \Forall{(a_{k})_{k=1}^{n}}{\bfF^{n}}
+        \norm{\sum_{k=1}^{n}a_{k}\bm e_{k}}^{2}=\sum_{k=1}^{n}\braIV{a_{k}}^{2}\ .
+    \end{align*}
+}
+\Proof{证明I}{
+    \begin{align*}
+        \norm{\sum_{k=1}^{n}a_{k}\bm e_{k}}^{2}=\braV{\sum_{k=1}^{n}a_{k}\bm e_{k}\and\sum_{k=1}^{n}a_{k}\bm e_{k}}=\sum_{i=1}^{n}\sum_{j=1}^{n}a_{i}\overline{a_{j}}\delta_{i,j}=\sum_{k=1}^{n}\braIV{a_{k}}^{2}\ .\ProofEndF
+    \end{align*}
+}
+\Proof{证明II\method{数学归纳法}}{
+    \par 当 $n=1$ 时. 我们有 $\norm{a_{1}\bm e_{1}}=\braIV{a_{1}}\norm{\bm e_{1}}=\braIV{a_{1}}$ .
+    \par 假设 $n=m$ 时上述命题成立. 由\link{内积空间}[正交性]{勾股定理}有
+    \begin{align*}
+        \norm{\sum_{k=1}^{m+1}a_{k}\bm e_{k}}^{2}=\norm{\sum_{k=1}^{m}a_{k}\bm e_{k}}^{2}+\norm{a_{m+1}\bm e_{m+1}}^{2}=\sum_{k=1}^{m}\braIV{a_{k}}^{2}+\braIV{a_{m+1}}^{2}=\sum_{k=1}^{m+1}\braIV{a_{k}}^{2}\ ,
+    \end{align*}
+    于是 $n=m+1$ 时上述命题成立, 进而其对一切正整数 $n$ 成立.\ProofEndT
+}
+
+\Theorem{规范正交组的线性无关性}{
+    任何有限规范正交向量组都线性无关.
+}
+\Proof{证明}{
+    \par 给定任意规范正交向量组 $(\bm e_{k})_{k=1}^{n}$ , 设 $(a_{k})_{k=1}^{n}\in\bfF^{n}$ 使得 $a_{1}\bm e_{1}+\cdots+a_{n}\bm e_{n}=\bm 0$ , 则由\link{内积空间}[正交性]{规范正交性引理}有
+    \begin{align*}
+        \sum_{k=1}^{n}\braIV{a_{k}}^{2}=\norm{\sum_{k=1}^{n}a_{k}\bm e_{k}}^{2}=\norm{\bm 0}^{2}=0\ ,
+    \end{align*}
+    这表明所有 $a_{k}$ 均为 $0$ , 于是 $(\bm e_{k})_{k=1}^{n}$ 线性无关.\ProofEndT
+}
+
+\par 在规范正交基上可以很容易地对向量或内积进行展开.
+
+\Theorem{规范正交展开}{
+    设 $(\bm e_{k})_{k=1}^{n}$ 是 $V$ 的一个规范正交基, 则
+    \begin{align*}
+        \Forall{\bm v}{V}
+        \bm v=\sum_{k=1}^{n}\braV{\bm v\and\bm e_{k}}\bm e_{k}\ ,\\[-14mm]
+    \end{align*}
+    \begin{align*}
+        \Forall{\bm v_{1}\and\bm v_{2}}{V}
+        \braV{\bm v_{1}\and\bm v_{2}}=\sum_{k=1}^{n}\braV{\bm v_{1}\and\bm e_{k}}\overline{\braV{\bm v_{2}\and\bm e_{k}}}\ .
+    \end{align*}
+}
+\Proof{证明}{
+    \par 先证第一个等式. 由 $(\bm e_{k})_{k=1}^{n}$ 是 $V$ 的基, 我们可以设 $(a_{k})_{k=1}^{n}\in\bfF^{n}$ 使得
+    \begin{align*}
+        \bm v=\sum_{k=1}^{n}a_{k}\bm e_{k}\ ,
+    \end{align*}
+    于是对任意的正整数 $1\leqslant m\leqslant n$ 有
+    \begin{align*}
+        a_{m}=\sum_{k=1}^{n}a_{k}\braV{\bm e_{k}\and\bm e_{m}}=\braV{\sum_{k=1}^{n}a_{k}\bm e_{k}\and\bm e_{m}}=\braV{\bm v\and\bm e_{m}}\ .
+    \end{align*}
+    \par 再证第二个等式. 由第一个等式可知
+    \begin{align*}
+        \braV{\bm v_{1}\and\bm v_{2}}=\braV{\bm v_{1}\and\sum_{k=1}^{n}\braV{\bm v_{2}\and\bm e_{k}}\bm e_{k}}=\sum_{k=1}^{n}\braV{\bm v_{1}\and\bm e_{k}}\overline{\braV{\bm v_{2}\and\bm e_{k}}}\ .\ProofEndF
+    \end{align*}
+}
+
+\Theorem{Bessel不等式（有限形式）}{
+    设 $(\bm e_{k})_{k=1}^{n}$ 是一个规范正交向量组, 则
+    \begin{align*}
+        \Forall{\bm v}{V}
+        \sum_{k=1}^{n}\braIV{\!\braV{\bm v\and\bm e_{k}}\!}^{2}\leqslant\norm{\bm v}^{2}\ ,
+    \end{align*}
+    其中等号当且仅当 $\bm v\in\spn\,(\bm e_{k})_{k=1}^{n}$ 时取得.
+}
+\Proof{证明}{
+    \par 记
+    \begin{align*}
+        \bm u=\sum_{k=1}^{n}\braV{\bm v\and\bm e_{k}}\bm e_{k}\ ,
+    \end{align*}
+    注意到对任意正整数 $1\leqslant k\leqslant n$ 有
+    \begin{align*}
+        \braV{\bm v-\bm u\and\bm e_{k}}=\braV{\bm v\and\bm e_{k}}-\braV{\bm v\and\bm e_{k}}\braV{\bm e_{k}\and\bm e_{k}}=0\ ,
+    \end{align*}
+    这意味着 $\braV{\bm v-\bm u\and\bm u}=0$ , 于是由\link{正交性}{勾股定理}有
+    \begin{align*}
+        \norm{\bm v}^{2}=\norm{\bm u}^{2}+\norm{\bm v-\bm u}^{2}\geqslant\norm{\bm u}^{2}=\sum_{k=1}^{n}\braIV{\!\braV{\bm v\and\bm e_{k}}\!}^{2}\ ,
+    \end{align*}
+    其中等号当且仅当 $\bm v=\bm u$ 时取得, \link{正交性}{规范正交展开}表明此条件等价于 $\bm v\in\spn\,(\bm e_{k})_{k=1}^{n}$ .\ProofEndT
+}
+\Corollary{Bessel不等式}{
+    设 $(\bm e_{k})_{k=1}^{\infty}$ 是一个规范正交向量组, 则
+    \begin{align*}
+        \Forall{\bm v}{V}
+        \sum_{k=1}^{\infty}\braIV{\!\braV{\bm v\and\bm e_{k}}\!}^{2}\leqslant\norm{\bm v}^{2}\ ,
+    \end{align*}
+    其中等号当且仅当 $\bm v\in\overline{\spn\,(\bm e_{k})_{k=1}^{\infty}}$ 时取得.
+}
+
+\par 该不等式可以视为向量的不完全规范正交展开.
+
+\newpage

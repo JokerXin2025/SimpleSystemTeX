@@ -1,0 +1,77 @@
+
+% 2025 Simple·System
+
+% ./Section/内积空间/伴随映射/有限维性质
+
+\par 下面我们聚焦于有限维空间中的伴随映射.
+
+\Theorem{有限维伴随映射的存在性&唯一性}(有限维伴随映射的存在性\&唯一性){
+    设 $U\and V$ 是有限维空间, 则任何 $T\in\mathcal{L}\braI{U\and V}$ 都有唯一的伴随映射.
+}
+\Proof{证明}{
+    \par 这由\link{内积空间}{Riesz表示定理（线性泛函）}(Riesz表示定理)保证.\ProofEndT
+}
+
+\par 事实上, 即使不要求线性, 满足条件 $\braV{T\bm u\and\bm v}=\braV{\bm u\and S\bm v}$ 的映射 $S$ 也是唯一的.
+
+\par 由\link{内积空间}[伴随映射]{伴随映射的核}可以导出如下与之对偶的性质, 我们只需确保 $\im T$ 是 $V$ 的有限维子空间并应用正交补的对合律即可.
+
+\Corollary{有限维伴随映射的像}{
+    设 $U$ 和 $V$ 是有限维空间, 则 $\im T^{*}=\braI{\ker T}^{\perp}$ .
+}
+
+\vspace{-4pt}
+
+\Theorem{有限维伴随映射的特征值}{
+    设 $V$ 是有限维空间并且 $\lambda$ 是 $T\in\mathcal{L}\braI{V}$ 的特征值, 则 $\overline{\lambda}$ 是 $T^{*}$ 的特征值.
+}
+\Proof{证明I}{
+    \par 设 $\bm A$ 为 $T$ 在某个基下的矩阵, 则
+    \begin{align*}
+        \det\braI{\overline{\bm A}\,^{T}-\overline{\lambda}\bm I}&=\det\braI{\overline{\bm A-\lambda\bm I}}=\overline{\det\braI{\bm A-\lambda\bm I}}=0\ ,
+    \end{align*}
+    因此 $\overline{\lambda}$ 是 $T^{*}$ 的特征值.\ProofEndT
+}
+\Proof{证明II}{
+    \par 由 $\lambda$ 是 $T$ 的特征值知 $T-\lambda\bm I_{V}$ 不是满射, 于是
+    \begin{align*}
+        \im\braI{T-\lambda\bm I_{V}}\ne V\implies\braI{\im\braI{T-\lambda\bm I_{V}}\!}^{\perp}\ne\braIII{\bm 0}\implies\ker\braI{T^{*}-\overline{\lambda}\bm I_{V}}\ne\braIII{\bm 0}\ ,
+    \end{align*}
+    于是 $T^{*}-\overline{\lambda}\bm I_{V}$ 不是单射, 即 $\overline{\lambda}$ 是 $T^{*}$ 的特征值.\ProofEndT
+}
+
+\Theorem{伴随映射的矩阵}{
+    设 $U$ 和 $V$ 分别是以 $B_{U}=(\bm u_{k})_{k=1}^{m}$ 和 $B_{V}=(\bm v_{k})_{k=1}^{n}$ 为规范正交基的非零有限维空间, 记 $\bm A$ 为 $T$ 在 $B_{U}$ 和 $B_{V}$ 下的矩阵, $\bm A'$ 为 $T^{*}$ 在 $B_{V}$ 和 $B_{U}$ 下的矩阵, 则 $\overline{\bm A}\,^{\rmT}=\bm A'$ .
+}
+
+\newpage
+
+\Proof{证明}{
+    \par 对每个 $T\bm u_{k}$ 应用\link{内积空间}[正交性]{规范正交展开}可得
+    \begin{align*}
+        \bm A=\matrix{ccccc}{
+            \braV{T\bm u_{1}\and\bm v_{1}} \* \cdots \* \braV{T\bm u_{i}\and\bm v_{1}} \* \cdots \* \braV{T\bm u_{m}\and\bm v_{1}} \\[-1mm]
+            \vdots \* \ddots \* \vdots \* \ddots \* \vdots \\[-1mm]
+            \braV{T\bm u_{1}\and\bm v_{j}} \* \cdots \* \braV{T\bm u_{i}\and\bm v_{j}} \* \cdots \* \braV{T\bm u_{m}\and\bm v_{j}} \\[-1mm]
+            \vdots \* \ddots \* \vdots \* \ddots \* \vdots \\[-1mm]
+            \braV{T\bm u_{1}\and\bm v_{n}} \* \cdots \* \braV{T\bm u_{i}\and\bm v_{n}} \* \cdots \* \braV{T\bm u_{m}\and\bm v_{n}}
+        }\ ,
+    \end{align*}
+    同理可得
+    \begin{align*}
+        \bm A'=\matrix{ccccc}{
+            \braV{T^{*}\bm v_{1}\and\bm u_{1}} \* \cdots \* \braV{T^{*}\bm v_{j}\and\bm u_{1}} \* \cdots \* \braV{T^{*}\bm v_{n}\and\bm u_{1}} \\[-1mm]
+            \vdots \* \ddots \* \vdots \* \ddots \* \vdots \\[-1mm]
+            \braV{T^{*}\bm v_{1}\and\bm u_{i}} \* \cdots \* \braV{T^{*}\bm v_{j}\and\bm u_{i}} \* \cdots \* \braV{T^{*}\bm v_{n}\and\bm u_{i}} \\[-1mm]
+            \vdots \* \ddots \* \vdots \* \ddots \* \vdots \\[-1mm]
+            \braV{T^{*}\bm v_{1}\and\bm u_{m}} \* \cdots \* \braV{T^{*}\bm v_{j}\and\bm u_{m}} \* \cdots \* \braV{T^{*}\bm v_{n}\and\bm u_{m}}
+        }\ ,
+    \end{align*}
+    其中对任意正整数 $1\leqslant i\leqslant m$ 和 $1\leqslant j\leqslant n$ 有
+    \begin{align*}
+        \overline{\braV{T\bm u_{i}\and\bm v_{j}}}=\braV{\bm v_{j}\and T\bm u_{i}}=\braV{T^{*}\bm v_{j}\and\bm u_{i}}\ ,
+    \end{align*}
+    即 $\bm A$ 第 $j$ 行第 $i$ 列的元素的共轭等于 $\bm A'$ 第 $i$ 行第 $j$ 列的元素, 这就证明了 $\overline{\bm A}\,^{\rmT}=\bm A'$ .\ProofEndT
+}
+
+\newpage

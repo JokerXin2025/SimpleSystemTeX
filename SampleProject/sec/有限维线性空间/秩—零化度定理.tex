@@ -1,0 +1,86 @@
+
+% 2025 Simple·System
+
+% ./Section/有限维线性空间/秩—零化度定理
+
+\par 现在我们将要给出\link{有限维线性空间}{有限维线性空间}中考察线性映射性质的重要工具.
+
+\Theorem{秩—零化度定理}(秩\—零化度定理){
+    设 $T\in\mathcal{L}\braI{U\and V}$ , 则
+    \begin{align*}
+        \dim\ker T+\dim\im T=\dim U\ .
+    \end{align*}
+}
+\Proof{证明I}{
+    \par 设 $(\bm u_{k})_{k=1}^{m}$ 是 $\ker T$ 的基, 并\link{有限维线性空间}{基的扩充构造}(将其扩充)为 $U$ 的基
+    \begin{align*}
+        B=\braI{\bm u_{1}\and\cdots\and\bm u_{m}\and\bm w_{1}\and\cdots\and\bm w_{n}}\ ,
+    \end{align*}
+    下面我们将证明 $B'=\braI{T\bm w_{1}\and\cdots\and T\bm w_{n}}$ 是 $\im T$ 的基, 从而完成证明.
+    \par 先证 $\spn B'=\im T$ . 对任意 $\bm v\in\im T$ , 存在 $\bm u\in U$ 使得 $T\bm u=\bm v$ , 又由 $B$ 是 $U$ 的基知存在 $(a_{k})_{k=1}^{m}\in\bfF^{m}$ 和 $(b_{k})_{k=1}^{n}\in\bfF^{n}$ 使得
+    \begin{align*}
+        \bm v=T\bm u=T\braI{\sum_{k=1}^{m}a_{k}\bm u_{k}+\sum_{k=1}^{n}b_{k}\bm w_{k}}=\sum_{k=1}^{m}a_{k}T\bm u_{k}+\sum_{k=1}^{n}b_{k}T\bm w_{k}=\sum_{k=1}^{n}b_{k}T\bm w_{k}\ .
+    \end{align*}
+    \par 再证 $B'$ 线性无关. 假设 $(c_{k})_{k=1}^{n}\in\bfF^{n}$ 使得
+    \begin{align*}
+        \bm u=\sum_{k=1}^{n}c_{k}T\bm w_{k}=T\braI{\sum_{k=1}^{n}c_{k}\bm w_{k}}\ ,
+    \end{align*}
+    与此同时, 我们知道 $\spn\,(\bm u_{k})_{k=1}^{m}=\ker T$ , 于是可以写出
+    \begin{align*}
+        \sum_{k=1}^{n}c_{k}\bm w_{k}=\sum_{k=1}^{m}d_{k}\bm u_{k}\ ,
+    \end{align*}
+    由 $B$ 线性无关可知所有的 $c_{k}$ 和 $d_{k}$ 均为 $0$ , 于是 $B'$ 线性无关.\ProofEndT
+}
+\Proof{证明II}{
+    \par 考虑映射 $\widetilde{T}:\sfrac{U}{\ker T}\to\im T\ ,\ \bm u+\ker T\mapsto T\bm u$ , 这是良定义的, 因为
+    \begin{align*}
+        \bm u_{1}+\ker T=\bm u_{2}+\ker T&\implies\bm u_{1}-\bm u_{2}\in\ker T\\[-2mm]
+        &\implies T\braI{\bm u_{1}-\bm u_{2}}=\bm 0\\[-2mm]
+        &\implies T\bm u_{1}=T\bm u_{2}\ ,
+    \end{align*}
+
+\newpage
+
+    \noindent $T$ 是线性映射保证了 $\widetilde{T}$ 也是线性映射.
+    \par 一方面, 对任意 $\bm v\in\im T$ , 若 $\widetilde{T}\braI{\bm u+\ker T}=\bm 0$ , 则 $T\bm u=\bm 0$ , 于是有 $\bm u\in\ker T$ , 即 $\bm u+\ker T=\bm 0+\ker T$ , 这表明 $\widetilde{T}$ 是单射.
+    \par 另一方面, 对任意 $\bm v\in\im T$ , 存在 $\bm u\in U$ 使得 $T\bm u=\bm v$ , 进而
+    \begin{align*}
+        \widetilde{T}\braI{\bm u+\ker T}=T\bm u=\bm v\ ,
+    \end{align*}
+    这表明 $\widetilde{T}$ 是满射.
+    \par 至此, 我们证明了 $\sfrac{U}{\ker T}\cong\im T$ , 于是 $\dim\ker T+\dim\im T=\dim U$ .\ProofEndT
+}
+
+\par 该定理表明, 定义域的一部分在线性映射作用下形成核, 剩下的部分则形成像.
+
+\Corollary{秩—零化度定理的推论}(秩\—零化度定理的推论){
+    设 $T\in\mathcal{L}\braI{U\and V}$ , 则
+    \serial{1.}若 $T$ 是单射, 则 $\dim U\leqslant\dim V$ ;
+    \serial{2.}若 $T$ 是满射, 则 $\dim U\geqslant\dim V$ ;
+    \serial{3.}若 $\dim U=\dim V$ , 则 $T$ 是单射当且仅当 $T$ 是满射.
+}
+
+\vspace{-4pt}
+
+\Corollary{秩—零化度定理的逆定理}(秩\—零化度定理的逆定理){
+    无限维空间上不存在核和像都是有限维空间的线性映射.
+}
+
+\par 当定义域和陪域的维数相同时, 我们可以对逆映射的判定准则进行如下优化.
+
+\Theorem{逆映射的判定准则}{
+    设 $S\in\mathcal{L}\braI{V\and U}$ , 并且 $\dim U=\dim V$ , 若 $ST=\bm I$ , 则 $S=T^{-1}$ .
+}
+\Proof{证明}{
+    \par 假设存在 $\bm u_{1}\and\bm u_{2}\in U$ 使得 $T\bm u_{1}=T\bm u_{2}$ , 则
+    \begin{align*}
+        \bm u_{1}=\bm I\bm u_{1}=ST\bm u_{1}=ST\bm u_{2}=\bm I\bm u_{2}=\bm u_{2}\ ,
+    \end{align*}
+    从而 $T$ 是单射, 由\link{有限维线性空间}{秩—零化度定理的推论}进一步知 $T$ 是双射, 即 $T$ 可逆, 于是
+    \begin{align*}
+        S=S\bm I=STT^{-1}=\bm IT^{-1}=T^{-1}\ ,
+    \end{align*}
+    因此 $TS=\bm I$ , 这就证明了 $S=T^{-1}$ .\ProofEndT
+}
+
+\newpage

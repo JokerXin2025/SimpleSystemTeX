@@ -1,0 +1,107 @@
+
+% 2025 Simple·System
+
+% ./Section/有限维线性空间/幂零循环空间分解
+
+%\Convention{sec}{
+    %\serial{•} .
+%}
+
+%\vspace{-4pt}
+
+\Theorem{幂零循环空间分解}{
+    若 $T$ 是幂零变换, 则存在 $V$ 中的向量组 $(\bm v_{k})_{k=1}^{n}$ 使得
+    \begin{align*}
+        V=\bigoplus_{k=1}^{n}C_{T}\braI{\bm v_{k}}\ ,
+    \end{align*}
+    其中 $n=\dim\ker T$ , 各 $C_{T}\braI{\bm v_{k}}$ 是在 $T$ 下不变的幂零循环空间.
+}
+\Proof{证明\method{流程}}{
+    \par 不妨记 $N$ 是使得 $T^{N}=\bm 0$ 成立的最小正整数, 考虑映射
+    \begin{align*}
+        \widetilde{T}:\quad&\bigcup_{k=1}^{N-1}\bigsfrac{\ker T^{k+1}}{\ker T^{k}}\to\ker T\cup\bigcup_{k=1}^{N-2}\bigsfrac{\ker T^{k+1}}{\ker T^{k}}\ ,\\[1mm]
+        &\bm v+\ker T^{k}\mapsto\casesII{T\bm v+\ker T^{k-1}}{k>1}{-2}{T\bm v}{k=1}\ ,
+    \end{align*}
+    注意到 $\widetilde{T}$ 是单射, 因为
+    \begin{align*}
+        k>1:\quad T\bm v_{1}+\ker T^{k-1}=T\bm v_{2}+\ker T^{k-1}&\implies T\braI{\bm v_{1}-\bm v_{2}}\in\ker T^{k-1}\\[-2mm]
+        &\implies\bm v_{1}-\bm v_{2}\in\ker T^{k}\\[-2mm]
+        &\implies\bm v_{1}+\ker T^{k}=\bm v_{2}+\ker T^{k}\ ,\\[-16mm]
+    \end{align*}
+    \begin{align*}
+        k=1:\quad T\bm v_{1}=T\bm v_{2}\implies\bm v_{1}-\bm v_{2}\in\ker T\implies\bm v_{1}+\ker T=\bm v_{2}+\ker T\ ,
+    \end{align*}
+    并且记号 $\widetilde{T}\,^{m}:=\underbrace{\widetilde{T}\cdots\widetilde{T}}_{m\Text{个}\widetilde{T}}$ 是有意义的, 于是
+    \begin{align*}
+        \widetilde{T}\,^{N-1}\braI{\bigsfrac{\ker T^{N}}{\ker T^{N-1}}}\subseteq\cdots\subseteq\widetilde{T}\braI{\bigsfrac{\ker T^{2}}{\ker T}}\subseteq\ker T\ ,
+    \end{align*}
+    令 $(\bm u_{k})_{k=1}^{n_{1}}$ 是 $\widetilde{T}\,^{N-1}\braI{\bigsfrac{\ker T^{N}}{\ker T^{N-1}}}$ 的基, 再令
+    \begin{align*}
+        (\bm v_{k}+\ker T^{N-1})_{k=1}^{n_{1}}\in\sfrac{\ker T^{N}}{\ker T^{N-1}}
+    \end{align*}
+
+\newpage
+
+    \noindent 是唯一使得 $\widetilde{T}\,^{N-1}\braI{\bm v_{k}+\ker T^{N-1}}=\bm u_{k}$ 对一切 $k\leqslant n_{1}$ 成立的向量组, 然后从 $m=1$ 开始依次考虑每个正整数 $m<N$ , 我们可以将 $(\bm u_{k})_{k=1}^{n_{m}}$ 扩充为 $$\widetilde{T}\,^{N-m-1}\braI{\bigsfrac{\ker T^{N-m}}{\ker T^{N-m-1}}}$$ 的基 $(\bm u_{k})_{k=1}^{n_{m+1}}$ , 如此直至得到 $\ker T$ 的基 $(\bm u_{k})_{k=1}^{n}$ 为止.
+    \par 下面我们证明 $(\bm v_{k})_{k=1}^{n}$ 是符合要求的向量组. 容易发现对于每个自然数 $m<N$ 都有
+    \begin{align*}
+        \left(\;\!T^{m-1}\bm v_{1}+\ker T^{N-m}\and\cdots\and T^{m-1}\bm v_{n_{1}}+\ker T^{N-m}\and\right.\\[-16mm]
+    \end{align*}
+    \begin{align*}
+        T^{m-2}\bm v_{n_{1}+1}+\ker T^{N-m}\and\cdots\and T^{m-2}\bm v_{n_{2}}+\ker T^{N-m}\and\\[-16mm]
+    \end{align*}
+    \begin{align*}
+        \cdots\cdots\and\\[-16mm]
+    \end{align*}
+    \begin{align*}
+        \left.\bm v_{n_{m-1}+1}+\ker T^{N-m}\and\cdots\and\bm v_{n_{m}}+\ker T^{N-m}\;\!\right)
+    \end{align*}
+    是 $\bigsfrac{\ker T^{N-m+1}}{\ker T^{N-m}}$ 的基, 因为一方面, 该向量组是线性无关的, 否则对其中各向量作用 $\widetilde{T}\,^{N-m}$ 就会与 $(\bm u_{k})_{k=1}^{n_{m}}$ 的线性无关性产生矛盾, 另一方面, 由 $\widetilde{T}\,^{N-m}$ 是单射可知
+    \begin{align*}
+        \dim\braI{\bigsfrac{\ker T^{N-m+1}}{\ker T^{N-m}}}=\dim\widetilde{T}\,^{N-m}\braI{\bigsfrac{\ker T^{N-m+1}}{\ker T^{N-m}}}=n_{m}\ .
+    \end{align*}
+    \par 令 $n_{0}=0$ , 依\link{线性空间}[线性变换]{幂零循环空间的维数}有
+    \begin{align*}
+        \sum_{k=1}^{n}\dim C_{T}\braI{\bm v_{k}}&=\sum_{m=0}^{N-1}\sum_{k=n_{m}+1}^{n_{m+1}}\dim C_{T}\braI{\bm v_{k}}\\[1mm]
+        &=\sum_{m=0}^{N-1}\braI{n_{m+1}-n_{m}}\braI{N-m}\\[-1mm]
+        &=n_{1}+\cdots+n_{N-1}+n\\[-1mm]
+        &=\sum_{m=1}^{N}\dim\braI{\bigsfrac{\ker T^{N-m+1}}{\ker T^{N-m}}}\\[1mm]
+        &=\sum_{m=1}^{N}\dim\ker T^{N-m+1}-\dim\ker T^{N-m}\\[-1mm]
+        &=\dim\ker T^{N}\\[-2mm]
+        &=\dim V\ ,
+    \end{align*}
+    因此我们只需证明 $C_{T}\braI{\bm v_{1}}+\cdots+C_{T}\braI{\bm v_{n}}=V$ 即可.
+
+\newpage
+
+    \par 给定任意的 $\bm v\in V$ , 置 $\bm w^{(0)}=\bm v$ , 现在从 $m=1$ 开始依次考虑每个正整数 $m\leqslant N$ , 我们知道 $\bm w^{(m-1)}\in\ker T^{N-m+1}$ , 因此
+    \begin{align*}
+        \bm w^{(m-1)}+\ker T^{N-m}\in\sfrac{\ker T^{N-m+1}}{\ker T^{N-m}}\ ,
+    \end{align*}
+    于是可由上面得到的 $\bigsfrac{\ker T^{N-m+1}}{\ker T^{N-m}}$ 的基给出一组标量 $(a_{k}^{(m)})_{k=1}^{n_{m}}\in\bfF^{n_{m}}$ 使得
+    \begin{align*}
+        \bm w^{(m-1)}+\ker T^{N-m}=\sum_{l=0}^{m-1}\sum_{k=n_{l}+1}^{n_{l+1}}a_{k}^{(m)}\braI{T^{m-l-1}\bm v_{k}+\ker T^{N-m}}\ ,
+    \end{align*}
+    进一步置
+    \begin{align*}
+        \bm w^{(m)}=\bm w^{(m-1)}-\sum_{l=0}^{m-1}\sum_{k=n_{l}+1}^{n_{l+1}}a_{k}^{(m)}T^{m-l-1}\bm v_{k}\ ,
+    \end{align*}
+    根据上式有 $\bm w^{(m)}\in\ker T^{N-m}$ 成立, 由此可继续执行该流程. 当考虑完所有的正整数 $m$ 后, 我们有 $\bm w^{(N)}=\bm 0$ , 同时得到了
+    \begin{align*}
+        \braI{a_{1}^{(1)}\and\cdots\and a_{n_{1}}^{(1)}\and a_{1}^{(2)}\and\cdots\and a_{n_{2}}^{(2)}\and\cdots\cdots\and a_{1}^{(N)}\and\cdots\and a_{n}^{(N)}}\in\bfF^{\,\dim V}
+    \end{align*}
+    使得
+    \begin{align*}
+        \bm v&=\sum_{m=1}^{N}\braI{\bm w^{(m-1)}-\bm w^{(m)}}\\[1mm]
+        &=\sum_{m=1}^{N}\sum_{l=0}^{m-1}\sum_{k=n_{l}+1}^{n_{l+1}}a_{k}^{(m)}T^{m-l-1}\bm v_{k}\\[1mm]
+        &=\sum_{l=0}^{N-1}\sum_{m=l+1}^{N}\sum_{k=n_{l}+1}^{n_{l+1}}a_{k}^{(m)}T^{m-l-1}\bm v_{k}\\[1mm]
+        &=\sum_{l=0}^{N-1}\sum_{k=n_{l}+1}^{n_{l+1}}\underbrace{\sum_{m=l+1}^{N}a_{k}^{(m)}T^{m-l-1}\bm v_{k}}_{\in C_{T}(\bm v_{k})}\ ,
+    \end{align*}
+    因此
+    \begin{align*}
+        V=\bigoplus_{k=1}^{n}C_{T}\braI{\bm v_{k}}\ .
+    \end{align*}
+    \par 最后, 显然各 $C_{T}\braI{\bm v_{k}}$ 是 $T$ 下的不变子空间, 这就完成了证明.\ProofEndT
+}
+
+\newpage

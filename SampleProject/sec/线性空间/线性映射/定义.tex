@@ -1,0 +1,70 @@
+
+% 2025 Simple·System
+
+% ./Section/线性空间/线性映射/定义
+
+\Definition{线性映射}{
+    设 $U$ 和 $V$ 是线性空间, 映射 $T:U\to V$ 是\newconcept{线性映射}, 当且仅当其满足条件
+    \serial{1.}可加性: 对任意 $\bm u_{1}\and\bm u_{2}\in U$ 都有 $T\braI{\bm u_{1}+\bm u_{2}}=T\bm u_{1}+T\bm u_{2}$ ;
+    \serial{2.}齐次性: 对任意 $\lambda\in\bfF$ 和 $\bm u\in U$ 都有 $T\braI{\lambda\bm u}=\lambda T\bm u$ .
+    \par\noindent 全体从 $U$ 到 $V$ 的线性映射构成的集合记为 $\mathcal{L}\braI{U\and V}$ , 并且用 $\mathcal{L}\braI{V}$ 来表示 $\mathcal{L}\braI{V\and V}$ .
+}
+
+\vspace{-4pt}
+
+\Example{零映射}{
+    从 $U$ 到 $V$ 的\newconcept{零映射}为 $\bm 0:\bm u\mapsto\bm 0_{V}$ .
+}
+
+\vspace{-4pt}
+
+\Example{恒等映射}{
+    $V$ 上的\newconcept{恒等映射}为 $\bm I_{V}:\bm v\mapsto\bm v$ .
+}
+
+\par 在 $T\braI{\lambda\bm u}=\lambda T\bm u$ 令 $\lambda=0$ 即可得到如下结论:
+
+\Corollary{零不变性}{
+    $T\bm 0=\bm 0$ .
+}
+
+\vspace{-4pt}
+
+\Theorem{线性扩张引理}{
+    设 $\braI{\bm u_{1}\and\cdots\and\bm u_{n}}$ 是 $n$ 维线性空间 $U$ 的基, 则对任意 $(\bm v_{k})_{k=1}^{n}\in V^{n}$ , 存在唯一的 $T\in\mathcal{L}\braI{U\and V}$ 使得 $T\bm u_{k}=\bm v_{k}$ 对一切正整数 $k\leqslant n$ 成立.
+}
+
+\par 线性代数的主要研究对象即{\bf 有限维线性空间之间的线性映射}, 其中核心的原因是任何线性组合在线性映射的作用下都不变, 也即 $T\sum\bm v=\sum T\bm v$ , 因此线性映射也可视为线性空间之间的同态映射.
+
+\par 作为两种特殊的线性映射, 从线性空间 $V$ 到其自身和其所在域的映射将被赋予特别的名称, 即\newconcept{线性变换}和\newconcept{线性泛函}, 我们将在\cptlink{线性空间}[线性变换]和\cptlink{线性空间}[线性泛函]两章中详细讨论其性质.
+
+\Definition{同构}{
+    线性空间 $U$ 和 $V$ \newconcept{同构}并记作 $U\cong V$ , 当且仅当存在\newconcept{同构映射} $T:U\to V$ 满足
+    \serial{1.}双射性: $T$ 是双射.
+    \serial{2.}结构保持性: $T$ 是线性映射.
+}
+
+\vspace{-4pt}
+
+%\Corollary{同构作为等价关系}{}
+
+\vspace{-4pt}
+
+\Theorem{同构空间的维数}{
+    设 $U$ 和 $V$ 是有限维空间, 则 $U\cong V$ 当且仅当 $\dim U=\dim V$ .
+}
+
+\Convention{cpt}{
+    \serial{•} 对任意线性空间 $U\and V$ : 令 $\mathcal{L}\braI{U\and V}$ 表示全体从 $U$ 到 $V$ 的线性映射构成的集合.
+    \serial{•} 对任意线性空间 $V$ : 令 $\mathcal{L}\braI{V}$ 表示 $\mathcal{L}\braI{V\and V}$ .
+    \serial{•}不产生歧义时, 令 $\bm 0$ 表示任何零映射.
+}
+
+\vspace{-4pt}
+
+%\Convention{subcpt}{
+    %\serial{•}设 $T\in\mathcal{L}\braI{U\and V}$ .
+    %\serial{•}对任意线性空间 $V$ : 令 $\bm I_{V}$ 表示 $V$ 上的恒等变换 $\bm v\mapsto\bm v$ .
+%}
+
+\newpage

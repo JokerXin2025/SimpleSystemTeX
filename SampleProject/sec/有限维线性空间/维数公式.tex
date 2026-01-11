@@ -1,0 +1,122 @@
+
+% 2025 Simple·System
+
+% ./Section/有限维线性空间/维数公式
+
+\Convention{sec}{
+    \serial{•}设 $U\and V_{1}\and\cdots\and V_{n}$ 是 $V$ 的子空间.
+}
+
+\Theorem{积空间的维数}{
+    \begin{align*}
+        \dim\prod_{k=1}^{n}V_{n}=\sum_{k=1}^{n}\dim V_{n}\ .
+    \end{align*}
+}
+\Proof{证明}{
+    \par 对每个正整数 $k\leqslant n$ , 设 $(\bm v_{j}^{(k)})_{j=1}^{\dim\!V_{k}}$ 是 $V_{k}$ 的基, 则显然
+    \begin{align*}
+        \left(\;\!\!\braI{\bm v_{1}^{(1)}\and\bm 0\and\cdots\and\bm 0}\and\cdots\cdots\and\braI{\bm v_{\dim\!V_{1}}^{(1)}\and\bm 0\and\cdots\and\bm 0}\and\right.\\[-15mm]
+    \end{align*}
+    \begin{align*}
+        \braI{\bm 0\and\bm v_{1}^{(2)}\and\cdots\and\bm 0}\and\cdots\cdots\and\braI{\bm 0\and\bm v_{\dim\!V_{2}}^{(2)}\and\cdots\and\bm 0}\and\\[-15mm]
+    \end{align*}
+    \begin{align*}
+        \cdots\cdots\quad\cdots\cdots\and\\[-15mm]
+    \end{align*}
+    \begin{align*}
+        \left.\braI{\bm 0\and\bm 0\and\cdots\and\bm v_{1}^{(n)}}\and\cdots\cdots\and\braI{\bm 0\and\bm 0\and\cdots\and\bm v_{\dim\!V_{n}}^{(n)}}\;\!\!\right)
+    \end{align*}
+    是 $\textstyle\prod_{k=1}^{n}V_{n}$ 的基.\ProofEndT
+}
+
+\par 由此我们得到如下线性空间的同构关系:
+\begin{align*}
+    \bigoplus_{k=1}^{n}V_{n}\cong\prod_{k=1}^{n}V_{n}\ .
+\end{align*}
+
+\Theorem{商空间的维数}{
+    $\dim\sfrac{V}{U}=\dim V-\dim U$ .
+}
+\Proof{证明}{
+    \par 设 $(\bm u_{k})_{k=1}^{m}$ 是 $U$ 的基, 并\link{有限维线性空间}{基的扩充构造}(将其扩充)为 $V$ 的基
+    \begin{align*}
+        B=\braI{\bm u_{1}\and\cdots\and\bm u_{m}\and\bm w_{1}\and\cdots\and\bm w_{n}}\ ,
+    \end{align*}
+    下面我们将证明 $B'=\braI{\bm w_{1}+U\and\cdots\and\bm w_{n}+U}$ 是 $\sfrac{V}{U}$ 的基, 从而完成证明.
+    \par 先证 $\spn B'=\sfrac{V}{U}$ . 对任意 $\bm v+U\in\sfrac{V}{U}$ , 存在 $\bm v\in V$ 使得
+    \begin{align*}
+        \bm v=\sum_{k=1}^{m}a_{k}\bm u_{k}+\sum_{k=1}^{n}b_{k}\bm w_{k}\ ,
+    \end{align*}
+
+\newpage
+
+    \noindent 于是有
+    \begin{align*}
+        \bm v+U=\sum_{k=1}^{m}a_{k}\bm u_{k}+\sum_{k=1}^{n}b_{k}\bm w_{k}+U=\sum_{k=1}^{n}b_{k}\braI{\bm w_{k}+U}\ .
+    \end{align*}
+    \par 再证 $B'$ 线性无关. 假设 $(c_{k})_{k=1}^{n}\in\bfF^{n}$ 使得
+    \begin{align*}
+        \bm v=\sum_{k=1}^{n}c_{k}\braI{\bm w_{k}+U}=\sum_{k=1}^{n}c_{k}\bm w_{k}+U\ ,
+    \end{align*}
+    与此同时, 我们知道 $\spn\,(\bm u_{k})_{k=1}^{m}=U$ , 于是可以写出
+    \begin{align*}
+        \sum_{k=1}^{n}c_{k}\bm w_{k}=\sum_{k=1}^{m}d_{k}\bm u_{k}\ ,
+    \end{align*}
+    由 $B$ 线性无关可知所有的 $c_{k}$ 和 $d_{k}$ 均为 $0$ , 于是 $B'$ 线性无关.\ProofEndT
+}
+
+\Theorem{子空间维数公式}{
+    \begin{align*}
+        \dim\braI{V_{1}+V_{2}}=\dim V_{1}+\dim V_{2}-\dim\braI{V_{1}\cap V_{2}}\ .
+    \end{align*}
+}
+\Proof{证明}{
+    \par 设 $(\bm u_{k})_{k=1}^{n}$ 是 $V_{1}\cap V_{2}$ 的基, 进而可以\link{有限维线性空间}{基的扩充构造}(将其分别扩充)为 $V_{1}$ 和 $V_{2}$ 的基
+    \begin{align*}
+        B_{1}=\braI{\bm u_{1}\and\cdots\and\bm u_{n}\and\bm v_{1}\and\cdots\and\bm v_{p}}\AND B_{2}=\braI{\bm u_{1}\and\cdots\and\bm u_{n}\and\bm w_{1}\and\cdots\and\bm w_{q}}\ ,
+    \end{align*}
+    于是有 $\dim\braI{V_{1}\cap V_{2}}=n$ , $\dim V_{1}=n+p$ , $\dim V_{2}=n+q$ . 下面我们将证明
+    \begin{align*}
+        B=\braI{\bm u_{1}\and\cdots\and\bm u_{n}\and\bm v_{1}\and\cdots\and\bm v_{p}\and\bm w_{1}\and\cdots\and\bm w_{q}}
+    \end{align*}
+    是 $V_{1}+V_{2}$ 的基, 从而完成证明.
+    \par 显然 $\spn B=V_{1}+V_{2}$ , 于是只需证明 $B$ 线性无关即可.
+    \par 设存在 $(a_{k})_{k=1}^{n}\in\bfF^{n}$ , $(b_{k})_{k=1}^{p}\in\bfF^{p}$ , $(c_{k})_{k=1}^{q}\in\bfF^{q}$ 使得
+    \begin{align*}
+        \sum_{k=1}^{n}a_{k}\bm u_{k}+\sum_{k=1}^{p}b_{k}\bm v_{k}+\sum_{k=1}^{q}c_{k}\bm w_{k}=\bm 0\ ,
+    \end{align*}
+    于是知
+    \begin{align*}
+        \sum_{k=1}^{q}c_{k}\bm w_{k}=-\sum_{k=1}^{n}a_{k}\bm u_{k}-\sum_{k=1}^{p}b_{k}\bm v_{k}\in V_{1}\ ,
+    \end{align*}
+
+\newpage
+
+    \noindent 进一步得到
+    \begin{align*}
+        \sum_{k=1}^{q}c_{k}\bm w_{k}\in V_{1}\cap V_{2}\ ,
+    \end{align*}
+    因而我们又可将其写作
+    \begin{align*}
+        \sum_{k=1}^{q}c_{k}\bm w_{k}=\sum_{k=1}^{n}d_{k}\bm u_{k}\ ,
+    \end{align*}
+    由 $B_{2}$ 线性无关知上述各 $c_{k}$ 和 $d_{k}$ 均为 $0$ , 再代入最初的设定有
+    \begin{align*}
+        \sum_{k=1}^{n}a_{k}\bm u_{k}+\sum_{k=1}^{p}b_{k}\bm v_{k}=\bm 0\ ,
+    \end{align*}
+    再由 $B_{1}$ 线性无关知上述各 $a_{k}$ 和 $b_{k}$ 都等于 $0$ . 至此即完成了证明.\ProofEndT
+}
+
+\Corollary{和空间的维数}{
+    \begin{align*}
+        \dim\sum_{k=1}^{n}V_{k}\leqslant\sum_{k=1}^{n}\dim V_{k}\ ,
+    \end{align*}
+    其中等号当且仅当 $V_{1}+V_{2}+\cdots+V_{n}$ 是直和时取得, 即
+    \begin{align*}
+        \dim\bigoplus_{k=1}^{n}V_{k}=\sum_{k=1}^{n}\dim V_{k}\ .
+    \end{align*}
+}
+
+\par 上述不等式的取等条件可以作为有限维子空间直和的一个\link{线性空间}[子空间]{直和的等价条件}(判定准则).
+
+\newpage

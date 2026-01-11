@@ -1,0 +1,23 @@
+
+% 2025 Simple·System
+
+% ./Section/线性空间/双线性型/对称交错分解
+
+\Theorem{双线性型的对称交错分解}{
+    \begin{align*}
+        \mathcal{L}^{2}\braI{V\by\bfF}=\mathcal{L}_{\mathrm{sym}}^{2}\braI{V\by\bfF}\oplus\mathcal{L}_{\mathrm{alt}}^{2}\braI{V\by\bfF}\ .
+    \end{align*}
+}
+\Proof{证明}{
+    \par 对任意 $\beta\in\mathcal{L}^{2}\braI{V\by\bfF}$ , 定义 $\rho:V^{2}\to\bfF$ 和 $\alpha:V^{2}\to\bfF$ 为
+    \begin{align*}
+        \rho\braI{\bm u\and\bm v}=\frac{\beta\braI{\bm u\and\bm v}+\beta\braI{\bm v\and\bm u}}{2}\AND\alpha\braI{\bm u\and\bm v}=\frac{\beta\braI{\bm u\and\bm v}-\beta\braI{\bm v\and\bm u}}{2}\ ,
+    \end{align*}
+    显然 $\rho\in\mathcal{L}_{\mathrm{sym}}^{2}\braI{V\by\bfF}$ , $\alpha\in\mathcal{L}_{\mathrm{alt}}^{2}\braI{V\by\bfF}$ , 于是 $\mathcal{L}^{2}\braI{V\by\bfF}=\mathcal{L}_{\mathrm{sym}}^{2}\braI{V\by\bfF}+\mathcal{L}_{\mathrm{alt}}^{2}\braI{V\by\bfF}$ , 又因为
+    \begin{align*}
+        \dim\mathcal{L}^{2}\braI{V\by\bfF}=n^{2}=\rmC_{n+1}^{2}+\rmC_{n}^{2}=\dim\mathcal{L}_{\mathrm{sym}}^{2}\braI{V\by\bfF}+\dim\mathcal{L}_{\mathrm{alt}}^{2}\braI{V\by\bfF}\ ,
+    \end{align*}
+    因此 $\mathcal{L}^{2}\braI{V\by\bfF}=\mathcal{L}_{\mathrm{sym}}^{2}\braI{V\by\bfF}\oplus\mathcal{L}_{\mathrm{alt}}^{2}\braI{V\by\bfF}$ .\ProofEndT
+}
+
+\newpage

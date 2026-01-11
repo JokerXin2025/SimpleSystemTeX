@@ -1,0 +1,90 @@
+
+% 2025 Simple·System
+
+% ./Section/线性空间/基本性质
+
+\Convention{sec}{
+    \serial{•}设 $a\in\bfF$ , $\bm u\and\bm v\in V$ .
+}
+
+\par 下面我们将利用\link{线性空间}{加法左幺元&加法左逆元}(加法幺元和加法逆元的对称性)来验证加法交换律适用于一切向量.
+
+\Theorem{加法交换律}{
+    $\bm u+\bm v=\bm v+\bm u$ .
+}
+\Proof{证明}{
+    \par 分别应用\link{线性空间}{线性空间}(左分配律和右分配律)可得
+    \begin{align*}
+        \braI{1+1}\cdot\braI{\bm u+\bm v}=\braI{\bm u+\bm u}+\braI{\bm v+\bm v}=\bm u+\braI{\!\braI{\bm u+\bm v}+\bm v}\ ,\\[-16mm]
+    \end{align*}
+    \begin{align*}
+        \braI{1+1}\cdot\braI{\bm u+\bm v}=\braI{\bm u+\bm v}+\braI{\bm u+\bm v}=\bm u+\braI{\!\braI{\bm v+\bm u}+\bm v}\ ,
+    \end{align*}
+    于是同时有
+    \begin{align*}
+        \braI{-\bm u+\braI{1+1}\cdot\braI{\bm u+\bm v}\!}+\braI{-\bm v}=\bm u+\bm v\ ,\\[-16mm]
+    \end{align*}
+    \begin{align*}
+        \braI{-\bm u+\braI{1+1}\cdot\braI{\bm u+\bm v}\!}+\braI{-\bm v}=\bm v+\bm u\ ,
+    \end{align*}
+    这就证明了 $\bm u+\bm v=\bm v+\bm u$ .\ProofEndT
+}
+
+\Theorem{无零因子性质}{
+    $a\bm v=\bm 0$ 当且仅当 $a=0$ 或 $\bm v=\bm 0$ .
+}
+\Proof{\rimplyl 证明}{
+    \begin{align*}
+        0\bm v=0\bm v+\bm 0=0\bm v+0\bm v-0\bm v=\braI{0+_{F}0}\bm v-0\bm v=0\bm v-0\bm v=\bm 0\ ,\\[-16mm]
+    \end{align*}
+    \begin{align*}
+        a\bm 0=a\bm 0+\bm 0=a\bm 0+a\bm 0-a\bm 0=a\braI{\bm 0+\bm 0}-a\bm 0=a\bm 0-a\bm 0=\bm 0\ .\ProofEndF
+    \end{align*}
+}
+\Proof{\limplyr 证明\method{反证法}}{
+    \par 假设 $a\ne 0$ 且 $\bm v\ne\bm 0$ . 因为 $a$ 不为域 $\bfF$ 的加法幺元, 我们令其乘法逆元为 $a^{-1}$ , 于是
+    \begin{align*}
+        \bm v=1\bm v=\braI{a^{-1}\times_{F}a}\bm v=a^{-1}\braI{a\bm v}=a^{-1}\bm 0=\bm 0\ ,
+    \end{align*}
+    从而导出了矛盾.\ProofEndT
+}
+
+\newpage
+
+\par 下面的三则定理将进一步展现域和线性空间在乘法运算上的一致性.
+
+\Theorem{乘法左幺元}{
+    $1$ 是 $V$ 的乘法幺元.
+}
+\Proof{证明}{
+    \par 1. 当 $V=\braIII{\bm 0}$ 时, 显然有 $1\bm 0=\bm 0$ 成立;
+    \par 2. 当 $V\supset\braIII{\bm 0}$ 时, 设 $1'$ 是 $V$ 的乘法幺元, 则
+    \begin{align*}
+        1\bm v=1\braI{1'\bm v}=\braI{1\times_{F}1'}\bm v=1'\bm v=\bm v\ .
+        \end{align*}
+    \par 综上所述, $1$ 必为线性空间 $V$ 的乘法幺元.\ProofEndT
+}
+
+\Theorem{乘法左幺元的唯一性}{
+    若线性空间 $V$ 非零, 则 $1\in\bfF$ 是唯一使得 $1\bm v=\bm v$ 成立的标量.
+}
+\Proof{证明}{
+    \par 选取任意非零向量 $\bm v\in V$ , 则对一切 $a\in\bfF$ 有
+    \begin{align*}
+        \braI{1\times_{F}a-_{F}a}\bm v=\braI{1\times_{F}a}\bm v-a\bm v=1\braI{a\bm v}-a\bm v=a\bm v-a\bm v=\bm 0\ ,
+    \end{align*}
+    由\link{线性空间}{无零因子性质}可知必有 $1\times_{F}a=a$ , 故 $1$ 为 $\bfF$ 的乘法幺元, 域的\link{域}{乘法幺元的唯一性}(乘法幺元唯一性)保证了其作为 $V$ 的乘法幺元的唯一性.\ProofEndT
+}
+
+\Theorem{加法逆元的一致性}{
+    $\braI{-1}\bm v=-\bm v$ .
+}
+\Proof{证明}{
+    \begin{align*}
+        \bm v+\braI{-1}\bm v=1\bm v+\braI{-1}\bm v=\braI{1-_{F}1}\bm v=0\bm v=\bm 0\ .\ProofEndF
+    \end{align*}
+}
+
+\par 事实上, 对于只包含加法幺元 $\bm 0$ 的线性空间 $V$ , 任何域 $\bfF$ 中的元素都是其乘法幺元, 这是因为 $a\cdot\bm 0=\bm 0$ 对一切 $a\in\bfF$ 成立.
+
+\newpage

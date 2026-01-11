@@ -1,0 +1,75 @@
+
+% 2025 Simple·System
+
+% ./Section/线性空间/线性映射/线性映射空间
+
+\par 对于任意非空子集 $S$ 和线性空间 $V$ , 容易验证 $V^{S}$ 是线性空间, 但我们一般考虑的是其中全体线性映射构成的子空间.
+
+\Theorem{线性映射构成线性空间}($\mathcal{L}\braI{U\and V}$是线性空间){
+    $\braI{\mathcal{L}\braI{U\and V}\and\bfF\and+\and\cdot}$ 是线性空间, 其中加法和数乘定义为
+    \begin{align*}
+        \Forall{S\and T}{\mathcal{L}\braI{U\and V}}
+        S+T:\bm u\mapsto S\bm u+T\bm u\ ,\\[-16mm]
+    \end{align*}
+    \begin{align*}
+        \ForallII{\lambda}{\bfF}{T}{\mathcal{L}\braI{U\and V}}
+        \lambda\cdot T:\bm u\mapsto\lambda T\bm u\ .
+    \end{align*}
+}
+\Proof{证明}{
+    \par 显然将 $\bm 0$ 作为 $\mathcal{L}\braI{U\and V}$ 的加法幺元.
+    \par 对任意 $S\and T\in\mathcal{L}\braI{U\and V}$ 和 $\mu\in\bfF$ , 我们有
+    \begin{align*}
+        \Forall{\bm u_{1}\and\bm u_{2}}{U}
+        \braI{S+T}\braI{\bm u_{1}+\bm u_{2}}&=S\braI{\bm u_{1}+\bm u_{2}}+T\braI{\bm u_{1}+\bm u_{2}}\\[-2mm]
+        &=S\bm u_{1}+S\bm u_{2}+T\bm u_{1}+T\bm u_{2}\\[-2mm]
+        &=S\bm u_{1}+T\bm u_{1}+S\bm u_{2}+T\bm u_{2}\\[-2mm]
+        &=\braI{S+T}\bm u_{1}+\braI{S+T}\bm u_{2}\ ,\\[-16mm]
+    \end{align*}
+    \begin{align*}
+        \Forall{\bm u_{1}\and\bm u_{2}}{U}
+        \braI{\mu T}\braI{\bm u_{1}+\bm u_{2}}&=\mu\cdot T\braI{\bm u_{1}+\bm u_{2}}\\[-2mm]
+        &=\mu\cdot\braI{T\bm u_{1}+T\bm u_{2}}\\[-2mm]
+        &=\mu\cdot T\bm u_{1}+\mu\cdot T\bm u_{2}\\[-2mm]
+        &=\braI{\mu T}\bm u_{1}+\braI{\mu T}\bm u_{2}\ ,\\[-16mm]
+    \end{align*}
+    \begin{align*}
+        \ForallII{\bm u}{U}{\lambda}{\bfF}
+        \braI{S+T}\braI{\lambda\bm u}&=S\braI{\lambda\bm u}+T\braI{\lambda\bm u}\\[-2mm]
+        &=\lambda S\bm u+\lambda T\bm u\\[-2mm]
+        &=\lambda\cdot\braI{S\bm u+T\bm u}\\[-2mm]
+        &=\lambda\cdot\braI{S+T}\bm u\ ,\\[-16mm]
+    \end{align*}
+    \begin{align*}
+        \ForallII{\bm u}{U}{\lambda}{\bfF}
+        \braI{\mu T}\braI{\lambda\bm u}&=\mu\cdot T\braI{\lambda\bm u}\\[-2mm]
+        &=\mu\cdot\braI{\lambda\cdot T\bm u}\\[-2mm]
+        &=\lambda\cdot\braI{\mu\cdot T\bm u}\\[-2mm]
+        &=\lambda\cdot\braI{\mu T}\bm u\ ,
+    \end{align*}
+    于是 $S+T$ 和 $\mu T$ 都是线性映射. 从而完成了证明.\ProofEndT
+}
+
+\newpage
+
+\Theorem{线性映射空间的维数}{
+    \serial{1.}若 $U=\braIII{\bm 0}$ 或 $V=\braIII{\bm 0}$ , 则 $\dim\mathcal{L}\braI{U\and V}=0$ ;
+    \serial{2.}若 $U$ 和 $V$ 是有限维空间, 则 $\dim\mathcal{L}\braI{U\and V}=\dim U\dim V$ ;
+    \serial{3.}若 $U$ 是非零有限维空间且 $V$ 是无限维空间 , 则 $\mathcal{L}\braI{U\and V}$ 是无限维空间;
+    \serial{\axiombasis{AC}4.}若 $V$ 是非零有限维空间且 $U$ 是无限维空间 , 则 $\mathcal{L}\braI{U\and V}$ 是无限维空间.
+}
+\Proof{\sentence{1}证明}{
+    \par 当 $\dim U=0$ 时, $U=\braIII{\bm 0}$ , 由线性映射的\link{线性空间}[线性映射]{零不变性}知 $\bm 0$ 是 $\mathcal{L}\braI{U\and V}$ 中唯一的元素.
+    \par 当 $\dim V=0$ 时, $V=\braIII{\bm 0}$ , $\bm 0$ 亦是 $\mathcal{L}\braI{U\and V}$ 中唯一的元素.
+    \par 因此无论 $\dim U=0$ 或 $\dim V=0$ , 都有 $\dim\mathcal{L}\braI{U\and V}=0$ 成立.\ProofEndT
+}
+
+\par 任取 $U$ 的某个基 $(\bm u_{k})_{k=1}^{n}$ , \link{线性空间}[线性映射]{线性扩张引理}为我们建立了 $V^{\{\bm u_{1},\cdots,\bm u_{n}\}}$ 与 $\mathcal{L}\braI{U\and V}$ 间的双射, 这表明任何线性映射本质上等同于 $U$ 的基到 $V$ 中向量组的映射, 因此我们可以选取 $(\bm v_{k})_{k=1}^{n}\in V^{n}$ , 并通过形式
+\begin{align*}
+    T\ :\ \sum_{k=1}^{n}a_{k}\bm u_{k}\mapsto\sum_{k=1}^{n}a_{k}\bm v_{k}
+\end{align*}
+来定义任何线性映射 $T\in\mathcal{L}\braI{U\and V}$ .
+
+\par 在\seclink{有限维线性空间}[矩阵表示]{向量&线性映射}中我们将进一步看到: 当线性空间的基被选定后, 任何线性映射 $T\in\mathcal{L}\braI{U\and V}$ 都可以用 $\dim V\times\dim U$ 型矩阵来唯一确定.
+
+\newpage

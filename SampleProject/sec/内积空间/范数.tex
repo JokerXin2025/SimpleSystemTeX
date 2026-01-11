@@ -1,0 +1,57 @@
+
+% 2025 Simple·System
+
+% ./Section/内积空间/范数
+
+\par 我们要求任何内积都满足正定性, 这确保每一种内积运算都能诱导出一种范数.
+
+\Definition{范数}{
+    设 $V$ 是一个内积空间, 则对任意 $\bm v\in V$ , 定义 $\bm v$ 的\newconcept{范数}为
+    \begin{align*}
+        \norm{\bm v}:=\sqrt{\braV{\bm v\and\bm v}}\ .
+    \end{align*}
+}
+
+\vspace{-4pt}
+
+\Corollary{范数的基本性质}{
+    设 $V$ 是一个内积空间, 则对任意的 $\bm v\in V$ 有
+    \par\noindent 1. 正定性: $$\Forall{\bm v}{V}\norm{\bm v}\geqslant0\ ,$$ 其中等号当且仅当 $\bm v=\bm 0$ 时成立.
+    \par\noindent 2. 线性: $$\ForallII{\bm v}{V}{\lambda}{\bfF}\norm{\lambda\bm v}=\braIV{\lambda}\norm{\bm v}\ .$$
+}
+
+\vspace{-4pt}
+
+\Theorem{余弦定理}{
+    设 $V$ 是一个内积空间, 则
+    \begin{align*}
+        \Forall{\bm v_{1}\and\bm v_{2}}{V}
+        \norm{\bm v_{1}+\bm v_{2}}^{2}=\norm{\bm v_{1}}^{2}+\norm{\bm v_{2}}^{2}+2\Re\braV{\bm v_{1}\and\bm v_{2}}\ .
+    \end{align*}
+}
+\Proof{证明}{
+    \begin{align*}
+        \norm{\bm v_{1}+\bm v_{2}}^{2}&=\braV{\bm v_{1}+\bm v_{2}\and\bm v_{1}+\bm v_{2}}\\[-2mm]
+        &=\braV{\bm v_{1}\and\bm v_{1}}+\braV{\bm v_{2}\and\bm v_{2}}+\braV{\bm v_{1}\and\bm v_{2}}+\overline{\braV{\bm v_{1}\and\bm v_{2}}}\\[-2mm]
+        &=\norm{\bm v_{1}}^{2}+\norm{\bm v_{2}}^{2}+2\Re\braV{\bm v_{1}\and\bm v_{2}}\ .\ProofEndF
+    \end{align*}
+}
+
+\Theorem{平行四边形恒等式}{
+    设 $V$ 是一个内积空间, 则
+    \begin{align*}
+        \Forall{\bm v_{1}\and\bm v_{2}}{V}
+        \norm{\bm v_{1}+\bm v_{2}}^{2}+\norm{\bm v_{1}-\bm v_{2}}^{2}=2\braI{\norm{\bm v_{1}}^{2}+\norm{\bm v_{2}}^{2}}\ .
+    \end{align*}
+}
+\Proof{证明}{
+    \begin{align*}
+        \
+    \end{align*}
+}
+
+\Convention{cpt}{
+    \serial{•}对任意内积空间 $V$ 和任意 $\bm v\in V$ : 令 $\norm{\bm v}$ 表示 $\bm v$ 的范数.
+}
+
+\newpage
