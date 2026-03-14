@@ -2,20 +2,12 @@
 % 2025 Simple·System
 
 \NeedsTeXFormat {LaTeX2e}
-\ProvidesPackage {simplesystem} [Preview 20]
-
-
-% --------------------------------------------------
-% | 外部宏包 | External Packages |
-% --------------------------------------------------
-
-\RequirePackage {xcolor, xparse, xstring}
-\RequirePackage {tikz, tocloft, amsmath}
+\ProvidesPackage {simplesystem} [2026/03/14 v1.0 SimpleSystemTeX 2026.pi]
+\RequirePackage {tikz, tocloft, amssymb}
 \RequirePackage [hidelinks] {hyperref}
 
-
 % --------------------------------------------------
-% | Simple·System 图标 | Simple·System Logo |
+% | Simple·System Logo |
 % --------------------------------------------------
 
 \newcommand \plotsetting {
@@ -27,7 +19,7 @@
 		samples = 100
 	]
 }
-\newcommand \SimpleSystem {
+\NewDocumentCommand \SimpleSystem {} {
     \begin{tikzpicture} [scale=0.3]
 		\plotsetting
 		plot (\x: {3.14159 - 0.36788 * cos (5 * \x)});
@@ -35,609 +27,634 @@
 		plot (\x: {3.14159 + 0.36788 * cos (5 * \x)});
 	\end{tikzpicture}
 }
-
+\NewDocumentCommand \SimpleSystemCover {m m} {
+    \begin{center}
+	    \vspace*{\fill}
+	    \SimpleSystem
+        \par #1
+	    \par #2
+	    \vspace*{\fill}
+    \end{center}
+}
 
 % --------------------------------------------------
-% | LaTeX3 编程层 | LaTeX3 Programming Layer |
+% | LaTeX3 Programming Level |
 % --------------------------------------------------
 
 \ExplSyntaxOn
 
-
 % --------------------------------------------------
-% | 变量声明 | Variables' Declarations |
-% --------------------------------------------------
-
-\newcounter {serial}
-
-\tl_new:N \l_parttitlename_tl
-\tl_new:N \l_chaptername_tl
-\tl_new:N \l_subchaptername_tl
-\tl_new:N \l_sectionlabel_tl
-\tl_new:N \l_sectionname_tl
-\tl_new:N \l_blockname_tl
-\tl_new:N \l_blockcontent_tl
-\tl_new:N \l_targetchaptername_tl
-\tl_new:N \l_targetsubchaptername_tl
-\tl_new:N \l_targetsectionlabel_tl
-\tl_new:N \l_targetsectionname_tl
-\tl_new:N \l_targetblockname_tl
-\tl_new:N \l_linktext_tl
-\tl_new:N \l_parameterA_tl
-\tl_new:N \l_parameterB_tl
-\iow_new:N \g_scrfile_iow
-\iow_new:N \g_sstfile_iow
-\prop_new:N \g_sectionname_prop
-\prop_new:N \g_blockname_prop
-\clist_new:N \l_register_clist
-
-\tl_new:N \g_CatalogTitle_format_tl
-\tl_new:N \g_CatalogPartTitle_format_tl
-\tl_new:N \g_CatalogSection_format_tl
-\tl_new:N \g_CatalogIndex_format_tl
-\tl_new:N \g_IndexTitle_format_tl
-\tl_new:N \g_IndexSubchapter_format_tl
-\tl_new:N \g_IndexSection_format_tl
-\tl_new:N \g_SectionHeading_format_tl
-\tl_new:N \g_BlockLink_format_tl
-\tl_new:N \g_SectionLink_format_tl
-\tl_new:N \g_ChapterLink_format_tl
-
-
-% --------------------------------------------------
-% | 错误处理 | Error Handling |
+% | SimpleSystemTeX Logo |
 % --------------------------------------------------
 
-\msg_new:nnnn {SimpleSystemTeX} {SectionPositioningError} {
-    Section~'#1'~positioning~failed.
-} {
-    Please~ensure~that~the~'\ImportSection'~command~has~been~used~correctly~to~import~section~'#1'.
-}
-
-\msg_new:nnnn {SimpleSystemTeX} {BlockPositioningError} {
-    Block~'#1'~positioning~failed.
-} {
-    Please~ensure~that~the~block~'#1'~has~been~created.
-}
-
-
-% --------------------------------------------------
-% | 试验语法 | Experimental Syntax |
-% --------------------------------------------------
-
-% 自动列表 | Automatic List
-
-\cs_new:Npn \translate_format:N #1 {
-    \setcounter {serial} 0
-    \tl_replace_all:Nnn #1 { ~+~ } {
-        \stepcounter{serial}
-        \par\noindent\textbf{\theserial.}~
-    }
-    \tl_replace_all:Nnn #1 { ~-~ } {
-        \par\noindent\textbf{\textbullet}\,
+\NewDocumentCommand \SimpleSystemTeX {d[]} {
+    \IfValueTF {#1} {
+        \str_case:nn {#1} {
+            {rm} {
+                $\mathrm{S^{imple}\sb{ystem}}$\TeX
+            }
+            {bf} {
+                $\mathbf{S^{imple}\sb{ystem}}$\textbf{\TeX}
+            }
+        }
+    } {
+        $\mathrm{S^{imple}\sb{ystem}}$\TeX
     }
 }
 
-% 对齐优化 | Alignment Optimization
-
-\cs_new:Npn \align_transform:N #1 {
-    %\regex_replace_all:nnN { \& } { \c{;}\c{!}\c{!}\c{!}\&\c{;}\c{!}\c{!}\c{!} } #1
-}
-
-
 % --------------------------------------------------
-% | 导言区 (分析层) | Preamble (Parser) |
+% | Variables' Declarations |
 % --------------------------------------------------
 
-\AtBeginDocument{
-    \iow_open:Nn \g_scrfile_iow { \c_sys_jobname_str.scr }
-    \iow_open:Nn \g_sstfile_iow { \c_sys_jobname_str.sst }
+\str_new:N \g__path_prefix_str
+\str_set:Nn \g__path_prefix_str {./sec/}
+
+\tl_new:N \l__part_tl
+\tl_new:N \l__linktext_tl
+\tl_new:N \g__task_list_tl
+\tl_new:N \g___task_list_tl
+\tl_new:N \g___loop_command_tl
+\int_new:N \g___list_num_int
+\seq_new:N \l__path_seq
+\seq_new:N \l__nextgroup_seq
+\seq_new:N \g__last_register_seq
+\seq_new:N \g__register_seq
+\iow_new:N \g__register_iow
+\prop_new:N \g___rule_prop
+\prop_new:N \g__sectionname_prop
+\prop_new:N \g__sectionparameter_prop
+\prop_new:N \g__blockname_prop
+\prop_new:N \g__blockparameter_prop
+\prop_new:N \g__blockcontent_prop
+\quark_new:N \q_prefix_mark
+\clist_map_inline:nn {{}, catalog, index, target} {
+    \clist_map_inline:nn {section, group, subgroup, subsubgroup, subsubsubgroup, sectionpath, sectionname, sectionparameter, sectionpage} {
+        \exp_args:Nc \tl_new:N {l__#1##1_tl}
+    }
+    \clist_map_inline:nn {block, blockname, blockparameter, blockcontent} {
+        \exp_args:Nc \tl_new:N {l__#1##1_tl}
+    }
 }
+
+% --------------------------------------------------
+% | Error Handling |
+% --------------------------------------------------
+
+\msg_new:nnnn {SimpleSystemTeX} {File Not Found} {
+    Please~ensure~that~file~'#1'~exists.
+} {}
+\msg_new:nnnn {SimpleSystemTeX} {Section Not Found} {
+    Please~ensure~that~command~'\ImportSection'~has~been~used~correctly~to~import~section~'#1'.
+} {}
+\msg_new:nnnn {SimpleSystemTeX} {Block Not Found} {
+    Please~ensure~that~block~'#1'~has~been~created.
+} {}
+\msg_new:nnnn {SimpleSystemTeX} {Group Index Not Found} {
+    Please~ensure~that~the~index~of~group~'#1'~has~been~created.
+} {}
+\msg_new:nnnn {SimpleSystemTeX} {Illegal Group Path} {
+    Please~ensure~that~the~group~path~'#1'~is~valid.
+} {}
+\msg_new:nnnn {SimpleSystemTeX} {Section Repeated} {
+    Section~'#1'~has~already~been~imported.
+} {}
+\msg_new:nnnn {SimpleSystemTeX} {Group Index Repeated} {
+    The~index~of~group~'#1'~has~already~been~created.
+} {}
+\msg_new:nnnn {SimpleSystemTeX} {Block Occupied} {
+    Block~'#1'~has~already~been~defined.
+} {}
+
+% --------------------------------------------------
+% | Experimental Syntax |
+% --------------------------------------------------
+
+% Automatic List
+
+\int_new:N \g__beta_Automatic_List_int
+\int_set:Nn \g__beta_Automatic_List_int {0}
+\cs_new:Nn \trans_auto_list:N {
+    \int_set:Nn \g___list_num_int {0}
+    \tl_replace_all:Nnn #1 {~+~} {
+        \int_incr:N \g___list_num_int
+        \par \noindent \textbf {\int_use:N \g___list_num_int.}~
+    }
+    \tl_replace_all:Nnn #1 {~-~} {
+        \par \noindent \textbf {\textbullet} \,
+    }
+}
+
+% --------------------------------------------------
+% | Format Setting |
+% --------------------------------------------------
+
+\tl_new:N \g__CatalogTitle_format_tl
+\tl_new:N \g__CatalogPartTitle_format_tl
+\tl_new:N \g__CatalogSection_format_tl
+\tl_new:N \g__SectionHeading_format_tl
+\tl_new:N \g__IndexTitle_format_tl
+\tl_new:N \g__IndexSubtitle_format_tl
+\tl_new:N \g__IndexSubsubtitle_format_tl
+\tl_new:N \g__IndexSubsubsubtitle_format_tl
+\tl_new:N \g__IndexSection_format_tl
+\tl_new:N \g__SectionLink_format_tl
+\tl_new:N \g__GroupLink_format_tl
+\tl_new:N \g__BlockLink_format_tl
+
+\NewDocumentCommand \FormatSetting {m +m} {
+    \tl_gset:cn {g__#1_format_tl} {#2}
+    \exp_args:Nnnc \regex_replace_all:nnN
+    {@([a-zA-Z]+)} {\c{l__\1_tl}} {g__#1_format_tl}
+    \exp_args:Nnnc \regex_replace_all:nnN
+    {\#ifempty} {\c{tl_if_empty:NTF}} {g__#1_format_tl}
+    \exp_args:Nnnc \regex_replace_all:nnN
+    {\#ifis} {\c{str_if_eq:VnTF}} {g__#1_format_tl}
+    \exp_args:Nnnc \regex_replace_all:nnN
+    {\#ifequal} {\c{str_if_eq:VVTF}} {g__#1_format_tl}
+}
+
+% Default Value
+
+\FormatSetting {CatalogTitle} {
+    \bfseries\LARGE
+    \begin{center}\textbf{Content}\end{center}
+    \bigskip
+}
+\FormatSetting {CatalogPartTitle} {
+    \bfseries\Large
+    \par\bigskip\noindent
+    @part
+    \par\medskip
+}
+\FormatSetting {CatalogSection} {
+    \bfseries
+    \par\noindent
+    #ifempty @catalogsubgroup {
+        \seclink {@catalogsectionpath}
+        (\!{\footnotesize @cataloggroup}\:|\: @catalogsectionname\cftdotfill{\cftnodots}\textbf{@catalogsectionpage})
+    } {
+        #ifequal @catalogsubgroup @catalogsectionname {
+            \seclink{@catalogsectionpath}
+            (\!{\footnotesize @cataloggroup}\; @catalogsubgroup\cftdotfill{\cftnodots}\textbf{@catalogsectionpage})
+        } {
+            \seclink{@catalogsectionpath}
+            (\!{\footnotesize @cataloggroup}\; @catalogsubgroup\:|\: @catalogsectionname\cftdotfill{\cftnodots}\textbf{@catalogsectionpage})
+        }
+    }
+    \par
+}
+\FormatSetting {IndexTitle} {
+    \bfseries
+    \noindent
+    {\huge @indexgroup}\ {\Large\ @indexparameter}
+    \par\bigskip
+}
+\FormatSetting {IndexSubtitle} {
+    \bfseries
+    \par\bigskip\noindent
+    \grplink {@indexgroup/@indexsubgroup/}
+    ({\normalsize @indexgroup}\ {\Large @indexsubgroup})
+    \par\smallskip
+}
+\FormatSetting {IndexSubsubtitle} {
+    \bfseries
+    \par\medskip\noindent
+    \grplink {@indexgroup/@indexsubgroup/@indexsubsubgroup/}
+    (\large @indexsubsubgroup)
+    \par
+}
+\FormatSetting {IndexSection} {
+    \bfseries\par\noindent
+    #ifempty @indexsubgroup {
+        \seclink {@indexsectionpath}
+        ({\footnotesize @indexgroup}\:|\: @indexsectionname\cftdotfill{\cftnodots}\textbf{@indexsectionpage})
+    } {
+        #ifequal @indexsubgroup @indexsectionname {
+            \seclink{@indexsectionpath}
+            ({\footnotesize @indexgroup}\; @indexsubgroup\cftdotfill{\cftnodots}\textbf{@indexsectionpage})
+        } {
+            \seclink{@indexsectionpath}
+            ({\footnotesize @indexgroup}\; @indexsubgroup\:|\: @indexsectionname\cftdotfill{\cftnodots}\textbf{@indexsectionpage})
+        }
+    }
+}
+\FormatSetting {SectionHeading} {
+    \bfseries
+    \noindent
+    #ifempty @subgroup {
+        {\Large @group}{\huge\;|\; @sectionname}
+    } {
+        #ifequal @subgroup @sectionname {
+            {\Large @group}\;\;{\huge @subgroup}
+        } {
+            {\Large @group}\;\;{\huge @subgroup\;|\; @sectionname}
+        }
+    }
+    \par\bigskip
+}
+\FormatSetting {SectionLink} {
+    \bfseries
+    #ifempty @linktext {
+        #ifempty @targetsubgroup {
+            \,{\footnotesize @targetgroup}\:|\: @targetsectionname\,
+        } {
+            \,{\footnotesize @targetgroup}\; @targetsubgroup\:|\: @targetsectionname\,
+        }
+    } {
+        \, @linktext\,
+    }
+}
+\FormatSetting {GroupLink} {
+    \bfseries
+    #ifempty @linktext {
+        #ifempty @targetsubgroup {
+            \, @targetgroup\,
+        } {
+            \,{\footnotesize @targetgroup}\; @targetsubgroup\,
+        }
+    } {
+        \, @linktext\,
+    }
+}
+\FormatSetting {BlockLink} {
+    \bfseries
+    #ifempty @linktext {
+        \, @targetblockname\,
+    } {
+        \, @linktext\,
+    }
+}
+
+% --------------------------------------------------
+% | Parser Level |
+% --------------------------------------------------
+
+\NewDocumentCommand \SetSectionPath {m} {
+    \str_gset:Nn \g__path_prefix_str {#1}
+}
+\NewDocumentCommand \ImportSection {m d() d<>} {
+    \group_begin:
+    \seq_if_in:NeTF \g__register_seq {./#1} {
+        \msg_error:nne {SimpleSystemTeX} {Section Repeated} {#1}
+    } {
+        \seq_gput_right:Ne \g__register_seq {./#1}
+    }
+    \seq_set_split:Nne \l_tmpa_seq {/} {#1}
+    \seq_pop_right:NN \l_tmpa_seq \l_tmpa_tl
+    \IfValueTF {#2} {
+        \prop_gput:Nen \g__sectionname_prop {#1} {#2}
+    } {
+        \prop_gput:NeV \g__sectionname_prop {#1} \l_tmpa_tl   % [set] @sectionname
+    }
+    \prop_gput:Nen \g__sectionparameter_prop {#1} {#3}   % [set] @sectionparameter
+    \tl_gput_right:Ne \g__task_list_tl {\exp_not:N \Section {{#1}}}
+    \group_end:
+}
+\NewDocumentCommand \MakeCatalog {} {
+    \tl_put_right:Nn \g__task_list_tl {\Catalog {}}
+}
+\NewDocumentCommand \CatalogPart {m} {
+    \tl_put_right:Nn \g__task_list_tl {\CatalogPart {{#1}}}
+}
+\NewDocumentCommand \CatalogCommand {m} {
+    \tl_put_right:Nn \g__task_list_tl {\CatalogCommand {{#1}}}
+}
+\NewDocumentCommand \TextCommand {m} {
+    \tl_put_right:Nn \g__task_list_tl {\TextCommand {{#1}}}
+}
+
+% --------------------------------------------------
+% | Core Tools |
+% --------------------------------------------------
+
+\cs_new_protected:Nn \__restore_register_item:n {
+    \seq_gput_right:Nn \g__last_register_seq {#1}
+}
+\cs_new_protected:Nn \__make_prop_loop:Nnn {
+    \quark_if_recursion_tail_stop:n {#2}
+    \prop_put:Nnn #1 {#2} {#3}
+    \__make_prop_loop:Nnn #1
+}
+\cs_new_protected:Nn \__execute_loop:Nnn {
+    \quark_if_recursion_tail_stop:n {#2}
+    \prop_get:NnNT #1 {#2} \g___loop_command_tl {
+        \g___loop_command_tl #3
+    }
+    \__execute_loop:Nnn #1
+}
+\cs_new_protected:Nn \__execute_rule:Nn {
+    \prop_clear:N \g___rule_prop
+    \__make_prop_loop:Nnn \g___rule_prop #2 \q_recursion_tail \q_recursion_tail \q_recursion_stop
+    \tl_set_eq:NN \g___task_list_tl #1
+    \tl_put_right:Nn \g___task_list_tl {\q_recursion_tail \q_recursion_tail \q_recursion_stop}
+    \exp_after:wN \__execute_loop:Nnn \exp_after:wN \g___rule_prop \g___task_list_tl
+}
+\cs_new:Nn \__parse_path:nn {
+    \clist_map_inline:nn {group, subgroup, subsubgroup, subsubsubgroup} {
+        \exp_args:Nc \tl_clear:N {l__#2##1_tl}
+    }
+    \seq_set_split:Nnn \l__path_seq {/} {#1}
+    \exp_args:NNc \seq_pop_right:NN \l__path_seq {l__#2section_tl}
+    \seq_map_indexed_inline:Nn \l__path_seq {
+        \int_case:nn {##1} {
+            {1} {\exp_args:Nc \tl_set:Nn {l__#2group_tl} {##2}}
+            {2} {\exp_args:Nc \tl_set:Nn {l__#2subgroup_tl} {##2}}
+            {3} {\exp_args:Nc \tl_set:Nn {l__#2subsubgroup_tl} {##2}}
+            {4} {\exp_args:Nc \tl_set:Nn {l__#2subsubsubgroup_tl} {##2}}
+        }
+    }
+}
+
+\AtBeginDocument {
+    \ExplSyntaxOn
+    \file_if_exist:nTF {\c_sys_jobname_str.sst} {
+        \file_input:n {\c_sys_jobname_str.sst}
+    } {
+        \msg_warning:nne {SimpleSystemTeX} {File Not Found} {\c_sys_jobname_str.sst}
+    }
+    \ExplSyntaxOff
+}
+\AtEndDocument {
+    \__execute_rule:Nn \g__task_list_tl {
+        \Section \__print_section:n
+        \Catalog \__print_catalog:
+        \TextCommand \use:n
+    }
+    \iow_open:Nn \g__register_iow {\c_sys_jobname_str.sst}
+    \seq_map_inline:Nn \g__register_seq {
+        \iow_now:Nn \g__register_iow {
+            \__restore_register_item:n {#1}
+        }
+    }
+    \iow_close:N \g__register_iow
+}
+
+% --------------------------------------------------
+% | Section |
+% --------------------------------------------------
+
+\cs_new:Nn \__print_section:n {
+    \phantomsection \label{./#1}
+    \group_begin:
+    \__parse_path:nn {#1} {}   % [provide] @section, @(...)group
+    \tl_set:Nn \l__sectionpath_tl {#1}   % [provide] @sectionpath
+    \tl_set:Nn \l__sectionpage_tl {\pageref*{./#1}}   % [provide] @sectionpage
+    \prop_get:NnN \g__sectionname_prop {#1} \l__sectionname_tl   % [provide] @sectionname
+    \prop_get:NnN \g__sectionparameter_prop {#1} \l__sectionparameter_tl   % [provide] @sectionparameter
+    {\g__SectionHeading_format_tl}
+    \file_if_exist:nTF {\g__path_prefix_str #1.tex} {
+        \file_input:n {\g__path_prefix_str #1.tex}
+    } {
+        \msg_warning:nne {SimpleSystemTeX} {File Not Found} {#1.tex}
+    }
+    \group_end:
+}
+
+% --------------------------------------------------
+% | Catalog |
+% --------------------------------------------------
+
+\cs_new:Nn \__process_catalog_part:n {
+    \tl_set:Nn \l__part_tl {#1}   % [provide] @part
+    {\g__CatalogPartTitle_format_tl}
+}
+\cs_new:Nn \__print_catalog_section:n {
+    \group_begin:
+    \exp_args:Ne \__parse_path:nn {#1} {catalog}   % [provide] @catalogsection, @catalog(...)group
+    \tl_set:Nn \l__catalogsectionpath_tl {#1}   % [provide] @catalogsectionpath
+    \tl_set:Nn \l__catalogsectionpage_tl {\pageref*{./#1}}   % [provide] @catalogsectionpage
+    \prop_get:NnN \g__sectionname_prop {#1} \l__catalogsectionname_tl   % [provide] @catalogsectionname
+    \prop_get:NnN \g__sectionparameter_prop {#1} \l__catalogsectionparameter_tl   % [provide] @catalogsectionparameter
+    {\g__CatalogSection_format_tl}
+    \group_end:
+}
+
+\cs_new:Nn \__print_catalog: {
+    \group_begin:
+    {\g__CatalogTitle_format_tl}
+    \__execute_rule:Nn \g__task_list_tl {
+        \Section \__print_catalog_section:n
+        \CatalogPart \__process_catalog_part:n
+        \CatalogCommand \use:n
+    }
+    \group_end:
+}
+
+% --------------------------------------------------
+% | Index |
+% --------------------------------------------------
+
+\cs_new:Nn \__process_group_index_section:nn {
+    \tl_set:Nn \g___index_tmpa_tl {\q_prefix_mark #2}
+    \tl_replace_once:Nnn \g___index_tmpa_tl {\q_prefix_mark #1} {}
+    \tl_if_in:NnF \g___index_tmpa_tl {\q_prefix_mark} {
+        \seq_set_split:NnV \g___index_tmpa_seq {/} \g___index_tmpa_tl
+        \int_compare:nTF {\seq_count:N \g___index_tmpa_seq == 1} {
+            \group_begin:
+            \seq_set_split:Nnn \g___index_tmpa_seq {/} {#2}
+            \seq_pop_right:NN \g___index_tmpa_seq \l__indexsection_tl   % [provide] @indexsection
+            \tl_set:Nn \l__indexsectionpath_tl {#2}   % [provide] @indexsectionpath
+            \tl_set:Nn \l__indexsectionpage_tl {\pageref*{./#2}}   % [provide] @indexsectionpage
+            \prop_get:NnN \g__sectionname_prop {#2} \l__indexsectionname_tl   % [provide] @indexsectionname
+            \prop_get:NnN \g__sectionparameter_prop {#2} \l__indexsectionparameter_tl   % [provide] @indexsectionparameter
+            {\g__IndexSection_format_tl}
+            \group_end:
+        } {
+            \seq_if_in:NeF \l__nextgroup_seq {
+                \exp_not:n {#1} \seq_item:Nn \g___index_tmpa_seq {1} /
+            } {
+                \seq_put_right:Ne \l__nextgroup_seq {
+                    \exp_not:n {#1} \seq_item:Nn \g___index_tmpa_seq {1} /
+                }
+            }
+        }
+    }
+}
+
+% Group Index
+
+\NewDocumentCommand \MakeGroupIndex {m d<>} {
+    \group_begin:
+    \seq_clear:N \l__nextgroup_seq
+    \exp_args:Ne \__parse_path:nn {#1.groupkeep} {index}   % [provide] @index(...)group
+    \IfValueT {#2} {
+        \tl_set:Nn \l__indexparameter_tl {#2}   % [provide] @indexparameter
+    }
+    \seq_if_in:NeTF \g__register_seq {./#1} {
+        \msg_error:nne {SimpleSystemTeX} {Group Index Repeated} {#1}
+    } {
+        \phantomsection \label{./#1}
+        \seq_gput_right:Ne \g__register_seq {./#1}
+    }
+    \int_case:nn {\seq_count:N \l__path_seq} {
+        {0} {
+            \msg_error:nne {SimpleSystemTeX} {Illegal Group Path} {#1}
+        }
+        {1} {{\g__IndexTitle_format_tl}}
+        {2} {{\g__IndexSubtitle_format_tl}}
+        {3} {{\g__IndexSubsubtitle_format_tl}}
+        {4} {{\g__IndexSubsubsubtitle_format_tl}}
+    }
+    \exp_args:NNe \__execute_rule:Nn \g__task_list_tl {
+        \exp_not:N \Section {\exp_not:N \__process_group_index_section:nn {#1}}
+    }
+    \seq_map_inline:Nn \l__nextgroup_seq {
+        \MakeGroupIndex {##1}
+    }
+    \group_end:
+}
+
+% --------------------------------------------------
+% | Block |
+% --------------------------------------------------
 
 \NewDocumentCommand \NewBlockType {s m} {
-    \tl_new:c {g_#2_format_tl}
+    \tl_new:c {g__#2_format_tl}
     \exp_args:Nc \NewDocumentCommand {#2} {m d() d<> +m} {
         \group_begin:
-        \tl_set:Nn \l_parameterB_tl {##3}
-        \IfNoValueTF {##2} {
-            \tl_set:Nn \l_blockname_tl {##1}
-            \prop_gput:Nnn \g_blockname_prop {##1} {##1}
+        \tl_set:Nn \l__block_tl {##1}   % [provide] @block
+        \IfValueTF {##2} {
+            \tl_set:Nn \l__blockname_tl {##2}   % [provide] @blockname
         } {
-            \tl_set:Nn \l_blockname_tl {##2}
-            \prop_gput:Nnn \g_blockname_prop {##1} {##2}
+            \tl_set:Nn \l__blockname_tl {##1}
+        }
+        \IfValueT {##3} {
+            \tl_set:Nn \l__blockparameter_tl {##3}   % [provide] @blockparameter
+        }
+        \tl_set:Nn \l__blockcontent_tl {##4}   % [provide] @blockcontent
+        \int_compare:nNnT {\g__beta_Automatic_List_int} = {1} {
+            \trans_auto_list:N \l__blockcontent_tl
         }
         \IfBooleanF {#1} {
-            \phantomsection
-            \label{·\l_chaptername_tl·\l_subchaptername_tl|##1}
+            \seq_if_in:NnTF \g__register_seq {##1} {
+                \msg_error:nne {SimpleSystemTeX} {Block Occupied} {##1}
+            } {
+                \phantomsection \label{##1}
+                \seq_gput_right:Nn \g__register_seq {##1}
+            }
+            \prop_gput:NnV \g__blockname_prop {##1} \l__blockname_tl   % [set] @blockname
+            \prop_gput:Nnn \g__blockparameter_prop {##1} {##3}   % [set] @blockparameter
+            \prop_gput:NnV \g__blockcontent_prop {##1} \l__blockcontent_tl   % [set] @blockcontent
         }
-        \tl_set:Nn \l_blockcontent_tl {##4}
-        \translate_format:N \l_blockcontent_tl
-        \tl_use:c {g_#2_format_tl}
+        \tl_use:c {g__#2_format_tl}
         \group_end:
     }
 }
 
-\NewDocumentCommand \ImportSection {m d[] m d() d<>} {
-    \IfNoValueTF {#4} {
-        \prop_gput:Nnn \g_sectionname_prop {#3} {#3}
-    } {
-        \prop_gput:Nnn \g_sectionname_prop {#3} {#4}
-    }
-    \iow_now:Nn \g_sstfile_iow {\Section {#1} {#2} {#3} {#5}}
-    \iow_now:Nn \g_scrfile_iow {\Section {#1} {#2} {#3} {#5}}
-}
-
-\NewDocumentCommand \MakeSimpleCatalog {} {
-    \iow_now:Nn \g_sstfile_iow {\Catalog}
-}
-
-\NewDocumentCommand \MakeSimpleIndex {m d[] d<>} {
-    \iow_now:Nn \g_sstfile_iow {\Index {#1} {#2} {#3}}
-    \iow_now:Nn \g_scrfile_iow {\Index {#1} {#3}}
-}
-
-\NewDocumentCommand \TextCommand {v} {
-    \iow_now:Nn \g_sstfile_iow {#1}
-}
-
-\NewDocumentCommand \CatalogPart {m} {
-    \iow_now:Nn \g_scrfile_iow {\Part {#1}}
-}
-
-\NewDocumentCommand \CatalogCommand {v} {
-    \iow_now:Nn \g_scrfile_iow {\Command {#1}}
-}
-
-
-% --------------------------------------------------
-% | 导言区 (执行层) | Preamble (Executor) |
-% --------------------------------------------------
-
-\AtEndDocument{
-    \iow_close:N \g_scrfile_iow
-    \iow_close:N \g_sstfile_iow
-    \file_if_exist:nT {\c_sys_jobname_str.sst}
-    {\file_input:n {\c_sys_jobname_str.sst}}
-}
-
-\NewDocumentCommand \PrintCatalogTitle {} {
-    {\g_CatalogTitle_format_tl}
-}
-
-\NewDocumentCommand \PrintCatalogPartTitle {} {
-    {\g_CatalogPartTitle_format_tl}
-}
-
-\NewDocumentCommand \PrintCatalogSection {m m m m} {
-    \group_begin:
-    \tl_set:Nn \l_chaptername_tl {#1}
-    \tl_set:Nn \l_subchaptername_tl {#2}
-    \tl_set:Nn \l_sectionlabel_tl {#3}
-    \tl_set:Nn \l_parameterA_tl {#4}
-    \prop_get:NnN \g_sectionname_prop {#3} \l_sectionname_tl
-    {\g_CatalogSection_format_tl}
-    \group_end:
-}
-
-\NewDocumentCommand \PrintCatalogIndex {m m} {
-    \group_begin:
-    \tl_set:Nn \l_chaptername_tl {#1}
-    \tl_set:Nn \l_parameterA_tl {#2}
-    {\g_CatalogIndex_format_tl}
-    \group_end:
-}
-
-\NewDocumentCommand \PrintIndexTitle {} {
-    \phantomsection
-    \label{\l_chaptername_tl·-NoValue-}
-    \group_begin:
-    {\g_IndexTitle_format_tl}
-    \group_end:
-}
-
-\NewDocumentCommand \PrintIndexSubchapter {} {
-    \phantomsection
-    \label{\l_chaptername_tl·\l_subchaptername_tl}
-    \group_begin:
-    {\g_IndexSubchapter_format_tl}
-    \group_end:
-}
-
-\NewDocumentCommand \PrintIndexSection {m} {
-    \group_begin:
-    \tl_set:Nn \l_sectionlabel_tl {#1}
-    \prop_get:NnN \g_sectionname_prop {#1} \l_sectionname_tl
-    {\g_IndexSection_format_tl}
-    \group_end:
-}
-
-\NewDocumentCommand \PrintSectionHeading {} {
-    \phantomsection
-    \label{\l_chaptername_tl·\l_subchaptername_tl|\l_sectionlabel_tl}
-    \group_begin:
-    \prop_get:NoN \g_sectionname_prop \l_sectionlabel_tl \l_sectionname_tl
-    {\g_SectionHeading_format_tl}
-    \group_end:
-}
-
-% 超链接 | Hyperlink
-
-\NewDocumentCommand \link {m d[] m d() d<>} {
-    \group_begin:
-    \tl_set:Nn \l_targetchaptername_tl {#1}
-    \tl_set:Nn \l_targetsubchaptername_tl {#2}
-    \tl_set:Nn \l_linktext_tl {#4}
-    \tl_set:Nn \l_parameterB_tl {#5}
-    \prop_if_in:NeTF \g_blockname_prop {#3} {
-        \prop_get:NeN \g_blockname_prop {#3} \l_targetblockname_tl
-    } {
-        \msg_warning:nne {SimpleSystemTeX} {BlockPositioningError} {#3}
-    }
-    \hyperref [·#1·#2|#3] {{\g_BlockLink_format_tl}}
-    \group_end:
-}
-
-\NewDocumentCommand \seclink {m d[] m d() d<>} {
-    \group_begin:
-    \tl_set:Nn \l_targetchaptername_tl {#1}
-    \tl_set:Nn \l_targetsubchaptername_tl {#2}
-    \tl_set:Nn \l_linktext_tl {#4}
-    \tl_set:Nn \l_parameterB_tl {#5}
-    \prop_if_in:NeTF \g_sectionname_prop {#3} {
-        \prop_get:NeN \g_sectionname_prop {#3} \l_targetsectionname_tl
-    } {
-        \msg_warning:nne {SimpleSystemTeX} {SectionPositioningError} {#3}
-    }
-    \hyperref [#1·#2|#3] {{\g_SectionLink_format_tl}}
-    \group_end:
-}
-
-\NewDocumentCommand \cptlink {m d[] d() d<>} {
-    \group_begin:
-    \tl_set:Nn \l_targetchaptername_tl {#1}
-    \tl_set:Nn \l_targetsubchaptername_tl {#2}
-    \tl_set:Nn \l_linktext_tl {#3}
-    \tl_set:Nn \l_parameterB_tl {#4}
-    \hyperref [#1·#2] {{\g_ChapterLink_format_tl}}
-    \group_end:
-}
-
-\cs_set:Npn \Section #1 #2 #3 #4 {
-
-    \group_begin:
-
-    \tl_set:Nn \l_chaptername_tl {#1}
-    \tl_set:Nn \l_subchaptername_tl {#2}
-    \tl_set:Nn \l_sectionlabel_tl {#3}
-    \tl_set:Nn \l_parameterA_tl {#4}
-    \prop_get:NnN \g_sectionname_prop {#3} \l_sectionname_tl
-
-    \PrintSectionHeading
-
-    \str_if_eq:nnTF {#2} {-NoValue-} {
-        \iow_term:n {[SimpleSystemTeX]~Importing~section~"#1|#3"~...}
-        \file_if_exist:nTF {./sec/#1/#3.tex} {
-            \file_input:n {./sec/#1/#3.tex}
-            \iow_term:n {[SimpleSystemTeX]~Section~"#1|#3"~imported.}
-        } {
-            \iow_term:n {[SimpleSystemTeX]~Section~"#1|#3"~importing~failed.~(Not~found)}
-        }
-    } {
-        \iow_term:n {[SimpleSystemTeX]~Importing~section~"#1·#2|#3"~...}
-        \file_if_exist:nTF {./sec/#1/#2/#3.tex} {
-            \file_input:n {./sec/#1/#2/#3.tex}
-            \iow_term:n {[SimpleSystemTeX]~Section~"#1·#2|#3"~imported.}
-        } {
-            \iow_term:n {[SimpleSystemTeX]~Section~"#1·#2|#3"~importing~failed.~(Not~found)}
-        }
-    }
-
-    \group_end:
-
-}
-
-\cs_set:Npn \Catalog {
-
-    \group_begin:
-
-    \cs_set:Npn \Part ##1 {
-        \tl_set:Nn \l_parttitlename_tl {##1}
-        \PrintCatalogPartTitle
-    }
-    \cs_set:Npn \Command ##1 {##1}
-    \cs_set_eq:NN \Section \PrintCatalogSection
-    \cs_set_eq:NN \Index \PrintCatalogIndex
-
-    \iow_term:n {[SimpleSystemTeX]~Making~catalog ...}
-    \PrintCatalogTitle
-    \file_if_exist:nT {\c_sys_jobname_str.scr}
-    {\file_input:n {\c_sys_jobname_str.scr}}
-    \iow_term:n {[SimpleSystemTeX]~Catalog~made.}
-
-    \group_end:
-
-}
-
-\cs_set:Npn \Index #1 #2 #3 {
-
-    \group_begin:
-
-    \tl_set:Nn \l_chaptername_tl {#1}
-    \tl_set:Nn \l_parameterA_tl {#3}
-
-    \iow_term:n {[SimpleSystemTeX]~Making~index~"#1"~...}
-
-    \PrintIndexTitle
-
-    \clist_set:Nn \l_register_clist {}
-    \cs_set:Npn \Section ##1 ##2 ##3 ##4 {
-        \str_if_eq:nnT {##1} {#1} {
-            \seq_if_exist:cF {chapter_queue_#1_##2} {
-                \seq_new:c {chapter_queue_#1_##2}
-                \clist_put_right:Nn \l_register_clist {##2}
-            }
-            \seq_gput_right:cn {chapter_queue_#1_##2} {##3}
-        }
-    }
-    \cs_set_eq:NN \Part \use_none:n
-    \cs_set_eq:NN \Index \use_none:nn
-    \cs_set_eq:NN \Command \use_none:n
-    \file_if_exist:nT {\c_sys_jobname_str.scr}
-    {\file_input:n {\c_sys_jobname_str.scr}}
-
-    \iow_term:x {[SimpleSystemTeX]~Search~for~chapter~"#1"~finished,~which~containing~subchapters:~"\clist_use:Nn \l_register_clist {",~"}"}
-
-    \str_if_eq:eeTF {\str_head:n {#2}} {,} {
-        \clist_set:Nn \l_target_clist {-NoValue-#2}
-    } {
-        \clist_set:Nn \l_target_clist {#2}
-    }
-    \str_if_eq:nnTF {#2} {-NoValue-} {
-        \clist_map_inline:Nn \l_register_clist {
-            \tl_set:Nn \l_subchaptername_tl {##1}
-            \PrintIndexSubchapter
-            \seq_map_inline:cn {chapter_queue_#1_##1} {
-                \PrintIndexSection {####1}
-            }
-            \iow_term:n {[SimpleSystemTeX]~Index~"#1·##1"~printed.}
-            \seq_gclear:c {chapter_queue_#1_##1}
-        }
-    } {
-        \clist_map_inline:Nn \l_target_clist {
-            \seq_if_exist:cTF {chapter_queue_#1_##1} {
-            \tl_set:Nn \l_subchaptername_tl {##1}
-                \PrintIndexSubchapter
-                \seq_map_inline:cn {chapter_queue_#1_##1} {
-                    \PrintIndexSection {####1}
-                }
-                \iow_term:n {[SimpleSystemTeX]~Index~"#1·##1"~printed.}
-                \seq_gclear:c {chapter_queue_#1_##1}
-            } {
-                \iow_term:n {[SimpleSystemTeX]~Index~"#1·##1"~printing~failed.~(Not~found)}
-            }
-        }
-    }
-
-    \iow_term:n {
-        [SimpleSystemTeX]~Index~"#1"~made.
-    }
-
-    \group_end:
-
-}
-
-
-% --------------------------------------------------
-% | 预设区块 | Preset Blocks |
-% --------------------------------------------------
+% Preset Blocks
 
 \NewBlockType {Definition}
 \NewBlockType {Theorem}
 \NewBlockType {Corollary}
 \NewBlockType* {Proof}
-
-
-% --------------------------------------------------
-% | 样式设定 | Format Settings |
-% --------------------------------------------------
-
-\NewDocumentCommand \FormatSetting {m +m} {
-    \tl_gset:cn {g_#1_format_tl} {#2}
-    \exp_args:Nnnc \regex_replace_all:nnN {<([a-zA-Z]+)>} {\c{l_\1_tl}} {g_#1_format_tl}
-    \exp_args:Nnnc \regex_replace_all:nnN {\#ifempty} {\c{newifempty}} {g_#1_format_tl}
-    \exp_args:Nnnc \regex_replace_all:nnN {\#ifequal} {\c{newifequal}} {g_#1_format_tl}
+\FormatSetting {Definition} {
+    \color{purple}
+    \par\noindent{\bfseries @blockname}
+    \quad\kaishu @blockcontent
+    \par
+}
+\FormatSetting {Theorem} {
+    \color{teal}
+    \par\noindent{\bfseries @blockname}
+    \quad\kaishu @blockcontent
+    \par
+}
+\FormatSetting {Corollary} {
+    \color{brown}
+    \par\noindent{\bfseries @blockname}
+    \quad\kaishu @blockcontent
+    \par
+}
+\FormatSetting {Proof} {
+    \color{gray}\par\noindent
+    \kaishu @blockname @blockcontent
+    \par
 }
 
-% 条件宏 | Condition Macros
-
-\newcommand \newifempty [3] {
-    \str_if_eq:VnTF {#1} {-NoValue-} {#2} {#3}
-}
-\newcommand \newifequal [4] {
-    \str_if_eq:VnTF {#1} {#2} {#3} {#4}
-}
-
-% 预设值 | Default Values
-
-
 % --------------------------------------------------
-% | 数学指令 | Mathematical Commands |
+% | Cross Reference |
 % --------------------------------------------------
 
-% 字母符号 | Letter Symbols
+% Section Link
 
-\newcommand \rmd {\mathrm{d}}
-\newcommand \rme {\mathrm{e}}
-\newcommand \rmi {\mathrm{i}}
-\newcommand \rmC {\mathrm{C}}
-\newcommand \rmH {\mathrm{H}}
-\newcommand \rmT {\mathrm{T}}
-\newcommand \bfC {\mathbf{C}}
-\newcommand \bfF {\mathbf{F}}
-\newcommand \bfN {\mathbf{N}}
-\newcommand \bfQ {\mathbf{Q}}
-\newcommand \bfR {\mathbf{R}}
-\newcommand \bfZ {\mathbf{Z}}
-\renewcommand \phi \varphi
-\renewcommand \epsilon \varepsilon
-\renewcommand \emptyset \varnothing
-
-% 分隔符 | Separators
-
-\let\and\relax
-\newcommand \and {\,,\,}
-\newcommand \by {\,;\,}
-\newcommand \AND {\quad\mathrm{and}\quad}
-\newcommand \OR {\quad\mathrm{or}\quad}
-
-% 括号 | Brackets
-
-\newcommand \braI [1] {\left(\;\!#1\;\!\right)}
-\newcommand \braII [1] {\left[\;#1\;\right]}
-\newcommand \braIII [1] {\left\{\;\!#1\;\!\right\}}
-\newcommand \braIV [1] {\left|\,#1\,\right|}
-\newcommand \braV [1] {\left\langle\,#1\,\right\rangle}
-\newcommand \braVI [1] {\left(\;\!#1\;\right]}
-\newcommand \braVII [1] {\left[\;#1\;\!\right)}
-\newcommand \ceil [1] {\left\lceil\;\!#1\;\!\right\rceil}
-\newcommand \floor [1] {\left\lfloor\;\!#1\;\!\right\rfloor}
-\newcommand \norm [1] {\left|\left|\;\!#1\;\!\right|\right|}
-
-% 运算符 | Operators
-
-\newcommand \rdots {\reflectbox{$\ddots$}}
-\newcommand \poly [2]{#1\;\![\,#2\,]}
-\newcommand \fsq {^{2\!}}
-\newcommand \fcu {^{3\!}}
-\newcommand \fnpow {^{n\!}}
-\newcommand \finv {^{-1\!}}
-\newcommand \fder {^{\,\prime\!}}
-\newcommand \fdder {^{\,\prime\prime\!}}
-\newcommand \fddder {^{\,\prime\prime\prime\!}}
-\newcommand \fnder [1] {^{\,(#1)\!}}
-\newcommand \sfrac [2] {#1\!\mathbin{\slash}\!#2}
-\newcommand \bigsfrac [2] {#1\!\mathbin{\big\slash}\!#2}
-\newcommand \Bigsfrac [2] {#1\!\mathbin{\Big\slash}\!#2}
-\newcommand \biggsfrac [2] {#1\!\mathbin{\bigg\slash}\!#2}
-\newcommand \Biggsfrac [2] {#1\!\mathbin{\Bigg\slash}\!#2}
-\newcommand \Int [4] {\int\sb{#1}^{\;\!#2}#3\,\rmd #4}
-\newcommand \restrict [1] {\,\big|\sb{\,#1}}
-\newcommand \subst [2] {\,\Big|\sb{\,#1}^{\,#2}}
-\newcommand \bigsubst [2] {\,\bigg|\sb{\,#1}^{\,#2}}
-\newcommand \Bigsubst [2] {\,\Bigg|\sb{\,#1}^{\,#2}}
-
-% 函数名称 | Function Names
-
-\let\Re\relax
-\let\Im\relax
-\let\char\relax
-\DeclareMathOperator \sgn {sgn}
-\DeclareMathOperator \Re {Re}
-\DeclareMathOperator \Im {Im}
-\DeclareMathOperator \char {char}
-\DeclareMathOperator \gm {gm}
-\DeclareMathOperator \am {am}
-\DeclareMathOperator \tr {tr}
-\DeclareMathOperator \im {im}
-\DeclareMathOperator \rank {rank}
-\DeclareMathOperator \spn {span}
-\DeclareMathOperator \sech {sech}
-\DeclareMathOperator \csch {csch}
-\DeclareMathOperator \arccot {arccot}
-\DeclareMathOperator \arcsec {arcsec}
-\DeclareMathOperator \arccsc {arccsc}
-\DeclareMathOperator \arsinh {arsinh}
-\DeclareMathOperator \arcosh {arcosh}
-\DeclareMathOperator \artanh {artanh}
-\DeclareMathOperator \arcoth {arcoth}
-\DeclareMathOperator \arsech {arsech}
-\DeclareMathOperator \arcsch {arcsch}
-
-% 逻辑量词 | Logical Quantifiers
-
-\newcommand \Forall [2] {\forall\ #1\in #2\ :\ \ }
-\newcommand \ForallII [4] {\forall\ #1\in #2\ ,\ #3\in #4\ :\ \ }
-\newcommand \Exists [2] {\exists\ #1\in #2\ :\ \ }
-\newcommand \ExistsII [4] {\exists\ #1\in #2\ ,\ #3\in #4\ :\ \ }
-
-% 基本结构 | Basic Structures
-
-\NewCommandCopy \originfrac \frac
-\RenewDocumentCommand \frac {s +m +m} {
-    \IfBooleanTF {#1} {
-        \originfrac{#2}{#3}
+\NewDocumentCommand \seclink {m d()} {
+    \seq_if_in:NeTF \g__register_seq {./#1} {
+        \group_begin:
+        \IfValueT {#2} {
+            \tl_set:Nn \l__linktext_tl {#2}   % [provide] @linktext
+        }
+        \exp_args:Ne \__parse_path:nn {#1} {target}   % [provide] @targetsection, @target(...)group
+        \tl_set:Nn \l__targetsectionpath_tl {#1}   % [provide] @targetsectionpath
+        \tl_set:Nn \l__targetsectionpage_tl {\pageref*{./#1}}   % [provide] @targetsectionpage
+        \prop_get:NeN \g__sectionname_prop {#1} \l__targetsectionname_tl   % [provide] @targetsectionname
+        \prop_get:NeN \g__sectionparameter_prop {#1} \l__targetsectionparameter_tl   % [provide] @targetsectionparameter
+        \hyperref [./#1] {{\g__SectionLink_format_tl}}
+        \group_end:
     } {
-        \originfrac{\displaystyle #2}{\displaystyle #3}
+        \msg_warning:nne {SimpleSystemTeX} {Section Not Found} {#1}
     }
 }
 
-\NewCommandCopy \originsqrt \sqrt
-\RenewDocumentCommand \sqrt {s d[] +m} {
-    \IfBooleanTF {#1} {
-        \IfValueTF {#2} {
-            \originsqrt [#2] {#3}
-        } {
-            \originsqrt {#3}
+% Group Link
+
+\NewDocumentCommand \grplink {m d()} {
+    \seq_if_in:NeTF \g__register_seq {./#1} {
+        \group_begin:
+        \IfValueT {#2} {
+            \tl_set:Nn \l__linktext_tl {#2}   % [provide] @linktext
         }
+        \exp_args:Ne \__parse_path:nn {#1.groupkeep} {target}   % [provide] @target(...)group
+        \hyperref [./#1] {{\g__GroupLink_format_tl}}
+        \group_end:
     } {
-        \IfValueTF {#2} {
-            \originsqrt [#2] {\displaystyle #3}
-        } {
-            \originsqrt {\displaystyle #3}
+        \msg_warning:nne {SimpleSystemTeX} {Group Index Not Found} {#1}
+    }
+}
+
+% Block Link
+
+\NewDocumentCommand \blclink {m d()} {
+    \seq_if_in:NeTF \g__last_register_seq {#1} {
+        \group_begin:
+        \IfValueT {#2} {
+            \tl_set:Nn \l__linktext_tl {#2}   % [provide] @linktext
+        }
+        \tl_set:Nn \l__targetblock_tl {#1}
+        \seq_if_in:NeT \g__register_seq {#1} {
+            \prop_get:NeN \g__blockname_prop {#1} \l__targetblockname_tl   % [provide] @targetblockname
+            \prop_get:NeN \g__blockparameter_prop {#1} \l__targetblockparameter_tl   % [provide] @targetblockparameter
+            \prop_get:NeN \g__blockcontent_prop {#1} \l__targetblockcontent_tl   % [provide] @targetblockcontent
+        }
+        \hyperref [#1] {{\g__BlockLink_format_tl}}
+        \group_end:
+    } {
+        \msg_warning:nne {SimpleSystemTeX} {Block Not Found} {#1}
+    }
+}
+
+% --------------------------------------------------
+% | Mathematical Command |
+% --------------------------------------------------
+
+% Simple Letter
+
+\clist_map_inline:nn {rm, it, bf, bb, sf, cal, frak} {
+    \exp_args:Nc \NewDocumentCommand {Simpleletter#1on} {} {
+        \int_step_inline:nnn { `a } { `z } {
+            \exp_args:Nc \newcommand {#1 \char_generate:nn {####1} {11}} {
+                \use:c {math#1} {\char_generate:nn {####1} {11}}
+            }
         }
     }
 }
-
-% 矩阵 & 分支 | Matrices & Cases
-
-\let\matrix\relax
-\newcommand \casesII [5] {\begin{cases}\\[-10mm]\ \ #1&\quad#2\\[#3mm]\ \ #4&\quad#5\end{cases}}
-\newcommand \casesIII [8] {\begin{cases}\\[-10mm]\ \ #1&\quad#2\\[#3mm]\ \ #4&\quad#5\\[#6mm]\ \ #7&\quad#8\end{cases}}
-\NewDocumentCommand \matrix {m +m} {
-    \tl_set:Nn \l_tmpa_tl {#2}
-    \align_transform:N \l_tmpa_tl
-    \braI{\;\!\!
-        \begin{array}{#1}
-            \l_tmpa_tl
-        \end{array}
-    \;\!\!}
-}
-\NewDocumentCommand \sqmatrix {m +m} {
-    \tl_set:Nn \l_tmpa_tl {#2}
-    \align_transform:N \l_tmpa_tl
-    \braII{\;\!
-        \begin{array}{#1}
-            \l_tmpa_tl
-        \end{array}
-    \;\!}
-}
-\NewDocumentCommand \determinant {m +m} {
-    \tl_set:Nn \l_tmpa_tl {#2}
-    \align_transform:N \l_tmpa_tl
-    \braIV{
-        \begin{array}{#1}
-            \l_tmpa_tl
-        \end{array}
-    }
-}
-
-% 通用公式环境 | General Formula Environments
-
-\NewDocumentCommand \Equation {s +m} {
-    \IfBooleanTF {#1} {
-        \[\resizebox{\textwidth}{!}{$
-            \displaystyle
-            \begin{aligned}
-                #2
-            \end{aligned}
-        $}\]
-    } {
-        \begin{align*}
-            #2
-        \end{align*}
+\clist_map_inline:nn {rm, it, bf, bb, sf, cal, frak} {
+    \exp_args:Nc \NewDocumentCommand {SimpleLetter#1on} {} {
+        \int_step_inline:nnn { `A } { `Z } {
+            \exp_args:Nc \newcommand {#1 \char_generate:nn {####1} {11}} {
+                \use:c {math#1} {\char_generate:nn {####1} {11}}
+            }
+        }
     }
 }
 
 \ExplSyntaxOff
-
-\endinput
