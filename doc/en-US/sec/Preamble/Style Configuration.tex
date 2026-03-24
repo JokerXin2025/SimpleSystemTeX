@@ -39,23 +39,23 @@
         }
 ]
 
-When writing style code, please ensure that a display argument does not immediately follow any macro command, as this may lead to syntax parsing errors. You must insert a space before the \texttt{@} to prevent this issue, for example: \cs{par}\texttt{ @\meta{display argument}} .
+When writing style code, please ensure that a display argument does not immediately follow any macro command, as this may lead to syntax parsing errors. You must insert a space before the \texttt{@} to prevent this issue, for example: \cs{par}\texttt{ @\meta{argument}} .
 
-\newpage Customizable style names and their available display arguments include:
+\newpage Customizable styles and their respective available display arguments include:
 
 \List{TOC Style}(\large Table of Contents){
     \par\medskip{}
     - \textbf{\texttt{TOCTitle} : Title of the table of contents}.
     - \textbf{\texttt{TOCPartTitle} : Part title in the table of contents}.
-        - - \texttt{@part} : Part name.
+        - - \texttt{@part} : Part.
     - \textbf{\texttt{TOCSection} : Section entry in the table of contents}.
-        - - \texttt{@section} : Section file name.
-        - - \texttt{@sectionname} : Section's display name.
-        - - \texttt{@part} : Name of the part containing the section.
-        - - \texttt{@group} , \texttt{@subgroup} ... : Top-level group, second-level group... containing the section.
-        - - \texttt{@sectionpath} : Section path.
-        - - \texttt{@sectionpage} : Page number where the section title is located.
-        - - \texttt{@sectionparameter} : Custom parameter of the section.
+        - - \texttt{@section} : Entry section file name.
+        - - \texttt{@sectionname} : Entry section's display name.
+        - - \texttt{@part} : Part containing the entry section.
+        - - \texttt{@group} , \texttt{@subgroup} ... : Top-level group, second-level group... containing the entry section.
+        - - \texttt{@sectionpath} : Entry section path.
+        - - \texttt{@sectionpage} : Page number where the entry section heading is located.
+        - - \texttt{@sectionparameter} : Custom parameter of the entry section.
 }
 
 \List{Section Style}(\large Section){
@@ -66,7 +66,7 @@ When writing style code, please ensure that a display argument does not immediat
         - - \texttt{@part} : Part containing the section.
         - - \texttt{@group} , \texttt{@subgroup} ... : Top-level group, second-level group... containing the section.
         - - \texttt{@sectionpath} : Section path.
-        - - \texttt{@sectionpage} : Page number where the section title is located.
+        - - \texttt{@sectionpage} : Page number where the section heading is located.
         - - \texttt{@sectionparameter} : Custom parameter of the section.
     - \textbf{\meta{block type} : Block}.
         - - \texttt{@section} , \texttt{@sectionname} ... : (Display arguments of the containing section)
@@ -109,7 +109,7 @@ When writing style code, please ensure that a display argument does not immediat
         - - \texttt{@targetpart} : Part containing the target section.
         - - \texttt{@targetgroup} , \texttt{@targetsubgroup} ... : Top-level group, second-level group... containing the target section.
         - - \texttt{@targetsectionpath} : Target section path.
-        - - \texttt{@targetsectionpage} : Page number where the target section title is located.
+        - - \texttt{@targetsectionpage} : Page number where the target section heading is located.
         - - \texttt{@targetsectionparameter} : Custom parameter of the target section.
     \newpage{}
     - \textbf{\texttt{BlockLink} : Block Link}.
@@ -127,7 +127,7 @@ When writing style code, please ensure that a display argument does not immediat
         - - \texttt{@targetindexparameter} : Custom parameter of the target index.
 }
 
-Not all display arguments are intended for rendering content. For instance, if \texttt{@section} contains special characters, you might use \texttt{@sectionname} as a substitute. In such scenarios, \texttt{@section} should be used to provide the section file name for conditional evaluation, whereas \texttt{@sectionname} should be used for direct display within the document. Please select the appropriate display arguments according to your specific requirements when authoring style code.
+Not all display arguments are intended for rendering content. For instance, if \texttt{@section} contains special characters, you might use \texttt{@sectionname} as a substitute. In such scenarios, \texttt{@section} should be used to provide the section file name for conditional evaluation, whereas \texttt{@sectionname} should be used for display in the document. Please select the appropriate display arguments according to your specific requirements when authoring style code.
 
 Please avoid the following practices within your style code, as they may lead to errors such as scope conflicts among display arguments:
 
@@ -139,6 +139,6 @@ Please avoid the following practices within your style code, as they may lead to
     - Do not compare path-type arguments like \texttt{@sectionpath} with other arguments like \texttt{@section} or their concatenated values, because they possess different \TeX\ catcodes.
 }
 
-Before authoring style code, please review the \seclink{Style Code Preset Values}. \textcolor{orange}{It is highly recommended to first copy the specific portions you intend to modify into the preamble}, and then base your further adjustments upon them.
+Before authoring style code, please review the \seclink{Style Code Preset Values}. \textcolor{orange}{It is highly recommended to copy the specific portions you intend to modify into the preamble first}, and then base your further adjustments upon them.
 
 \newpage

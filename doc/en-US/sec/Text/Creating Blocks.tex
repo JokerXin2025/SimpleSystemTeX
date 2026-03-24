@@ -1,5 +1,5 @@
 
-You can use the following commands in the text or \blclink{Style Code} text to create a block of an already defined block type:
+You can use the following commands in the text or \blclink{Style Code} to create a block of an already defined block type:
 
 \UserCommand{Create Block}<\cs{\meta{regular block type}} , \cs{\meta{anonymous block type}}>{
     \cs{\meta{regular block type}}
@@ -14,7 +14,7 @@ You can use the following commands in the text or \blclink{Style Code} text to c
     \{\meta{content}\longarg\}
 }[
     - \meta{regular block type} , \meta{anonymous block type} : The name of the block type to be created.
-    - \meta{label} : The unique identifier for the block. Do not start with a \texttt{.} .
+    - \meta{label} : The unique identifier of the block. Do not start with a \texttt{.} .
     - \meta{content}\longarg\ : The specific content of the block.
 ][
     - \meta{display name} : The name of the block used for display. If this argument is empty, the \meta{label} will be used by default.
@@ -63,7 +63,7 @@ You can use the following commands in the text or \blclink{Style Code} text to c
 
 \AutomaticListon
 
-When creating a block, please ensure that this block type has already been declared via the \cs{NewBlockType} command. The block label of a regular block type serves as the unique identifier for cross-referencing and cannot duplicate that of other blocks. You can use the following command to quickly create an anonymous block under a regular block type:
+When creating a block, please ensure that this block type has already been declared via the \cs{NewBlockType} command. The label of a regular block serves as the unique identifier for cross-referencing and cannot duplicate that of other blocks. You can use the following command to quickly create an anonymous block under a regular block type:
 
 \UserCommand{Quickly Create Anonymous Block}<\cs{\meta{regular block type}}*>{
     \cs{\meta{regular block type}}*
@@ -73,7 +73,7 @@ When creating a block, please ensure that this block type has already been decla
     \{\meta{content}\longarg\}
 }
 
-If the \meta{content} is redundant for a specific block type, you can write macros in the preamble to wrap the block creation command. This allows you to omit the content argument when creating the block within the document body. The following example demonstrates a simplified command for creating a \texttt{MyBlockType} block:
+If the \meta{content} is redundant for a specific block type, you can write macros in the preamble to wrap the block creation command. This allows you to omit the content argument when creating the block. The following example demonstrates a simplified command for creating a \texttt{MyBlockType} block:
 
 \Example{Omitting Block Content-Example}{
     \par\noindent \cs{NewBlockType} \{MyBlockType\}
@@ -82,7 +82,7 @@ If the \meta{content} is redundant for a specific block type, you can write macr
     \par\noindent \}
 }
 
-A similar wrapping technique can also be employed for the simultaneous creation of sub-blocks. Please refer to the following example:
+A similar wrapping technique can also be employed for the synchronized creation of sub-blocks. Please refer to the following example:
 
 \Example{Synchronizing Sub-Blocks Creation-Example}{
     \par\noindent \cs{NewDocumentCommand} \cs{TheoremWithProof} \{m +m +d[] +d[]\} \{

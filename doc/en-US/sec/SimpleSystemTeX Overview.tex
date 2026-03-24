@@ -5,11 +5,11 @@ The core design philosophy of \SimpleSystemTeX is to maximize the \textbf{separa
 
 \medskip\textbf{File Management System}
 
-In \SimpleSystemTeX, a \newconcept{Section} serves as the fundamental content unit of the document. Each section corresponds to an independent subfile (i.e. a \newconcept{Section File}) that stores the specific content code. The directory containing these subfiles is referred to as a \newconcept{Group}. Groups support up to four levels of nesting; however, to minimize the complexity of the styling code, the nesting depth should be kept as shallow as possible.
+In \SimpleSystemTeX, a \newconcept{Section} serves as the fundamental content unit of the document. Each section corresponds to an independent subfile (i.e. a \newconcept{Section File}) that stores the specific text code. The directory containing these subfiles is referred to as a \newconcept{Group}. Groups support up to four levels of nesting; however, to minimize the complexity of the styling code, the nesting depth should be kept as shallow as possible.
 
 \medskip\textbf{Main File}
 
-The document body of a \SimpleSystemTeX main file serves a dual purpose: typesetting both the content and the table of contents (TOC). When a specific section file is imported using the \cs{ImportSection} command, the system not only renders the corresponding content within the document but also automatically adds it to the TOC. By simply adjusting the order of the \cs{ImportSection} commands within the main file, you can easily alter the sequence in which sections appear in both the document and the TOC.
+The document body of a \SimpleSystemTeX main file serves a dual purpose: typesetting both the text and the table of contents (TOC). When a specific section file is imported using the \cs{ImportSection} command, the system not only renders the corresponding content within the text but also automatically adds it to the TOC. By simply adjusting the order of the \cs{ImportSection} commands within the main file, you can easily alter the sequence in which sections appear in both the text and the TOC.
 
 If you need to use content typesetting commands directly within the main file, please wrap them inside the following command:
 
@@ -20,31 +20,31 @@ If you need to use content typesetting commands directly within the main file, p
     - \meta{LaTeX Command}\longarg\ : The \LaTeX\ code to be executed during content typesetting.
 ]
 
-Although this command allows you to write content directly in the main file, we \textcolor{orange}{strongly advise against extensive use of this practice}. Doing so can easily lead to a disorganized document structure, increase subsequent maintenance efforts, and contradict the core design philosophy of \SimpleSystemTeX.
+Although this command allows you to write text directly in the main file, we \textcolor{orange}{strongly advise against extensive use of this practice}. Doing so can easily lead to a disorganized document structure, increase subsequent maintenance efforts, and contradict the core design philosophy of \SimpleSystemTeX.
 
-Please note that any non--\!\SimpleSystemTeX commands in the main file that are not wrapped within a \cs{TextCommand} will be executed at the very beginning of the document. Therefore, LaTeX code for the cover page does not require additional wrapping.
+Please note that any non--\!\SimpleSystemTeX commands in the main file that are not wrapped inside a \cs{TextCommand} will be executed at the very beginning of the document. Therefore, \LaTeX\ code for the cover page does not require additional wrapping.
 
 \medskip\textbf{Blocks}
 
-\newconcept{Blocks} are the core structural elements used for organizing and presenting content within \SimpleSystemTeX. By creating various types of blocks, users can clearly distinguish different forms of content, such as definitions, theorems, and proofs. Furthermore, blocks facilitate seamless navigation and information retrieval throughout the document via built-in cross-reference and indexing functionalities.
+\newconcept{Blocks} are the core structural elements used for organizing and presenting content in \SimpleSystemTeX. By creating various types of blocks, one can clearly distinguish different forms of content, such as definitions, theorems, and proofs. Furthermore, blocks facilitate seamless navigation and information retrieval throughout the document via built-in cross-reference and indexing functionalities.
 
-An \newconcept{Anonymous Block} is a specialized block type, typically utilized for explanatory text or as supplementary content to other blocks. \SimpleSystemTeX does not generate cross-reference anchors for anonymous blocks; consequently, they cannot serve as targets for hyperlinks, nor will they appear in the block index.
+An \newconcept{Anonymous Block} is a special type of block, typically utilized for explanatory content or as supplement to other blocks. \SimpleSystemTeX will not generate cross-reference anchors for anonymous blocks; consequently, they cannot serve as targets for hyperlinks, nor will they appear in the block index.
 
-To enhance the readability and logical flow of the document, users should structure their content sensibly, applying appropriate block types based on the content's nature. We \textcolor{orange}{strongly advise against nesting regular blocks within one another}.
+To enhance the readability and consistency of the document, users should structure their text and apply appropriate block types based on the content's nature. We \textcolor{orange}{strongly advise against nesting regular blocks within one another}.
 
 \medskip\textbf{Cross-Reference}
 
-In \SimpleSystemTeX, the cross-reference mechanism is deeply integrated with the file and block management systems. The importation of any section file or the creation of a block automatically generates a corresponding anchor. Users can effortlessly insert hyperlinks by simply providing the target section or block identifier, eliminating the need for manual anchor management. This ensures that cross-references dynamically adapt to content additions, deletions, or modifications, thereby significantly reducing maintenance overhead.
+In \SimpleSystemTeX, the cross-reference mechanism is deeply integrated with the file \& block management system. Importation of section files or creation of blocks will automatically generate corresponding anchors. Users can insert hyperlinks by simply providing the identifier of the target section or block, instead of managing anchors manually. This ensures that cross-references dynamically adapt to content modifications, thereby significantly reducing maintenance overhead.
 
 \medskip\SimpleSystemTeX[bf]\textbf{Manual}
 
-Consistent with any document authored using \SimpleSystemTeX, this manual utilizes sections as its fundamental content units. These sections are categorized into various top-level groups based on the usage contexts of the commands they describe. All commands are presented using a uniformly styled command block type, and a \seclink{SimpleSystemTeX Command Index} is provided in the appendix for quick reference.
+Consistent with any document authored using \SimpleSystemTeX, this manual utilizes sections as its fundamental content units, which are categorized into top-level groups based on the usage contexts of the commands they describe. All commands are presented using a uniformly styled command block type, and the \seclink{SimpleSystemTeX Command Index} is provided in the appendix for quick reference.
 
 When invoking \SimpleSystemTeX commands, you must supply all required \textcolor{olive}{mandatory arguments}. If \textcolor{brown}{optional arguments} are omitted, their corresponding enclosing delimiters (e.g. \texttt{()} , \texttt{<>}) must also be omitted. The pilcrow symbol \texttt{\longarg} indicates that the argument accepts multi-paragraph \LaTeX\ code, allowing the use of the \cs{par} command or consecutive blank lines.
 
-The vast majority of \SimpleSystemTeX commands have been actively utilized in the typesetting of this very manual and other demonstration projects. We encourage you to review their source code to familiarize yourself with their practical application.
+The vast majority of \SimpleSystemTeX commands have been actively utilized in the typesetting of this very manual and other demonstration projects. We encourage you to review their source code to familiarize yourself with their practical applications.
 
-Last Revised: 2026\,--\,03\,--\,22.
+Last Revised: 2026\,--\,03\,--\,24.
 
 \bigskip\bigskip\bigskip
 

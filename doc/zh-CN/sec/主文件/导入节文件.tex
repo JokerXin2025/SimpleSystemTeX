@@ -22,7 +22,7 @@
     - 群组路径: \texttt{\meta{Group}/\meta{Subgroup}/}
 }
 
-你也可以通过下面的命令来修改节文件路径前缀, 已适应已有的项目结构:
+你可以通过下面的命令来修改节文件路径前缀, 以适应已有的项目结构:
 
 \UserCommand{修改节文件路径前缀}<\cs{SetSectionPath}>{
     \cs{SetSectionPath}
@@ -33,7 +33,7 @@
 
 你可以使用成对的 \texttt{\{} 和 \texttt{\}} , 或其它任意两个相同的字符作为界定符, 请务必确保路径前缀中不包含界定符.
 
-修改节文件路径前缀后, \SimpleSystemTeX 将会以新的方式解析群组结构, 例如将路径前缀修改为 \texttt{./sec/\meta{Group}/} 后, \meta{Section1} 所在的一级群组将变为 \meta{Subgroup} , 请务必确保新的节文件路径前缀与预期的文件结构相匹配.
+修改节文件路径前缀后, \SimpleSystemTeX 会以新的方式解析群组结构, 例如将路径前缀修改为 \texttt{./sec/\meta{Group}/} 后, \meta{Section1} 所在的一级群组将变为 \meta{Subgroup} , 请务必确保新的节文件路径前缀与预期的文件结构相匹配.
 
 在主文件的正文区使用下面的命令来导入节文件:
 
@@ -52,18 +52,18 @@
 当节文件名称中包含不可打印的特殊字符时, 你\textcolor{red}{必须提供经过转义的节显示名称}以确保节名称能够在目录、节标题和交叉引用中正确显示.
 
 \Example{导入节文件-示例}{
-    \par\noindent \cs{ImportSection}\{线性空间/Hamel基\}
-    \par\noindent \cs{ImportSection}\{拓扑空间/内部\&闭包\}(内部\cs{\&} 闭包)
-    \par\noindent \cs{ImportSection}\{测度空间/Lp收敛\}(\$L\^{}p\$ 收敛)
+    \par\noindent \cs{ImportSection} \{线性空间/Hamel基\}
+    \par\noindent \cs{ImportSection} \{拓扑空间/内部\&闭包\}(内部\cs{\&} 闭包)
+    \par\noindent \cs{ImportSection} \{测度空间/Lp收敛\}(\$L\^{}p\$ 收敛)
 }
 
 \SimpleSystemTeX 将根据节文件的导入顺序确定正文中各节的呈现顺序, 以及它们在目录中的条目顺序. 你也可以添加分块来对节进行分组. 请注意, 分块完全依赖于节文件导入顺序, 而与各节所处的群组结构无关.
 
 \UserCommand{创建分块}<\cs{AddPart}>{
     \cs{AddPart}
-    \{\meta{分块名称}\}
+    \{\meta{分块}\}
 }[
-    - \meta{分块名称} : 用于在目录中显示的分块名称.
+    - \meta{分块} : 用于在目录中显示的分块名称.
 ]
 
 \newpage 作为示例, 下面给出部分\SimpleSystemTeX Manual的项目结构及其对应的导入命令:
@@ -88,21 +88,21 @@
 }
 
 \Example{Manual项目结构-示例}{
-    \par\noindent \cs{AddPart}\{\cs{SimpleSystemTeX}[bf]\}
-    \par\noindent \cs{ImportSection}\{SimpleSystemTeX概述\}(\cs{SimpleSystemTeX}[bf]概述)
-    \par\noindent \cs{AddPart}\{文件管理\}
-    \par\noindent \cs{ImportSection}\{主文件/导入节文件\}
-    \par\noindent \cs{ImportSection}\{主文件/生成目录\}
-    \par\noindent \cs{AddPart}\{区块\cs{\&} 交叉引用\}
-    \par\noindent \cs{ImportSection}\{导言区/声明区块类型\}
-    \par\noindent \cs{ImportSection}\{正文/创建区块\}
-    \par\noindent \cs{ImportSection}\{正文/生成区块索引\}
-    \par\noindent \cs{ImportSection}\{正文/添加链接\}
-    \par\noindent \cs{AddPart}\{其它\}
-    \par\noindent \cs{ImportSection}\{导言区/样式设定\}
-    \par\noindent \cs{AddPart}\{附录\}
-    \par\noindent \cs{ImportSection}\{样式代码预设值\}
-    \par\noindent \cs{ImportSection}\{SimpleSystemTeX命令索引\}(\cs{SimpleSystemTeX}[bf]命令索引)
+    \par\noindent \cs{AddPart} \{\cs{SimpleSystemTeX}[bf]\}
+    \par\noindent \cs{ImportSection} \{SimpleSystemTeX概述\}(\cs{SimpleSystemTeX}[bf]概述)
+    \par\noindent \cs{AddPart} \{文件管理\}
+    \par\noindent \cs{ImportSection} \{主文件/导入节文件\}
+    \par\noindent \cs{ImportSection} \{主文件/生成目录\}
+    \par\noindent \cs{AddPart} \{区块\cs{\&} 交叉引用\}
+    \par\noindent \cs{ImportSection} \{导言区/声明区块类型\}
+    \par\noindent \cs{ImportSection} \{正文/创建区块\}
+    \par\noindent \cs{ImportSection} \{正文/生成区块索引\}
+    \par\noindent \cs{ImportSection} \{正文/添加链接\}
+    \par\noindent \cs{AddPart} \{其它\}
+    \par\noindent \cs{ImportSection} \{导言区/样式设定\}
+    \par\noindent \cs{AddPart} \{附录\}
+    \par\noindent \cs{ImportSection} \{样式代码预设值\}
+    \par\noindent \cs{ImportSection} \{SimpleSystemTeX命令索引\} (\cs{SimpleSystemTeX}[bf]命令索引)
 }
 
 \newpage

@@ -1,5 +1,5 @@
 
-The primary advantage of encapsulating content components within blocks is the ability to use the \cs{MakeBlockIndex} command anywhere in the document body to rapidly generate an index of all blocks of the same type within a specific group. Furthermore, block indices are equipped with cross-reference anchors, allowing you to \blclink{Add Block Index Link-U}(add block index links) elsewhere in the document to help readers navigate directly to the index.
+The primary advantage of encapsulating content components within blocks is the ability to use the \cs{MakeBlockIndex} command anywhere in the document body to rapidly generate an index of all blocks of the same type in a specific group. Furthermore, block indices are equipped with cross-reference anchors, allowing you to \blclink{Add Block Index Link-U}(add block index links) elsewhere in the document to help readers navigate directly to the index.
 
 Thanks to the hierarchical tree structure of groups, an index generated for a specific group will automatically encompass the block entries from all its descendant subgroups. Cross-reference anchors for these subgroup indices are also generated simultaneously.
 
@@ -15,7 +15,7 @@ Thanks to the hierarchical tree structure of groups, an index generated for a sp
     - \meta{custom parameter} : Used in \seclink{Preamble/Style Configuration} to achieve various complex typesetting logic.
 ]
 
-The scope path serves as the unique identifier for cross-referencing a group index. Consequently, you \textcolor{red}{cannot generate two block indices with overlapping scopes}, even if they specify different lists of block types. If generating overlapping block indices is strictly necessary, you can use the following command to create a temporary block index that does not generate anchors:
+The scope path serves as the unique identifier for cross-referencing a group index. So you \textcolor{red}{cannot generate two block indices with overlapping scopes}, even if they specify different block type lists. If generating overlapping block indices is strictly necessary, you can use the following command to create a temporary block index that does not generate anchors:
 
 \UserCommand{Generate Temporary Block Index}<\cs{MakeBlockIndex*}>{
     \cs{MakeBlockIndex*}
