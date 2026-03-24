@@ -1,0 +1,99 @@
+
+您可以在正文部分或\blclink{样式代码}中使用下面的命令来通过已定义的区块类型创建区块:
+
+\UserCommand{创建区块}<\cs{\meta{常规区块类型}} , \cs{\meta{匿名区块类型}}>{
+    \cs{\meta{常规区块类型}}
+    \{\meta{区块标签}\}
+    (\meta{区块显示名称})
+    <\meta{自定义参数}>
+    \{\meta{区块内容}\longarg\}
+    \AnotherUsage
+    \cs{\meta{匿名区块类型}}
+    (\meta{区块显示名称})
+    <\meta{自定义参数}>
+    \{\meta{区块内容}\longarg\}
+}[
+    - \meta{常规区块类型} 或 \meta{匿名区块类型} : 要创建的区块类型名称.
+    - \meta{区块标签} : 区块的唯一标识名称, 请勿以 \texttt{.} 开头.
+    - \meta{区块内容}\longarg\ : 区块的具体内容.
+][
+    - \meta{区块显示名称} : 用于显示的区块名称. 若此参数为空则默认为\meta{区块标签}.
+    - \meta{自定义参数} : 在\seclink{导言区/样式设定}中使用该参数来实现各种复杂的排版逻辑.
+]
+
+\AutomaticListoff
+
+\Example{创建区块-示例}{
+    \par\noindent \cs{Theorem} \{规范正交性引理\} \{
+    \par 设 \$(\cs{bm} e\_k)\_\{k=1\}\^{}n\$ 是规范正交组, 则
+    \par \cs{begin}\{align*\}
+    \par\indent\indent \cs{forall} (a\_k)\_\{k=1\}\^{}n \cs{in} \cs{mathbf}\{F\}\^{}n
+    \par\indent\indent \cs{left}|\cs{left}| \cs{sum}\_\{k=1\}\^{}n a\_k \cs{bm} e\_k \cs{right}|\cs{right}|\^{}2
+    \par\indent\indent = \cs{sum}\_\{k=1\}\^{}n \cs{left}| a\_k \cs{right}|\^{}2 \cs{ }.
+    \par\cs{end}\{align*\}
+    \par\noindent \}
+    \par\noindent \cs{Proof} \{规范正交性引理-证明1\} (证明I) \{
+    \par \cs{begin}\{align*\}
+    \par\indent\indent \cs{left}|\cs{left}| \cs{sum}\_\{k=1\}\^{}n a\_k \cs{bm} e\_k \cs{right}|\cs{right}|\^{}2
+    \par\indent\indent = \cs{left}\cs{langle} \cs{sum}\_\{k=1\}\^{}n a\_k \cs{bm} e\_k\cs{ },\cs{ }\cs{sum}\_\{k=1\}\^{}n a\_k \cs{bm} e\_k
+    \par\indent\indent\cs{right}\cs{rangle}
+    \par\indent\indent = \cs{sum}\_\{i=1\}\^{}n \cs{sum}\_\{j=1\}\^{}n a\_i \cs{overline}\{a\_\{j\}\} \cs{delta}\_\{i,j\}
+    \par\indent\indent = \cs{sum}\_\{k=1\}\^{}n | a\_k |\^{}2 \cs{ }.
+    \par \cs{end}\{align*\}
+    \par\noindent \}
+    \newpage
+    \par\noindent \cs{Proof} \{规范正交性引理-证明2\} (证明II) <数学归纳法> \{
+    \par \cs{par} 对 \$n=1\$ , 我们有
+    \par \cs{begin}\{align*\}
+    \par\indent\indent || a\_1 \cs{bm} e\_1 || = | a\_1 | || \cs{bm} e\_1 || = | a\_1 | \cs{ }.
+    \par \cs{end}\{align*\}
+    \par \cs{par} 假设命题对 \$n=m\$ 成立. 根据 \cs{blclink}\{勾股定理\}, 我们有
+    \par \cs{begin}\{align*\}
+    \par\indent\indent \cs{left}|\cs{left}| \cs{sum}\_\{k=1\}\^{}\{m+1\} a\_k \cs{bm} e\_k \cs{right}|\cs{right}|\^{}2
+    \par\indent\indent = \cs{left}|\cs{left}| \cs{sum}\_\{k=1\}\^{}m a\_k \cs{bm} e\_k \cs{right}|\cs{right}|\^{}2
+    \par\indent\indent + \cs{left}|\cs{left}| a\_\{m+1\} \cs{bm} e\_\{m+1\} \cs{right}|\cs{right}|\^{}2
+    \par\indent\indent = \cs{sum}\_\{k=1\}\^{}m | a\_k |\^{}2 + | a\_\{m+1\} |\^{}2
+    \par\indent\indent = \cs{sum}\_\{k=1\}\^{}\{m+1\} | a\_k |\^{}2 \cs{ }.
+    \par \cs{end}\{align*\}
+    \par 因此, 该命题对 \$n=m+1\$ 成立, 从而对一切正整数 \$n\$ 成立.
+    \par\noindent \}
+}
+
+\AutomaticListon
+
+创建区块时, 请确保该区块类型已通过 \cs{NewBlockType} 命令声明. 常规区块类型的区块标签作为交叉引用的唯一标识符, 不能与其它区块重复. 您可以使用如下命令来快速创建常规区块类型下的匿名区块:
+
+\UserCommand{快速创建匿名区块}<\cs{\meta{常规区块类型}}*>{
+    \cs{\meta{常规区块类型}}*
+    \{\meta{区块标签}\}
+    (\meta{区块显示名称})
+    <\meta{自定义参数}>
+    \{\meta{区块内容}\longarg\}
+}
+
+若区块内容对于某种特定的区块类型而言不必要, 则您可以在导言区编写一些宏命令来封装创建区块命令, 从而在正文中创建区块时避免提供区块内容. 下面的例子给出了一个创建 \texttt{MyBlockType} 区块的简化命令示例:
+
+\Example{省略区块内容-示例}{
+    \par\noindent \cs{NewBlockType} \{MyBlockType\}
+    \par\noindent \cs{NewDocumentCommand} \cs{myblocktype} \{m d() d<>\} \{
+    \par \cs{MyBlockType} \{\#1\} (\#2) <\#3> \{\}
+    \par\noindent \}
+}
+
+类似的封装方法也可以用于实现子区块的同步创建, 您可以参考如下示例:
+
+\Example{子区块同步创建-示例}{
+    \par\noindent \cs{NewDocumentCommand} \cs{TheoremWithProof} \{m +m +d[] +d[]\} \{
+    \par \cs{ParentBlockType} \{\#1-parent\} (\#1) \{\#2\}
+    \par \cs{IfVauleT} \{\#3\} \{
+    \par\indent\indent \cs{Proof} \{\#1-proofA\} (\#1) \{\#3\}
+    \par \}
+    \par \cs{IfVauleT} \{\#4\} \{
+    \par\indent\indent \cs{Proof} \{\#1-proofB\} (\#1) \{\#4\}
+    \par \}
+    \par\noindent \}
+}
+
+为了区分区块本身和封装后的命令, 建议使用首字母大写的单词作为区块类型名称, 而使用小写字母开头的单词来命名封装后的命令.
+
+\newpage

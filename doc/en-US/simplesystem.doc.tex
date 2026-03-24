@@ -1,0 +1,155 @@
+
+% SimpleSystemTeX doc (en-US)
+
+% --------------------------------------------------
+% | Preamble (XeLaTeX) |
+% --------------------------------------------------
+
+% Packages
+
+\documentclass[10pt]{article}
+\usepackage{../../build/local/simplesystem}
+\usepackage{geometry,fontspec,dirtree,setspace}
+
+% Page Layout
+
+\setmonofont {Menlo} [
+    Scale = 0.875
+]
+\renewcommand \baselinestretch {1.375}
+\geometry {
+    b5paper,
+    left=18.75mm,
+    right=18.75mm,
+    top=20mm,
+    bottom=25mm
+}
+\setlength{\DTbaselineskip}{12.5pt}
+
+\newcommand \cs [1] {\texttt{\textbackslash #1}}
+\newcommand \meta [1] {$\langle$\,{\ttfamily\slshape #1}\,$\rangle$}
+\newcommand \longarg {\textsuperscript{\P}}
+\newcommand \AnotherUsage {\par\noindent\ }
+
+\NewCommandCopy \originalSimpleSystemTeX \SimpleSystemTeX
+\RenewDocumentCommand \SimpleSystemTeX {d[]} {%
+    \IfValueTF {#1} {%
+        \originalSimpleSystemTeX[#1]\,%
+    } {%
+        \originalSimpleSystemTeX\,%
+    }%
+}
+
+\NewBlockType{NewConcept}
+\NewBlockType{List}
+\NewBlockType{Example}
+\NewBlockType{BadPractice}
+\NewBlockType{Usage}
+\NewBlockType{MandatoryArguments}
+\NewBlockType{OptionalArguments}
+\NewBlockType{LocalUsage}
+
+\SetStyle {NewConcept} {%
+    {\slshape @blockname}%
+}
+\SetStyle {List} {
+    \par\medskip\noindent\textbf{@blockname}
+    \par @blockcontent
+    \par\medskip
+}
+\SetStyle {Example} {
+    \color{gray}
+    \par\bigskip\noindent\textbf{Example}
+    \cleaders\hbox{\rule[0.25em]{7.5pt}{0.1pt}}\hfill\kern0pt
+    \begin{spacing}{1.25}
+    \par\medskip\noindent{\ttfamily\small @blockcontent}
+    \end{spacing}
+    \par\medskip\noindent\leavevmode\cleaders\hbox{\rule[0.5em]{7.5pt}{0.1pt}}\hfill\kern0pt
+    \par\medskip
+}
+\SetStyle {BadPractice} {
+    \color{red}
+    \par\medskip\noindent\textbf{Bad Practice}
+    \par @blockcontent
+    \par\medskip
+}
+\SetStyle {Usage} {
+    \color{purple}\ttfamily
+    \par\bigskip\noindent{\bfseries\sffamily @blockname}
+    \cleaders\hbox{\rule[0.25em]{7.5pt}{0.1pt}}\hfill\kern0pt
+    \par\smallskip\noindent{\ttfamily\small @blockcontent}
+    \par\noindent\leavevmode\cleaders\hbox{\rule[0.5em]{7.5pt}{0.1pt}}\hfill\kern0pt
+    \par
+}
+\SetStyle {MandatoryArguments} {
+    \color{olive}
+    \par\noindent{\bfseries Mandatory Arguments}
+    {\slshape @blockcontent}
+    \par\smallskip
+}
+\SetStyle {OptionalArguments} {
+    \color{brown}
+    \par\noindent{\bfseries Optional Arguments}
+    {\slshape @blockcontent}
+    \par\smallskip
+}
+\SetStyle {LocalUsage} {
+    \ttfamily
+    \par\indent\indent @blockcontent
+    \par
+}
+
+\NewDocumentCommand \newconcept {m} {%
+    \NewConcept {#1} {#1}%
+}
+\NewDocumentCommand \UserCommand {m d<> +m +d[] +d[]} {
+    \Usage{#1-U}(#1)<#2>{#3}
+    \IfValueT{#4}{
+        \MandatoryArguments{#1-MP}<#2>{#4}
+    }
+
+    \IfValueT{#5}{
+        \OptionalArguments{#1-OP}<#2>{#5}
+    }
+    \par\medskip
+}
+
+\AutomaticListon
+
+\begin{document}
+
+    % Cover
+
+    \pagestyle{empty}
+    \SimpleSystemCover{
+        \huge\SimpleSystemTeX[bf]\textbf{Manual}
+    }
+    \newpage
+    \pagestyle{plain}
+
+    % Table of Contents
+
+    \TableofContents
+    \TextCommand{\newpage}
+
+    \AddPart{\!\SimpleSystemTeX[bf]}
+    \ImportSection{SimpleSystemTeX Overview}(\!\SimpleSystemTeX[bf] Overview)
+
+    \AddPart{File Management}
+    \ImportSection{Main File/Importing Section Files}
+    \ImportSection{Main File/Generating TOC}
+
+    \AddPart{Blocks \& Cross-Reference}
+    \ImportSection{Preamble/Declaring Block Types}
+    \ImportSection{Text/Creating Blocks}
+    \ImportSection{Text/Generating Block Indexes}
+    \ImportSection{Text/Adding Links}
+
+    \AddPart{Others}
+    \ImportSection{Preamble/Style Configuration}
+
+    \AddPart{Appendix}
+    \ImportSection{Style Code Preset Values}
+    \ImportSection{SimpleSystemTeX Command Index}(\!\SimpleSystemTeX[bf] Command Index)
+
+\end{document}

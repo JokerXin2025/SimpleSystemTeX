@@ -1,0 +1,36 @@
+%<*package>
+
+\msg_new:nnnn {SimpleSystemTeX} {File Not Found} {
+    Please~ensure~that~file~'#1'~exists.
+} {}
+\msg_new:nnnn {SimpleSystemTeX} {Section Not Found} {
+    Please~ensure~that~command~'\ImportSection'~has~been~used~correctly~to~import~section~'#1'.
+} {}
+\msg_new:nnnn {SimpleSystemTeX} {Block Not Found} {
+    Please~ensure~that~block~'#1'~has~been~created.
+} {}
+\msg_new:nnnn {SimpleSystemTeX} {Invalid Group Path} {
+    The~group~path~'#1'~is~invalid.\\
+    Group~path~should~end~with~'/'.
+} {}
+\msg_new:nnnn {SimpleSystemTeX} {Invalid Block Type Name} {
+    The~block~type~name~'#1'~is~invalid.\\
+    Please~use~only~pure~letters~(a-z,A-Z)~for~the~name.
+} {}
+\msg_new:nnnn {SimpleSystemTeX} {Section Repeated} {
+    Section~'#1'~has~already~been~imported.\\
+    Details~of~section~'#1'~will~be~overwritten.
+} {}
+\msg_new:nnnn {SimpleSystemTeX} {Block Occupied} {
+    Block~'#1'~has~already~been~created.\\
+    Details~of~block~'#1'~will~be~overwritten.
+} {}
+\msg_new:nnnn {SimpleSystemTeX} {Block Index Not Found} {
+    Please~ensure~that~the~block~index~of~group~'#1'~has~been~created.
+} {}
+\msg_new:nnnn {SimpleSystemTeX} {Block Index Repeated} {
+    The~block~index~of~group~'#1'~has~already~been~created.\\
+    Details~of~block~index~'#1'~will~be~overwritten.
+} {}
+
+%</package>

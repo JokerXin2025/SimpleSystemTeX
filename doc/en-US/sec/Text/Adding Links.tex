@@ -1,0 +1,34 @@
+
+\UserCommand{Add Section Link}<\cs{seclink}>{
+    \cs{seclink}
+    \{\meta{section path}\}
+    (\meta{link text})
+}[
+    - \meta{section path} : The path of the target section.
+][
+    - \meta{link text} : The text to be displayed for the link.
+]
+
+\UserCommand{Add Block Link}<\cs{blclink}>{
+    \cs{blclink}
+    \{\meta{label}\}
+    (\meta{link text})
+}[
+    - \meta{label} : The label of the target block.
+][
+    - \meta{link text} : The text to be displayed for the link.
+]
+
+\UserCommand{Add Block Index Link}<\cs{indlink}>{
+    \cs{indlink}
+    \{\meta{scope path}\}
+    (\meta{link text})
+}[
+    - \meta{scope path} : The scope path of the target index scope.
+][
+    - \meta{link text} : The text to be displayed for the link.
+]
+
+The link will be rendered using \meta{link text} as its display content. If this argument is omitted, \SimpleSystemTeX will apply a default link display style. You can modify the relevant display logic by altering the style code within the \seclink{Preamble/Style Configuration}(Style Configuration).
+
+\newpage

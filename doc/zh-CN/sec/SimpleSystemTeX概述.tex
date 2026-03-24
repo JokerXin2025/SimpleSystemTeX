@@ -1,0 +1,56 @@
+
+\SimpleSystemTeX 是一个基于\LaTeX3 构建, 专为大规模集成排版任务设计的\LaTeX 宏包. 它提供了一套自动化文件\&区块管理系统, 同时配备有便捷的索引生成和交叉引用功能.
+
+\SimpleSystemTeX 的核心设计理念在于极大程度地实现\textbf{内容与结构分离}. 这一机制使得内容创作者无需时刻关注文档全局结构和样式设计细节, 只需专注于内容的撰写, 从而大幅降低了大型文档的维护难度. 使用AI工具进行润色或辅助创作时, 该机制对于提升效率的帮助将尤为显著.
+
+\medskip\textbf{文件管理系统}
+
+在\SimpleSystemTeX 中, \newconcept{节}{Section}是正文的基本内容单元. 每个节对应一个独立的子文件（即\newconcept{节文件}{Section File}）用于存放具体的正文代码, 集中存放这些子文件的文件夹称为\newconcept{群组}{Group}. 群组最多支持4层嵌套, 但为了减小样式代码的复杂程度, 群组的嵌套层数应当尽可能低.
+
+\medskip\textbf{主文件}
+
+\SimpleSystemTeX 主文件的正文区兼具正文与目录排版的双重作用, 当使用 \cs{ImportSection} 命令导入特定的节文件时, 系统不仅会在正文部分渲染相应内容, 还会将其自动添加至目录中. 您只需调整各 \cs{ImportSection} 命令在主文件中的调用顺序, 即可轻松改变各个节在正文和目录中的呈现先后.
+
+如需在主文件中直接使用正文排版命令, 请将其包裹在以下命令中:
+
+\UserCommand{正文排版命令}<\cs{TextCommand}>{
+    \cs{TextCommand}
+    \{\meta{LaTeX命令}\longarg\}
+}[
+    - \meta{LaTeX命令}\longarg\ : 需要在正文排版时执行的\LaTeX 代码.
+]
+
+尽管此命令允许您直接在主文件中撰写正文内容, 但我们\textcolor{orange}{极不推荐大量采用这种做法}, 这极易导致文档结构混乱并增加后期维护成本, 同时也背离了\SimpleSystemTeX 的设计理念.
+
+需要说明的是, 主文件中任何未被 \cs{TextCommand} 包裹的非\SimpleSystemTeX 命令, 都会作用在整个文档的起始位置. 因此, 文档封面的\LaTeX 代码无需额外包裹.
+
+\medskip\textbf{区块}
+
+\newconcept{区块}{Block}是\SimpleSystemTeX 中用于组织和展示内容的核心正文元素, 通过创建不同类型的区块, 可以清晰地表达定义、定理、证明等不同性质的内容, 同时也可以通过交叉引用和索引功能方便地导航和查找文档中的信息.
+
+\newconcept{匿名区块}{Anonymous Block}是一种特殊的区块, 一般仅用于解释性的内容块或作为其它区块的辅助内容而出现, \SimpleSystemTeX 不会为这类区块创建交叉引用的锚点, 因此它们无法作为任何区块链接的目标或出现在区块索引中.
+
+为增强文档的可读性和逻辑性, 用户应该对正文内容进行合理划分, 并根据其属性使用不同类型的区块, 我们\textcolor{orange}{强烈建议避免常规区块之间的嵌套定义或使用}.
+
+\medskip\textbf{交叉引用}
+
+在\SimpleSystemTeX 中, 交叉引用机制与文件\&区块管理系统深度集成, 任何节文件的导入和区块的创建都会同步产生锚点, 用户可以通过提供目标节/区块标识符来快速添加跳转链接, 而不必手动管理锚点. 这使得文档中的交叉引用能够自动适应内容的增删改动, 大幅降低了维护成本.
+
+\medskip\SimpleSystemTeX[bf]\textbf{Manual}
+
+与任何使用\SimpleSystemTeX 编写的文档一样, 本手册以节为基本内容单位, 并根据其所介绍命令的使用场景将其划入不同的一级群组. 所有命令都通过风格统一的命令区块类型进行展示, 并在附录中给出了\seclink{SimpleSystemTeX命令索引}以供快速查找.
+
+使用\SimpleSystemTeX 命令时, 您必须提供命令中要求的\textcolor{olive}{必选参数}, 不提供\textcolor{brown}{可选参数}时, 命令中用于包裹它们的界定符（如 \texttt{()} , \texttt{<>} 等）也应当被一同省略. 标注 \texttt{\longarg} 表示该参数支持多段\LaTeX 代码, 您可以在其中使用 \cs{par} 命令或连续多次换行.
+
+\SimpleSystemTeX 的绝大多数命令都已经应用于本手册和其它示范项目中, 您可以查看它们的源代码来熟悉这些命令的使用.
+
+最新修改: 2026\,--\,03\,--\,22.
+
+\bigskip\bigskip\bigskip
+
+\List{更多信息}(){
+    - \SimpleSystemTeX 仓库: \href{https://github.com/JokerXin2025/SimpleSystemTeX}{https://github.com/JokerXin2025/SimpleSystemTeX}.
+    - 作者邮箱: \href{mailto:jokerxin2025@163.com}{jokerxin2025@163.com}.
+}
+
+\newpage

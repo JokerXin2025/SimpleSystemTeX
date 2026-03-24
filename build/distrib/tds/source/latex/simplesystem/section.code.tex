@@ -1,0 +1,51 @@
+%<*package>
+
+% [parameter] path of section (verbatim) , section's display name , section's parameter
+\cs_new_protected:Nn \_preprocess_section:nnn {
+    \group_begin:
+
+    \seq_if_in:NnTF \g_@@_section_seq {./#1} {
+        \msg_error:nnn {SimpleSystemTeX} {Section Repeated} {#1}
+    } {
+        \seq_gput_right:Nn \g_@@_section_seq {./#1}
+    }
+
+    \prop_gput:Nnn \g_@@_sectionname_prop {#1} {#2}
+    \prop_gput:Nnn \g_@@_sectionparameter_prop {#1} {#3}
+    \prop_gput:NnV \g_@@_sectionpart_prop {#1} \g_@@_preprocess_part_tl
+    \tl_gput_right:Nn \g_@@_task_list_tl {\Section {{#1}}}
+
+    \group_end:
+}
+\cs_generate_variant:Nn \_preprocess_section:nnn {nVV}
+
+% [parameter] path of section (verbatim)
+\cs_new_protected:Nn \_print_section:n {
+    \phantomsection \label{./#1}
+    \group_begin:
+
+    % @section , @(...)group
+    \_parse_path:nn {#1} {}
+    % @sectionpath
+    \tl_set:Nn \l_@@_sectionpath_tl {#1}
+    % @sectionpage
+    \tl_set:Nn \l_@@_sectionpage_tl {\pageref*{./#1}}
+    % @sectionname
+    \prop_get:NnN \g_@@_sectionname_prop {#1} \l_@@_sectionname_tl
+    % @sectionparameter
+    \prop_get:NnN \g_@@_sectionparameter_prop {#1} \l_@@_sectionparameter_tl
+    % @part
+    \prop_get:NnN \g_@@_sectionpart_prop {#1} \l_@@_part_tl
+
+    {\g_@@_SectionHeading_style_tl}
+
+    \file_if_exist:nTF {\g_@@_path_prefix_str #1.tex} {
+        \file_input:n {\g_@@_path_prefix_str #1.tex}
+    } {
+        \msg_warning:nnn {SimpleSystemTeX} {File Not Found} {#1.tex}
+    }
+
+    \group_end:
+}
+
+%</package>

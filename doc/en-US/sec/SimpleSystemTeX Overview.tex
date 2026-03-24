@@ -1,0 +1,56 @@
+
+\SimpleSystemTeX is a \LaTeX\ package built on \LaTeX3, specifically designed for large-scale, integrated typesetting tasks. It provides an automated file \& block management system, while also featuring convenient tools for index generation and cross-referencing.
+
+The core design philosophy of \SimpleSystemTeX is to maximize the \textbf{separation of content and structure}. This mechanism frees content creators from constantly managing global document structure and stylistic details, allowing them to focus on writing. Consequently, it significantly reduces the maintenance burden of large documents. This approach is particularly beneficial for boosting efficiency when utilizing AI tools for text polishing or assisting.
+
+\medskip\textbf{File Management System}
+
+In \SimpleSystemTeX, a \newconcept{Section} serves as the fundamental content unit of the document. Each section corresponds to an independent subfile (i.e. a \newconcept{Section File}) that stores the specific content code. The directory containing these subfiles is referred to as a \newconcept{Group}. Groups support up to four levels of nesting; however, to minimize the complexity of the styling code, the nesting depth should be kept as shallow as possible.
+
+\medskip\textbf{Main File}
+
+The document body of a \SimpleSystemTeX main file serves a dual purpose: typesetting both the content and the table of contents (TOC). When a specific section file is imported using the \cs{ImportSection} command, the system not only renders the corresponding content within the document but also automatically adds it to the TOC. By simply adjusting the order of the \cs{ImportSection} commands within the main file, you can easily alter the sequence in which sections appear in both the document and the TOC.
+
+If you need to use content typesetting commands directly within the main file, please wrap them inside the following command:
+
+\UserCommand{Content Typesetting Command}<\cs{TextCommand}>{
+    \cs{TextCommand}
+    \{\meta{LaTeX Command}\longarg\}
+}[
+    - \meta{LaTeX Command}\longarg\ : The \LaTeX\ code to be executed during content typesetting.
+]
+
+Although this command allows you to write content directly in the main file, we \textcolor{orange}{strongly advise against extensive use of this practice}. Doing so can easily lead to a disorganized document structure, increase subsequent maintenance efforts, and contradict the core design philosophy of \SimpleSystemTeX.
+
+Please note that any non--\!\SimpleSystemTeX commands in the main file that are not wrapped within a \cs{TextCommand} will be executed at the very beginning of the document. Therefore, LaTeX code for the cover page does not require additional wrapping.
+
+\medskip\textbf{Blocks}
+
+\newconcept{Blocks} are the core structural elements used for organizing and presenting content within \SimpleSystemTeX. By creating various types of blocks, users can clearly distinguish different forms of content, such as definitions, theorems, and proofs. Furthermore, blocks facilitate seamless navigation and information retrieval throughout the document via built-in cross-reference and indexing functionalities.
+
+An \newconcept{Anonymous Block} is a specialized block type, typically utilized for explanatory text or as supplementary content to other blocks. \SimpleSystemTeX does not generate cross-reference anchors for anonymous blocks; consequently, they cannot serve as targets for hyperlinks, nor will they appear in the block index.
+
+To enhance the readability and logical flow of the document, users should structure their content sensibly, applying appropriate block types based on the content's nature. We \textcolor{orange}{strongly advise against nesting regular blocks within one another}.
+
+\medskip\textbf{Cross-Reference}
+
+In \SimpleSystemTeX, the cross-reference mechanism is deeply integrated with the file and block management systems. The importation of any section file or the creation of a block automatically generates a corresponding anchor. Users can effortlessly insert hyperlinks by simply providing the target section or block identifier, eliminating the need for manual anchor management. This ensures that cross-references dynamically adapt to content additions, deletions, or modifications, thereby significantly reducing maintenance overhead.
+
+\medskip\SimpleSystemTeX[bf]\textbf{Manual}
+
+Consistent with any document authored using \SimpleSystemTeX, this manual utilizes sections as its fundamental content units. These sections are categorized into various top-level groups based on the usage contexts of the commands they describe. All commands are presented using a uniformly styled command block type, and a \seclink{SimpleSystemTeX Command Index} is provided in the appendix for quick reference.
+
+When invoking \SimpleSystemTeX commands, you must supply all required \textcolor{olive}{mandatory arguments}. If \textcolor{brown}{optional arguments} are omitted, their corresponding enclosing delimiters (e.g. \texttt{()} , \texttt{<>}) must also be omitted. The pilcrow symbol \texttt{\longarg} indicates that the argument accepts multi-paragraph \LaTeX\ code, allowing the use of the \cs{par} command or consecutive blank lines.
+
+The vast majority of \SimpleSystemTeX commands have been actively utilized in the typesetting of this very manual and other demonstration projects. We encourage you to review their source code to familiarize yourself with their practical application.
+
+Last Revised: 2026\,--\,03\,--\,22.
+
+\bigskip\bigskip\bigskip
+
+\List{More Information}(){
+    - \SimpleSystemTeX Repository: \href{https://github.com/JokerXin2025/SimpleSystemTeX}{https://github.com/JokerXin2025/SimpleSystemTeX}.
+    - Author's Email: \href{mailto:jokerxin2025@163.com}{jokerxin2025@163.com}.
+}
+
+\newpage

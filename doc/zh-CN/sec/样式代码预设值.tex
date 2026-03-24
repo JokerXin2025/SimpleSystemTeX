@@ -1,0 +1,181 @@
+
+\begin{spacing}{1.125}
+\small
+\begin{verbatim}
+\SetStyle {TOCTitle} {%
+    \bfseries\LARGE
+    \begin{center}\textbf{Content}\end{center}%
+    \bigskip
+}
+\SetStyle {TOCPartTitle} {%
+    \bfseries\Large
+    \par\bigskip\noindent
+    @part%
+    \par\medskip
+}
+\SetStyle {TOCSection} {%
+    \bfseries
+    \par\noindent
+    #ifempty @group {%
+        \seclink {@sectionpath} (%
+            \color{black}%
+            \!@sectionname%
+            \cftdotfill{\cftnodots}%
+            \textbf{@sectionpage}%
+        )%
+    } {%
+        #ifempty @subgroup {%
+            \seclink {@sectionpath} (%
+                \color{black}%
+                \!{\footnotesize @group}%
+                \:|\:@sectionname%
+                \cftdotfill{\cftnodots}%
+                \textbf{@sectionpage}%
+            )%
+        } {%
+            \seclink{@sectionpath} (%
+                \color{black}%
+                \!{\footnotesize @group}%
+                \;@subgroup%
+                \:|\:@sectionname%
+                \cftdotfill{\cftnodots}%
+                \textbf{@sectionpage}%
+            )%
+        }%
+    }%
+    \par
+}
+\end{verbatim}
+\newpage
+\begin{verbatim}
+\SetStyle {IndexGroup} {%
+    \bfseries\Large
+    \par\medskip\noindent
+    \indlink {@indexgroup/} (%
+        \color{black}%
+        \!@indexgroup%
+    )%
+    \par\medskip
+}
+\SetStyle {IndexSubgroup} {%
+    \bfseries
+    \par\medskip\noindent
+    \indlink {@indexgroup/@indexsubgroup/} (%
+        \color{black}%
+        \!{\small @indexgroup}%
+        \ {\large @indexsubgroup}%
+    )%
+    \par\smallskip
+}
+\SetStyle {IndexSubsubgroup} {%
+    \bfseries\normalsize
+    \par\smallskip\noindent
+    \indlink {@indexgroup/@indexsubgroup/@indexsubsubgroup/} (%
+        \color{black}%
+        \!@indexsubsubgroup%
+    )%
+    \par
+}
+\SetStyle {IndexBlock} {%
+    \bfseries
+    \par\noindent
+    \blclink{@indexblock} (%
+        \color{black}%
+        \!@indexblockname\quad @indexblockparameter%
+        \cftdotfill{\cftnodots}%
+        \textbf{@indexsectionpage}%
+    )%
+    \par
+}
+\end{verbatim}
+\newpage
+\begin{verbatim}
+\SetStyle {SectionHeading} {%
+    \bfseries
+    \par\noindent
+    #ifempty @group {%
+        {\huge @sectionname}%
+    } {%
+        #ifempty @subgroup {%
+            {\Large @group}%
+            {\huge\;|\;@sectionname}%
+        } {%
+            {\Large @group}%
+            \;\;{\huge @subgroup\;|\;@sectionname}%
+        }%
+    }%
+    \par\bigskip
+}
+\SetStyle {SectionLink} {%
+    \color{blue}%
+    #ifempty @linktext {%
+        #ifempty @targetgroup {%
+            \,@targetsectionname\,%
+        } {%
+            #ifempty @targetsubgroup {%
+                \,{\footnotesize @targetgroup}%
+                \:|\:@targetsectionname\,%
+            } {%
+                \,{\footnotesize @targetgroup}%
+                \;@targetsubgroup%
+                \:|\:@targetsectionname\,%
+            }%
+        }%
+    } {%
+        \,@linktext\,%
+    }%
+}
+\end{verbatim}
+\newpage
+\begin{verbatim}
+\SetStyle {BlockLink} {%
+    \color{blue}%
+    #ifempty @linktext {%
+        \,@targetblockname\,%
+    } {%
+        \,@linktext\,%
+    }%
+}
+\SetStyle {IndexLink} {%
+    \color{blue}%
+    #ifempty @linktext {%
+        #ifempty @targetsubgroup {%
+            \,@targetgroup\,%
+        } {%
+            \,{\footnotesize @targetgroup}%
+            \;@targetsubgroup\,%
+        }%
+    } {%
+        \,@linktext\,%
+    }%
+}
+
+\SetStyle {Definition} {%
+    \color{purple}%
+    \par\noindent{\bfseries @blockname}%
+    \quad{\itshape @blockcontent}%
+    \par
+}
+\SetStyle {Theorem} {%
+    \color{teal}%
+    \par\noindent{\bfseries @blockname}%
+    \quad{\itshape @blockcontent}%
+    \par
+}
+\SetStyle {Corollary} {%
+    \color{brown}%
+    \par\noindent{\bfseries @blockname}%
+    \quad{\itshape @blockcontent}%
+    \par
+}
+\SetStyle {Proof} {%
+    \color{gray}\itshape
+    \par\noindent
+    @blockname {\scriptsize (@blockparameter)}%
+    \par @blockcontent%
+    \par
+}
+\end{verbatim}
+\end{spacing}
+
+\newpage

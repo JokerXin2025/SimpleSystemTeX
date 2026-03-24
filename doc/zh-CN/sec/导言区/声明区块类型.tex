@@ -1,0 +1,24 @@
+
+\UserCommand{声明区块类型}<\cs{NewBlockType} , \cs{NewBlockType*}>{
+    \cs{NewBlockType}
+    \{\meta{常规区块类型}\}
+    \AnotherUsage
+    \cs{NewBlockType*}
+    \{\meta{匿名区块类型}\}
+}[
+    - \meta{常规区块类型} , \meta{匿名区块类型} : 要声明的区块类型名称, 只能包含字母, 区分大小写.
+]
+
+您不能对已创建的区块类型再次使用 \cs{NewBlockType} 或 \cs{NewBlockType*} 命令, 但可以\seclink{导言区/样式设定}(重新修改它们的样式). \SimpleSystemTeX 为用户预设了如下几种基本区块类型:
+
+\List{预设常规区块类型}{
+    - \texttt{Definition} : 数学定义.
+    - \texttt{Theorem} : 数学定理.
+    - \texttt{Corollary} : 数学推论.
+}
+
+\List{预设匿名区块类型}{
+    - \texttt{Proof} : 数学证明.
+}
+
+\newpage

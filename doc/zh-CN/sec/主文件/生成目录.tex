@@ -1,0 +1,33 @@
+
+在主文件的正文区使用下面的命令来生成目录:
+
+\UserCommand{生成目录}<\cs{TableofContents}>{
+    \cs{TableofContents}
+}
+
+使用 \cs{TableofContents} 生成的目录会自动包含全部由 \cs{ImportSection} 导入的节文件, 目录本身不会作为其中的条目. 文档修改后的首次编译完成后, 所有的节条目和分块标题将自动更新, 但由于\TeX 交叉引用的滞后性, 您需要再次编译来获得正确的页码显示和链接.
+
+若要在目录中的两个节条目之间执行排版命令, 请将其放置在相应的 \cs{ImportSection} 命令之间, 并包裹在以下命令中:
+
+\UserCommand{目录排版命令}<\cs{TableCommand}>{
+    \cs{TableCommand}
+    \{\meta{LaTeX命令}\longarg\}
+}[
+    - \meta{LaTeX命令}\longarg\ : 需要在目录排版时执行的\LaTeX 代码.
+]
+
+\Example{目录排版-示例}{
+    \par\noindent\ \cs{TableofContents}
+    \par\noindent\ \cs{AddPart} \{分块A\}
+    \par\noindent\ \cs{ImportSection} \{群组/节A1\}
+    \par\noindent\ \cs{ImportSection} \{群组/节A2\}
+    \par\noindent\ \cs{AddPart} \{分块B\}
+    \par\noindent\ \cs{ImportSection} \{群组/节B1\}
+    \par\noindent\ \cs{TableCommand} \{\cs{bigskip}\cs{bigskip}\}
+    \par\noindent\ \cs{TextCommand} \{\cs{newpage}\}
+    \par\noindent\ \cs{AddPart} \{附录\}
+    \par\noindent\ \cs{ImportSection} \{附录1\}
+    \par\noindent\ \cs{ImportSection} \{附录2\}
+}
+
+\newpage
