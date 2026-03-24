@@ -1,7 +1,7 @@
 %<*package>
 
 % [parameter] part's name
-\cs_new_protected:Nn \_process_toc_part:n {
+\cs_new_protected:Nn \_@@_process_toc_part:n {
 
     % @part
     \tl_set:Nn \l_@@_part_tl {#1}
@@ -10,11 +10,11 @@
 }
 
 % [parameter] path of entry section (verbatim)
-\cs_new_protected:Nn \_print_toc_section:n {
+\cs_new_protected:Nn \_@@_print_toc_section:n {
     \group_begin:
 
     % @section , @(...)group
-    \_parse_path:nn {#1} {}
+    \_@@_parse_path:nn {#1} {}
     % @sectionpath
     \tl_set:Nn \l_@@_sectionpath_tl {#1}
     % @sectionpage
@@ -29,14 +29,14 @@
     \group_end:
 }
 
-\cs_new_protected:Nn \_print_toc: {
+\cs_new_protected:Nn \_@@_print_toc: {
     \group_begin:
 
     {\g_@@_TOCTitle_style_tl}
 
-    \_execute_rule:Nn \g_@@_task_list_tl {
-        \Section \_print_toc_section:n
-        \Part \_process_toc_part:n
+    \_@@_execute_rule:Nn \g_@@_task_list_tl {
+        \Section \_@@_print_toc_section:n
+        \Part \_@@_process_toc_part:n
         \TableCommand \use:n
     }
 

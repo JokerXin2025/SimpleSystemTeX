@@ -47,7 +47,7 @@
         \tl_set:Nn \l_@@_interface_argb_tl {#3}
     }
 
-    \_preprocess_section:nVV {#1} \l_@@_interface_arga_tl \l_@@_interface_argb_tl
+    \_@@_preprocess_section:nVV {#1} \l_@@_interface_arga_tl \l_@@_interface_argb_tl
 
     \group_end:
 }
@@ -58,9 +58,9 @@
 
         \tl_new:c {g_#2_style_tl}
         \IfBooleanTF {#1} {
-            \_declare_anonymous_block_type:n {#2}
+            \_@@_declare_anonymous_block_type:n {#2}
         } {
-            \_declare_block_type:n {#2}
+            \_@@_declare_block_type:n {#2}
         }
 
     } {
@@ -80,9 +80,9 @@
     }
 
     \IfBooleanTF {#1} {
-        \_generate_block_index:NnVV \c_false_bool {#2} \l_@@_interface_arga_tl \l_@@_interface_argb_tl
+        \_@@_generate_block_index:NnVV \c_false_bool {#2} \l_@@_interface_arga_tl \l_@@_interface_argb_tl
     } {
-        \_generate_block_index:NnVV \c_true_bool {#2} \l_@@_interface_arga_tl \l_@@_interface_argb_tl
+        \_@@_generate_block_index:NnVV \c_true_bool {#2} \l_@@_interface_arga_tl \l_@@_interface_argb_tl
     }
 
     \group_end:
@@ -95,7 +95,7 @@
         \tl_set:Nn \l_@@_interface_arga_tl {#2}
     }
 
-    \_add_section_link:eV {\tl_to_str:e {#1}} \l_@@_interface_arga_tl
+    \_@@_add_section_link:eV {\tl_to_str:e {#1}} \l_@@_interface_arga_tl
 
     \group_end:
 }
@@ -107,7 +107,7 @@
         \tl_set:Nn \l_@@_interface_arga_tl {#2}
     }
 
-    \_add_block_link:eV {#1} \l_@@_interface_arga_tl
+    \_@@_add_block_link:eV {#1} \l_@@_interface_arga_tl
 
     \group_end:
 }
@@ -119,7 +119,7 @@
         \tl_set:Nn \l_@@_interface_arga_tl {#2}
     }
 
-    \_add_index_link:eV {\tl_to_str:e {#1}} \l_@@_interface_arga_tl
+    \_@@_add_index_link:eV {\tl_to_str:e {#1}} \l_@@_interface_arga_tl
 
     \group_end:
 }

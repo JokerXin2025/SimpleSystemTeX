@@ -4,7 +4,7 @@
 \tl_new:N \l_@@_block_argb_tl
 
 % [parameter] block type name (only letters) , block's label (expanded) , block's display name , block's parameter , block's content
-\cs_new_protected:Nn \_set_block:nnnnn {
+\cs_new_protected:Nn \_@@_set_block:nnnnn {
 
     \seq_if_in:NnTF \g_@@_block_seq {#2} {
         \msg_warning:nnn {SimpleSystemTeX} {Block Occupied} {#2}
@@ -25,10 +25,10 @@
     }
 
 }
-\cs_generate_variant:Nn \_set_block:nnnnn {neVVn}
+\cs_generate_variant:Nn \_@@_set_block:nnnnn {neVVn}
 
 % [parameter] block type name (only letters) , block's label (expanded) , block's display name , block's parameter , block's content
-\cs_new_protected:Nn \_print_block:nnnnn {
+\cs_new_protected:Nn \_@@_print_block:nnnnn {
     \group_begin:
 
     % @block
@@ -47,11 +47,11 @@
 
     \group_end:
 }
-\cs_generate_variant:Nn \_print_block:nnnnn {neVVn}
-\cs_generate_variant:Nn \_print_block:nnnnn {nnVVn}
+\cs_generate_variant:Nn \_@@_print_block:nnnnn {neVVn}
+\cs_generate_variant:Nn \_@@_print_block:nnnnn {nnVVn}
 
 % [parameter] block type name (only letters)
-\cs_new_protected:Nn \_declare_anonymous_block_type:n {
+\cs_new_protected:Nn \_@@_declare_anonymous_block_type:n {
 
     \exp_args:Nc \NewDocumentCommand {#1} {d() d<> +m} {
         \group_begin:
@@ -63,7 +63,7 @@
             \tl_set:Nn \l_@@_block_argb_tl {##2}
         }
 
-        \_print_block:nnVVn {#1} {} \l_@@_block_arga_tl \l_@@_block_argb_tl {##3}
+        \_@@_print_block:nnVVn {#1} {} \l_@@_block_arga_tl \l_@@_block_argb_tl {##3}
 
         \group_end:
     }
@@ -71,7 +71,7 @@
 }
 
 % [parameter] block type name (only letters)
-\cs_new_protected:Nn \_declare_block_type:n {
+\cs_new_protected:Nn \_@@_declare_block_type:n {
 
     \exp_args:Nc \NewDocumentCommand {#1} {s m d() d<> +m} {
         \group_begin:
@@ -86,10 +86,10 @@
         }
 
         \IfBooleanF {##1} {
-            \_set_block:neVVn {#1} {##2} \l_@@_block_arga_tl \l_@@_block_argb_tl {##5}
+            \_@@_set_block:neVVn {#1} {##2} \l_@@_block_arga_tl \l_@@_block_argb_tl {##5}
         }
 
-        \_print_block:neVVn {#1} {##2} \l_@@_block_arga_tl \l_@@_block_argb_tl {##5}
+        \_@@_print_block:neVVn {#1} {##2} \l_@@_block_arga_tl \l_@@_block_argb_tl {##5}
 
         \group_end:
     }

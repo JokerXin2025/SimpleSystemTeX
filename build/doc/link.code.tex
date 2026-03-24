@@ -1,7 +1,7 @@
 %<*package>
 
 % [parameter] path of target section (verbatim) , link text
-\cs_new_protected:Nn \_add_section_link:nn {
+\cs_new_protected:Nn \_@@_add_section_link:nn {
 
     \seq_if_in:NnTF \g_@@_section_seq {./#1} {
         \group_begin:
@@ -9,7 +9,7 @@
         % @linktext
         \tl_set:Nn \l_@@_linktext_tl {#2}
         % @targetsection , @target(...)group
-        \_parse_path:nn {#1} {target}
+        \_@@_parse_path:nn {#1} {target}
         % @targetsectionpath
         \tl_set:Nn \l_@@_targetsectionpath_tl {#1}
         % @targetsectionpage
@@ -29,10 +29,10 @@
     }
 
 }
-\cs_generate_variant:Nn \_add_section_link:nn {eV}
+\cs_generate_variant:Nn \_@@_add_section_link:nn {eV}
 
 % [parameter] target block's name (expanded) , link text
-\cs_new_protected:Nn \_add_block_link:nn {
+\cs_new_protected:Nn \_@@_add_block_link:nn {
 
     \seq_if_in:NnTF \g_@@_block_register_seq {#1} {
         \group_begin:
@@ -56,10 +56,10 @@
     }
 
 }
-\cs_generate_variant:Nn \_add_block_link:nn {eV}
+\cs_generate_variant:Nn \_@@_add_block_link:nn {eV}
 
 % [parameter] scope path of index (verbatim) , link text
-\cs_new_protected:Nn \_add_index_link:nn {
+\cs_new_protected:Nn \_@@_add_index_link:nn {
 
     \seq_if_in:NnTF \g_@@_index_register_seq {./#1} {
         \group_begin:
@@ -67,7 +67,7 @@
         % @linktext
         \tl_set:Nn \l_@@_linktext_tl {#2}
         % @target(...)group
-        \_parse_path:nn {#1.groupkeep} {target}
+        \_@@_parse_path:nn {#1.groupkeep} {target}
         % @targetindexparameter
         \prop_get:NnN \g_@@_indexparameter_register_prop {#1} \l_@@_targetindexparameter_tl
 
@@ -79,6 +79,6 @@
     }
 
 }
-\cs_generate_variant:Nn \_add_index_link:nn {eV}
+\cs_generate_variant:Nn \_@@_add_index_link:nn {eV}
 
 %</package>

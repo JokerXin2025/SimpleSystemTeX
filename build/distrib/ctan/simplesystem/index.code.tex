@@ -4,7 +4,7 @@
 \quark_new:N \q_@@_prefix_mark
 
 % [parameter] scope path of index (verbatim) , block index's parameter
-\cs_new_protected:Nn \_set_index:nn {
+\cs_new_protected:Nn \_@@_set_index:nn {
 
     \seq_if_in:NnTF \g_@@_index_seq {./#1} {
         \msg_warning:nnn {SimpleSystemTeX} {Block Index Repeated} {#1}
@@ -23,7 +23,7 @@
 }
 
 % [parameter] entry block's label (expanded) , path of entry block's parent section (verbatim)
-\cs_new_protected:Nn \_print_index_block:nn {
+\cs_new_protected:Nn \_@@_print_index_block:nn {
     \group_begin:
 
     % @indexblock
@@ -54,7 +54,7 @@
 }
 
 % [parameter] scope path of index (verbatim) , block's label (expanded) , path of entry block's parent section (verbatim)
-\cs_new_protected:Nn \_process_index_item:nnn {
+\cs_new_protected:Nn \_@@_process_index_item:nnn {
     \group_begin:
 
     \tl_set:Nn \l_tmpa_tl {\q_@@_prefix_mark #3}
@@ -62,7 +62,7 @@
     \tl_if_in:NnF \l_tmpa_tl {\q_@@_prefix_mark} {
         \seq_set_split:NnV \l_tmpa_seq {/} \l_tmpa_tl
         \int_compare:nTF {\seq_count:N \l_tmpa_seq == 1} {
-            \_print_index_block:nn {#2} {#3}
+            \_@@_print_index_block:nn {#2} {#3}
         } {
             \seq_if_in:NeF \g_@@_nextgroup_seq {
                 \exp_not:n {#1} \seq_item:Nn \l_tmpa_seq {1} /
@@ -78,18 +78,18 @@
 }
 
 % [parameter] whether to add label , scope path of index (verbatim) , list of block type names , block index's parameter
-\cs_new_protected:Nn \_generate_block_index:Nnnn {
+\cs_new_protected:Nn \_@@_generate_block_index:Nnnn {
     \group_begin:
 
     \clist_set:Nn \l_tmpa_clist {#3}
 
     % @index(...)group
-    \_parse_path:nn {#2.groupkeep} {index}
+    \_@@_parse_path:nn {#2.groupkeep} {index}
     % @indexparameter
     \tl_set:Nn \l_@@_indexparameter_tl {#4}
 
     \bool_if:NT #1 {
-        \_set_index:nn {#2} {#4}
+        \_@@_set_index:nn {#2} {#4}
     }
 
     \int_case:nn {\seq_count:N \l_@@_path_seq} {
@@ -104,22 +104,22 @@
 
     \seq_map_inline:Nn \g_@@_block_register_seq {
         \clist_if_empty:NTF \l_tmpa_clist {
-            \exp_args:Nnne \_process_index_item:nnn {#2} {##1} {\prop_item:Nn \g_@@_blocksectionpath_register_prop {##1}}
+            \exp_args:Nnne \_@@_process_index_item:nnn {#2} {##1} {\prop_item:Nn \g_@@_blocksectionpath_register_prop {##1}}
         } {
             \exp_args:NNe \clist_if_in:NnT \l_tmpa_clist {
                 \prop_item:Nn \g_@@_blocktype_register_prop {##1}
             } {
-                \exp_args:Nnne \_process_index_item:nnn {#2} {##1} {\prop_item:Nn \g_@@_blocksectionpath_register_prop {##1}}
+                \exp_args:Nnne \_@@_process_index_item:nnn {#2} {##1} {\prop_item:Nn \g_@@_blocksectionpath_register_prop {##1}}
             }
         }
     }
 
     \seq_map_inline:Nn \g_@@_nextgroup_seq {
-        \_generate_block_index:Nnnn #1 {##1} {#3} {#4}
+        \_@@_generate_block_index:Nnnn #1 {##1} {#3} {#4}
     }
 
     \group_end:
 }
-\cs_generate_variant:Nn \_generate_block_index:Nnnn {NnVV}
+\cs_generate_variant:Nn \_@@_generate_block_index:Nnnn {NnVV}
 
 %</package>

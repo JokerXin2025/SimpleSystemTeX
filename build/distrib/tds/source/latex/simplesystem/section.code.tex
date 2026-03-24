@@ -1,7 +1,7 @@
 %<*package>
 
 % [parameter] path of section (verbatim) , section's display name , section's parameter
-\cs_new_protected:Nn \_preprocess_section:nnn {
+\cs_new_protected:Nn \_@@_preprocess_section:nnn {
     \group_begin:
 
     \seq_if_in:NnTF \g_@@_section_seq {./#1} {
@@ -17,15 +17,15 @@
 
     \group_end:
 }
-\cs_generate_variant:Nn \_preprocess_section:nnn {nVV}
+\cs_generate_variant:Nn \_@@_preprocess_section:nnn {nVV}
 
 % [parameter] path of section (verbatim)
-\cs_new_protected:Nn \_print_section:n {
+\cs_new_protected:Nn \_@@_print_section:n {
     \phantomsection \label{./#1}
     \group_begin:
 
     % @section , @(...)group
-    \_parse_path:nn {#1} {}
+    \_@@_parse_path:nn {#1} {}
     % @sectionpath
     \tl_set:Nn \l_@@_sectionpath_tl {#1}
     % @sectionpage

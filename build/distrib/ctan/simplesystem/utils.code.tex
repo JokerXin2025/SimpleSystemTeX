@@ -5,26 +5,26 @@
 \seq_new:N \l_@@_path_seq
 \prop_new:N \l_@@_rule_prop
 
-\cs_new_protected:Nn \_make_prop_loop:Nnn {
+\cs_new_protected:Nn \_@@_make_prop_loop:Nnn {
     \quark_if_recursion_tail_stop:n {#2}
     \prop_put:Nnn #1 {#2} {#3}
-    \_make_prop_loop:Nnn #1
+    \_@@_make_prop_loop:Nnn #1
 }
-\cs_new_protected:Nn \_execute_loop:Nnn {
+\cs_new_protected:Nn \_@@_execute_loop:Nnn {
     \quark_if_recursion_tail_stop:n {#2}
     \prop_get:NnNT #1 {#2} \l_@@_loop_command_tl {
         \l_@@_loop_command_tl #3
     }
-    \_execute_loop:Nnn #1
+    \_@@_execute_loop:Nnn #1
 }
-\cs_new_protected:Nn \_execute_rule:Nn {
+\cs_new_protected:Nn \_@@_execute_rule:Nn {
     \prop_clear:N \l_@@_rule_prop
-    \_make_prop_loop:Nnn \l_@@_rule_prop #2 \q_recursion_tail \q_recursion_tail \q_recursion_stop
+    \_@@_make_prop_loop:Nnn \l_@@_rule_prop #2 \q_recursion_tail \q_recursion_tail \q_recursion_stop
     \tl_set_eq:NN \l_@@_task_list_tl #1
     \tl_put_right:Nn \l_@@_task_list_tl {\q_recursion_tail \q_recursion_tail \q_recursion_stop}
-    \exp_after:wN \_execute_loop:Nnn \exp_after:wN \l_@@_rule_prop \l_@@_task_list_tl
+    \exp_after:wN \_@@_execute_loop:Nnn \exp_after:wN \l_@@_rule_prop \l_@@_task_list_tl
 }
-\cs_new_protected:Nn \_parse_path:nn {
+\cs_new_protected:Nn \_@@_parse_path:nn {
     \clist_map_inline:nn {group, subgroup, subsubgroup, subsubsubgroup} {
         \tl_clear:c {l_#2##1_tl}
     }

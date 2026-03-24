@@ -12,7 +12,7 @@
     \int_gset:Nn \g_@@_Automatic_List_beta_int {0}
 }
 
-\cs_new_protected:Nn \trans_auto_list:N {
+\cs_new_protected:Nn \_@@_trans_auto_list:N {
     \int_set:Nn \l_@@_list_num_int {0}
     \tl_replace_all:Nnn #1 {~+~} {
         \int_incr:N \l_@@_list_num_int

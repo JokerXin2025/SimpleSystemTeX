@@ -36,7 +36,7 @@
 %% in the same archive or directory.)
 
 \NeedsTeXFormat {LaTeX2e}
-\ProvidesExplPackage {simplesystem} {2026-03-14} {1.0.0} {
+\ProvidesExplPackage {simplesystem} {2026-03-24} {1.0.0} {
     A modern package for managing sections and blocks.
 }
 \RequirePackage {tikz, tocloft, amssymb}
@@ -186,26 +186,26 @@
 \seq_new:N \l__simplesystem_path_seq
 \prop_new:N \l__simplesystem_rule_prop
 
-\cs_new_protected:Nn \_make_prop_loop:Nnn {
+\cs_new_protected:Nn \__simplesystem_make_prop_loop:Nnn {
     \quark_if_recursion_tail_stop:n {#2}
     \prop_put:Nnn #1 {#2} {#3}
-    \_make_prop_loop:Nnn #1
+    \__simplesystem_make_prop_loop:Nnn #1
 }
-\cs_new_protected:Nn \_execute_loop:Nnn {
+\cs_new_protected:Nn \__simplesystem_execute_loop:Nnn {
     \quark_if_recursion_tail_stop:n {#2}
     \prop_get:NnNT #1 {#2} \l__simplesystem_loop_command_tl {
         \l__simplesystem_loop_command_tl #3
     }
-    \_execute_loop:Nnn #1
+    \__simplesystem_execute_loop:Nnn #1
 }
-\cs_new_protected:Nn \_execute_rule:Nn {
+\cs_new_protected:Nn \__simplesystem_execute_rule:Nn {
     \prop_clear:N \l__simplesystem_rule_prop
-    \_make_prop_loop:Nnn \l__simplesystem_rule_prop #2 \q_recursion_tail \q_recursion_tail \q_recursion_stop
+    \__simplesystem_make_prop_loop:Nnn \l__simplesystem_rule_prop #2 \q_recursion_tail \q_recursion_tail \q_recursion_stop
     \tl_set_eq:NN \l__simplesystem_task_list_tl #1
     \tl_put_right:Nn \l__simplesystem_task_list_tl {\q_recursion_tail \q_recursion_tail \q_recursion_stop}
-    \exp_after:wN \_execute_loop:Nnn \exp_after:wN \l__simplesystem_rule_prop \l__simplesystem_task_list_tl
+    \exp_after:wN \__simplesystem_execute_loop:Nnn \exp_after:wN \l__simplesystem_rule_prop \l__simplesystem_task_list_tl
 }
-\cs_new_protected:Nn \_parse_path:nn {
+\cs_new_protected:Nn \__simplesystem_parse_path:nn {
     \clist_map_inline:nn {group, subgroup, subsubgroup, subsubsubgroup} {
         \tl_clear:c {l_#2##1_tl}
     }
@@ -222,7 +222,7 @@
 }
 
 
-\cs_new_protected:Nn \_preprocess_section:nnn {
+\cs_new_protected:Nn \__simplesystem_preprocess_section:nnn {
     \group_begin:
 
     \seq_if_in:NnTF \g__simplesystem_section_seq {./#1} {
@@ -238,14 +238,14 @@
 
     \group_end:
 }
-\cs_generate_variant:Nn \_preprocess_section:nnn {nVV}
+\cs_generate_variant:Nn \__simplesystem_preprocess_section:nnn {nVV}
 
-\cs_new_protected:Nn \_print_section:n {
+\cs_new_protected:Nn \__simplesystem_print_section:n {
     \phantomsection \label{./#1}
     \group_begin:
 
     % @section , @(...)group
-    \_parse_path:nn {#1} {}
+    \__simplesystem_parse_path:nn {#1} {}
     % @sectionpath
     \tl_set:Nn \l__simplesystem_sectionpath_tl {#1}
     % @sectionpage
@@ -269,7 +269,7 @@
 }
 
 
-\cs_new_protected:Nn \_process_toc_part:n {
+\cs_new_protected:Nn \__simplesystem_process_toc_part:n {
 
     % @part
     \tl_set:Nn \l__simplesystem_part_tl {#1}
@@ -277,11 +277,11 @@
 
 }
 
-\cs_new_protected:Nn \_print_toc_section:n {
+\cs_new_protected:Nn \__simplesystem_print_toc_section:n {
     \group_begin:
 
     % @section , @(...)group
-    \_parse_path:nn {#1} {}
+    \__simplesystem_parse_path:nn {#1} {}
     % @sectionpath
     \tl_set:Nn \l__simplesystem_sectionpath_tl {#1}
     % @sectionpage
@@ -296,14 +296,14 @@
     \group_end:
 }
 
-\cs_new_protected:Nn \_print_toc: {
+\cs_new_protected:Nn \__simplesystem_print_toc: {
     \group_begin:
 
     {\g__simplesystem_TOCTitle_style_tl}
 
-    \_execute_rule:Nn \g__simplesystem_task_list_tl {
-        \Section \_print_toc_section:n
-        \Part \_process_toc_part:n
+    \__simplesystem_execute_rule:Nn \g__simplesystem_task_list_tl {
+        \Section \__simplesystem_print_toc_section:n
+        \Part \__simplesystem_process_toc_part:n
         \TableCommand \use:n
     }
 
@@ -314,7 +314,7 @@
 \tl_new:N \l__simplesystem_block_arga_tl
 \tl_new:N \l__simplesystem_block_argb_tl
 
-\cs_new_protected:Nn \_set_block:nnnnn {
+\cs_new_protected:Nn \__simplesystem_set_block:nnnnn {
 
     \seq_if_in:NnTF \g__simplesystem_block_seq {#2} {
         \msg_warning:nnn {SimpleSystemTeX} {Block Occupied} {#2}
@@ -335,9 +335,9 @@
     }
 
 }
-\cs_generate_variant:Nn \_set_block:nnnnn {neVVn}
+\cs_generate_variant:Nn \__simplesystem_set_block:nnnnn {neVVn}
 
-\cs_new_protected:Nn \_print_block:nnnnn {
+\cs_new_protected:Nn \__simplesystem_print_block:nnnnn {
     \group_begin:
 
     % @block
@@ -356,10 +356,10 @@
 
     \group_end:
 }
-\cs_generate_variant:Nn \_print_block:nnnnn {neVVn}
-\cs_generate_variant:Nn \_print_block:nnnnn {nnVVn}
+\cs_generate_variant:Nn \__simplesystem_print_block:nnnnn {neVVn}
+\cs_generate_variant:Nn \__simplesystem_print_block:nnnnn {nnVVn}
 
-\cs_new_protected:Nn \_declare_anonymous_block_type:n {
+\cs_new_protected:Nn \__simplesystem_declare_anonymous_block_type:n {
 
     \exp_args:Nc \NewDocumentCommand {#1} {d() d<> +m} {
         \group_begin:
@@ -371,14 +371,14 @@
             \tl_set:Nn \l__simplesystem_block_argb_tl {##2}
         }
 
-        \_print_block:nnVVn {#1} {} \l__simplesystem_block_arga_tl \l__simplesystem_block_argb_tl {##3}
+        \__simplesystem_print_block:nnVVn {#1} {} \l__simplesystem_block_arga_tl \l__simplesystem_block_argb_tl {##3}
 
         \group_end:
     }
 
 }
 
-\cs_new_protected:Nn \_declare_block_type:n {
+\cs_new_protected:Nn \__simplesystem_declare_block_type:n {
 
     \exp_args:Nc \NewDocumentCommand {#1} {s m d() d<> +m} {
         \group_begin:
@@ -393,10 +393,10 @@
         }
 
         \IfBooleanF {##1} {
-            \_set_block:neVVn {#1} {##2} \l__simplesystem_block_arga_tl \l__simplesystem_block_argb_tl {##5}
+            \__simplesystem_set_block:neVVn {#1} {##2} \l__simplesystem_block_arga_tl \l__simplesystem_block_argb_tl {##5}
         }
 
-        \_print_block:neVVn {#1} {##2} \l__simplesystem_block_arga_tl \l__simplesystem_block_argb_tl {##5}
+        \__simplesystem_print_block:neVVn {#1} {##2} \l__simplesystem_block_arga_tl \l__simplesystem_block_argb_tl {##5}
 
         \group_end:
     }
@@ -407,7 +407,7 @@
 \seq_new:N \g__simplesystem_nextgroup_seq
 \quark_new:N \q__simplesystem_prefix_mark
 
-\cs_new_protected:Nn \_set_index:nn {
+\cs_new_protected:Nn \__simplesystem_set_index:nn {
 
     \seq_if_in:NnTF \g__simplesystem_index_seq {./#1} {
         \msg_warning:nnn {SimpleSystemTeX} {Block Index Repeated} {#1}
@@ -425,7 +425,7 @@
 
 }
 
-\cs_new_protected:Nn \_print_index_block:nn {
+\cs_new_protected:Nn \__simplesystem_print_index_block:nn {
     \group_begin:
 
     % @indexblock
@@ -455,7 +455,7 @@
     \group_end:
 }
 
-\cs_new_protected:Nn \_process_index_item:nnn {
+\cs_new_protected:Nn \__simplesystem_process_index_item:nnn {
     \group_begin:
 
     \tl_set:Nn \l_tmpa_tl {\q__simplesystem_prefix_mark #3}
@@ -463,7 +463,7 @@
     \tl_if_in:NnF \l_tmpa_tl {\q__simplesystem_prefix_mark} {
         \seq_set_split:NnV \l_tmpa_seq {/} \l_tmpa_tl
         \int_compare:nTF {\seq_count:N \l_tmpa_seq == 1} {
-            \_print_index_block:nn {#2} {#3}
+            \__simplesystem_print_index_block:nn {#2} {#3}
         } {
             \seq_if_in:NeF \g__simplesystem_nextgroup_seq {
                 \exp_not:n {#1} \seq_item:Nn \l_tmpa_seq {1} /
@@ -478,18 +478,18 @@
     \group_end:
 }
 
-\cs_new_protected:Nn \_generate_block_index:Nnnn {
+\cs_new_protected:Nn \__simplesystem_generate_block_index:Nnnn {
     \group_begin:
 
     \clist_set:Nn \l_tmpa_clist {#3}
 
     % @index(...)group
-    \_parse_path:nn {#2.groupkeep} {index}
+    \__simplesystem_parse_path:nn {#2.groupkeep} {index}
     % @indexparameter
     \tl_set:Nn \l__simplesystem_indexparameter_tl {#4}
 
     \bool_if:NT #1 {
-        \_set_index:nn {#2} {#4}
+        \__simplesystem_set_index:nn {#2} {#4}
     }
 
     \int_case:nn {\seq_count:N \l__simplesystem_path_seq} {
@@ -504,26 +504,26 @@
 
     \seq_map_inline:Nn \g__simplesystem_block_register_seq {
         \clist_if_empty:NTF \l_tmpa_clist {
-            \exp_args:Nnne \_process_index_item:nnn {#2} {##1} {\prop_item:Nn \g__simplesystem_blocksectionpath_register_prop {##1}}
+            \exp_args:Nnne \__simplesystem_process_index_item:nnn {#2} {##1} {\prop_item:Nn \g__simplesystem_blocksectionpath_register_prop {##1}}
         } {
             \exp_args:NNe \clist_if_in:NnT \l_tmpa_clist {
                 \prop_item:Nn \g__simplesystem_blocktype_register_prop {##1}
             } {
-                \exp_args:Nnne \_process_index_item:nnn {#2} {##1} {\prop_item:Nn \g__simplesystem_blocksectionpath_register_prop {##1}}
+                \exp_args:Nnne \__simplesystem_process_index_item:nnn {#2} {##1} {\prop_item:Nn \g__simplesystem_blocksectionpath_register_prop {##1}}
             }
         }
     }
 
     \seq_map_inline:Nn \g__simplesystem_nextgroup_seq {
-        \_generate_block_index:Nnnn #1 {##1} {#3} {#4}
+        \__simplesystem_generate_block_index:Nnnn #1 {##1} {#3} {#4}
     }
 
     \group_end:
 }
-\cs_generate_variant:Nn \_generate_block_index:Nnnn {NnVV}
+\cs_generate_variant:Nn \__simplesystem_generate_block_index:Nnnn {NnVV}
 
 
-\cs_new_protected:Nn \_add_section_link:nn {
+\cs_new_protected:Nn \__simplesystem_add_section_link:nn {
 
     \seq_if_in:NnTF \g__simplesystem_section_seq {./#1} {
         \group_begin:
@@ -531,7 +531,7 @@
         % @linktext
         \tl_set:Nn \l__simplesystem_linktext_tl {#2}
         % @targetsection , @target(...)group
-        \_parse_path:nn {#1} {target}
+        \__simplesystem_parse_path:nn {#1} {target}
         % @targetsectionpath
         \tl_set:Nn \l__simplesystem_targetsectionpath_tl {#1}
         % @targetsectionpage
@@ -551,9 +551,9 @@
     }
 
 }
-\cs_generate_variant:Nn \_add_section_link:nn {eV}
+\cs_generate_variant:Nn \__simplesystem_add_section_link:nn {eV}
 
-\cs_new_protected:Nn \_add_block_link:nn {
+\cs_new_protected:Nn \__simplesystem_add_block_link:nn {
 
     \seq_if_in:NnTF \g__simplesystem_block_register_seq {#1} {
         \group_begin:
@@ -577,9 +577,9 @@
     }
 
 }
-\cs_generate_variant:Nn \_add_block_link:nn {eV}
+\cs_generate_variant:Nn \__simplesystem_add_block_link:nn {eV}
 
-\cs_new_protected:Nn \_add_index_link:nn {
+\cs_new_protected:Nn \__simplesystem_add_index_link:nn {
 
     \seq_if_in:NnTF \g__simplesystem_index_register_seq {./#1} {
         \group_begin:
@@ -587,7 +587,7 @@
         % @linktext
         \tl_set:Nn \l__simplesystem_linktext_tl {#2}
         % @target(...)group
-        \_parse_path:nn {#1.groupkeep} {target}
+        \__simplesystem_parse_path:nn {#1.groupkeep} {target}
         % @targetindexparameter
         \prop_get:NnN \g__simplesystem_indexparameter_register_prop {#1} \l__simplesystem_targetindexparameter_tl
 
@@ -599,7 +599,7 @@
     }
 
 }
-\cs_generate_variant:Nn \_add_index_link:nn {eV}
+\cs_generate_variant:Nn \__simplesystem_add_index_link:nn {eV}
 
 
 \tl_new:N \l__simplesystem_interface_arga_tl
@@ -649,7 +649,7 @@
         \tl_set:Nn \l__simplesystem_interface_argb_tl {#3}
     }
 
-    \_preprocess_section:nVV {#1} \l__simplesystem_interface_arga_tl \l__simplesystem_interface_argb_tl
+    \__simplesystem_preprocess_section:nVV {#1} \l__simplesystem_interface_arga_tl \l__simplesystem_interface_argb_tl
 
     \group_end:
 }
@@ -660,9 +660,9 @@
 
         \tl_new:c {g_#2_style_tl}
         \IfBooleanTF {#1} {
-            \_declare_anonymous_block_type:n {#2}
+            \__simplesystem_declare_anonymous_block_type:n {#2}
         } {
-            \_declare_block_type:n {#2}
+            \__simplesystem_declare_block_type:n {#2}
         }
 
     } {
@@ -682,9 +682,9 @@
     }
 
     \IfBooleanTF {#1} {
-        \_generate_block_index:NnVV \c_false_bool {#2} \l__simplesystem_interface_arga_tl \l__simplesystem_interface_argb_tl
+        \__simplesystem_generate_block_index:NnVV \c_false_bool {#2} \l__simplesystem_interface_arga_tl \l__simplesystem_interface_argb_tl
     } {
-        \_generate_block_index:NnVV \c_true_bool {#2} \l__simplesystem_interface_arga_tl \l__simplesystem_interface_argb_tl
+        \__simplesystem_generate_block_index:NnVV \c_true_bool {#2} \l__simplesystem_interface_arga_tl \l__simplesystem_interface_argb_tl
     }
 
     \group_end:
@@ -697,7 +697,7 @@
         \tl_set:Nn \l__simplesystem_interface_arga_tl {#2}
     }
 
-    \_add_section_link:eV {\tl_to_str:e {#1}} \l__simplesystem_interface_arga_tl
+    \__simplesystem_add_section_link:eV {\tl_to_str:e {#1}} \l__simplesystem_interface_arga_tl
 
     \group_end:
 }
@@ -709,7 +709,7 @@
         \tl_set:Nn \l__simplesystem_interface_arga_tl {#2}
     }
 
-    \_add_block_link:eV {#1} \l__simplesystem_interface_arga_tl
+    \__simplesystem_add_block_link:eV {#1} \l__simplesystem_interface_arga_tl
 
     \group_end:
 }
@@ -721,7 +721,7 @@
         \tl_set:Nn \l__simplesystem_interface_arga_tl {#2}
     }
 
-    \_add_index_link:eV {\tl_to_str:e {#1}} \l__simplesystem_interface_arga_tl
+    \__simplesystem_add_index_link:eV {\tl_to_str:e {#1}} \l__simplesystem_interface_arga_tl
 
     \group_end:
 }
@@ -981,7 +981,7 @@ plot (\x: {3.14159 + 0.36788 * cos (5 * \x)});
     \int_gset:Nn \g__simplesystem_Automatic_List_beta_int {0}
 }
 
-\cs_new_protected:Nn \trans_auto_list:N {
+\cs_new_protected:Nn \__simplesystem_trans_auto_list:N {
     \int_set:Nn \l__simplesystem_list_num_int {0}
     \tl_replace_all:Nnn #1 {~+~} {
         \int_incr:N \l__simplesystem_list_num_int
