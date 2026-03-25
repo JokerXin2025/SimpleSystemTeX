@@ -1,0 +1,29 @@
+%<*package>
+
+% Automatic List
+
+\int_new:N \l_@@_list_num_int
+\int_new:N \g_@@_Automatic_List_beta_int
+\int_set:Nn \g_@@_Automatic_List_beta_int {0}
+\NewDocumentCommand \AutomaticListon {} {
+    \int_gset:Nn \g_@@_Automatic_List_beta_int {1}
+}
+\NewDocumentCommand \AutomaticListoff {} {
+    \int_gset:Nn \g_@@_Automatic_List_beta_int {0}
+}
+
+\cs_new_protected:Nn \_@@_trans_auto_list:N {
+    \int_set:Nn \l_@@_list_num_int {0}
+    \tl_replace_all:Nnn #1 {~+~} {
+        \int_incr:N \l_@@_list_num_int
+        \par \noindent \textbf {\int_use:N \l_@@_list_num_int.}~
+    }
+    \tl_replace_all:Nnn #1 {~-~-~} {
+        \par $\circ$ \
+    }
+    \tl_replace_all:Nnn #1 {~-~} {
+        \par \noindent \textbullet \,
+    }
+}
+
+%</package>

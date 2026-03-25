@@ -1,0 +1,101 @@
+
+You can use the following commands in the text or \blclink{Style Code} to create a block of an already defined block type:
+
+\UserCommand{Create Block}<\cs{\meta{regular block type}} , \cs{\meta{anonymous block type}}>{
+    \cs{\meta{regular block type}}
+    \{\meta{label}\}
+    (\meta{display name})
+    <\meta{custom parameter}>
+    \{\meta{content}\longarg\}
+    \AnotherUsage
+    \cs{\meta{anonymous block type}}
+    (\meta{display name})
+    <\meta{custom parameter}>
+    \{\meta{content}\longarg\}
+}[
+    - \meta{regular block type} , \meta{anonymous block type} : The name of the block type to be created.
+    - \meta{label} : The unique identifier of the block. Do not start with a \texttt{.} .
+    - \meta{content}\longarg\ : The specific content of the block.
+][
+    - \meta{display name} : The name of the block used for display. If this argument is empty, the \meta{label} will be used by default.
+    - \meta{custom parameter} : Used in \seclink{Preamble/Style Configuration} to achieve various complex typesetting logic.
+]
+
+\AutomaticListoff
+
+\Example{创建区块-示例}{
+    \par\noindent \cs{Theorem} \{Orthonormality Lemma\} \{
+    \par Let \$(\cs{bm} e\_k)\_\{k=1\}\^{}n\$ be an orthonormal system of vectors, then
+    \par \cs{begin}\{align*\}
+    \par\indent\indent \cs{forall} (a\_k)\_\{k=1\}\^{}n \cs{in} \cs{mathbf}\{F\}\^{}n
+    \par\indent\indent \cs{left}|\cs{left}| \cs{sum}\_\{k=1\}\^{}n a\_k \cs{bm} e\_k \cs{right}|\cs{right}|\^{}2
+    \par\indent\indent = \cs{sum}\_\{k=1\}\^{}n \cs{left}| a\_k \cs{right}|\^{}2 \cs{ }.
+    \par\cs{end}\{align*\}
+    \par\noindent \}
+    \par\noindent \cs{Proof} \{Orthonormality Lemma-proof1\} (Proof I) \{
+    \par \cs{begin}\{align*\}
+    \par\indent\indent \cs{left}|\cs{left}| \cs{sum}\_\{k=1\}\^{}n a\_k \cs{bm} e\_k \cs{right}|\cs{right}|\^{}2
+    \par\indent\indent = \cs{left}\cs{langle} \cs{sum}\_\{k=1\}\^{}n a\_k \cs{bm} e\_k\cs{ },\cs{ }\cs{sum}\_\{k=1\}\^{}n a\_k \cs{bm} e\_k
+    \par\indent\indent\cs{right}\cs{rangle}
+    \par\indent\indent = \cs{sum}\_\{i=1\}\^{}n \cs{sum}\_\{j=1\}\^{}n a\_i \cs{overline}\{a\_\{j\}\} \cs{delta}\_\{i,j\}
+    \par\indent\indent = \cs{sum}\_\{k=1\}\^{}n | a\_k |\^{}2 \cs{ }.
+    \par \cs{end}\{align*\}
+    \par\noindent \}
+    \newpage
+    \par\noindent \cs{Proof} \{Orthonormality Lemma-proof2\} (Proof II) <Induction> \{
+    \par \cs{par} For \$n=1\$ , we have
+    \par \cs{begin}\{align*\}
+    \par\indent\indent || a\_1 \cs{bm} e\_1 || = | a\_1 | || \cs{bm} e\_1 || = | a\_1 | \cs{ }.
+    \par \cs{end}\{align*\}
+    \par \cs{par} Suppose the proposition holds for \$n=m\$ . By the \cs{blclink}\{Pythagorean
+    \par Theorem\}, we have
+    \par \cs{begin}\{align*\}
+    \par\indent\indent \cs{left}|\cs{left}| \cs{sum}\_\{k=1\}\^{}\{m+1\} a\_k \cs{bm} e\_k \cs{right}|\cs{right}|\^{}2
+    \par\indent\indent = \cs{left}|\cs{left}| \cs{sum}\_\{k=1\}\^{}m a\_k \cs{bm} e\_k \cs{right}|\cs{right}|\^{}2
+    \par\indent\indent + \cs{left}|\cs{left}| a\_\{m+1\} \cs{bm} e\_\{m+1\} \cs{right}|\cs{right}|\^{}2
+    \par\indent\indent = \cs{sum}\_\{k=1\}\^{}m | a\_k |\^{}2 + | a\_\{m+1\} |\^{}2
+    \par\indent\indent = \cs{sum}\_\{k=1\}\^{}\{m+1\} | a\_k |\^{}2 \cs{ }.
+    \par \cs{end}\{align*\}
+    \par Thus, the proposition holds for \$n=m+1\$ , and consequently, it holds for all
+    \par positive integers \$n\$ .
+    \par\noindent \}
+}
+
+\AutomaticListon
+
+When creating a block, please ensure that this block type has already been declared via the \cs{NewBlockType} command. The label of a regular block serves as the unique identifier for cross-referencing and cannot duplicate that of other blocks. You can use the following command to quickly create an anonymous block under a regular block type:
+
+\UserCommand{Quickly Create Anonymous Block}<\cs{\meta{regular block type}}*>{
+    \cs{\meta{regular block type}}*
+    \{\meta{label}\}
+    (\meta{display name})
+    <\meta{parameter}>
+    \{\meta{content}\longarg\}
+}
+
+If the \meta{content} is redundant for a specific block type, you can write macros in the preamble to wrap the block creation command. This allows you to omit the content argument when creating the block. The following example demonstrates a simplified command for creating a \texttt{MyBlockType} block:
+
+\Example{Omitting Block Content-Example}{
+    \par\noindent \cs{NewBlockType} \{MyBlockType\}
+    \par\noindent \cs{NewDocumentCommand} \cs{myblocktype} \{m d() d<>\} \{
+    \par \cs{MyBlockType} \{\#1\} (\#2) <\#3> \{\}
+    \par\noindent \}
+}
+
+A similar wrapping technique can also be employed for the synchronized creation of sub-blocks. Please refer to the following example:
+
+\Example{Synchronizing Sub-Blocks Creation-Example}{
+    \par\noindent \cs{NewDocumentCommand} \cs{TheoremWithProof} \{m +m +d[] +d[]\} \{
+    \par \cs{ParentBlockType} \{\#1-parent\} (\#1) \{\#2\}
+    \par \cs{IfVauleT} \{\#3\} \{
+    \par\indent\indent \cs{Proof} \{\#1-proofA\} (\#1) \{\#3\}
+    \par \}
+    \par \cs{IfVauleT} \{\#4\} \{
+    \par\indent\indent \cs{Proof} \{\#1-proofB\} (\#1) \{\#4\}
+    \par \}
+    \par\noindent \}
+}
+
+To easily distinguish between the block types themselves and your wrapped macros, we recommend using words with capitalized first letters (PascalCase) for block type names, and words starting with a lowercase letter (camelCase) to name your wrapper commands.
+
+\newpage

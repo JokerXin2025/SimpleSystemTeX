@@ -1,0 +1,127 @@
+%<*package>
+
+\tl_new:N \l_@@_interface_arga_tl
+\tl_new:N \l_@@_interface_argb_tl
+
+\NewDocumentCommand \TableofContents {} {
+
+    \tl_put_right:Nn \g_@@_task_list_tl {\TOC {}}
+
+}
+
+\NewDocumentCommand \TextCommand {+m} {
+
+    \tl_put_right:Nn \g_@@_task_list_tl {\TextCommand {{#1}}}
+
+}
+
+\NewDocumentCommand \TableCommand {+m} {
+
+    \tl_put_right:Nn \g_@@_task_list_tl {\TableCommand {{#1}}}
+
+}
+
+\NewDocumentCommand \AddPart {m} {
+
+    \tl_set:Nn \g_@@_preprocess_part_tl {#1}
+    \tl_put_right:Nn \g_@@_task_list_tl {\Part {{#1}}}
+
+}
+
+\NewDocumentCommand \SetSectionPath {v} {
+
+    \str_gset:Nn \g_@@_path_prefix_str {#1}
+
+}
+
+\NewDocumentCommand \ImportSection {v d() d<>} {
+    \group_begin:
+
+    \IfValueTF {#2} {
+        \tl_set:Nn \l_@@_interface_arga_tl {#2}
+    } {
+        \seq_set_split:Nnn \l_tmpa_seq {/} {#1}
+        \seq_pop_right:NN \l_tmpa_seq \l_@@_interface_arga_tl
+    }
+    \IfValueT {#3} {
+        \tl_set:Nn \l_@@_interface_argb_tl {#3}
+    }
+
+    \_@@_preprocess_section:nVV {#1} \l_@@_interface_arga_tl \l_@@_interface_argb_tl
+
+    \group_end:
+}
+
+\NewDocumentCommand \NewBlockType {s m} {
+
+    \regex_match:nnTF {^[a-zA-Z]+$} {#2} {
+
+        \tl_new:c {g_#2_style_tl}
+        \IfBooleanTF {#1} {
+            \_@@_declare_anonymous_block_type:n {#2}
+        } {
+            \_@@_declare_block_type:n {#2}
+        }
+
+    } {
+        \msg_fatal:nnn {SimpleSystemTeX} {Invalid Block Type Name} {#2}
+    }
+
+}
+
+\NewDocumentCommand \MakeBlockIndex {s v d[] d<>} {
+    \group_begin:
+
+    \IfValueT {#3} {
+        \tl_set:Nn \l_@@_interface_arga_tl {#3}
+    }
+    \IfValueT {#4} {
+        \tl_set:Nn \l_@@_interface_argb_tl {#4}
+    }
+
+    \IfBooleanTF {#1} {
+        \_@@_generate_block_index:NnVV \c_false_bool {#2} \l_@@_interface_arga_tl \l_@@_interface_argb_tl
+    } {
+        \_@@_generate_block_index:NnVV \c_true_bool {#2} \l_@@_interface_arga_tl \l_@@_interface_argb_tl
+    }
+
+    \group_end:
+}
+
+\NewDocumentCommand \seclink {m d()} {
+    \group_begin:
+
+    \IfValueT {#2} {
+        \tl_set:Nn \l_@@_interface_arga_tl {#2}
+    }
+
+    \_@@_add_section_link:eV {\tl_to_str:e {#1}} \l_@@_interface_arga_tl
+
+    \group_end:
+}
+
+\NewDocumentCommand \blclink {m d()} {
+    \group_begin:
+
+    \IfValueT {#2} {
+        \tl_set:Nn \l_@@_interface_arga_tl {#2}
+    }
+
+    \_@@_add_block_link:eV {#1} \l_@@_interface_arga_tl
+
+    \group_end:
+}
+
+\NewDocumentCommand \indlink {m d()} {
+    \group_begin:
+
+    \IfValueT {#2} {
+        \tl_set:Nn \l_@@_interface_arga_tl {#2}
+    }
+
+    \_@@_add_index_link:eV {\tl_to_str:e {#1}} \l_@@_interface_arga_tl
+
+    \group_end:
+}
+
+%</package>

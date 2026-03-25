@@ -1,0 +1,12 @@
+- deleta the folder `build` and the file `simplesystem-ctan.zip` in the main folder
+- bash: `l3build unpack`
+- bash: `l3build install`
+- recompile all the documentation
+- bash: `l3build ctan`
+- move the generated `simplesystem-ctan.zip` to desktop and unzip it (named `simplesystem`)
+- add the folder `sec` and the file `simplesystem.doc.tex` to the unzipped folder
+- bash: `cd ~/Desktop`
+- bash: `find simplesystem -name ".DS_Store" -delete`
+- bash: `zip -r -X simplesystem-ctan.zip simplesystem/ -x "*.DS_Store" -x "__MACOSX"`
+- move the generated `simplesystem-ctan.zip` back to the main folder
+- push the changes to GitHub and submit the package zip to CTAN

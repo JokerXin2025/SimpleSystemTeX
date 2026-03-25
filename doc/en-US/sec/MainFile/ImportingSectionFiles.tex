@@ -1,0 +1,108 @@
+
+To avoid repeatedly typing complex file paths when importing section files, one should predefine a \newconcept{Section Path Prefix}. When importing a section file or adding a section link, you only need to provide the portion of the file path excluding the prefix and the file extension (i.e. the \newconcept{Section Path}). The section path minus the section file name is referred to as the \newconcept{Group Path} of that section. Please note that \textcolor{red}{none of the commands provided by \SimpleSystemTeX require the full section file path}. Providing the full path will prevent the group structure from being parsed correctly.
+
+The system defaults to \texttt{./sec/} as the section path prefix. Therefore, please ensure your project adheres to the following directory structure:
+
+\medskip\dirtree{%
+    .1 {\meta{Project}/} .
+    .2 {\meta{Project}.tex} \DTcomment{Main File} .
+    .2 {simplesystem.sty} \DTcomment{SimpleSystemTeX Package} .
+    .2 {sec/} .
+    .3 {\meta{Group}/} {\DTcomment{First-Level Group}} .
+    .4 {\meta{Subgroup}/} {\DTcomment{Second-Level Group}} .
+    .5 {\meta{Section1}.tex} .
+    .4 {\meta{Section2}.tex} .
+}\medskip
+
+Taking above file structure as an example, the respective paths for \meta{Section1} are:
+
+\List{Section1's Paths}(){
+    - Section File Path: \texttt{./sec/\meta{Group}/\meta{Subgroup}/\meta{Section1}.tex}
+    - Section Path: \texttt{\meta{Group}/\meta{Subgroup}/\meta{Section1}}
+    - Group Path: \texttt{\meta{Group}/\meta{Subgroup}/}
+}
+
+You can modify the section path prefix using the following command to accommodate existing project structures:
+
+\UserCommand{Modify Section Path Prefix}<\cs{SetSectionPath}>{
+    \cs{SetSectionPath}
+    \meta{delimiter}\meta{path prefix}\meta{delimiter}
+}[
+    - \meta{path prefix} : The new section path prefix. It must begin with \texttt{./} (current directory) or \texttt{../} (parent directory) and end with \texttt{/} . The path is relative to the directory containing the main file, with directories separated by \texttt{/} .
+]
+
+You may use a matched pair of braces \texttt{\{} and \texttt{\}}, or any two identical characters as delimiters. Please ensure that the path prefix does not contain the delimiter character.
+
+After you modify the section path prefix, \SimpleSystemTeX will parse the group structure according to the new setting. For instance, if the prefix is changed to \texttt{./sec/\meta{Group}/} , the top-level group for \meta{Section1} becomes \meta{Subgroup} . Please ensure the new section path prefix matches your intended file structure.
+
+Use the following command in the document body of the main file to import sections:
+
+\UserCommand{Import Section File}<\cs{ImportSection}>{
+    \cs{ImportSection}
+    \{\meta{section path}\}
+    (\meta{display name})
+    <\meta{custom parameter}>
+}[
+    - \meta{section path} : The path of the section to be imported, which must not contain special characters \texttt{\cs{}} , \texttt{\%} , \texttt{\{} , \texttt{\}} , or consecutive spaces.
+][
+    - \meta{display name} : The name of the section to be displayed. If this argument is empty, the section file name will be used by default.
+    - \meta{custom parameter} : Used in \seclink{Preamble/Style Configuration} to achieve various complex typesetting logic.
+]
+
+When the section file name contains unprintable special characters, you \textcolor{red}{must provide an escaped display name} to ensure the section name renders correctly in the table of contents, section headings, and cross-references.
+
+\Example{Importing Section Files-Example}{
+    \par\noindent \cs{ImportSection} \{Linear Space/Hamel Basis\}
+    \par\noindent \cs{ImportSection} \{Topology Space/Interior\&Closure\} (Interior\cs{\&} Closure)
+    \par\noindent \cs{ImportSection} \{Measure Space/Lp Convergence\} (\$L\^{}p\$ Convergence)
+}
+
+\SimpleSystemTeX determines the rendering order of sections in the document body, as well as their entry sequence in the table of contents, based on the order in which the section files are imported. You can also add "parts" to group sections together. Please note that grouping by parts depends entirely on the import order of the section files and is independent of the group structure in which the sections reside.
+
+\UserCommand{Create Part}<\cs{AddPart}>{
+    \cs{AddPart}
+    \{\meta{part}\}
+}[
+    - \meta{part} : The name of the part to be displayed in the table of contents.
+]
+
+As an example, the following shows part of the project \SimpleSystemTeX Manual's structure alongside its corresponding import commands:
+
+\dirtree{%
+    .0 .
+    .1 {simplesystem.doc.tex} .
+    .1 {sec/} .
+    .2 {SimpleSystemTeX Command Index.tex} .
+    .2 {SimpleSystemTeX Overview.tex} .
+    .2 {Style Code Preset Values.tex} .
+    .2 {Main File/} .
+    .3 {Generating TOC.tex} .
+    .3 {Importing Section Files.tex} .
+    .2 {Preamble/} .
+    .3 {Declaring Block Types.tex} .
+    .3 {Style Configuration.tex} .
+    .2 {Text/} .
+    .3 {Adding Links.tex} .
+    .3 {Creating Blocks.tex} .
+    .3 {Generating Block Indexes.tex} .
+}
+
+\Example{Manual Project Structure-Example}{
+    \par\noindent \cs{AddPart} \{\cs{SimpleSystemTeX}[bf]\}
+    \par\noindent \cs{ImportSection} \{SimpleSystemTeX Overview\}(\cs{SimpleSystemTeX}[bf] Overview)
+    \par\noindent \cs{AddPart} \{File Management\}
+    \par\noindent \cs{ImportSection} \{Main File/Importing Section Files\}
+    \par\noindent \cs{ImportSection} \{Main File/Generating TOC\}
+    \par\noindent \cs{AddPart} \{Blocks\cs{\&} Cross-Reference\}
+    \par\noindent \cs{ImportSection} \{Preamble/Declaring Block Types\}
+    \par\noindent \cs{ImportSection} \{Text/Creating Blocks\}
+    \par\noindent \cs{ImportSection} \{Text/Generating Block Indexes\}
+    \par\noindent \cs{ImportSection} \{Text/Adding Links\}
+    \par\noindent \cs{AddPart} \{Others\}
+    \par\noindent \cs{ImportSection} \{Preamble/Style Configuration\}
+    \par\noindent \cs{AddPart} \{Appendix\}
+    \par\noindent \cs{ImportSection} \{Style Code Preset Values\}
+    \par\noindent \cs{ImportSection} \{SimpleSystemTeX Command Index\} (\cs{SimpleSystemTeX}[bf]Command Index)
+}
+
+\newpage

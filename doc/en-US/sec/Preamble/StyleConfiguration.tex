@@ -1,0 +1,144 @@
+
+\SimpleSystemTeX allows users to customize \newconcept{Style Code} by using the \cs{SetStyle} command in the preamble, thereby setting or modifying the styling of various document components. In addition to standard \LaTeX\ commands, users can also utilize \newconcept{Display Arguments} prefixed with \texttt{@} within the style code to dynamically extract document content. The values of these arguments can similarly be evaluated in conditional statements to achieve highly flexible typesetting effects.
+
+\UserCommand{Configure Style}{
+    \cs{SetStyle}
+    \{\meta{style}\}
+    \{\meta{style code}\longarg\}
+}[
+    - \meta{style} : The name of the style to be set or modified.
+][
+    - \meta{style code}\longarg\ : The \LaTeX\ code used to define the appearance of the style. You may use standard \LaTeX\ commands for typesetting, display arguments prefixed with \texttt{@} , and the following conditional statements prefixed with \texttt{\#} :
+        - - \texttt{\#ifempty} : Evaluates whether a display argument is empty.
+        \LocalUsage{ifempty}(\#ifempty){
+            \upshape
+            \#ifempty
+            @\meta{argument}
+            \{\meta{true code}\longarg\}
+            \{\meta{false code}\longarg\}
+        }
+        - - \texttt{\#ifis} : Evaluates whether a display argument, after one level of expansion, equals a
+        \par\indent\indent\indent\indent specific value.
+        \LocalUsage{ifis}(\#ifis){
+            \upshape
+            \#ifis
+            @\meta{argument}
+            \{\meta{value}\}
+            \{\meta{true code}\longarg\}
+            \{\meta{false code}\longarg\}
+        }
+        - - \texttt{\#ifequal} : Evaluates whether two display arguments, after one level of expansion,
+        \par\indent\indent\indent\indent\indent are equal to each other.
+        \LocalUsage{ifequal}(\#ifequal){
+            \upshape
+            \#ifequal
+            @\meta{argument1}
+            @\meta{argument2}
+            \{\meta{true code}\longarg\}
+            \{\meta{false code}\longarg\}
+        }
+]
+
+When writing style code, please ensure that a display argument does not immediately follow any macro command, as this may lead to syntax parsing errors. You must insert a space before the \texttt{@} to prevent this issue, for example: \cs{par}\texttt{ @\meta{argument}} .
+
+\newpage Customizable styles and their respective available display arguments include:
+
+\List{TOC Style}(\large Table of Contents){
+    \par\medskip{}
+    - \textbf{\texttt{TOCTitle} : Title of the table of contents}.
+    - \textbf{\texttt{TOCPartTitle} : Part title in the table of contents}.
+        - - \texttt{@part} : Part.
+    - \textbf{\texttt{TOCSection} : Section entry in the table of contents}.
+        - - \texttt{@section} : Entry section file name.
+        - - \texttt{@sectionname} : Entry section's display name.
+        - - \texttt{@part} : Part containing the entry section.
+        - - \texttt{@group} , \texttt{@subgroup} ... : Top-level group, second-level group... containing the entry section.
+        - - \texttt{@sectionpath} : Entry section path.
+        - - \texttt{@sectionpage} : Page number where the entry section heading is located.
+        - - \texttt{@sectionparameter} : Custom parameter of the entry section.
+}
+
+\List{Section Style}(\large Section){
+    \par\medskip{}
+    - \textbf{\texttt{SectionHeading} : Section Heading}.
+        - - \texttt{@section} : Section file name.
+        - - \texttt{@sectionname} : Section's display name.
+        - - \texttt{@part} : Part containing the section.
+        - - \texttt{@group} , \texttt{@subgroup} ... : Top-level group, second-level group... containing the section.
+        - - \texttt{@sectionpath} : Section path.
+        - - \texttt{@sectionpage} : Page number where the section heading is located.
+        - - \texttt{@sectionparameter} : Custom parameter of the section.
+    - \textbf{\meta{block type} : Block}.
+        - - \texttt{@section} , \texttt{@sectionname} ... : (Display arguments of the containing section)
+        - - \texttt{@block} : Block's label, not available for anonymous blocks.
+        - - \texttt{@blockname} : Block's display name.
+        - - \texttt{@blockparameter} : Custom parameter of the block.
+        - - \texttt{@blockcontent} : Block's content.
+}
+
+\newpage
+
+\List{Block Index Style}(\large Block Index){
+    \par\medskip{}
+    - \textbf{\texttt{IndexTitle} , \texttt{IndexSubtitle} ... : Titles of top-level group, second-level group... in the block index}.
+        - - \texttt{@section} , \texttt{@sectionname} ... : (Display arguments of the containing section)
+        - - \texttt{@indexgroup} , \texttt{@indexsubgroup} ... : Top-level group, second-level group... in the block index's scope path.
+        - - \texttt{@indexparameter} : Custom parameter of the block index.
+    - \textbf{\texttt{IndexBlock} : Entry in the block index}.
+        - - \texttt{@section} , \texttt{@sectionname} ... : (Display arguments of the containing section)
+        - - \texttt{@indexparameter} : Custom parameter of the block index.
+        - - \texttt{@indexblock} : Entry block's label, not available for anonymous blocks.
+        - - \texttt{@indexblockname} : Entry block's display name.
+        - - \texttt{@indexblockparameter} : Custom parameter of the entry block.
+        - - \texttt{@indexsection} : Section file name containing the entry block.
+        - - \texttt{@indexsectionname} : Display name of the section containing the entry block.
+        - - \texttt{@indexpart} : Part containing the entry block.
+        - - \texttt{@indexgroup} , \texttt{@indexsubgroup} ... : Top-level group, second-level group... containing the entry block.
+        - - \texttt{@indexsectionpath} : Section path containing the entry block.
+        - - \texttt{@indexsectionparameter} : Custom parameter of the section containing the entry block.
+}
+
+\List{Cross-Reference Style}(\large Cross-Reference){
+    \par\medskip{}
+    - \textbf{\texttt{SectionLink} : Section Link}.
+        - - \texttt{@section} , \texttt{@sectionname} ... : (Display arguments of the containing section)
+        - - \texttt{@block} , \texttt{@blockname} ... : (Display arguments of the containing block)
+        - - \texttt{@linktext} : Link text.
+        - - \texttt{@targetsection} : Target section file name.
+        - - \texttt{@targetsectionname} : Target section's display name.
+        - - \texttt{@targetpart} : Part containing the target section.
+        - - \texttt{@targetgroup} , \texttt{@targetsubgroup} ... : Top-level group, second-level group... containing the target section.
+        - - \texttt{@targetsectionpath} : Target section path.
+        - - \texttt{@targetsectionpage} : Page number where the target section heading is located.
+        - - \texttt{@targetsectionparameter} : Custom parameter of the target section.
+    \newpage{}
+    - \textbf{\texttt{BlockLink} : Block Link}.
+        - - \texttt{@section} , \texttt{@sectionname} ... : (Display arguments of the containing section)
+        - - \texttt{@block} , \texttt{@blockname} ... : (Display arguments of the containing block)
+        - - \texttt{@linktext} : Link text.
+        - - \texttt{@targetblock} : Target block's label, not available for anonymous blocks.
+        - - \texttt{@targetblockname} : Target block's display name.
+        - - \texttt{@targetblockparameter} : Custom parameter of the target block.
+    - \textbf{\texttt{IndexLink} : Index Link}.
+        - - \texttt{@section} , \texttt{@sectionname} ... : (Display arguments of the containing section)
+        - - \texttt{@block} , \texttt{@blockname} ... : (Display arguments of the containing block)
+        - - \texttt{@linktext} : Link text.
+        - - \texttt{@targetgroup} , \texttt{@targetsubgroup} ... : Top-level group, second-level group... in the target index's scope path.
+        - - \texttt{@targetindexparameter} : Custom parameter of the target index.
+}
+
+Not all display arguments are intended for rendering content. For instance, if \texttt{@section} contains special characters, you might use \texttt{@sectionname} as a substitute. In such scenarios, \texttt{@section} should be used to provide the section file name for conditional evaluation, whereas \texttt{@sectionname} should be used for display in the document. Please select the appropriate display arguments according to your specific requirements when authoring style code.
+
+Please avoid the following practices within your style code, as they may lead to errors such as scope conflicts among display arguments:
+
+\BadPractice{Style Code-Bad Practice}{
+    - Do not leave label-type arguments containing special characters, like \texttt{@section}, directly exposed in the style code.
+    - Do not nest blocks in the style code of \meta{block type} .
+    - Do not nest links in the style code of \textbf{\texttt{SectionLink}}, \textbf{\texttt{BlockLink}}, or \textbf{\texttt{IndexLink}}.
+    - Do not use \texttt{@blockcontent} in the style code of \textbf{\texttt{SectionLink}}, \textbf{\texttt{BlockLink}}, or \textbf{\texttt{IndexLink}}.
+    - Do not compare path-type arguments like \texttt{@sectionpath} with other arguments like \texttt{@section} or their concatenated values, because they possess different \TeX\ catcodes.
+}
+
+Before authoring style code, please review the \seclink{Style Code Preset Values}. \textcolor{orange}{It is highly recommended to copy the specific portions you intend to modify into the preamble first}, and then base your further adjustments upon them.
+
+\newpage

@@ -24,9 +24,9 @@
 \prop_new:N \g_@@_sectionpart_prop
 
 \AtEndDocument {
-    \_execute_rule:Nn \g_@@_task_list_tl {
-        \Section \_print_section:n
-        \TOC \_print_toc:
+    \_@@_execute_rule:Nn \g_@@_task_list_tl {
+        \Section \_@@_print_section:n
+        \TOC \_@@_print_toc:
         \TextCommand \use:n
     }
 }

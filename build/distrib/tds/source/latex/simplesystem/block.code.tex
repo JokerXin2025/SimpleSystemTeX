@@ -40,7 +40,7 @@
     % @blockcontent
     \tl_set:Nn \l_@@_blockcontent_tl {#5}
     \int_compare:nT {\g_@@_Automatic_List_beta_int == 1} {
-        \trans_auto_list:N \l_@@_blockcontent_tl
+        \_@@_trans_auto_list:N \l_@@_blockcontent_tl
     }
 
     \tl_use:c {g_@@_#1_style_tl}

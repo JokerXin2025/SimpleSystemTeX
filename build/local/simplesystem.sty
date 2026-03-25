@@ -58,9 +58,9 @@
 \prop_new:N \g__simplesystem_sectionpart_prop
 
 \AtEndDocument {
-    \_execute_rule:Nn \g__simplesystem_task_list_tl {
-        \Section \_print_section:n
-        \TOC \_print_toc:
+    \__simplesystem_execute_rule:Nn \g__simplesystem_task_list_tl {
+        \Section \__simplesystem_print_section:n
+        \TOC \__simplesystem_print_toc:
         \TextCommand \use:n
     }
 }
@@ -349,7 +349,7 @@
     % @blockcontent
     \tl_set:Nn \l__simplesystem_blockcontent_tl {#5}
     \int_compare:nT {\g__simplesystem_Automatic_List_beta_int == 1} {
-        \trans_auto_list:N \l__simplesystem_blockcontent_tl
+        \__simplesystem_trans_auto_list:N \l__simplesystem_blockcontent_tl
     }
 
     \tl_use:c {g__simplesystem_#1_style_tl}

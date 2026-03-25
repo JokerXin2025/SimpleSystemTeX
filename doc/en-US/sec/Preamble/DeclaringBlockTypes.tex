@@ -1,0 +1,24 @@
+
+\UserCommand{Declare Block Type}<\cs{NewBlockType} , \cs{NewBlockType*}>{
+    \cs{NewBlockType}
+    \{\meta{regular block type}\}
+    \AnotherUsage
+    \cs{NewBlockType*}
+    \{\meta{anonymous block type}\}
+}[
+    - \meta{regular block type} , \meta{anonymous block type} : The name of the block type to be declared, which can only contain letters and is case-sensitive.
+]
+
+You cannot use \cs{NewBlockType} or \cs{NewBlockType*} commands on a block type that has already been created, but you can \seclink{Preamble/Style Configuration}(redefine their styles). \SimpleSystemTeX provides the following predefined basic block types:
+
+\List{Predefined Regular Block Types}{
+    - \texttt{Definition} : Mathematical definition.
+    - \texttt{Theorem} : Mathematical theorem.
+    - \texttt{Corollary} : Mathematical corollary.
+}
+
+\List{Predefined Anonymous Block Types}{
+    - \texttt{Proof} : Mathematical proof.
+}
+
+\newpage
