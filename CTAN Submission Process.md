@@ -1,12 +1,19 @@
-- deleta the folder `build` and the file `simplesystem-ctan.zip` in the main folder
-- bash: `l3build unpack`
-- bash: `l3build install`
+- bash1: `git clone https://github.com/JokerXin2025/SimpleSystemTeX.git`
+- move the `SimpleSystemTeX` folder to the desktop
+- delete the folder `build` , `simplesystemtex-ctan` and the file `simplesystemtex-ctan.zip` in the `SimpleSystemTeX` folder
+- (Modification)
+- bash2: `cd ~/Desktop/SimpleSystemTeX`
+- bash2: `l3build unpack`
+- bash2: `l3build install`
 - recompile all the documentation
-- bash: `l3build ctan`
-- move the generated `simplesystem-ctan.zip` to desktop and unzip it (named `simplesystem`)
-- add the folder `sec` and the file `simplesystem.doc.tex` to the unzipped folder
-- bash: `cd ~/Desktop`
-- bash: `find simplesystem -name ".DS_Store" -delete`
-- bash: `zip -r -X simplesystem-ctan.zip simplesystem/ -x "*.DS_Store" -x "__MACOSX"`
-- move the generated `simplesystem-ctan.zip` back to the main folder
+- create a folder named `simplesystemtex-ctan` in the `SimpleSystemTeX` folder and add the following files and folders to it:
+    - files: `README.md` , `LICENSE` , `build.lua` , `doc/en-US/simplesystemtex.doc.tex` , `doc/en-US/simplesystemtex.doc.pdf` ,
+    - folders: `sources` , `doc/en-US/sec`
+- bash3: `cd ~/Desktop`
+- bash3: `find SimpleSystemTeX -name ".DS_Store" -delete`
+- bash3: `zip -r -X simplesystemtex-ctan.zip SimpleSystemTeX/simplesystemtex-ctan/ -x "*.DS_Store" -x "__MACOSX"`
+- bash1: `cd ~/Desktop/SimpleSystemTeX`
+- bash1: `git add .`
+- bash1: `git commit -m "(Submission Message)"`
+- bash1: `git push origin main`
 - push the changes to GitHub and submit the package zip to CTAN
