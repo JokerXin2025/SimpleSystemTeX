@@ -1,19 +1,21 @@
+- bash1: `cd ~/Desktop`
 - bash1: `git clone https://github.com/JokerXin2025/SimpleSystemTeX.git`
-- move the `SimpleSystemTeX` folder to the desktop
-- delete the folder `build` , `simplesystemtex-ctan` and the file `simplesystemtex-ctan.zip` in the `SimpleSystemTeX` folder
+- bash1: `cd SimpleSystemTeX`
+- bash1: `rm -rf build simplesystemtex-ctan simplesystemtex-ctan.zip`
 - (Modification)
-- bash2: `cd ~/Desktop/SimpleSystemTeX`
-- bash2: `l3build unpack`
-- bash2: `l3build install`
+- bash1: `l3build unpack`
+- bash1: `l3build install`
 - recompile all the documentation
-- create a folder named `simplesystemtex-ctan` in the `SimpleSystemTeX` folder and add the following files and folders to it:
-    - files: `README.md` , `LICENSE` , `build.lua` , `doc/en-US/simplesystemtex.doc.tex` , `doc/en-US/simplesystemtex.doc.pdf` ,
-    - folders: `sources` , `doc/en-US/sec`
-- bash3: `cd ~/Desktop`
-- bash3: `find SimpleSystemTeX -name ".DS_Store" -delete`
-- bash3: `zip -r -X simplesystemtex-ctan.zip SimpleSystemTeX/simplesystemtex-ctan/ -x "*.DS_Store" -x "__MACOSX"`
-- submit the package zip to CTAN
-- bash1: `cd ~/Desktop/SimpleSystemTeX`
+- bash1: `mkdir ~/Desktop/simplesystemtex-ctan`
+- bash1: `cp README.md LICENSE build.lua doc/en-US/simplesystemtex.doc.tex doc/en-US/simplesystemtex.doc.pdf ~/Desktop/simplesystemtex-ctan/`
+- bash1: `cp -r sources doc/en-US/sec ~/Desktop/simplesystemtex-ctan/`
+- bash2: `cd ~/Desktop`
+- bash2: `find simplesystemtex-ctan -name ".DS_Store" -delete`
+- bash2: `zip -r -X simplesystemtex-ctan.zip simplesystemtex-ctan/ -x "*.DS_Store" -x "__MACOSX"`
+- submit the file `simplesystemtex-ctan.zip` as `simplesystemtex.zip` to CTAN
+- bash2: `mv simplesystemtex-ctan.zip SimpleSystemTeX/simplesystemtex-ctan.zip`
+- bash2: `mv simplesystemtex-ctan SimpleSystemTeX/simplesystemtex-ctan`
+- bash2: `find SimpleSystemTeX -name ".DS_Store" -delete`
 - bash1: `git add .`
 - bash1: `git commit -m "(Submission Message)"`
 - bash1: `git remote set-url origin https://(Personal Access Tokens)@github.com/JokerXin2025/SimpleSystemTeX.git`
