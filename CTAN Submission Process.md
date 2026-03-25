@@ -12,8 +12,9 @@
 - bash3: `cd ~/Desktop`
 - bash3: `find SimpleSystemTeX -name ".DS_Store" -delete`
 - bash3: `zip -r -X simplesystemtex-ctan.zip SimpleSystemTeX/simplesystemtex-ctan/ -x "*.DS_Store" -x "__MACOSX"`
+- submit the package zip to CTAN
 - bash1: `cd ~/Desktop/SimpleSystemTeX`
 - bash1: `git add .`
 - bash1: `git commit -m "(Submission Message)"`
+- bash1: `git remote set-url origin https://(Personal Access Tokens)@github.com/JokerXin2025/SimpleSystemTeX.git`
 - bash1: `git push origin main`
-- push the changes to GitHub and submit the package zip to CTAN
