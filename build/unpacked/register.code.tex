@@ -2,8 +2,8 @@
 
 \seq_new:N \g_@@_block_register_seq
 \seq_new:N \g_@@_index_register_seq
-\prop_new:N \g_@@_blocktype_register_prop
 \prop_new:N \g_@@_blockname_register_prop
+\prop_new:N \g_@@_blocktype_register_prop
 \prop_new:N \g_@@_blockparameter_register_prop
 \prop_new:N \g_@@_blockcontent_register_prop
 \prop_new:N \g_@@_blocksectionpath_register_prop
@@ -19,14 +19,14 @@
     \seq_gput_right:Nn \g_@@_index_register_seq {#1}
 }
 
-% [parameter] block's label (expanded) , block type name (only letters)
-\NewDocumentCommand \Register@blocktype {m m} {
-    \prop_gput:Nnn \g_@@_blocktype_register_prop {#1} {#2}
-}
-
 % [parameter] block's label (expanded) , block's display name
 \NewDocumentCommand \Register@blockname {m m} {
     \prop_gput:Nnn \g_@@_blockname_register_prop {#1} {#2}
+}
+
+% [parameter] block's label (expanded) , block type name (only letters)
+\NewDocumentCommand \Register@blocktype {m m} {
+    \prop_gput:Nnn \g_@@_blocktype_register_prop {#1} {#2}
 }
 
 % [parameter] block's label (expanded) , block's parameter

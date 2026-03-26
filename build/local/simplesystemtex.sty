@@ -102,8 +102,8 @@
 
 \seq_new:N \g__simplesystemtex_block_register_seq
 \seq_new:N \g__simplesystemtex_index_register_seq
-\prop_new:N \g__simplesystemtex_blocktype_register_prop
 \prop_new:N \g__simplesystemtex_blockname_register_prop
+\prop_new:N \g__simplesystemtex_blocktype_register_prop
 \prop_new:N \g__simplesystemtex_blockparameter_register_prop
 \prop_new:N \g__simplesystemtex_blockcontent_register_prop
 \prop_new:N \g__simplesystemtex_blocksectionpath_register_prop
@@ -117,12 +117,12 @@
     \seq_gput_right:Nn \g__simplesystemtex_index_register_seq {#1}
 }
 
-\NewDocumentCommand \Register@blocktype {m m} {
-    \prop_gput:Nnn \g__simplesystemtex_blocktype_register_prop {#1} {#2}
-}
-
 \NewDocumentCommand \Register@blockname {m m} {
     \prop_gput:Nnn \g__simplesystemtex_blockname_register_prop {#1} {#2}
+}
+
+\NewDocumentCommand \Register@blocktype {m m} {
+    \prop_gput:Nnn \g__simplesystemtex_blocktype_register_prop {#1} {#2}
 }
 
 \NewDocumentCommand \Register@blockparameter {m m} {
@@ -146,7 +146,7 @@
     \clist_map_inline:nn {section, part, group, subgroup, subsubgroup, subsubsubgroup, sectionpath, sectionpage, sectionname, sectionparameter} {
         \tl_new:c {l__simplesystemtex_#1##1_tl}
     }
-    \clist_map_inline:nn {block, blockname, blockparameter, blockcontent} {
+    \clist_map_inline:nn {block, blockname, blocktype, blockparameter, blockcontent} {
         \tl_new:c {l__simplesystemtex_#1##1_tl}
     }
 }
@@ -344,6 +344,8 @@
     \tl_set:Nn \l__simplesystemtex_block_tl {#2}
     % @blockname
     \tl_set:Nn \l__simplesystemtex_blockname_tl {#3}
+    % @blocktype
+    \tl_set:Nn \l__simplesystemtex_blocktype_tl {#1}
     % @blockparameter
     \tl_set:Nn \l__simplesystemtex_blockparameter_tl {#4}
     % @blockcontent
@@ -432,6 +434,8 @@
     \tl_set:Nn \l__simplesystemtex_indexblock_tl {#1}
     % @indexblockname
     \prop_get:NnN \g__simplesystemtex_blockname_register_prop {#1} \l__simplesystemtex_indexblockname_tl
+    % @indexblocktype
+    \prop_get:NnN \g__simplesystemtex_blocktype_register_prop {#1} \l__simplesystemtex_indexblocktype_tl
     % @indexblockparameter
     \prop_get:NnN \g__simplesystemtex_blockparameter_register_prop {#1} \l__simplesystemtex_indexblockparameter_tl
     % @indexblockcontent
@@ -563,6 +567,8 @@
         \tl_set:Nn \l__simplesystemtex_targetblock_tl {#1}
         % @targetblockname
         \prop_get:NnN \g__simplesystemtex_blockname_register_prop {#1} \l__simplesystemtex_targetblockname_tl
+        % @targetblocktype
+        \prop_get:NnN \g__simplesystemtex_blocktype_register_prop {#1} \l__simplesystemtex_targetblocktype_tl
         % @targetblockparameter
         \prop_get:NnN \g__simplesystemtex_blockparameter_register_prop {#1} \l__simplesystemtex_targetblockparameter_tl
         % @targetblockcontent
@@ -779,29 +785,20 @@
 \SetStyle {IndexGroup} {%
     \bfseries\Large
     \par\medskip\noindent
-    \indlink {@indexgroup/} (%
-        \color{black}%
-        \!@indexgroup%
-    )%
+    \!@indexgroup%
     \par\medskip
 }
 \SetStyle {IndexSubgroup} {%
     \bfseries
     \par\medskip\noindent
-    \indlink {@indexgroup/@indexsubgroup/} (%
-        \color{black}%
-        \!{\small @indexgroup}%
-        \ {\large @indexsubgroup}%
-    )%
+    \!{\small @indexgroup}%
+    \ {\large @indexsubgroup}%
     \par\smallskip
 }
 \SetStyle {IndexSubsubgroup} {%
     \bfseries\normalsize
     \par\smallskip\noindent
-    \indlink {@indexgroup/@indexsubgroup/@indexsubsubgroup/} (%
-        \color{black}%
-        \!@indexsubsubgroup%
-    )%
+    \!@indexsubsubgroup%
     \par
 }
 \SetStyle {IndexBlock} {%
