@@ -167,7 +167,19 @@
 \SetStyle {Proof} {%
     \color{gray}\itshape
     \par\noindent
-    @blockname {\scriptsize (@blockparameter)}%
+    #ifempty @blockname {%
+        #ifempty @blockparameter {%
+            Proof%
+        } {%
+            Proof {\scriptsize (@blockparameter)}%
+        }%
+    } {%
+        #ifempty @blockparameter {%
+            @blockname%
+        } {%
+            @blockname {\scriptsize (@blockparameter)}%
+        }%
+    }
     \par @blockcontent%
     \par
 }
