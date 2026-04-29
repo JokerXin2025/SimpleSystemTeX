@@ -911,7 +911,7 @@
 
 
 
-\clist_map_inline:nn {rm, bf, it, bb, cal, frak, sf, tt} {
+\clist_map_inline:nn {rm, bf, it, bb, cal, frak, sf, tt, scr} {
     \exp_args:Nc \NewDocumentCommand {UseMathletter#1} {} {
         \int_step_inline:nnn { `a } { `z } {
             \exp_args:Nc \newcommand {#1 \char_generate:nn {####1} {11}} {
@@ -920,7 +920,7 @@
         }
     }
 }
-\clist_map_inline:nn {rm, bf, it, bb, cal, frak, sf, tt} {
+\clist_map_inline:nn {rm, bf, it, bb, cal, frak, sf, tt, scr} {
     \exp_args:Nc \NewDocumentCommand {UseMathLetter#1} {} {
         \int_step_inline:nnn { `A } { `Z } {
             \exp_args:Nc \newcommand {#1 \char_generate:nn {####1} {11}} {

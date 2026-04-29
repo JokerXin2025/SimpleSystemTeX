@@ -5,7 +5,6 @@
 \prop_new:N \g_@@_blockname_register_prop
 \prop_new:N \g_@@_blocktype_register_prop
 \prop_new:N \g_@@_blockparameter_register_prop
-\prop_new:N \g_@@_blockcontent_register_prop
 \prop_new:N \g_@@_blocksectionpath_register_prop
 \prop_new:N \g_@@_indexparameter_register_prop
 
@@ -32,11 +31,6 @@
 % [parameter] block's label (expanded) , block's parameter
 \NewDocumentCommand \Register@blockparameter {m m} {
     \prop_gput:Nnn \g_@@_blockparameter_register_prop {#1} {#2}
-}
-
-% [parameter] block's label (expanded) , block's content
-\NewDocumentCommand \Register@blockcontent {m +m} {
-    \prop_gput:Nnn \g_@@_blockcontent_register_prop {#1} {#2}
 }
 
 % [parameter] block's label (expanded) , path of block's parent section (verbatim)
